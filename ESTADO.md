@@ -508,3 +508,18 @@ documentacion/INTEGRACION_LOCAL_PADRE.md con evidencia P08-A/B reportada para
 no repetir pendientes ya atendidos; evidencia histórica de ESTADO intacta.
 Tarea documental: no pnpm/Gradle/build/tests nuevos, ADB, subagentes, cambios a
 apps/contrato/fixtures, push, CI remoto o despliegue. Conservadas barreras locales.
+
+## Disponibilidad de laboratorio actualizada — 2026-10-09
+
+Propietario retira temporalmente A56 por uso personal y permite avanzar con A13.
+Registrado en COORDINACION_PROYECTOS.md: A56 fuera de operaciones hasta nueva
+disponibilidad/autorización; trabajo JVM del padre independiente del teléfono.
+A13 disponible para coordinar trabajo desde proyecto hijo, no para ADB desde
+Render ni para inferir reset/aprovisionamiento/borrado/RETIRE/CA/quiosco nuevos.
+Preparado handoff a IA hijo: continuar HIJO-C01 respetando H05 y proponer siguiente
+prueba acotada de recuperación/emergencia con objetivo, precondiciones, operaciones
+y aceptación. Avisar del alcance antes de instalación/cambio físico. No enviado
+ni ejecutado: no existe canal automático entre sesiones.
+
+Turno documental: ninguna consulta a teléfonos/ADB, prueba, build, cambio de app,
+credencial, contrato, despliegue o push. Límites del relay conservados.

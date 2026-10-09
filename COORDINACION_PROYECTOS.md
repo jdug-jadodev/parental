@@ -125,6 +125,28 @@ conflicto/ambigüedad, detener y consultar al propietario. No ADB genérico, res
 aprovisionamiento, borrado, cambio de credenciales ni retiro por este relevo.
 La coordinación tampoco autoriza lanzar subagentes o editar repos ajenos.
 
+### Disponibilidad comunicada por el propietario
+
+El propietario retira temporalmente el A56 para uso personal y permite avanzar
+con el A13. A56 queda fuera de instalación, consultas y pruebas hasta nueva
+disponibilidad/autorización; las tareas locales JVM del padre pueden continuar.
+El A13 queda disponible para coordinar el trabajo desde la sesión del hijo.
+Render mantiene su prohibición de operar dispositivos y no ejecuta ADB.
+No se infiere permiso para reset, aprovisionamiento, borrado, RETIRE, instalación
+de CA, quiosco o restricciones nuevas. Antes de una operación física, la IA del
+hijo debe delimitar la prueba, comprobar dependencias y comunicar su alcance.
+
+Handoff adicional preparado para la IA del hijo, aún no enviado:
+
+> El propietario se lleva el A56; no consultarlo ni usarlo. El A13 está disponible
+> para avanzar en tu proyecto. Continúa la unidad HIJO-C01 de coordinación local
+> respetando H05 y prepara la siguiente comprobación acotada de recuperación/
+> emergencia que permita tu estado actual. Devuelve objetivo, precondiciones,
+> operaciones necesarias y criterio de aceptación antes de una prueba física.
+> No saltar H05 para endurecer ni cambiar datos/identidad/credenciales. Si hace
+> falta instalar o alterar el teléfono, avisa del alcance concreto antes de actuar.
+> Solo tu sesión opera el A13 con selector explícito; Render no ejecutará ADB.
+
 ## 7. Cómo devolver resultados y activar una tarea
 
 El propietario/IA responsable recibe el handoff; hasta confirmar recepción figura
