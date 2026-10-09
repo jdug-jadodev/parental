@@ -39,6 +39,7 @@ export function firmarAuth(reto: RetoConexion, pareja: string, rol: Rol, privada
 }
 
 export class ClienteAuth {
+  readonly presencias: Frame[] = [];
   private readonly frames: Frame[] = [];
   private readonly pendientes: { resolver: (frame: Frame) => void; rechazar: (error: Error) => void }[] = [];
   readonly cerrado: Promise<number>;
@@ -52,6 +53,7 @@ export class ClienteAuth {
     socket.on('error', () => socket.terminate());
     socket.on('message', (datos: Buffer) => {
       const frame = { ...codecAuth.leerFrame(datos) };
+      if (frame.kind === 'PEER_STATUS') { this.presencias.push(frame); return; }
       const pendiente = this.pendientes.shift();
       if (pendiente) pendiente.resolver(frame); else this.frames.push(frame);
     });

@@ -254,3 +254,30 @@ rate limit de upgrades por IP y preparación Render). No se reenvían órdenes;
 después de AUTH_OK cualquier frame de aplicación se rechaza. Sin configuración
 continúan upgrades rechazados; health 503, loopback y producción bloqueada.
 Sin apps, dispositivos, despliegue, push ni cambios al contrato/fixtures.
+
+## R03 — primer bloque local, en curso — 2026-10-09
+
+Implementados MensajeRelay/FalloRelay, ProcesarMensajeEntrada y verificación de
+mensajes como puerto de salida. Firma MESSAGE verificada con la clave del rol
+autenticado antes de interpretar payload; autorización por pareja/emisor/tipo.
+Mapper de borde con entidad de transporte; reenvío de bytes originales, sin cola.
+WebSocketAdapter responde PING/PONG (un envío pendiente, duplicado inmediato
+ignorado), PEER_STATUS y PEER_UNAVAILABLE; limita todos los frames autenticados
+a ráfaga 20 y recarga 10/s. Salida acotada a 64 KiB incluyendo el próximo frame;
+receptor lento se cierra y emisor recibe indisponibilidad, nunca ACK de aplicación.
+Limpieza de sockets mediante ping de transporte cada 30 s con nonce verificado;
+no es keepalive HTTP, no evita suspensión ni demuestra aplicación de órdenes.
+Upgrades: cupo global 40/10 por segundo, por IP 20/2 por segundo, tabla máxima
+128 entradas con TTL 60 s. Solo remoteAddress; X-Forwarded-For no da autoridad.
+
+Ejecutado pnpm run verificar: instalación congelada/check/build correctos,
+86 tests aprobados, 0 fallos/omitidos; 28 ejemplos/13 contraejemplos y 10 vectores/
+78 comprobaciones correctos, Node v24.21.0. Nuevas pruebas deterministas cubren
+cupo, TTL/límite global, borde 64 KiB, fallo de envío y limpieza de latidos.
+Un primer intento detectó dos violaciones de arquitectura: helper técnico con
+sufijo de adaptador de salida y mapper importando DTOs de aplicación. Corregidas
+sin debilitar los tests. Pruebas R02 ajustadas para presencia y rechazo de AUTH
+repetido, no para rechazar PING ya válido. Pendientes pruebas de routing y carga.
+
+Conservados health 503, loopback y bloqueo de producción. No apps, dispositivos,
+despliegue, push ni modificaciones de compartido/fixtures.

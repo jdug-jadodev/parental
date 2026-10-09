@@ -128,7 +128,7 @@ test('R-LIMIT: máximo 16 retos pendientes; desconectar libera un lugar', async 
   assert.equal((await siguiente.reto()).kind, 'CHALLENGE');
 });
 
-test('R-AUTH: repetir AUTH o enviar órdenes tras AUTH_OK no activa R03', async (contexto) => {
+test('R-AUTH: repetir AUTH o enviar AUTH_OK del cliente se rechaza', async (contexto) => {
   const { env, claves, pareja } = entornoAuth();
   const servicio = await iniciarAuth(env);
   contexto.after(servicio.detener);
@@ -137,7 +137,7 @@ test('R-AUTH: repetir AUTH o enviar órdenes tras AUTH_OK no activa R03', async 
     const prueba = firmarAuth(await cliente.reto(), pareja, 'PARENT', claves.PARENT.privateKey);
     cliente.enviar(prueba);
     await cliente.recibir();
-    cliente.enviar(repetir ? prueba : codecAuth.codificarFrame({ v: 1, kind: 'PING', nonce: Buffer.alloc(32).toString('base64url') }));
+    cliente.enviar(repetir ? prueba : codecAuth.codificarFrame({ v: 1, kind: 'AUTH_OK', connectionId: randomUUID() }));
     assert.deepEqual(await cliente.recibir(), { v: 1, kind: 'ERROR', code: 'BAD_SCHEMA' });
     assert.equal(await cliente.cerrado, 1008);
   }
