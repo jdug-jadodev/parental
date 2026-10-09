@@ -3,12 +3,14 @@
 Proyecto independiente: solo servidor Node/TypeScript del relay WSS. No desarrollar
 ni modificar las apps en parental_padre ni el repositorio del hijo.
 
-El propietario pidió separar proyectos y desarrollar servidor más adelante.
-En esta extracción no se implementaron nuevas funciones ni se desplegó nada.
+Proyecto extraído sin despliegue; R01 implementado localmente después de extracción.
+Arquitectura hexagonal: src/ y paquete npm en raíz; leer documentacion/ARQUITECTURA.md.
 Leer README.md, ESTADO.md y documentacion/SPEC_RELAY_RENDER.md antes de continuar.
-Próxima tarea R01; R02/R03 pendientes. Una tarea por turno, respetar dependencias.
+Próxima tarea R02; R03 pendiente. Una tarea por turno, respetar dependencias.
 
 - Español claro en comunicación/documentación/comentarios/commits.
+- Código sin comentarios; explicar decisiones en documentación. Dominio/aplicación
+  aislados de Node e infraestructura, inyección por constructor y mappers en bordes.
 - CP/1 y fixtures en compartido/ son copia congelada: no cambiar esquema,
   firmas ni semántica unilateralmente. Acordar nueva versión antes de sincronizar.
 - No privadas, códigos reales, credenciales ni historial; solo configuración pública.

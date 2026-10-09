@@ -89,5 +89,25 @@ parental_render-relay-heredado-20261009-hexagonal. Los artefactos nuevos se
 generan en node_modules/ y dist/ de la raíz.
 
 Este bloque conserva loopback, health 503, upgrades rechazados, bloqueo de
-producción y límites R01. Pendiente del cierre de refactorización: pruebas
-específicas de arquitectura, inyección, mappers y respuestas ante fallos.
+producción y límites R01. Commit del primer bloque: c986288.
+
+### Cierre de refactorización
+
+Añadidos test/arquitectura.test.ts, test/hexagonal.test.ts,
+test/respuestas.test.ts y test/interoperabilidad.test.ts. Comprueban aislamiento
+de imports de dominio/aplicación, ausencia de comentarios en src, contratos
+inyectados, sustitución de puertos con dobles, DTOs independientes, filtrado del
+entorno, roundtrip dominio/entidad WebSocket, interrupción ante fallo del puerto,
+500 genérico HTTP/upgrade y ejecución de la herramienta Node desde otra carpeta.
+Firma efímera solo en RAM en prueba local; no se escriben ni devuelven privadas.
+
+Ejecutado npm run verificar tras añadir pruebas: primero 48 tests aprobados;
+tras añadir comprobaciones de herramienta, verificación final con 50 tests
+aprobados, 0 fallos/omitidos, ci/check/build correctos, 28 ejemplos aceptados,
+13 contraejemplos rechazados y 10 vectores/78 comprobaciones correctas.
+0 vulnerabilidades, mismo aviso esbuild sin aprobación. No se ejecutó el wrapper
+PowerShell ni integración JVM/Android; los dos tests de herramienta son Node local.
+
+Refactorización terminada; servidor sigue en R01. Próxima función: R02.
+No se modificó compartido/ ni los fixtures; no se ejecutaron comandos en las
+apps padre/hijo. No dispositivos, ADB, despliegue ni habilitación de WSS público.
