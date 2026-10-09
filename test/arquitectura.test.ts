@@ -42,22 +42,73 @@ test('arquitectura: dominio y aplicación solo dependen hacia dentro', () => {
 test('arquitectura: controladores reciben puertos de entrada, casos de uso y adaptadores implementan sus contratos', () => {
   for (const { nombre, ast } of fuentes) {
     const controlador = nombre.startsWith('infrastructure/controller/');
-    const implementacion = nombre.startsWith('application/usecase/') || /^infrastructure\/adapter\/[^/]+\.adapter\.ts$/.test(nombre) && !nombre.endsWith('/websocket.adapter.ts');
-    if (!controlador && !implementacion) continue;
+    const entrada = controlador || nombre === 'infrastructure/adapter/websocket.adapter.ts';
+    const casoDeUso = nombre.startsWith('application/usecase/');
+    const salida = /^infrastructure\/adapter\/[^/]+\.adapter\.ts$/.test(nombre) && !entrada;
+    if (!entrada && !casoDeUso && !salida) continue;
     visitar(ast, (nodo) => {
       if (ts.isClassDeclaration(nodo)) {
-        if (implementacion) {
+        if (casoDeUso || salida) {
           const implementa = nodo.heritageClauses?.find((clausula) => clausula.token === ts.SyntaxKind.ImplementsKeyword);
-          assert.ok(implementa?.types.some((tipo) => /(?:Entrada|Salida)$/.test(tipo.expression.getText(ast))), nombre);
+          const contrato = casoDeUso ? /Entrada$/ : /Salida$/;
+          assert.ok(implementa?.types.some((tipo) => contrato.test(tipo.expression.getText(ast))), nombre);
         }
-        if (controlador) {
+        if (entrada) {
           const constructor = nodo.members.find(ts.isConstructorDeclaration);
           assert.ok(constructor?.parameters.some((parametro) => /Entrada$/.test(parametro.type?.getText(ast) ?? '')), nombre);
         }
       }
       if (ts.isImportDeclaration(nodo) && ts.isStringLiteral(nodo.moduleSpecifier)) {
-        assert.doesNotMatch(nodo.moduleSpecifier.text, /(?:dependencias|usecase)\//, nombre);
+        assert.doesNotMatch(nodo.moduleSpecifier.text, /(?:usecase\/|dependencias\.js)/, nombre);
+        if (controlador) assert.doesNotMatch(nodo.moduleSpecifier.text, /\/(?:adapter|config|routers)\//, nombre);
       }
+    });
+  }
+});
+
+test('arquitectura: solo existe la estructura acordada y los DTOs viven en aplicación', () => {
+  const carpetas = readdirSync(raiz, { withFileTypes: true }).filter((entrada) => entrada.isDirectory()).map((entrada) => entrada.name).sort();
+  assert.deepEqual(carpetas, ['application', 'domain', 'infrastructure']);
+  for (const { nombre } of fuentes) {
+    assert.match(nombre, /^(?:main\.ts|application\/(?:mapper|dtos|usecase|validations)\/.+|domain\/(?:entities|ports\/(?:portin|portout))\/.+|infrastructure\/(?:controller|routers|adapter|config)\/.+)$/, nombre);
+    if (nombre.endsWith('.dto.ts')) assert.ok(nombre.startsWith('application/dtos/'), nombre);
+    if (nombre.endsWith('.mapper.ts')) assert.match(nombre, /^(?:application\/mapper|infrastructure\/adapter\/mapper)\//, nombre);
+  }
+});
+
+test('arquitectura: cada entidad de dominio tiene su archivo y los puertos no conocen DTOs', () => {
+  for (const { nombre, ast } of fuentes) {
+    if (nombre.startsWith('domain/entities/')) {
+      assert.equal(ast.statements.filter(ts.isClassDeclaration).length, 1, nombre);
+    }
+    if (!nombre.startsWith('domain/ports/')) continue;
+    assert.equal(ast.statements.filter(ts.isInterfaceDeclaration).length, 1, nombre);
+    visitar(ast, (nodo) => {
+      if (ts.isIdentifier(nodo)) assert.doesNotMatch(nodo.text, /Dto$/, nombre);
+      if (ts.isImportDeclaration(nodo) && ts.isStringLiteral(nodo.moduleSpecifier)) {
+        assert.match(nodo.moduleSpecifier.text, /^\.\.\/\.\.\/entities\//, nombre);
+      }
+    });
+  }
+});
+
+test('arquitectura: composición solo en config y controller solo tiene health/keepalive', () => {
+  const controllers = fuentes.filter((fuente) => fuente.nombre.startsWith('infrastructure/controller/'));
+  assert.equal(controllers.length, 1);
+  const controller = controllers[0]!;
+  const metodos: string[] = [];
+  visitar(controller.ast, (nodo) => {
+    if (ts.isMethodDeclaration(nodo) && !nodo.modifiers?.some((modificador) => modificador.kind === ts.SyntaxKind.PrivateKeyword)) {
+      metodos.push(nodo.name.getText(controller.ast));
+    }
+  });
+  assert.deepEqual(metodos.sort(), ['health', 'keepalive']);
+  for (const { ruta, nombre, ast } of fuentes.filter((fuente) => fuente.nombre.startsWith('infrastructure/'))) {
+    visitar(ast, (nodo) => {
+      if (!ts.isImportDeclaration(nodo) || !ts.isStringLiteral(nodo.moduleSpecifier)) return;
+      const destino = relative(raiz, resolve(dirname(ruta), nodo.moduleSpecifier.text)).replaceAll('\\', '/');
+      if (destino.startsWith('application/usecase/')) assert.equal(nombre, 'infrastructure/config/dependencias.ts');
+      if (nombre.startsWith('infrastructure/adapter/mapper/')) assert.doesNotMatch(destino, /^application\//, nombre);
     });
   }
 });

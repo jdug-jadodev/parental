@@ -5,8 +5,8 @@ import { RechazoUpgradeEntity } from '../entities/rechazo-upgrade.entity.js';
 
 export class UpgradeMapper {
   static aDominio(entidad: UpgradeEntity): SolicitudConexion {
-    const texto = (valor: string | string[] | undefined): string | undefined =>
-      Array.isArray(valor) ? valor.join(', ') : valor;
+    const texto = (valor: string | readonly string[] | undefined): string | undefined =>
+      typeof valor === 'string' || valor === undefined ? valor : valor.join(', ');
     return new SolicitudConexion(
       entidad.method, entidad.url, texto(entidad.headers.origin), texto(entidad.headers['sec-websocket-protocol']),
     );

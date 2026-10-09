@@ -11,6 +11,12 @@ Próxima tarea R02; R03 pendiente. Una tarea por turno, respetar dependencias.
 - Español claro en comunicación/documentación/comentarios/commits.
 - Código sin comentarios; explicar decisiones en documentación. Dominio/aplicación
   aislados de Node e infraestructura, inyección por constructor y mappers en bordes.
+- Estructura: application/{mapper,dtos,usecase,validations}, domain/entities (una
+  entidad por archivo) y ports/{portin,portout}; infrastructure/{controller,routers,
+  adapter,config}. Composición solo en config/dependencias.ts. Controller HTTP
+  solo health/keepalive; WebSocket entra por adapter, sin DTOs de conexión duplicados.
+- Keepalive solo confirma actividad del proceso; no disponibilidad CP/1 ni garantía
+  contra suspensión de Render. No añadir autopings, cron o servicios externos sin solicitud.
 - CP/1 y fixtures en compartido/ son copia congelada: no cambiar esquema,
   firmas ni semántica unilateralmente. Acordar nueva versión antes de sincronizar.
 - No privadas, códigos reales, credenciales ni historial; solo configuración pública.

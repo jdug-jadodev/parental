@@ -20,11 +20,13 @@ test('respuestas: fallos HTTP y de upgrade son genéricos y no exponen detalles'
     servidor.closeAllConnections();
   }));
   const { port } = servidor.address() as AddressInfo;
-  const respuesta = await fetch(`http://127.0.0.1:${port}/healthz`);
-  assert.equal(respuesta.status, 500);
-  assert.equal(respuesta.headers.get('cache-control'), 'no-store');
-  assert.match(respuesta.headers.get('content-type') ?? '', /application\/json/);
-  assert.deepEqual(await respuesta.json(), { error: 'Error interno' });
+  for (const ruta of ['/healthz', '/keepalive']) {
+    const respuesta = await fetch(`http://127.0.0.1:${port}${ruta}`);
+    assert.equal(respuesta.status, 500);
+    assert.equal(respuesta.headers.get('cache-control'), 'no-store');
+    assert.match(respuesta.headers.get('content-type') ?? '', /application\/json/);
+    assert.deepEqual(await respuesta.json(), { error: 'Error interno' });
+  }
   const socket = connect(port, '127.0.0.1');
   try {
     socket.setTimeout(3000, () => socket.destroy(new Error('Timeout de prueba')));

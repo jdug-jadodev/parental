@@ -169,5 +169,31 @@ como referencia; la ampliación solicitada se documenta en ARQUITECTURA/README.
 Ejecutado pnpm run verificar: instalación congelada/check/build correctos,
 52 tests aprobados (0 fallos/omitidos), 28 ejemplos y 13 contraejemplos correctos,
 10 vectores/78 comprobaciones. Contrato/fixtures intactos, R02/R03 pendientes.
-Pendiente del bloque de cierre: reforzar reglas de estructura y pruebas específicas
-de keepalive, router, adaptador WebSocket y entidades aisladas.
+Primer bloque guardado en commit 0389173.
+
+### Cierre de simplificación
+
+Pruebas de arquitectura reforzadas: estructura exacta, DTOs solo en aplicación,
+una clase por archivo de entidad de dominio, puertos sin DTOs, inyección por
+constructor, composición restringida a config/dependencias y solo dos métodos
+públicos HTTP en controller. El adaptador de entrada WebSocket se distingue de
+adaptadores de salida. Mapper de infraestructura no importa DTO/mappers de aplicación.
+Entidades WebSocket copian/congelan cabeceras y arrays; pruebas de roundtrip y
+rechazo de interpretar 500 de transporte como decisión de dominio.
+
+Añadidos test/keepalive.test.ts y test/websocket-adapter.test.ts; comprueban
+keepalive 200 sin afirmar CP/1, health todavía 503, rechazo de otras rutas,
+métodos/query y que el adaptador entrega una entidad de dominio a su puerto,
+no DTOs ni socket. Fallos HTTP de ambos endpoints siguen devolviendo 500 genérico.
+Router registra las rutas una sola vez, sin repetir la lista para validarlas.
+
+dist anterior trasladado sin borrar a la carpeta temporal aprobada OpenCode:
+parental_render-dist-anterior-simplificacion-20261009. Eliminadas solo carpetas
+vacías de src dejadas por los movimientos, mediante borrado no recursivo.
+Ejecutado pnpm run verificar con build desde dist limpio: 59 tests aprobados,
+0 fallos/omitidos; instalación congelada/check/build correctos, 28 ejemplos,
+13 contraejemplos, 10 vectores y 78 comprobaciones correctos. Node v24.21.0.
+
+Sin modificaciones a apps, compartido/ o fixtures; sin dispositivos, despliegue
+ni sockets habilitados. Loopback, health 503 y production bloqueado conservados.
+R02/R03 siguen pendientes. No se ejecutó el wrapper PowerShell en esta tarea.
