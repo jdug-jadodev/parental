@@ -57,3 +57,37 @@ memoria y preparación/despliegue Render. El test R-LIMIT-01 de R01 verifica
 opciones y rechazos HTTP, no el comportamiento de frames de sockets autenticados.
 Integración móvil posterior coordinada: primero clientes Node autenticados;
 las apps no se compilaron ni modificaron. Sin dispositivos, ADB ni despliegue.
+
+## Refactorización hexagonal — 2026-10-09
+
+Solicitud posterior: estructura tradicional con src/ en la raíz, puertos,
+casos de uso, controladores, adaptadores, DTOs, entidades y mappers; sin
+comentarios en código. No se avanzó R02/R03 durante esta tarea.
+
+Primer bloque: paquete npm/configuración de herramientas trasladados a raíz;
+src/domain, src/application/ports/{input,output}, src/application/use-cases,
+src/infrastructure/{adapters,config,http,websocket,protocol}, src/bootstrap y
+src/main.ts. Inyección por constructor desde composición, dominio/aplicación
+sin dependencias Node ni infraestructura. Configuración, health y rechazo de
+upgrades usan controladores → puertos de entrada → casos de uso; estos usan
+puertos de salida para estado local y validación pública.
+
+Request/response DTOs y mappers separados; SolicitudConexion ↔ UpgradeEntity
+y DecisionConexion → RechazoUpgradeEntity. Errores HTTP inesperados devuelven
+500 genérico; configuración solo mapea variables permitidas. DTOs CP/1, codec
+y criptografía técnica aislados en infraestructura, sin alterar contrato ni
+bytes firmados. Tests y herramienta de interoperabilidad trasladados a test/.
+README y documentacion/ARQUITECTURA.md describen las rutas nuevas; referencias
+relay/ históricas se conservan. No se modificaron las apps consumidoras.
+
+Ejecutado dos veces npm run verificar desde la raíz: ci/check/build correctos,
+35 tests aprobados, esquema 28 ejemplos/13 contraejemplos y vectores 10/78.
+Node v24.21.0, 0 vulnerabilidades; aviso esbuild sin aprobación adicional.
+La antigua carpeta relay/ solo conservaba artefactos locales y carpetas vacías;
+se trasladó íntegra, sin borrar, a la carpeta aprobada de temporales OpenCode:
+parental_render-relay-heredado-20261009-hexagonal. Los artefactos nuevos se
+generan en node_modules/ y dist/ de la raíz.
+
+Este bloque conserva loopback, health 503, upgrades rechazados, bloqueo de
+producción y límites R01. Pendiente del cierre de refactorización: pruebas
+específicas de arquitectura, inyección, mappers y respuestas ante fallos.
