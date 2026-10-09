@@ -14,6 +14,8 @@ import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/c
 import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
 
 const argumentos = process.argv.slice(2);
+const fallos = argumentos[0] === '--fallos';
+if (fallos) argumentos.shift();
 assert.equal(argumentos.length, 2, 'Uso: pnpm run test:padre --ruta-padre RUTA');
 assert.equal(argumentos[0], '--ruta-padre');
 const padre = resolve(argumentos[1]);
@@ -48,7 +50,7 @@ const temporal = mkdtempSync(join(baseTemporal, 'relay-padre-jvm-'));
 const java = nombre => process.env.JAVA_HOME ? join(process.env.JAVA_HOME, 'bin', process.platform === 'win32' ? `${nombre}.exe` : nombre) : nombre;
 const compilacion = spawnSync(java('javac'), ['-encoding', 'UTF-8', '-cp', classpath.join(delimiter), '-d', temporal, join(raiz, 'test/soporte/PruebaPadre.java')], { encoding: 'utf8', timeout: 30000 });
 if (compilacion.status !== 0) throw new Error(`No se compiló el driver JVM: ${compilacion.stderr ?? ''}`);
-const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre'], { stdio: ['pipe', 'pipe', 'pipe'] });
+const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre', ...(fallos ? ['fallos'] : [])], { stdio: ['pipe', 'pipe', 'pipe'] });
 jvm.stderr.resume();
 const terminado = new Promise(resolver => { jvm.once('error', () => resolver(-1)); jvm.once('exit', codigo => resolver(codigo)); });
 const lectura = createInterface({ input: jvm.stdout });
@@ -68,8 +70,9 @@ try {
   const identidadHijo = generateKeyPairSync('ec', { namedCurve: 'prime256v1' });
   const publicaHijo = identidadHijo.publicKey.export({ type: 'spki', format: 'der' }).toString('base64url');
   const pareja = randomUUID();
-  servidor = crearServidorLocal({ NODE_ENV: 'test', PUBLIC_ORIGIN: 'https://127.0.0.1', ACTIVE_PAIR_ID: pareja,
-    PARENT_PUBLIC_KEY_B64: publicaPadre, CHILD_PUBLIC_KEY_B64: publicaHijo }, { cert, key });
+  const env = { NODE_ENV: 'test', PUBLIC_ORIGIN: 'https://127.0.0.1', ACTIVE_PAIR_ID: pareja,
+    PARENT_PUBLIC_KEY_B64: publicaPadre, CHILD_PUBLIC_KEY_B64: publicaHijo };
+  servidor = crearServidorLocal(env, { cert, key });
   servidor.listen(0, '127.0.0.1');
   await once(servidor, 'listening');
   const origen = `https://127.0.0.1:${servidor.address().port}`;
@@ -83,21 +86,25 @@ try {
     const sigB64 = sign('sha256', bytesFirma(purpose, bytes), { key: identidadHijo.privateKey, dsaEncoding: 'der' }).toString('base64url');
     return codec.codificarFrame({ v: 1, kind: 'SIGNED', purpose, payloadB64: bytes.toString('base64url'), sigB64 });
   };
-  hijo = new WebSocket(origen.replace('https:', 'wss:') + '/ws', 'cp.v1', { ca: cert });
   const frames = [], esperas = [];
-  hijo.on('message', bytes => {
-    const frame = codec.leerFrame(bytes);
-    if (frame.kind === 'PEER_STATUS') return;
-    const pendiente = esperas.shift();
-    if (pendiente) pendiente(bytes); else frames.push(bytes);
-  });
-  hijo.on('error', () => {});
   const recibir = () => dentroDe(frames.length ? Promise.resolve(frames.shift()) : new Promise(resolver => esperas.push(resolver)), 10000);
-  await once(hijo, 'open');
-  const reto = codec.leerFrame(await recibir());
-  assert.equal(reto.kind, 'CHALLENGE');
-  hijo.send(firmar({ v: 1, kind: 'AUTH_PROOF', pairId: pareja, role: 'CHILD', connectionId: reto.connectionId, nonce: reto.nonce }, 'AUTH'), { binary: false });
-  assert.equal(codec.leerFrame(await recibir()).kind, 'AUTH_OK');
+  const conectarHijo = async () => {
+    hijo = new WebSocket(origen.replace('https:', 'wss:') + '/ws', 'cp.v1', { ca: cert });
+    hijo.on('message', bytes => {
+      const frame = codec.leerFrame(bytes);
+      if (frame.kind === 'PEER_STATUS') return;
+      const pendiente = esperas.shift();
+      if (pendiente) pendiente(bytes); else frames.push(bytes);
+    });
+    hijo.on('error', () => {});
+    await once(hijo, 'open');
+    const reto = codec.leerFrame(await recibir());
+    assert.equal(reto.kind, 'CHALLENGE');
+    hijo.send(firmar({ v: 1, kind: 'AUTH_PROOF', pairId: pareja, role: 'CHILD', connectionId: reto.connectionId, nonce: reto.nonce }, 'AUTH'), { binary: false });
+    assert.equal(codec.leerFrame(await recibir()).kind, 'AUTH_OK');
+    return reto.connectionId;
+  };
+  const conexionHijo = await conectarHijo();
   jvm.stdin.write(`${origen}\t${pareja}\t${publicaHijo}\n`);
   const sync = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
   assert.equal(sync.kind, 'SYNC_REQUEST'); assert.equal(sync.pairId, pareja);
@@ -110,13 +117,43 @@ try {
   const orden = documento.mensaje;
   assert.equal(orden.kind, 'SET_POLICY'); assert.equal(orden.pairId, pareja);
   assert.equal(orden.bootId, bootId); assert.equal(orden.childSessionId, childSessionId); assert.equal(orden.commandNonce, commandNonce);
-  hijo.send(firmar({ v: 1, kind: 'ACK', pairId: pareja, sender: 'CHILD', bootId, childSessionId, commandId: orden.commandId,
-    seq: orden.seq, commandPayloadSha256B64: documento.payloadSha256B64, result: 'ACCEPTED_PENDING_ENFORCEMENT',
-    mode: 'LOCKED', reason: 'OK', remainingSec: null }, 'MESSAGE'), { binary: false });
-  assert.equal(await dentroDe(leerLinea(), 15000), 'OK\tTLS_AUTH_PONG_SYNC_STATE_POLICY_ACK_FONDO');
-  assert.equal(await dentroDe(terminado, 5000), 0);
-  console.log('OK: transporte y RelayConnection JVM del padre → relay WSS local → hijo Node simulado; TLS no confiable rechazado, AUTH/PONG y cuatro tipos MESSAGE verificados.');
-  console.log('No acredita APK, Keystore, ControlPoliticas, Device Owner ni aplicación de una orden; ACK solo simulado y pendiente de enforcement.');
+  if (fallos) {
+    assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_SIN_ACK');
+    const port = servidor.address().port;
+    const cierreHijo = once(hijo, 'close');
+    const cierreServidor = once(servidor, 'close');
+    cerrarServidorHttp(servidor);
+    await cierreServidor;
+    assert.equal((await cierreHijo)[0], 1012);
+    servidor = crearServidorLocal(env, { cert, key });
+    servidor.listen(port, '127.0.0.1');
+    await once(servidor, 'listening');
+    assert.equal(await dentroDe(leerLinea(), 20000), 'RECONECTADO');
+    assert.equal(frames.length, 0);
+    assert.notEqual(await conectarHijo(), conexionHijo);
+    jvm.stdin.write('HIJO_LISTO\n');
+    const syncNuevo = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
+    assert.equal(syncNuevo.kind, 'SYNC_REQUEST');
+    assert.notEqual(syncNuevo.syncNonce, sync.syncNonce);
+    hijo.send(firmar({ v: 1, kind: 'STATE', pairId: pareja, sender: 'CHILD', syncNonce: syncNuevo.syncNonce, bootId,
+      childSessionId: randomUUID(), stateSeq: '1', lastAcceptedSeq: '0', lastCommandId: null,
+      lastCommandPayloadSha256B64: null, lastResult: 'NONE', mode: 'LOCKED', reason: 'OK', remainingSec: null,
+      networkValidated: true, channelHealthy: true, isDeviceOwner: false, lockTaskActive: false,
+      commandNonce: randomBytes(32).toString('base64url') }, 'MESSAGE'), { binary: false });
+    assert.equal(await dentroDe(leerLinea(), 15000), 'OK\tREINICIO_SIN_ACK_SESION_NUEVA_SIN_REPLAY');
+    assert.equal(await dentroDe(terminado, 5000), 0);
+    assert.equal(frames.length, 0);
+    console.log('OK: ACK no emitido por hijo simulado, cierre 1012 y recreación de instancia WSS en el mismo proceso; padre JVM reautenticado, ticket viejo rechazado y nueva sincronización sin replay.');
+    console.log('Solo RelayConnection/core; no prueba agotamiento de reintentos, persistencia/reconciliación de ControlPoliticas ni aplicación real.');
+  } else {
+    hijo.send(firmar({ v: 1, kind: 'ACK', pairId: pareja, sender: 'CHILD', bootId, childSessionId, commandId: orden.commandId,
+      seq: orden.seq, commandPayloadSha256B64: documento.payloadSha256B64, result: 'ACCEPTED_PENDING_ENFORCEMENT',
+      mode: 'LOCKED', reason: 'OK', remainingSec: null }, 'MESSAGE'), { binary: false });
+    assert.equal(await dentroDe(leerLinea(), 15000), 'OK\tTLS_AUTH_PONG_SYNC_STATE_POLICY_ACK_FONDO');
+    assert.equal(await dentroDe(terminado, 5000), 0);
+    console.log('OK: transporte y RelayConnection JVM del padre → relay WSS local → hijo Node simulado; TLS no confiable rechazado, AUTH/PONG y cuatro tipos MESSAGE verificados.');
+    console.log('No acredita APK, Keystore, ControlPoliticas, Device Owner ni aplicación de una orden; ACK solo simulado y pendiente de enforcement.');
+  }
 } finally {
   clearTimeout(limite); lectura.close(); jvm.kill();
   if (hijo) hijo.terminate();

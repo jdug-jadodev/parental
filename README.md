@@ -100,6 +100,9 @@ Primera integración JVM del padre con relay WSS local preparada en
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché
 Gradle y no forma parte de CI. Ver `documentacion/INTEGRACION_LOCAL_PADRE.md`:
 no equivale a probar la APK, Keystore o políticas reales.
+Variante `pnpm run test:padre:fallos --ruta-padre RUTA`: ACK omitido y recreación
+de instancia WSS, reautenticación JVM y sincronización nueva sin replay. No
+sustituye pruebas de restart de proceso o de reintentos de ControlPoliticas.
 
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.

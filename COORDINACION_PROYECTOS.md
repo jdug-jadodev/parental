@@ -80,13 +80,21 @@ Entregar a la IA del padre después de fijar el alcance de la siguiente unidad:
 No usar un booleano de Device Owner enviado por un simulador como acreditación
 física. VINCULADO de P08-B está aislado en tests y no resuelve esta puerta.
 
-### RELAY-C01 — siguiente unidad propia, todavía pendiente
+### RELAY-C01 — avance parcial de transporte local
 
 Ampliar pruebas locales integradas con padre JVM para reinicio real del relay y
 ACK totalmente perdido hasta agotar reintentos, sin cola/reproducción y sin APPLIED
 ficticio. P08-B no ejecutó esos dos escenarios. No editar su harness desde aquí;
 acordar el reparto con su IA o usar un driver propio del relay. No se implementó
-ni ejecutó esta ampliación en el turno documental actual.
+ni ejecutó esta ampliación en el turno documental inicial.
+
+Avance posterior: test:padre:fallos prueba RelayConnection JVM con ACK omitido
+por el hijo simulado, cierre 1012, recreación del servidor WSS en el mismo puerto,
+reautenticación/ticket nuevo, rechazo de ticket antiguo y SYNC/STATE nuevos sin
+replay. Se recrea la instancia en el mismo proceso Node; **no reinicio de proceso**.
+ControlPoliticas/ParentStore no intervienen en este driver: siguen pendientes
+agotamiento real de sus reintentos, persistencia/reconciliación y restart de proceso
+en el recorrido integrado. No cerrar RELAY-C01 completo por esta prueba de red.
 
 ## 4. Secuencia de puertas
 
@@ -127,9 +135,10 @@ La coordinación tampoco autoriza lanzar subagentes o editar repos ajenos.
 
 ### Disponibilidad comunicada por el propietario
 
-El propietario retira temporalmente el A56 para uso personal y permite avanzar
-con el A13. A56 queda fuera de instalación, consultas y pruebas hasta nueva
-disponibilidad/autorización; las tareas locales JVM del padre pueden continuar.
+El propietario confirmó el regreso del A56: vuelve disponible para coordinar
+pruebas desde el proyecto padre. Su disponibilidad no inicia instalaciones/ADB:
+definir la prueba concreta y avisar antes de cualquier operación física. El retiro
+temporal anterior queda como evidencia histórica en ESTADO.md.
 El A13 queda disponible para coordinar el trabajo desde la sesión del hijo.
 Render mantiene su prohibición de operar dispositivos y no ejecuta ADB.
 No se infiere permiso para reset, aprovisionamiento, borrado, RETIRE, instalación
@@ -138,7 +147,7 @@ hijo debe delimitar la prueba, comprobar dependencias y comunicar su alcance.
 
 Handoff adicional preparado para la IA del hijo, aún no enviado:
 
-> El propietario se lleva el A56; no consultarlo ni usarlo. El A13 está disponible
+> A56 nuevamente disponible para el padre; no consultarlo desde el hijo. A13 disponible
 > para avanzar en tu proyecto. Continúa la unidad HIJO-C01 de coordinación local
 > respetando H05 y prepara la siguiente comprobación acotada de recuperación/
 > emergencia que permita tu estado actual. Devuelve objetivo, precondiciones,

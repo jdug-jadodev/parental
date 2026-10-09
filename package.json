@@ -18,6 +18,7 @@
     "test:carga": "node --expose-gc test/soporte/carga-relay.mjs",
     "test:carga:prolongada": "node --expose-gc test/soporte/carga-relay.mjs --prolongada",
     "test:padre": "node test/soporte/prueba-padre.mjs",
+    "test:padre:fallos": "node test/soporte/prueba-padre.mjs --fallos",
     "verificar": "node scripts/verificar.mjs"
   },
   "pnpm": {

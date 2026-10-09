@@ -33,7 +33,8 @@ public class PruebaPadre {
         String publica = Base64.getUrlEncoder().withoutPadding().encodeToString(identidad.getPublic().getEncoded());
         System.out.println("LISTO\t" + publica + "\t" + b64(certificado.certificatePem().getBytes(StandardCharsets.US_ASCII))
             + "\t" + b64(certificado.privateKeyPkcs8Pem().getBytes(StandardCharsets.US_ASCII)));
-        String[] entrada = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8)).readLine().split("\t");
+        BufferedReader canal = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
+        String[] entrada = canal.readLine().split("\t");
         String origen = entrada[0], pareja = entrada[1];
         ClaveVerificacion clavePadre = ClaveVerificacion.Companion.desdeSpki(Rol.PARENT, publica);
         ClaveVerificacion claveHijo = ClaveVerificacion.Companion.desdeSpki(Rol.CHILD, entrada[2]);
@@ -93,6 +94,33 @@ public class PruebaPadre {
             SobreFirmado comando = CriptografiaProtocolo.INSTANCE.firmarSobre(orden, Proposito.MESSAGE, clavePadre, firmante);
             byte[] commandFrame = CodecProtocolo.INSTANCE.codificarFrame(comando);
             exigir(conexion.enviarPolitica(ticket, commandFrame));
+            if (args.length == 1 && args[0].equals("fallos")) {
+                System.out.println("ORDEN_SIN_ACK");
+                long reconectarHasta = System.nanoTime() + TimeUnit.SECONDS.toNanos(15);
+                while ((ticket.equals(conexion.sesionPoliticas()) || !conexion.getEstado().getValue().getCanalSano()) && System.nanoTime() < reconectarHasta) {
+                    conexion.avanzarReloj(); Thread.sleep(10);
+                }
+                Long nuevo = conexion.sesionPoliticas();
+                exigir(nuevo != null && !ticket.equals(nuevo));
+                exigir(!conexion.enviarPolitica(ticket, commandFrame));
+                exigir(recibidos.isEmpty());
+                System.out.println("RECONECTADO");
+                exigir("HIJO_LISTO".equals(canal.readLine()));
+                String nonceNuevo = nonce();
+                SolicitudSincronizacion syncNuevo = new SolicitudSincronizacion(pareja, nonceNuevo, "PARENT", 1);
+                SobreFirmado sobreNuevo = CriptografiaProtocolo.INSTANCE.firmarSobre(syncNuevo, Proposito.MESSAGE, clavePadre, firmante);
+                exigir(conexion.enviarPolitica(nuevo, CodecProtocolo.INSTANCE.codificarFrame(sobreNuevo)));
+                byte[] bytesNuevos = recibidos.poll(10, TimeUnit.SECONDS); exigir(bytesNuevos != null);
+                DocumentoVerificado verificado = CriptografiaProtocolo.INSTANCE.verificarSobre(bytesNuevos, claveHijo, Proposito.MESSAGE);
+                exigir(verificado.getMensaje() instanceof EstadoDispositivo);
+                EstadoDispositivo actualizado = (EstadoDispositivo) verificado.getMensaje();
+                exigir(actualizado.getSyncNonce().equals(nonceNuevo));
+                exigir(!actualizado.getChildSessionId().equals(state.getChildSessionId()));
+                exigir(recibidos.isEmpty());
+                conexion.segundoPlano(); exigir(conexion.sesionPoliticas() == null);
+                System.out.println("OK\tREINICIO_SIN_ACK_SESION_NUEVA_SIN_REPLAY");
+                return;
+            }
             byte[] ackFrame = recibidos.poll(10, TimeUnit.SECONDS); exigir(ackFrame != null);
             DocumentoVerificado respuesta = CriptografiaProtocolo.INSTANCE.verificarSobre(ackFrame, claveHijo, Proposito.MESSAGE);
             exigir(respuesta.getMensaje() instanceof Confirmacion);

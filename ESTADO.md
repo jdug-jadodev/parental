@@ -523,3 +523,31 @@ ni ejecutado: no existe canal automático entre sesiones.
 
 Turno documental: ninguna consulta a teléfonos/ADB, prueba, build, cambio de app,
 credencial, contrato, despliegue o push. Límites del relay conservados.
+
+## Fallos de transporte con padre JVM — 2026-10-09
+
+Propietario confirma regreso del A56 y solicita continuar. Actualizada su
+disponibilidad en COORDINACION_PROYECTOS.md; no se inicia ADB ni instalación.
+Releídos relevos padre/hijo: mantienen P08-B parcial y H05 abierta respectivamente.
+
+Añadido test:padre:fallos con driver propio del relay: hijo Node omite ACK,
+cierre WSS 1012 y recreación de instancia en el mismo puerto. RelayConnection
+JVM reautentica, obtiene ticket nuevo y rechaza envío con el anterior. Hijo
+reautentica con reto nuevo y recibe SYNC_REQUEST nuevo, sin reproducción de la
+orden anterior; padre verifica STATE firmado con nonce y sesión nuevos.
+No se cambia código productivo, CP/1 ni fixtures. TLS y claves efímeros en RAM.
+
+Ejecutados pnpm run test:padre:fallos --ruta-padre con ruta explícita del padre
+y pnpm run test:padre --ruta-padre con la misma ruta: ambos correctos.
+pnpm run verificar terminado correctamente: 104 tests aprobados, 28 ejemplos
+y 13 contraejemplos correctos; 10 vectores y 78 comprobaciones documentales.
+Compilación del driver Java solo en temporal OpenCode, sin Gradle ni cambios
+al proyecto padre. Documentados comando, alcance y límites en README y guía.
+
+Recreación de instancia/listener en el mismo proceso Node, NO reinicio de proceso
+independiente. ACK omitido por simulador, no pérdida de un ACK emitido. No ejecuta
+ControlPoliticas/ParentStore ni agotamiento de sus dos reintentos o reconciliación
+duradera. Es avance parcial: RELAY-C01 completo permanece pendiente. No acredita
+APK, Keystore, vínculo operativo, Device Owner ni aplicación efectiva de orden.
+Sin teléfonos/ADB, cambios a apps, push, despliegue o exposición LAN. Conservados
+loopback, health 503 y producción bloqueada.

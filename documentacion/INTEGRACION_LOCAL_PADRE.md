@@ -20,6 +20,7 @@ se libera el transporte preparado y no se escucha.
 ```powershell
 pnpm run build
 pnpm run test:padre --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
+pnpm run test:padre:fallos --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 ```
 
 Requiere JDK 21 con java/javac en PATH o JAVA_HOME, clases debug ya compiladas
@@ -62,6 +63,20 @@ simulador de protocolo: no ejerce restricciones. El driver invoca envío de
 transporte para probar CP/1, **no ControlPoliticas** ni sus guardias de negocio.
 STATE declara isDeviceOwner=false y lockTaskActive=false: no es evidencia de un
 hijo apto. No promociona PREPARADO ni habilita controles de la APK.
+
+### Variante de fallos de transporte
+
+test:padre:fallos no emite el ACK de la orden recibida por el hijo simulado.
+Después cierra la instancia WSS con 1012 y crea otra en el mismo puerto, con
+configuración pública y TLS efímeros conservados solo en RAM. RelayConnection JVM
+reconecta por su backoff normal, autentica con reto nuevo y obtiene PONG/ticket
+nuevos; el ticket anterior no permite enviar. El hijo Node reautentica y solo
+recibe SYNC_REQUEST nuevo, no la orden anterior. STATE firmado de sesión nueva
+se verifica en JVM; no llega un ACK inventado o almacenado por el relay.
+
+Esto prueba recreación de instancia/listener en el mismo proceso Node, no muerte
+y arranque de un proceso independiente. Tampoco ejecuta ControlPoliticas ni
+agotamiento de sus dos reintentos/reconciliación duradera: siguen pendientes.
 
 ## Pendientes y handoff al proyecto padre
 
