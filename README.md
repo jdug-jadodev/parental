@@ -106,6 +106,9 @@ sustituye por sí sola pruebas de restart de proceso o reintentos de ControlPoli
 `pnpm run test:padre:proceso --ruta-padre RUTA` termina abruptamente un proceso
 relay independiente y arranca otro en el mismo puerto: comprueba reconexión JVM
 sin replay, pero no reintentos/persistencia de ControlPoliticas ni APK reales.
+`pnpm run test:padre:politicas --ruta-padre RUTA` usa ControlPoliticas/ParentStore
+JVM reales: ACK omitido, dos reintentos idénticos y reconciliación tras reapertura
+cifrada en RAM. Vínculo y Device Owner ficticios solo en test, nunca acreditación física.
 
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.

@@ -1,6 +1,7 @@
 package dev.controlparental.parent.network;
 
 import dev.controlparental.protocol.*;
+import dev.controlparental.parent.policy.PruebaPoliticas;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -80,6 +81,11 @@ public class PruebaPadre {
             exigir(conexion.getEstado().getValue().getFase() == FaseRelay.AUTENTICADO);
             exigir(conexion.getEstado().getValue().getCanalSano());
             Long ticket = conexion.sesionPoliticas(); exigir(ticket != null);
+            if (args.length == 1 && args[0].equals("politicas")) {
+                PruebaPoliticas.ejecutar(conexion, recibidos, canal, publica, entrada[2], pareja, origen,
+                    mensaje -> CriptografiaProtocolo.INSTANCE.firmarSobre(mensaje, Proposito.MESSAGE, clavePadre, firmante));
+                return;
+            }
             String syncNonce = nonce();
             SolicitudSincronizacion sync = new SolicitudSincronizacion(pareja, syncNonce, "PARENT", 1);
             SobreFirmado solicitud = CriptografiaProtocolo.INSTANCE.firmarSobre(sync, Proposito.MESSAGE, clavePadre, firmante);

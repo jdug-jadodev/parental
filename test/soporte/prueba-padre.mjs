@@ -14,9 +14,10 @@ import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/c
 import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
 
 const argumentos = process.argv.slice(2);
+const politicas = argumentos[0] === '--politicas';
 const proceso = argumentos[0] === '--proceso';
 const fallos = proceso || argumentos[0] === '--fallos';
-if (fallos) argumentos.shift();
+if (fallos || politicas) argumentos.shift();
 assert.equal(argumentos.length, 2, 'Uso: pnpm run test:padre --ruta-padre RUTA');
 assert.equal(argumentos[0], '--ruta-padre');
 const padre = resolve(argumentos[1]);
@@ -26,6 +27,13 @@ for (const archivo of ['compartido/00_CONTRATO_V1.md', 'compartido/protocolo.sch
   assert.equal(hash(readFileSync(join(padre, archivo))), hash(readFileSync(join(raiz, archivo))), `Copia congelada distinta: ${archivo}`);
 }
 const clases = join(padre, 'app-parent/build/tmp/kotlin-classes/debug');
+if (politicas) {
+  for (const [carpeta, nombre] of [['policy', 'ControlPoliticas'], ['data', 'ParentStore'], ['data', 'MetadatosPadre'], ['security', 'CifradoMetadatos']]) {
+    const fuente = join(padre, `app-parent/src/main/java/dev/controlparental/parent/${carpeta}/${nombre}.kt`);
+    const compilado = join(clases, `dev/controlparental/parent/${carpeta}/${nombre}.class`);
+    assert.ok(existsSync(compilado) && statSync(compilado).mtimeMs >= statSync(fuente).mtimeMs, 'Solicitar build actualizado al padre para políticas');
+  }
+}
 for (const nombre of ['RelayConnection', 'TransporteOkHttp']) {
   const fuente = join(padre, `app-parent/src/main/java/dev/controlparental/parent/network/${nombre}.kt`);
   const compilado = join(clases, `dev/controlparental/parent/network/${nombre}.class`);
@@ -49,9 +57,10 @@ const classpath = [clases, join(padre, 'core-protocol/build/libs/core-protocol.j
 const baseTemporal = process.platform === 'win32' ? join(process.env.LOCALAPPDATA, 'Temp/opencode') : process.env.TMPDIR ?? '/tmp';
 const temporal = mkdtempSync(join(baseTemporal, 'relay-padre-jvm-'));
 const java = nombre => process.env.JAVA_HOME ? join(process.env.JAVA_HOME, 'bin', process.platform === 'win32' ? `${nombre}.exe` : nombre) : nombre;
-const compilacion = spawnSync(java('javac'), ['-encoding', 'UTF-8', '-cp', classpath.join(delimiter), '-d', temporal, join(raiz, 'test/soporte/PruebaPadre.java')], { encoding: 'utf8', timeout: 30000 });
+const compilacion = spawnSync(java('javac'), ['-encoding', 'UTF-8', '-cp', classpath.join(delimiter), '-d', temporal,
+  join(raiz, 'test/soporte/PruebaPadre.java'), join(raiz, 'test/soporte/PruebaPoliticas.java')], { encoding: 'utf8', timeout: 30000 });
 if (compilacion.status !== 0) throw new Error(`No se compiló el driver JVM: ${compilacion.stderr ?? ''}`);
-const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre', ...(fallos ? ['fallos'] : [])], { stdio: ['pipe', 'pipe', 'pipe'] });
+const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre', ...(politicas ? ['politicas'] : fallos ? ['fallos'] : [])], { stdio: ['pipe', 'pipe', 'pipe'] });
 jvm.stderr.resume();
 const terminado = new Promise(resolver => { jvm.once('error', () => resolver(-1)); jvm.once('exit', codigo => resolver(codigo)); });
 const lectura = createInterface({ input: jvm.stdout });
@@ -130,12 +139,41 @@ try {
   hijo.send(firmar({ v: 1, kind: 'STATE', pairId: pareja, sender: 'CHILD', syncNonce: sync.syncNonce, bootId, childSessionId,
     stateSeq: '1', lastAcceptedSeq: '0', lastCommandId: null, lastCommandPayloadSha256B64: null, lastResult: 'NONE',
     mode: 'LOCKED', reason: 'OK', remainingSec: null, networkValidated: true, channelHealthy: true,
-    isDeviceOwner: false, lockTaskActive: false, commandNonce }, 'MESSAGE'), { binary: false });
+    isDeviceOwner: politicas, lockTaskActive: false, commandNonce }, 'MESSAGE'), { binary: false });
   const documento = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE');
   const orden = documento.mensaje;
   assert.equal(orden.kind, 'SET_POLICY'); assert.equal(orden.pairId, pareja);
   assert.equal(orden.bootId, bootId); assert.equal(orden.childSessionId, childSessionId); assert.equal(orden.commandNonce, commandNonce);
-  if (fallos) {
+  if (politicas) {
+    assert.equal(orden.action, 'LOCK_FOR'); assert.equal(orden.durationSec, 60); assert.equal(orden.seq, '1');
+    assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_DURADERA');
+    for (let i = 1; i <= 2; i++) {
+      jvm.stdin.write(`AVANZAR_${i * 5000}\n`);
+      assert.deepEqual(await recibir(), documento.bytesFrame());
+      assert.equal(await dentroDe(leerLinea(), 5000), `REINTENTO_${i}`);
+    }
+    jvm.stdin.write('AVANZAR_15000\n');
+    const nuevaSync = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
+    assert.equal(nuevaSync.kind, 'SYNC_REQUEST'); assert.notEqual(nuevaSync.syncNonce, sync.syncNonce);
+    assert.equal(await dentroDe(leerLinea(), 5000), 'REINTENTOS_AGOTADOS');
+    const estado = (solicitud, stateSeq, hash, lastResult, sesion = childSessionId) => firmar({
+      v: 1, kind: 'STATE', pairId: pareja, sender: 'CHILD', syncNonce: solicitud.syncNonce, bootId,
+      childSessionId: sesion, stateSeq, lastAcceptedSeq: orden.seq, lastCommandId: orden.commandId,
+      lastCommandPayloadSha256B64: hash, lastResult, mode: 'LOCKED', reason: lastResult === 'ENFORCEMENT_FAILED' ? 'ENFORCEMENT_ERROR' : 'OK',
+      remainingSec: null, networkValidated: true, channelHealthy: true, isDeviceOwner: true,
+      lockTaskActive: false, commandNonce }, 'MESSAGE');
+    hijo.send(estado(nuevaSync, '2', randomBytes(32).toString('base64url'), 'ACCEPTED_PENDING_ENFORCEMENT'), { binary: false });
+    assert.equal(await dentroDe(leerLinea(), 10000), 'HASH_AJENO_NO_RESUELVE');
+    hijo.send(estado(nuevaSync, '3', documento.payloadSha256B64, 'ACCEPTED_PENDING_ENFORCEMENT'), { binary: false });
+    const syncReapertura = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
+    assert.equal(syncReapertura.kind, 'SYNC_REQUEST'); assert.notEqual(syncReapertura.syncNonce, nuevaSync.syncNonce);
+    assert.equal(await dentroDe(leerLinea(), 10000), 'ALMACEN_REABIERTO');
+    hijo.send(estado(syncReapertura, '1', documento.payloadSha256B64, 'ENFORCEMENT_FAILED', randomUUID()), { binary: false });
+    assert.equal(await dentroDe(leerLinea(), 10000), 'OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM');
+    assert.equal(await dentroDe(terminado, 5000), 0); assert.equal(frames.length, 0);
+    console.log('OK: ControlPoliticas/ParentStore JVM reales, ACK omitido, dos reintentos idénticos y nueva sincronización; hash ajeno no resuelve la orden y reconciliación pendiente/fallo tras reapertura cifrada en RAM.');
+    console.log('VINCULADO/isDeviceOwner solo ficticios de test; no acredita APK, Keystore, almacenamiento físico ni orden aplicada.');
+  } else if (fallos) {
     assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_SIN_ACK');
     const cierreHijo = once(hijo, 'close');
     if (proceso) {

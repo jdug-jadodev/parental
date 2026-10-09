@@ -22,6 +22,7 @@ pnpm run build
 pnpm run test:padre --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:fallos --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
+pnpm run test:padre:politicas --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 ```
 
 Requiere JDK 21 con java/javac en PATH o JAVA_HOME, clases debug ya compiladas
@@ -99,6 +100,45 @@ la orden anterior; padre verifica STATE de sesión nueva y no recibe ACK fictici
 El reinicio corresponde al proceso Node de laboratorio, no Render, Android ni
 el proceso JVM del padre. No prueba cortes de energía, agotamiento de reintentos
 de ControlPoliticas, reconciliación duradera o una orden aplicada por el hijo.
+
+### Variante de políticas sin ACK
+
+test:padre:politicas compila también PruebaPoliticas.java en el temporal del relay,
+usando ControlPoliticas, ParentStore, MetadatosPadre y CifradoMetadatos del build
+existente del padre. Comprueba que sus clases no sean anteriores a sus fuentes;
+no ejecuta Gradle ni modifica ese proyecto. El driver llama métodos suspendidos
+con continuaciones sobre Dispatchers.IO, para no bloquear al escritor serial
+de ParentStore cuando comprueba la persistencia desde el callback de envío.
+
+Inicializa únicamente un almacén de laboratorio VINCULADO y un hijo Node que
+declara isDeviceOwner=true de forma ficticia. No promociona ningún vínculo
+PREPARADO ni cambia las guardas de producción. Firma JCA y autoridad ficticia,
+AES/GCM real de CifradoMetadatos con clave de test en RAM; ArchivoMetadatos
+en RAM, no AtomicFile ni Keystore. Solo publica resultados genéricos.
+
+Recorrido demostrado:
+
+1. SYNC/STATE firmado y confirmación explícita de LOCK_FOR de 60 s.
+2. Reserva/contador 1, firma y ENVIADA_SIN_CONFIRMAR persistidos antes de enviar.
+   El callback comprueba el registro real y los bytes en cada envío.
+3. Hijo omite todos los ACK. Reloj de políticas inyectado avanza a 5/10 s: dos
+   reintentos byte a byte idénticos al original. No se espera ese tiempo real.
+   El reloj de transporte y la red WSS sí son reales.
+4. A 15 s, ControlPoliticas agota reintentos y emite SYNC_REQUEST con nonce nuevo,
+   no un cuarto comando. La intención incierta permanece y nunca figura aplicada.
+5. STATE firmado con id/seq correctos pero hash ajeno no resuelve la intención:
+   conserva el pendiente y pide confirmación. No se exige que rechace el STATE
+   completo: el comportamiento observado es retener evidencia sin correlacionarla.
+6. STATE de hash correcto y ACCEPTED_PENDING_ENFORCEMENT deja pendiente aplicación.
+7. Cierre/reapertura del ParentStore sobre el mismo archivo cifrado en RAM y un
+   ControlPoliticas nuevo: pendiente preservado, sin reproducir la orden. SYNC
+   nuevo y STATE de sesión nueva con id/seq/hash correctos y ENFORCEMENT_FAILED
+   simulado resuelven el pendiente conservando contador 1 y fase FALLO_APLICACION.
+
+No prueba ACK emitido y perdido en tránsito, restricciones reales, reinicio del
+padre, almacenamiento físico ni reintentos combinados con restart del relay.
+El reinicio de proceso relay está cubierto por la variante de transporte separada.
+Estas variantes opcionales no forman parte de CI ni sustituyen las puertas físicas.
 
 ## Pendientes y handoff al proyecto padre
 

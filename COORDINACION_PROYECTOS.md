@@ -105,6 +105,19 @@ proceso relay local demostrado; no del padre/Android ni infraestructura Render.
 Las tres variantes JVM pasaron. Pendiente de RELAY-C01: agotamiento de reintentos
 y reconciliación con ControlPoliticas/ParentStore reales, sin editar el padre.
 
+Avance posterior: test:padre:politicas cubre esa pérdida lógica por omisión de ACK
+con ControlPoliticas/ParentStore/CifradoMetadatos compilados reales del padre y
+driver propio en relay. Tres envíos iguales (original + dos reintentos), registro
+ENVIADA_SIN_CONFIRMAR antes de cada envío y SYNC nuevo al agotar reintentos.
+STATE con hash ajeno conserva pendiente; correlación correcta deja aplicación
+pendiente. Reapertura cifrada en RAM y nuevo control no reproducen la orden:
+STATE de sesión nueva con id/seq/hash correcto resuelve fallo simulado, sin APPLIED.
+Reloj de políticas controlado; transporte WSS real. VINCULADO/Device Owner solo
+ficticios en laboratorio, sin acreditación física ni cambios en el padre.
+Coberturas locales ampliadas por variantes separadas; pendientes combinación de
+restart con ControlPoliticas, pérdida en tránsito de un ACK realmente emitido y
+persistencia/reinicio físicos del padre. No declarar integración móvil completa.
+
 ## 4. Secuencia de puertas
 
 1. Revisar propuesta hijo/H05 y diseño de acreditación padre, una unidad por turno.

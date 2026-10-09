@@ -20,6 +20,7 @@
     "test:padre": "node test/soporte/prueba-padre.mjs",
     "test:padre:fallos": "node test/soporte/prueba-padre.mjs --fallos",
     "test:padre:proceso": "node test/soporte/prueba-padre.mjs --proceso",
+    "test:padre:politicas": "node test/soporte/prueba-padre.mjs --politicas",
     "verificar": "node scripts/verificar.mjs"
   },
   "pnpm": {

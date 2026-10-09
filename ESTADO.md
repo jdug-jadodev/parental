@@ -586,3 +586,52 @@ parcial. No acredita APK/Keystore, Device Owner, vínculo operativo ni APPLIED.
 Sin Gradle, ADB/teléfonos, cambios al contrato/fixtures/apps, LAN, push o despliegue.
 Actualizadas README, guía de integración y coordinación con alcance/pendientes.
 Código productivo sin cambios; health 503, loopback y producción bloqueada.
+
+## Políticas JVM sin ACK hasta agotar reintentos — 2026-10-09
+
+Continuación autorizada, una unidad de pruebas del relay. Releídos relevos de
+padre/hijo y coordinación propia: vínculo productivo PREPARADO e H05 abierta
+siguen bloqueando integración física. Solo lectura del padre, sin modificaciones.
+
+Añadidos PruebaPoliticas.java y test:padre:politicas en este repositorio. Reutiliza
+ControlPoliticas/ParentStore/MetadatosPadre/CifradoMetadatos compilados del padre;
+comprobación de antigüedad de clases y hashes congelados antes de escuchar.
+Driver Java compilado en temporal OpenCode, sin Gradle. Continuaciones IO,
+autoridad/firma JCA de test y almacén cifrado AES/GCM real sobre archivo RAM.
+VINCULADO e isDeviceOwner=true son únicamente fixtures efímeros, no promociones
+de producción ni evidencia de aprovisionamiento. CP/1/fixtures sin cambios.
+
+Probado LOCK_FOR de 60 s con confirmación y reserva persistida antes de envío.
+Hijo Node omite ACK; reloj de políticas inyectado a 5/10 s produce exactamente
+dos reintentos con los mismos bytes. A 15 s nueva sincronización, no cuarta orden;
+contador 1 y pendiente conservados. Cada envío comprueba ENVIADA_SIN_CONFIRMAR
+y bytes persistidos reales antes de tocar socket. No fase APLICADA inventada.
+
+STATE firmado de id/seq correctos y hash ajeno no resuelve pendiente: solicita
+confirmación, sin rechazo total del mensaje. STATE correlacionado con resultado
+ACCEPTED_PENDING_ENFORCEMENT deja PENDIENTE_APLICACION. Cierre/reapertura del
+store cifrado RAM conserva pendiente; control nuevo no reproduce orden. STATE
+de sesión nueva con id/seq/hash correctos y ENFORCEMENT_FAILED simulado resuelve
+pendiente manteniendo contador 1 y fase FALLO_APLICACION. Red/TLS/firmas reales,
+tiempo de políticas controlado, sin esperar 15 s de pared ni aplicar restricciones.
+
+Durante desarrollo: primer intento falló por inferencia genérica Java; cuatro
+intentos posteriores terminaron en timeout por bloqueo del driver al leer store
+desde una continuación sin dispatcher. Corregido usando Dispatchers.IO, sin
+cambiar el padre. Ajustada expectativa de hash ajeno al comportamiento real de
+STATE (conservar pendiente), sin relajar validación de correlación. Diagnósticos
+temporales genéricos retirados. Variante final aprobada, además de una ejecución
+previa correcta con esos diagnósticos; fallos no contados como pruebas aprobadas.
+
+Ejecutado pnpm run verificar: check/build y 104 tests aprobados; 28 ejemplos,
+13 contraejemplos, 10 vectores y 78 comprobaciones correctos. También aprobadas
+test:padre, test:padre:fallos y test:padre:proceso con --ruta-padre explícita
+C:\Users\Usuario\Documents\parental_padre. Nueva variante politicas aprobada
+con esa misma ruta. Sin escritura al padre ni pruebas Android/ADB/dispositivos.
+git status --porcelain del padre y del hijo vacío en las consultas finales.
+
+No cubre ACK emitido y perdido en tránsito, restart combinado con políticas,
+reinicio Android ni almacenamiento físico/Keystore. Reinicio de relay se probó
+en variante de transporte separada. Coordinación/README/guía actualizadas con
+estas coberturas y límites. Sin push, despliegue, LAN, cambios productivos o apps.
+Barreras health 503, loopback y producción bloqueada conservadas.
