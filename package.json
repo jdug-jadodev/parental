@@ -16,6 +16,7 @@
     "check": "tsc --noEmit -p tsconfig.json",
     "test:esquema": "node scripts/verificar-esquema.mjs",
     "test:carga": "node --expose-gc test/soporte/carga-relay.mjs",
+    "test:carga:prolongada": "node --expose-gc test/soporte/carga-relay.mjs --prolongada",
     "verificar": "node scripts/verificar.mjs"
   },
   "pnpm": {

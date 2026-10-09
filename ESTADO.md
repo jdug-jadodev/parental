@@ -318,3 +318,58 @@ proxy por IP, readiness y prueba de carga/red real prolongada. Integración móv
 pendiente de que el propietario confirme disponibilidad de apps. No se modificaron
 apps, compartido/ ni fixtures; sin dispositivos, despliegue, push o servicios
 externos. Loopback, health 503 y bloqueo de producción permanecen.
+
+## Revisión de seguridad y carga prolongada local — 2026-10-09
+
+Revisados admisión/configuración, retos/firma, codec JSON/DER/base64url, routing,
+salida, límites y cierre. Endurecimiento de WebSocketAdapter/websocket.config.ts:
+autoPong deshabilitado, cupo ping/pong de control conjunto 10/s con ráfaga 20,
+incluso antes de AUTH; respuesta manual acotada a 64 KiB. Se fijan maxFragments=64
+y maxBufferedChunks=128 mediante opciones públicas existentes de ws/tipos.
+Cabeceras originales >32 pares rechazadas antes de admisión como defensa
+adicional. Node v24.21.0 ya rechaza exceso de cabeceras con HTTP 431: no se
+reprodujo elusión de Origin. Salida incluye además cabecera WS de 2/4/10 bytes
+en el margen de 64 KiB; corregido borde exacto de la prueba correspondiente.
+
+test/seguridad-transporte.test.ts cubre cabeceras excesivas/Origin tardío, XFF
+variable sin eludir cupo por socket, ping normal sin conceder autenticación,
+flood ping y pong pre-AUTH, 64 fragmentos válidos y 65 vacíos rechazados. Prueba
+real de heartbeat: padre autenticado sin autoPong envía nonce incorrecto y termina
+con 1006 en la segunda revisión; hijo con pong correcto permanece conectado.
+ClienteAuth permite desactivar autoPong exclusivamente como opción de prueba.
+test/websocket-adapter.test.ts añade defensa rawHeaders y completa su doble de
+IncomingMessage. Primer verificar detectó expectativa 400 frente al 431 nativo
+y ausencia de rawHeaders en el doble; corregidos, sin relajar admisión real.
+
+Ejecutado pnpm audit --json: 0 vulnerabilidades conocidas (todas las severidades),
+40 dependencias según su metadata. No se actualizaron paquetes/lockfile ni se
+autorizaron scripts de instalación. Es diagnóstico del registro, no auditoría
+independiente ni garantía de seguridad.
+
+Ejecutado pnpm run verificar final tras incluir framing: instalación congelada,
+check/build correctos, 101 tests aprobados, 0 fallos/omitidos; 28 ejemplos y
+13 contraejemplos correctos, 10 vectores/78 comprobaciones correctos. Node v24.21.0.
+
+Carga ampliada en test/soporte/carga-relay.mjs y script test:carga:prolongada:
+perfil largo de 60 lotes, AUTH/PING/PONG en ambos roles, SYNC_REQUEST sin receptor
+en ciclos padre, memoria tras GC, P95 PONG local y P99 retraso del bucle. Salida
+solo agregados; claves efímeras en RAM. Ejecutado pnpm run build y después
+pnpm run test:carga:prolongada: 610 ciclos en 314.490 ms, cero conexiones al final
+de cada lote. Heap base 13.548.616, final 13.981.240 (+432.624 bytes); externa base
+4.475.497, final 4.449.489; RSS base 86.609.920, final 87.674.880. P95 PONG local
+1,197 ms; P99 retraso del bucle 51,544 ms. Durante esta ejecución también hubo
+verificaciones locales en otros procesos: no es benchmark aislado. Carga sobre
+build con controles/fragmentos endurecidos, anterior al ajuste adicional de framing.
+
+Tras ese ajuste se ejecutaron verificar final y pnpm run test:carga sobre build
+final: 70 ciclos en 32.058 ms, seis lotes, cero conexiones entre lotes. Heap base
+13.543.080, final 13.597.320 (+54.240 bytes); externa base 4.475.472, final
+4.387.214; RSS base 85.639.168, final 85.962.752. P95 PONG 2,524 ms; P99 retraso
+46,957 ms. Ambas cargas dentro de márgenes diagnósticos heap <8 MiB/externa <4 MiB.
+No demuestran ausencia de fugas a largo plazo, capacidad pública ni latencia móvil.
+
+README/ARQUITECTURA actualizados; documentacion/REVISION_SEGURIDAD.md registra
+hallazgos, evidencia y límites. No apps, dispositivos, despliegue, push, CI remoto
+ni modificaciones de compartido/fixtures. Sin servicios externos ni autopings HTTP.
+Conservados loopback, health 503 y producción bloqueada. Pendientes: TLS/proxy/
+readiness públicos autorizados, red lenta real e integración móvil coordinada.

@@ -3,6 +3,7 @@ import { generateKeyPairSync, randomUUID, sign } from 'node:crypto';
 import { once } from 'node:events';
 import { readFileSync } from 'node:fs';
 import { setTimeout as esperar } from 'node:timers/promises';
+import { performance, monitorEventLoopDelay } from 'node:perf_hooks';
 import WebSocket from 'ws';
 import { crearServidorLocal } from '../../dist/src/infrastructure/config/dependencias.js';
 import { cerrarServidorHttp } from '../../dist/src/infrastructure/config/servidor.config.js';
@@ -10,6 +11,12 @@ import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/c
 import { bytesFirma } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
 
 assert.equal(typeof global.gc, 'function', 'Ejecutar con node --expose-gc tras pnpm run build');
+assert.ok(process.argv.slice(2).every((argumento) => argumento === '--prolongada'), 'Solo se admite --prolongada');
+const lotes = process.argv.includes('--prolongada') ? 60 : 6;
+const inicio = performance.now();
+const latencias = [];
+const retraso = monitorEventLoopDelay({ resolution: 20 });
+retraso.enable();
 const codec = new CodecProtocolo(readFileSync(new URL('../../compartido/protocolo.schema.json', import.meta.url)));
 const padre = generateKeyPairSync('ec', { namedCurve: 'prime256v1' });
 const hijo = generateKeyPairSync('ec', { namedCurve: 'prime256v1' });
@@ -25,15 +32,38 @@ async function ciclo(indice) {
   const limite = setTimeout(() => socket.terminate(), 3000);
   socket.on('error', () => {});
   try {
-    const [bytes] = await once(socket, 'message');
+    const [bytes] = await once(socket, 'message', { signal: AbortSignal.timeout(3000) });
     const reto = codec.leerFrame(bytes);
     assert.equal(reto.kind, 'CHALLENGE');
     const rol = indice % 2 === 0 ? 'PARENT' : 'CHILD';
     const payload = codec.codificarPayload({ v: 1, kind: 'AUTH_PROOF', pairId: pareja, role: rol, connectionId: reto.connectionId, nonce: reto.nonce });
     const firma = sign('sha256', bytesFirma('AUTH', payload), { key: (rol === 'PARENT' ? padre : hijo).privateKey, dsaEncoding: 'der' });
-    const recibido = once(socket, 'message');
+    const frames = [];
+    const pendientes = [];
+    const cerradoError = new Error('Socket de carga cerrado antes de la respuesta');
+    socket.on('message', (datos) => {
+      const frame = codec.leerFrame(datos);
+      if (frame.kind === 'PEER_STATUS') return;
+      const pendiente = pendientes.shift();
+      if (pendiente) pendiente.resolver(frame); else frames.push(frame);
+    });
+    socket.on('close', () => { for (const pendiente of pendientes.splice(0)) pendiente.rechazar(cerradoError); });
+    const recibir = () => frames.length ? Promise.resolve(frames.shift()) : new Promise((resolver, rechazar) => pendientes.push({ resolver, rechazar }));
     socket.send(codec.codificarFrame({ v: 1, kind: 'SIGNED', purpose: 'AUTH', payloadB64: payload.toString('base64url'), sigB64: firma.toString('base64url') }), { binary: false });
-    assert.equal(codec.leerFrame((await recibido)[0]).kind, 'AUTH_OK');
+    assert.equal((await recibir()).kind, 'AUTH_OK');
+    const nonce = reto.nonce;
+    const enviadoEn = performance.now();
+    socket.send(codec.codificarFrame({ v: 1, kind: 'PING', nonce }), { binary: false });
+    const pong = await recibir();
+    assert.equal(pong.kind, 'PONG');
+    assert.equal(pong.nonce, nonce);
+    latencias.push(performance.now() - enviadoEn);
+    if (rol === 'PARENT') {
+      const mensaje = codec.codificarPayload({ v: 1, kind: 'SYNC_REQUEST', pairId: pareja, sender: 'PARENT', syncNonce: nonce });
+      const sigB64 = sign('sha256', bytesFirma('MESSAGE', mensaje), { key: padre.privateKey, dsaEncoding: 'der' }).toString('base64url');
+      socket.send(codec.codificarFrame({ v: 1, kind: 'SIGNED', purpose: 'MESSAGE', payloadB64: mensaje.toString('base64url'), sigB64 }), { binary: false });
+      assert.equal((await recibir()).kind, 'PEER_UNAVAILABLE');
+    }
     const cerrado = once(socket, 'close');
     socket.close();
     await cerrado;
@@ -50,7 +80,7 @@ try {
   for (let i = 0; i < 10; i++) await ciclo(i);
   const base = await muestra();
   const muestras = [];
-  for (let lote = 0; lote < 6; lote++) {
+  for (let lote = 0; lote < lotes; lote++) {
     await esperar(5100);
     for (let i = 0; i < 10; i++) await ciclo(i);
     const memoria = await muestra();
@@ -60,9 +90,11 @@ try {
   const crecimiento = final.heapUsed - base.heapUsed;
   assert.ok(crecimiento < 8 * 1024 * 1024, 'Crecimiento de heap superior al margen local de 8 MiB');
   assert.ok(final.external - base.external < 4 * 1024 * 1024, 'Crecimiento externo superior a 4 MiB');
-  console.log(JSON.stringify({ ciclos: 70, lotesMedidos: 6, conexionesAlFinalDeCadaLote: 0, base: { heapUsed: base.heapUsed, external: base.external, rss: base.rss }, muestras, crecimientoHeapBytes: crecimiento }));
+  latencias.sort((a, b) => a - b);
+  console.log(JSON.stringify({ perfil: lotes === 60 ? 'prolongada' : 'corta', duracionMs: Math.round(performance.now() - inicio), ciclos: (lotes + 1) * 10, lotesMedidos: lotes, conexionesAlFinalDeCadaLote: 0, base: { heapUsed: base.heapUsed, external: base.external, rss: base.rss }, muestras, crecimientoHeapBytes: crecimiento, pongLocalP95Ms: latencias[Math.ceil(latencias.length * 0.95) - 1], retrasoBucleP99Ms: retraso.percentile(99) / 1e6 }));
   console.log('Prueba local acotada; no demuestra ausencia de fugas a largo plazo ni capacidad pública.');
 } finally {
+  retraso.disable();
   const cerrado = once(servidor, 'close');
   cerrarServidorHttp(servidor);
   await cerrado;

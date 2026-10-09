@@ -6,6 +6,9 @@ export function crearTransporteWebSocket(): WebSocketServer {
     noServer: true,
     maxPayload: MAX_FRAME,
     perMessageDeflate: false,
+    autoPong: false,
+    maxFragments: 64,
+    maxBufferedChunks: 128,
     handleProtocols: (protocolos) => protocolos.has('cp.v1') ? 'cp.v1' : false,
   });
 }

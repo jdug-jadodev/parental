@@ -22,7 +22,7 @@ test('WebSocket: adaptador de entrada inyecta puerto y entrega dominio, no DTO/s
   contexto.after(() => socket.destroy());
   let respuesta = '';
   socket.on('data', (datos: Buffer) => { respuesta += datos.toString('utf8'); });
-  adaptador.upgrade({ method: 'GET', url: '/ws', headers: { 'sec-websocket-protocol': 'cp.v1' } } as IncomingMessage, socket);
+  adaptador.upgrade({ method: 'GET', url: '/ws', rawHeaders: ['Sec-WebSocket-Protocol', 'cp.v1'], headers: { 'sec-websocket-protocol': 'cp.v1' } } as IncomingMessage, socket);
   assert.equal(llamadas, 1);
   assert.match(respuesta, /^HTTP\/1.1 503 Service Unavailable/);
 });
@@ -41,4 +41,16 @@ test('WebSocket: entidad copia cabeceras y arrays para aislar cambios externos',
 
 test('WebSocket: fallo de infraestructura no se mapea como decisión del dominio', () => {
   assert.throws(() => UpgradeMapper.deRechazo(new RechazoUpgradeEntity(500)), /no es una decisión de dominio/);
+});
+
+test('WebSocket: defensa de cabeceras originales rechaza antes de consultar admisión', (contexto) => {
+  let llamadas = 0;
+  const adaptador = new WebSocketAdapter({ ejecutar: () => { llamadas++; return new DecisionConexion('NO_DISPONIBLE'); } });
+  const socket = new PassThrough();
+  contexto.after(() => socket.destroy());
+  let respuesta = '';
+  socket.on('data', (datos: Buffer) => { respuesta += datos.toString('utf8'); });
+  adaptador.upgrade({ method: 'GET', url: '/ws', headers: {}, rawHeaders: Array(66).fill('prueba') } as IncomingMessage, socket);
+  assert.equal(llamadas, 0);
+  assert.match(respuesta, /^HTTP\/1\.1 400 Bad Request/);
 });

@@ -7,7 +7,8 @@ export interface SocketSalida {
 export function enviarAcotado(socket: SocketSalida, bytes: string | Uint8Array, fallar: () => void, completar: () => void = () => {}): boolean {
   if (socket.readyState !== 1) return false;
   const longitud = typeof bytes === 'string' ? Buffer.byteLength(bytes) : bytes.byteLength;
-  if (socket.bufferedAmount + longitud > 65536) { fallar(); return false; }
+  const cabecera = longitud <= 125 ? 2 : longitud <= 65535 ? 4 : 10;
+  if (socket.bufferedAmount + longitud + cabecera > 65536) { fallar(); return false; }
   try {
     socket.send(bytes, { binary: false }, (error) => { completar(); if (error) fallar(); });
     return true;

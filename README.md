@@ -22,7 +22,7 @@ Health 503 se conserva como barrera hasta autorizar y validar la fase pública.
 HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
 `GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
 acredita autenticación, entrega de órdenes ni evita por sí solo la suspensión
-de Render. No se configuraron pings periódicos, cron ni servicios externos.
+de Render. No se configuraron autopings HTTP, cron ni servicios externos.
 
 ## Verificación con Node.js, sin Python
 
@@ -62,17 +62,27 @@ próximo frame), upgrades por IP 2/s con ráfaga 20 y global 10/s con ráfaga 40
 Tabla por IP limitada a 128 entradas/TTL 60 s; solo dirección del socket, no
 X-Forwarded-For. Ping de transporte cada 30 s limpia sockets sin respuesta;
 es distinto del heartbeat de aplicación y no es un servicio anti-suspensión.
+Ping/pong de control entrantes tienen cupo separado de 10/s con ráfaga 20,
+también antes de autenticar. Pong automático deshabilitado: el adaptador responde
+solo dentro del cupo y del límite de salida. Máximo 64 fragmentos por mensaje y
+128 chunks pendientes en el receptor ws; máximo 32 cabeceras HTTP de entrada.
 
 Prueba de memoria local, después de compilar:
 
 ```sh
 pnpm run build
 pnpm run test:carga
+pnpm run test:carga:prolongada
 ```
 
-Ejecuta 70 ciclos de autenticación/desconexión, alterna roles y mide seis lotes
-con GC explícito. Comprueba cero sockets entre lotes y márgenes de memoria;
+La carga corta ejecuta 70 ciclos y seis lotes; la prolongada, 610 ciclos y 60
+lotes durante unos cinco minutos. Alterna roles, verifica PONG de aplicación y
+descarte de SYNC_REQUEST sin receptor, y mide memoria con GC explícito, latencia
+PONG local y retraso del bucle. Comprueba cero sockets entre lotes y márgenes de memoria;
 es una prueba acotada, no una garantía de ausencia de fugas a largo plazo.
+`pnpm run verificar` incluye una prueba real de limpieza por heartbeat de unos
+60 segundos; no requiere servicios externos. Ver alcance y límites de la revisión
+en `documentacion/REVISION_SEGURIDAD.md`.
 
 ## Próximas etapas, una por turno
 

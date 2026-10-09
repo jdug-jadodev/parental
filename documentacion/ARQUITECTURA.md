@@ -124,6 +124,7 @@ superaría 64 KiB, se cierra y también se informa indisponibilidad. enviarAcota
 comprueba tamaño UTF-8 y bufferedAmount; falla cerrado ante error de envío.
 No se reintenta ni almacena el mensaje. El límite incluye el próximo frame para
 no sobrepasar el margen por una última escritura.
+Se incluye la cabecera del frame sin máscara (2/4/10 bytes), además del payload.
 
 Cupo usa tiempo monotónico: 10 frames/s, ráfaga 20 por socket, incluyendo PING
 y entradas inválidas antes de verificar firmas. Un PONG de aplicación pendiente
@@ -136,6 +137,16 @@ LatidosTransporte envía nonce aleatorio en ping de control cada 30 s y solo un
 pong idéntico despeja el pendiente. En la siguiente revisión termina los sockets
 que no respondieron; borra sus entradas al cerrar. No certifica canal saludable
 de aplicación ni aplicación de órdenes, y no llama a /keepalive.
+
+El transporte no responde automáticamente a ping de control. WebSocketAdapter
+aplica a ping y pong entrantes un cupo conjunto separado (10/s, ráfaga 20), aun
+sin autenticar; solo responde si la salida sigue acotada. Así los controles no
+pueden generar salida ilimitada esquivando el cupo de mensajes de aplicación.
+El receptor ws permite hasta 64 fragmentos/mensaje y 128 chunks pendientes, además
+del límite de 16 KiB. Exceder partes vacías también cierra: maxPayload por sí solo
+no limita el número de fragmentos. La configuración HTTP limita a 32 cabeceras;
+el adaptador además rechaza rawHeaders con más de 32 pares antes de admisión,
+sin confiar únicamente en un objeto de cabeceras que pudiera estar truncado.
 
 ## Herramientas y compatibilidad
 

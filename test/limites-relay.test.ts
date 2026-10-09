@@ -36,7 +36,7 @@ test('R-LIMIT: upgrades por IP, límite global, tabla acotada y caducidad TTL', 
 test('R-LIMIT-02: salida exacta 64 KiB aceptada, exceso cerrado sin enviar ni cola', () => {
   let enviados = 0;
   let fallos = 0;
-  let buffer = 65535;
+  let buffer = 65533;
   const socket: SocketSalida = {
     readyState: 1, get bufferedAmount() { return buffer; },
     send: (_bytes, opciones, callback) => { assert.equal(opciones.binary, false); enviados++; callback(); },

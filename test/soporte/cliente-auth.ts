@@ -58,8 +58,8 @@ export class ClienteAuth {
       if (pendiente) pendiente.resolver(frame); else this.frames.push(frame);
     });
   }
-  static async conectar(url: string): Promise<ClienteAuth> {
-    const cliente = new ClienteAuth(new WebSocket(url, 'cp.v1', { perMessageDeflate: true }));
+  static async conectar(url: string, autoPong = true): Promise<ClienteAuth> {
+    const cliente = new ClienteAuth(new WebSocket(url, 'cp.v1', { perMessageDeflate: true, autoPong }));
     await once(cliente.socket, 'open');
     return cliente;
   }

@@ -46,6 +46,10 @@ export class WebSocketAdapter {
     socket.once('close', () => clearTimeout(limite));
     socket.on('error', () => socket.destroy());
     try {
+      if (solicitud.rawHeaders.length > 64) {
+        socket.end(new RechazoUpgradeEntity(400).serializar());
+        return;
+      }
       if (this.upgrades && !this.upgrades.admitir(socket instanceof Socket ? socket.remoteAddress : undefined, performance.now())) {
         throw new FalloAutenticacion('RATE_LIMITED');
       }
@@ -92,6 +96,7 @@ export class WebSocketAdapter {
     let identidad: ConexionAutenticada | undefined;
     let rechazado = false;
     const cupo = new Cupo(20, 10, performance.now());
+    const controles = new Cupo(20, 10, performance.now());
     let pongPendiente = false;
     let ultimoNonce: string | undefined;
     const rechazar = (codigo: CodigoAutenticacion, cierre = 1008): void => {
@@ -106,7 +111,17 @@ export class WebSocketAdapter {
     limite.unref();
     socket.on('error', () => socket.terminate());
     this.latidos.registrar(socket);
-    socket.on('pong', (bytes: Buffer) => this.latidos.pong(socket, bytes));
+    const admitirControl = (): boolean => {
+      if (rechazado || socket.readyState !== WebSocket.OPEN) return false;
+      if (!controles.admitir(performance.now())) { rechazar('RATE_LIMITED'); return false; }
+      return true;
+    };
+    socket.on('pong', (bytes: Buffer) => { if (admitirControl()) this.latidos.pong(socket, bytes); });
+    socket.on('ping', (bytes: Buffer) => {
+      if (!admitirControl()) return;
+      if (socket.bufferedAmount + bytes.length + 2 > 65536) { this.cerrar(socket, 1008, 'Salida saturada'); return; }
+      socket.pong(bytes, false, (error) => { if (error) socket.terminate(); });
+    });
     socket.once('close', () => {
       this.latidos.eliminar(socket);
       clearTimeout(limite);
