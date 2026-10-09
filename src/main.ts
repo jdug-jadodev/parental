@@ -6,7 +6,7 @@ import { leerPuerto } from './application/validations/configuracion.validation.j
 
 function iniciar(): void {
   if (process.env.NODE_ENV === 'production') {
-    throw new Error('El servidor solo permite ejecución local. El relay público requiere R02–R03.');
+    throw new Error('El servidor solo permite ejecución local. El relay público requiere autorización y validación.');
   }
   const configurado = VARIABLES_PUBLICAS.some((nombre) => process.env[nombre] !== undefined);
   const servidor = crearServidorLocal(configurado ? process.env : undefined);

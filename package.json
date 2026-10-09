@@ -15,6 +15,7 @@
     "test": "tsx --test test/*.test.ts",
     "check": "tsc --noEmit -p tsconfig.json",
     "test:esquema": "node scripts/verificar-esquema.mjs",
+    "test:carga": "node --expose-gc test/soporte/carga-relay.mjs",
     "verificar": "node scripts/verificar.mjs"
   },
   "pnpm": {

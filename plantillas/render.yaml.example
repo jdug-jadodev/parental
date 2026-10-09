@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: parental-relay
+    runtime: node
+    numInstances: 1
+    buildCommand: pnpm install --frozen-lockfile --prod=false && pnpm run build
+    startCommand: pnpm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: error
+      - key: PUBLIC_ORIGIN
+        sync: false
+      - key: ACTIVE_PAIR_ID
+        sync: false
+      - key: PARENT_PUBLIC_KEY_B64
+        sync: false
+      - key: CHILD_PUBLIC_KEY_B64
+        sync: false

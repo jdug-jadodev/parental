@@ -45,6 +45,9 @@ upgrade Node → WebSocketAdapter → UpgradeEntity → UpgradeMapper.aDominio
               o admisión local → AutenticarConexionEntrada → AutenticarConexion
               → retos/reloj/entropía/verificación (puertos de salida)
               ← RetoAutenticacion/ConexionAutenticada → AutenticacionMapper → frame
+mensaje autenticado → ProcesarMensajeEntrada → ProcesarMensaje
+                    → VerificacionMensajeSalida → VerificacionMensajeAdapter
+                    ← MensajeRelay → destinatario o PEER_UNAVAILABLE/PONG
 ```
 
 No existe ConexionController ni DTO de conexión intermedio. El mapper específico
@@ -70,7 +73,7 @@ e importación criptográfica SPKI P-256.
 
 ## HTTP, liveness y seguridad
 
-- `GET /healthz`: 503 con `{ok:false,protocol:1}` mientras R02/R03 no estén listos.
+- `GET /healthz`: 503 con `{ok:false,protocol:1}`; fase pública no autorizada/validada.
 - `GET /keepalive`: 200 con `{alive:true}`, sin claves, pareja ni presencia.
 - Otras rutas/métodos y query strings: 404. No hay endpoints HTTP de negocio.
 - Upgrade inválido: 400; CP/1 sin configuración o durante cierre: 503.
@@ -91,7 +94,8 @@ noServer, maxPayload 16384 y compresión deshabilitada. Codec y criptografía
 permanecen en adapter/protocol.
 Los tipos CP/1 son DTOs, no entidades de dominio. Nunca se reserializan payloads
 firmados para verificar o reenviar. R02 verifica los bytes originales antes de
-interpretar AUTH_PROOF; R03 y el reenvío siguen pendientes.
+interpretar AUTH_PROOF. R03 verifica MESSAGE con la clave del socket autenticado
+antes de interpretar payload, y el caso de uso exige pareja, emisor y tipo autorizado.
 
 El caso de uso consume el reto antes de verificar la firma, comprueba socket,
 nonce y pareja, y revisa expiración antes y después de verificar. RelojAdapter
@@ -102,9 +106,36 @@ el rol declarado debe corresponder a la clave firmante. No acepta claves propues
 
 WebSocketAdapter mantiene una conexión autenticada por rol y sustituye la antigua
 solo después de autenticar. El cierre antiguo no borra la nueva del mapa.
-Después de AUTH_OK se rechazan más frames de aplicación hasta R03; no hay eco
-ni reenvío. cerrarServidorHttp detiene upgrades y cierra pendientes/autenticados
+Después de AUTH_OK solo PING y los cuatro tipos MESSAGE autorizados se admiten.
+No hay eco, persistencia ni cola de órdenes. cerrarServidorHttp detiene upgrades y cierra pendientes/autenticados
 con 1012, con terminación forzada del socket tras un segundo si no coopera.
+
+## Routing, límites y latidos locales
+
+WebSocketAdapter conserva el mapa de sockets, envía PEER_STATUS y selecciona
+destinatario según el rol autenticado, no según una dirección recibida en JSON.
+MensajeRelay conserva una copia de los bytes del frame y devuelve copias; el
+mapper solo extrae metadatos verificados, nunca reconstruye el contenedor firmado.
+El receptor sigue siendo responsable de secuencias, hash de ACK, desafíos y
+decisión de aplicar. El relay no conserva la orden para verificar su resultado.
+
+Si el receptor está ausente/cerrando, se informa PEER_UNAVAILABLE; si su salida
+superaría 64 KiB, se cierra y también se informa indisponibilidad. enviarAcotado
+comprueba tamaño UTF-8 y bufferedAmount; falla cerrado ante error de envío.
+No se reintenta ni almacena el mensaje. El límite incluye el próximo frame para
+no sobrepasar el margen por una última escritura.
+
+Cupo usa tiempo monotónico: 10 frames/s, ráfaga 20 por socket, incluyendo PING
+y entradas inválidas antes de verificar firmas. Un PONG de aplicación pendiente
+por socket; un duplicado inmediato de nonce se ignora. LimiteUpgradesAdapter
+es un helper de transporte, no un puerto de salida de negocio: tabla acotada,
+TTL y límites por IP/global, inyectado desde dependencias.ts. En local la IP
+es remoteAddress. Un proxy público requiere revisión específica antes de abrir.
+
+LatidosTransporte envía nonce aleatorio en ping de control cada 30 s y solo un
+pong idéntico despeja el pendiente. En la siguiente revisión termina los sockets
+que no respondieron; borra sus entradas al cerrar. No certifica canal saludable
+de aplicación ni aplicación de órdenes, y no llama a /keepalive.
 
 ## Herramientas y compatibilidad
 
@@ -114,7 +145,9 @@ Sin autorización de scripts de dependencias. dist/node_modules ignorados.
 compartido/ y fixtures conservan bytes congelados; las evidencias anteriores
 mantienen rutas y comandos históricos. Las apps no se modifican desde aquí.
 
-Render se preparará en R03 desde la raíz: pnpm install --frozen-lockfile --prod=false,
-pnpm run build y pnpm start. No se creó ni aplicó configuración de despliegue.
+Render dispone de una plantilla inactiva en plantillas/render.yaml.example y
+un checklist en documentacion/DESPLIEGUE_RENDER.md. Comandos previstos desde la
+raíz: pnpm install --frozen-lockfile --prod=false, pnpm run build y pnpm start.
+No se aplicó configuración de despliegue; producción permanece bloqueada.
 La herramienta local de interoperabilidad sigue en test/soporte/interoperabilidad.mjs;
 los consumidores Android deben ajustarse coordinadamente en otra tarea.

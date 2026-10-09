@@ -281,3 +281,40 @@ repetido, no para rechazar PING ya válido. Pendientes pruebas de routing y carg
 
 Conservados health 503, loopback y bloqueo de producción. No apps, dispositivos,
 despliegue, push ni modificaciones de compartido/fixtures.
+
+## R03 — cierre de implementación local — 2026-10-09
+
+Segundo bloque: test/routing.test.ts prueba con clientes Node ambos sentidos y
+cuatro tipos permitidos, preservación byte a byte incluso con espacios externos,
+presencia, receptor ausente sin cola, reconexión/restart, sustitución de sockets,
+impostores, firma/pareja/rol/propósito/versión/campos inválidos, PING/PONG sin
+reenvío, duplicado inmediato ignorado y exceso de mensajes. test/backpressure.test.ts
+simula bufferedAmount >64 KiB en un socket real para comprobar cierre del receptor
+y PEER_UNAVAILABLE al emisor sin notificación duplicada. No es medición de una
+red lenta real; el borde exacto y errores de envío se prueban determinísticamente.
+
+Ejecutado pnpm run verificar final: instalación congelada/check/build correctos,
+94 tests aprobados, 0 fallos/omitidos; 28 ejemplos aceptados, 13 contraejemplos
+rechazados, 10 vectores/78 comprobaciones correctos. Node v24.21.0.
+Ejecutado pnpm run test:carga sobre dist compilado, con GC explícito: 70 ciclos
+autenticados/desconectados alternando roles, seis lotes medidos y cero conexiones
+TCP al final de cada lote. Heap base 13.458.936 bytes, final 13.483.080 (+24.144);
+memoria externa base 4.468.676, final 4.451.680; RSS base 86.269.952, final
+86.441.984. Heap de los seis lotes: 13.342.088, 13.384.568, 13.403.416,
+13.428.448, 13.447.736 y 13.483.080 bytes. Dentro de márgenes locales de 8 MiB
+heap/4 MiB externa; no demuestra ausencia de fugas a largo plazo ni capacidad
+pública. Script test/soporte/carga-relay.mjs añadido a package.json como test:carga;
+requiere compilar antes y no forma parte de la verificación corta.
+
+Preparación documental: documentacion/DESPLIEGUE_RENDER.md y plantilla inactiva
+plantillas/render.yaml.example, desde raíz, pnpm fijado, una instancia y solo
+variables públicas sin valores reales. No se aplicó plantilla: fallaría con
+NODE_ENV=production bloqueado y health 503. README/ARQUITECTURA y encabezado de
+AGENTS actualizados para no repetir R02/R03 locales como tareas pendientes.
+
+R03 local implementado y verificado. Despliegue y validación pública pendientes:
+requieren autorización, origen/exportación públicos coordinados, revisión TLS,
+proxy por IP, readiness y prueba de carga/red real prolongada. Integración móvil
+pendiente de que el propietario confirme disponibilidad de apps. No se modificaron
+apps, compartido/ ni fixtures; sin dispositivos, despliegue, push o servicios
+externos. Loopback, health 503 y bloqueo de producción permanecen.

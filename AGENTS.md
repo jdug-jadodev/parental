@@ -3,10 +3,11 @@
 Proyecto independiente: solo servidor Node/TypeScript del relay WSS. No desarrollar
 ni modificar las apps en parental_padre ni el repositorio del hijo.
 
-Proyecto extraído sin despliegue; R01 implementado localmente después de extracción.
+Proyecto extraído sin despliegue; R01–R03 implementados y probados localmente.
 Arquitectura hexagonal: src/ y paquete pnpm en raíz; leer documentacion/ARQUITECTURA.md.
 Leer README.md, ESTADO.md y documentacion/SPEC_RELAY_RENDER.md antes de continuar.
-Próxima tarea R02; R03 pendiente. Una tarea por turno, respetar dependencias.
+Fase pública e integración móvil pendientes de autorización/coordinación.
+Una tarea por turno, respetar dependencias.
 
 - Español claro en comunicación/documentación/comentarios/commits.
 - Código sin comentarios; explicar decisiones en documentación. Dominio/aplicación

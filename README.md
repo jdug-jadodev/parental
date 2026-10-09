@@ -4,18 +4,20 @@ Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
 y los fixtures permanecen congelados.
 
-## Estado: R01 y R02, autenticación local
+## Estado: R01–R03 locales, sin despliegue
 
 Validación de configuración pública, claves SPKI P-256 distintas, HTTP y
 límites iniciales. Transporte WebSocket conectado sin compresión y con máximo
 de 16 KiB únicamente con configuración pública válida y clientes loopback.
 R02 implementa CHALLENGE → firma AUTH → AUTH_OK: reto de un solo uso ligado
 al socket, nonce de 32 bytes y expiración monotónica de 10 segundos.
+R03 reenvía SYNC_REQUEST/SET_POLICY del padre y STATE/ACK del hijo tras validar
+firma, pareja y rol. Mantiene intactos los bytes originales y no guarda órdenes.
 
 **No operativo públicamente:** escucha solo en `127.0.0.1`, `/healthz` devuelve
 503 y arranque en producción bloqueado. Sin configuración se rechazan upgrades;
-con configuración válida solo se permite autenticación local, no reenvío de
-mensajes. No se anuncia CP/1 listo hasta completar R03.
+con configuración válida se permite autenticación y reenvío exclusivamente local.
+Health 503 se conserva como barrera hasta autorizar y validar la fase pública.
 
 HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
 `GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
@@ -50,13 +52,34 @@ Una clave propuesta por el cliente no concede autoridad: solo las dos públicas
 configuradas autorizan padre/hijo. Se admiten hasta 16 retos pendientes y una
 conexión autenticada por rol; solo un cliente autenticado sustituye al anterior.
 Desconectar o fallar elimina el reto. El cierre controlado usa código 1012.
-Los mensajes posteriores a AUTH_OK se rechazan mientras R03 esté pendiente.
+Tras AUTH_OK, PING recibe PONG con su nonce; no se reenvía al otro cliente.
+PEER_STATUS informa presencia y PEER_UNAVAILABLE descarta mensajes sin receptor.
+Presencia, PONG y reenvío no significan orden aplicada. Los tipos o propósitos
+no autorizados cierran la conexión; no se ofrece un eco abierto.
+
+Límites locales: 10 frames/s con ráfaga 20, salida máxima 64 KiB (incluido el
+próximo frame), upgrades por IP 2/s con ráfaga 20 y global 10/s con ráfaga 40.
+Tabla por IP limitada a 128 entradas/TTL 60 s; solo dirección del socket, no
+X-Forwarded-For. Ping de transporte cada 30 s limpia sockets sin respuesta;
+es distinto del heartbeat de aplicación y no es un servicio anti-suspensión.
+
+Prueba de memoria local, después de compilar:
+
+```sh
+pnpm run build
+pnpm run test:carga
+```
+
+Ejecuta 70 ciclos de autenticación/desconexión, alterna roles y mide seis lotes
+con GC explícito. Comprueba cero sockets entre lotes y márgenes de memoria;
+es una prueba acotada, no una garantía de ausencia de fugas a largo plazo.
 
 ## Próximas etapas, una por turno
 
 - R02 completado localmente con fixtures y clientes Node simulados.
-- R03: retransmisión autenticada, latidos, límites operativos y preparación
-  de Render. Probar primero con dos clientes Node locales, sin tocar las apps.
+- R03 implementado y probado localmente con clientes Node; fase pública pendiente.
+- Preparación de Render: `documentacion/DESPLIEGUE_RENDER.md` y plantilla inactiva
+  `plantillas/render.yaml.example`. No aplicarla: producción todavía está bloqueada.
 - Integración posterior con las apps y despliegue: requieren coordinación y
   autorización; no se han realizado aquí. ACK de relay no significa orden aplicada.
 
@@ -104,6 +127,6 @@ distintas, sin cadenas de conversiones de ida y vuelta. No hay ORM ni base de da
 
 Los tipos del contrato CP/1 son DTOs de transporte, no entidades de dominio.
 Los bytes firmados siguen intactos: no pasan por mappers que reserialicen JSON.
-Autenticación implementada en R02; mensajes operativos pendientes de R03.
+Autenticación y routing implementados en R02/R03; validación pública pendiente.
 Ver detalles en `documentacion/ARQUITECTURA.md`. El código de `src/` no contiene
 comentarios; la explicación vive en documentación.

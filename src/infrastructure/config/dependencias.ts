@@ -33,7 +33,7 @@ export function crearServidorLocal(valores?: ConfiguracionRequestDto): Server {
   let procesar: ProcesarMensaje | undefined;
   if (valores) {
     const configuracion = new ConfigurarServidor(new ValidacionPublicaAdapter()).ejecutar(ConfiguracionMapper.aDominio(valores));
-    if (configuracion.entorno === 'production') throw new Error('El servidor solo permite ejecución local; R03 pendiente');
+    if (configuracion.entorno === 'production') throw new Error('El servidor solo permite ejecución local; fase pública pendiente');
     const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
     const esquema = readFileSync(new URL(`${raiz}compartido/protocolo.schema.json`, import.meta.url));
     const codec = new CodecProtocolo(esquema);
