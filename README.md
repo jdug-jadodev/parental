@@ -4,15 +4,18 @@ Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
 y los fixtures permanecen congelados.
 
-## Estado: R01, base segura local
+## Estado: R01 y R02, autenticación local
 
 Validación de configuración pública, claves SPKI P-256 distintas, HTTP y
-límites iniciales. Transporte WebSocket preparado sin compresión y con máximo
-de 16 KiB, **todavía no conectado al servidor HTTP**.
+límites iniciales. Transporte WebSocket conectado sin compresión y con máximo
+de 16 KiB únicamente con configuración pública válida y clientes loopback.
+R02 implementa CHALLENGE → firma AUTH → AUTH_OK: reto de un solo uso ligado
+al socket, nonce de 32 bytes y expiración monotónica de 10 segundos.
 
 **No operativo públicamente:** escucha solo en `127.0.0.1`, `/healthz` devuelve
-503, upgrades rechazados y arranque en producción bloqueado. Incluso con
-configuración válida no se anuncia CP/1 listo hasta completar R02/R03.
+503 y arranque en producción bloqueado. Sin configuración se rechazan upgrades;
+con configuración válida solo se permite autenticación local, no reenvío de
+mensajes. No se anuncia CP/1 listo hasta completar R03.
 
 HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
 `GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
@@ -43,10 +46,15 @@ Sin variables públicas se permite la base local no operativa. Si se proporciona
 alguna de `PUBLIC_ORIGIN`, `ACTIVE_PAIR_ID`, `PARENT_PUBLIC_KEY_B64` o
 `CHILD_PUBLIC_KEY_B64`, se exige el conjunto completo y válido. Solo públicas;
 nunca claves privadas, códigos de recuperación ni historial.
+Una clave propuesta por el cliente no concede autoridad: solo las dos públicas
+configuradas autorizan padre/hijo. Se admiten hasta 16 retos pendientes y una
+conexión autenticada por rol; solo un cliente autenticado sustituye al anterior.
+Desconectar o fallar elimina el reto. El cierre controlado usa código 1012.
+Los mensajes posteriores a AUTH_OK se rechazan mientras R03 esté pendiente.
 
 ## Próximas etapas, una por turno
 
-- R02: autenticación por reto ligada al socket, expiración y firma del rol.
+- R02 completado localmente con fixtures y clientes Node simulados.
 - R03: retransmisión autenticada, latidos, límites operativos y preparación
   de Render. Probar primero con dos clientes Node locales, sin tocar las apps.
 - Integración posterior con las apps y despliegue: requieren coordinación y
@@ -84,7 +92,7 @@ src/
       protocol/                 codec y criptografía técnica CP/1
     config/                     servidor, WebSocket, entorno y dependencias
   main.ts                       arranque local y cierre
-test/                           pruebas unitarias, arquitectura y HTTP local
+test/                           pruebas unitarias, arquitectura, HTTP y WS local
 ```
 
 El router llama al controlador HTTP, que recibe un puerto de entrada.
@@ -96,6 +104,6 @@ distintas, sin cadenas de conversiones de ida y vuelta. No hay ORM ni base de da
 
 Los tipos del contrato CP/1 son DTOs de transporte, no entidades de dominio.
 Los bytes firmados siguen intactos: no pasan por mappers que reserialicen JSON.
-Autenticación y mensajes operativos se implementarán en R02/R03 bajo estas reglas.
+Autenticación implementada en R02; mensajes operativos pendientes de R03.
 Ver detalles en `documentacion/ARQUITECTURA.md`. El código de `src/` no contiene
 comentarios; la explicación vive en documentación.

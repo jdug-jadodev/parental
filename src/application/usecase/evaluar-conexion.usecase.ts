@@ -4,7 +4,9 @@ import type { EvaluarConexionEntrada } from '../../domain/ports/portin/evaluar-c
 import { esSolicitudConexionValida } from '../validations/conexion.validation.js';
 
 export class EvaluarConexion implements EvaluarConexionEntrada {
+  constructor(private readonly permitirAutenticacion = false) {}
   ejecutar(solicitud: SolicitudConexion): DecisionConexion {
-    return new DecisionConexion(esSolicitudConexionValida(solicitud) ? 'NO_DISPONIBLE' : 'SOLICITUD_INVALIDA');
+    if (!esSolicitudConexionValida(solicitud)) return new DecisionConexion('SOLICITUD_INVALIDA');
+    return new DecisionConexion(this.permitirAutenticacion ? 'AUTENTICACION_REQUERIDA' : 'NO_DISPONIBLE');
   }
 }

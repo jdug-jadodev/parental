@@ -17,6 +17,7 @@ export class UpgradeMapper {
     });
   }
   static aRechazo(decision: DecisionConexion): RechazoUpgradeEntity {
+    if (decision.motivo === 'AUTENTICACION_REQUERIDA') throw new Error('La admisión no es un rechazo de transporte');
     return new RechazoUpgradeEntity(decision.motivo === 'SOLICITUD_INVALIDA' ? 400 : 503);
   }
   static deRechazo(entidad: RechazoUpgradeEntity): DecisionConexion {

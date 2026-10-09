@@ -220,3 +220,37 @@ y copias de bytes independientes. Esquema 28 ejemplos/13 contraejemplos correcto
 Este bloque aún no enlaza autenticación al transporte: upgrades siguen bloqueados.
 Siguiente bloque de R02: conexión del handshake local y pruebas con clientes Node.
 No apps, dispositivos, despliegue ni modificaciones al contrato/fixtures.
+
+## R02 — cierre local — 2026-10-09
+
+Segundo bloque: EvaluarConexion/DecisionConexion admiten exclusivamente la fase
+de autenticación cuando la composición recibe configuración pública completa.
+dependencias.ts inyecta retos, reloj, entropía, codec/verificación y transporte.
+WebSocketAdapter valida loopback, enlaza handleUpgrade con sus bytes head,
+envía CHALLENGE/AUTH_OK/ERROR y cancela retos al cerrar, vencer o fallar.
+Mantiene una conexión autenticada por rol, reemplazándola solo tras firma válida
+y sin permitir que el cierre antiguo elimine al nuevo. Máximo 16 retos pendientes,
+18 sockets totales; binarios y frames >16 KiB rechazados. servidor.config.ts y
+main.ts coordinan cierre 1012 y terminación forzada. README/ARQUITECTURA actualizados.
+
+Ejecutado pnpm run verificar: instalación congelada, check y build correctos;
+81 tests aprobados, 0 fallos/omitidos; 28 ejemplos aceptados, 13 contraejemplos
+rechazados, 10 vectores/78 comprobaciones correctos. Node v24.21.0.
+test/auth-websocket.test.ts y test/soporte/cliente-auth.ts usan clientes Node locales
+y privadas efímeras solo en RAM: ambos roles, copia entre sockets, impostor,
+rol/pareja/nonce inválidos, sustitución repetida, repetición de AUTH, aplicación
+prohibida, binarios/JSON ambiguo/límite, rechazo de Origin/query/ruta/subprotocolo,
+saturación de 16 retos y liberación, cierre real tras 10 s y cierre 1012.
+Durante el desarrollo se corrigieron un error TypeScript de RawData y una
+comparación de prototipos JSON en el cliente de pruebas antes de verificar.
+
+También ejecutado smoke Node por stdin sobre dist/src con públicas ficticias:
+composición compilada, escucha en puerto efímero loopback, health 503 y cierre
+correctos. Un primer intento node -e falló por comillas PowerShell; no era fallo
+del servidor y se repitió por stdin. No se ejecutó el wrapper PowerShell.
+
+R02 completado localmente; R03 pendiente (routing, latidos, límites operativos,
+rate limit de upgrades por IP y preparación Render). No se reenvían órdenes;
+después de AUTH_OK cualquier frame de aplicación se rechaza. Sin configuración
+continúan upgrades rechazados; health 503, loopback y producción bloqueada.
+Sin apps, dispositivos, despliegue, push ni cambios al contrato/fixtures.

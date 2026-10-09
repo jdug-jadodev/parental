@@ -41,7 +41,10 @@ WebSocket:
 ```text
 upgrade Node → WebSocketAdapter → UpgradeEntity → UpgradeMapper.aDominio
              → EvaluarConexionEntrada → EvaluarConexion
-             ← DecisionConexion → UpgradeMapper.aRechazo → HTTP de rechazo
+              ← DecisionConexion → UpgradeMapper.aRechazo → HTTP de rechazo
+              o admisión local → AutenticarConexionEntrada → AutenticarConexion
+              → retos/reloj/entropía/verificación (puertos de salida)
+              ← RetoAutenticacion/ConexionAutenticada → AutenticacionMapper → frame
 ```
 
 No existe ConexionController ni DTO de conexión intermedio. El mapper específico
@@ -70,7 +73,9 @@ e importación criptográfica SPKI P-256.
 - `GET /healthz`: 503 con `{ok:false,protocol:1}` mientras R02/R03 no estén listos.
 - `GET /keepalive`: 200 con `{alive:true}`, sin claves, pareja ni presencia.
 - Otras rutas/métodos y query strings: 404. No hay endpoints HTTP de negocio.
-- Upgrade inválido: 400; upgrade CP/1 válido: 503 hasta implementar autenticación.
+- Upgrade inválido: 400; CP/1 sin configuración o durante cierre: 503.
+- Con configuración válida solo se autentican sockets de 127.0.0.1; otros: 403.
+- Máximo 16 retos pendientes y 18 sockets de transporte; saturación: 429.
 - Fallos inesperados HTTP/upgrade: 500 genérico, sin detalles internos.
 - Respuestas JSON con no-store; `main.ts` conserva loopback y bloqueo de producción.
 
@@ -81,10 +86,25 @@ la recomendación de la SPEC de una instancia que no se suspenda por inactividad
 Se añade esta ruta por solicitud del propietario; la SPEC copiada conserva su
 tabla HTTP anterior como referencia histórica, sin cambiar CP/1.
 
-El transporte ws sigue sin enlazarse a HTTP, con noServer, maxPayload 16384 y
-compresión deshabilitada. Codec y criptografía permanecen en adapter/protocol.
+El transporte ws se enlaza a HTTP solo con configuración pública válida, con
+noServer, maxPayload 16384 y compresión deshabilitada. Codec y criptografía
+permanecen en adapter/protocol.
 Los tipos CP/1 son DTOs, no entidades de dominio. Nunca se reserializan payloads
-firmados para verificar o reenviar. No se implementaron R02/R03 en esta reorganización.
+firmados para verificar o reenviar. R02 verifica los bytes originales antes de
+interpretar AUTH_PROOF; R03 y el reenvío siguen pendientes.
+
+El caso de uso consume el reto antes de verificar la firma, comprueba socket,
+nonce y pareja, y revisa expiración antes y después de verificar. RelojAdapter
+usa performance.now; EntropiaAdapter usa UUID v4 y 32 bytes aleatorios. Los retos
+permanecen en RAM acotada y se eliminan por uso, expiración o desconexión.
+VerificacionAutenticacionAdapter solo utiliza las claves P-256 configuradas:
+el rol declarado debe corresponder a la clave firmante. No acepta claves propuestas.
+
+WebSocketAdapter mantiene una conexión autenticada por rol y sustituye la antigua
+solo después de autenticar. El cierre antiguo no borra la nueva del mapa.
+Después de AUTH_OK se rechazan más frames de aplicación hasta R03; no hay eco
+ni reenvío. cerrarServidorHttp detiene upgrades y cierra pendientes/autenticados
+con 1012, con terminación forzada del socket tras un segundo si no coopera.
 
 ## Herramientas y compatibilidad
 
