@@ -412,3 +412,55 @@ protección de ramas. CI remoto queda preparado, no acreditado como operativo.
 Tras publicación autorizada deben pasar ambos jobs antes de exigir sus checks.
 Sin cambios a apps, código del relay, contrato, fixtures o dependencias;
 sin dispositivos ni despliegue. Loopback, health 503 y producción bloqueada.
+
+## Primera integración local con padre P07 — 2026-10-09
+
+Autorizada lectura del proyecto parental_padre sin modificarlo ni usar ADB.
+Leídos instrucciones/estado y red/core pertinentes; HEAD padre 9db290e, estado
+P07_IMPLEMENTADO_LOCAL_PARCIAL. git status --porcelain del padre vacío antes y
+después. No se ejecutó Gradle ni se alteraron fuentes/build/caché del padre.
+Detectada incompatibilidad de transporte de la base local: padre exige WSS y
+origen HTTPS, no acepta WS. No se relajó TLS ni se cambió CP/1 unilateralmente.
+
+servidor.config.ts admite HTTPS/WSS local mediante key/cert inyectados en RAM,
+TLS mínimo 1.2; mantiene router, límites y cierre. dependencias.ts requiere
+configuración pública para TLS y limpia transporte si falla creación HTTPS.
+main.ts intacto, sin env privadas ni puerto permanente nuevo. tls-local.test.ts
+prueba rechazo sin configuración, producción bloqueada y TLS ausente/inválido.
+
+Añadidos test/soporte/PruebaPadre.java, prueba-padre.mjs y script test:padre.
+Driver Java compilado solo en temporal aprobado OpenCode, usando clases/JAR
+ya existentes del padre y caché Gradle en lectura. Compara SHA-256 de contrato,
+esquema y vectores de ambos repos; comprobación correcta. Usa TransporteOkHttp,
+RelayConnection y core-protocol JVM reales ya compilados, firmante JCA efímero
+y autoridad de prueba aislada, no Keystore. No se reconstruyó APK ni se acredita
+procedencia binaria de esos artefactos solo por mtime. JDK 21 local.
+
+Ejecutado pnpm run build y pnpm run test:padre --ruta-padre
+"C:\Users\Usuario\Documents\parental_padre": correcto. Tras añadir limpieza ante
+error TLS, ejecutado pnpm run verificar: instalación congelada/check/build correctos,
+104 tests aprobados, 0 fallos/omitidos; 28 ejemplos/13 contraejemplos correctos y
+10 vectores/78 comprobaciones correctos, Node v24.21.0. Repetido test:padre contra
+build final: correcto. No se ejecutó CI remoto, carga o auditoría en este turno.
+
+Cruce real WSS/loopback en puerto efímero: confianza TLS predeterminada del padre
+rechaza certificado de test; cliente JVM aislado confía solo en ese certificado
+manteniendo hostname, sin trustAll. Hijo Node autentica y padre JVM pasa AUTH y
+PONG correlacionado. SYNC_REQUEST JVM → relay → Node; STATE firmado Node → relay
+→ JVM; SET_POLICY firmado JVM → relay → Node; ACK firmado de vuelta, verificados
+pareja, nonce, boot/sesión y correlación id/seq/hash. ACK simulado exclusivamente
+ACCEPTED_PENDING_ENFORCEMENT, nunca evidencia de aplicación real. Segundo plano
+invalida sesión del padre. Health HTTPS 503 comprobado; clientes/JVM/relay cerrados.
+Privadas TLS/CP/1 y certificado efímeros solo RAM/pipes, sin archivos ni impresión.
+
+README/ARQUITECTURA y documentacion/INTEGRACION_LOCAL_PADRE.md documentan comandos,
+alcance y handoff. Pendiente ControlPoliticas/ParentStore reales contra relay,
+APK/Keystore/red Android e hijo real. Driver solo prueba red/core: envía a nivel
+transporte, no las guardias P05; STATE no afirma Device Owner/Lock Task. No se
+promociona PREPARADO ni se habilitan controles de APK. Observación de lectura para
+IA padre: programa PING 10 s tras PONG frente a 15 s de tabla CP/1; revisar allí,
+sin cambios aquí ni prueba de cadencia larga. 127.0.0.1 del teléfono no apunta
+al PC; una prueba APK posterior exige entorno/TLS local autorizado específico.
+
+Sin cambios al padre/hijo, contrato, fixtures o dependencias; sin dispositivos,
+ADB, despliegue ni push. Conservados loopback, health 503 y producción bloqueada.

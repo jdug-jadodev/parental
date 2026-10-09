@@ -90,12 +90,18 @@ CI preparado en `.github/workflows/verificar.yml`: Node 24 y pnpm fijado,
 verificación y carga corta en Ubuntu/Windows. Carga prolongada opcional manual.
 Sin push ni ejecución remota comprobada; ver `documentacion/CI.md`.
 
+Primera integración JVM del padre con relay WSS local preparada en
+`pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
+ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché
+Gradle y no forma parte de CI. Ver `documentacion/INTEGRACION_LOCAL_PADRE.md`:
+no equivale a probar la APK, Keystore o políticas reales.
+
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.
 - Preparación de Render: `documentacion/DESPLIEGUE_RENDER.md` y plantilla inactiva
   `plantillas/render.yaml.example`. No aplicarla: producción todavía está bloqueada.
-- Integración posterior con las apps y despliegue: requieren coordinación y
-  autorización; no se han realizado aquí. ACK de relay no significa orden aplicada.
+- Integración de APK/hijo real y despliegue: requieren coordinación y autorización;
+  pendientes. El cruce local JVM no los sustituye. ACK de relay no significa orden aplicada.
 
 Referencias: `documentacion/SPEC_RELAY_RENDER.md` y R01–R03 de
 `documentacion/PLAN_ORIGEN_PADRE.md` (histórico, no ejecutar tareas Android).

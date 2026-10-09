@@ -1,11 +1,16 @@
-import { createServer, type Server } from 'node:http';
+import { createServer, type Server, type RequestListener } from 'node:http';
+import { createServer as crearHttps, type ServerOptions } from 'node:https';
 import type { WebSocketAdapter } from '../adapter/websocket.adapter.js';
 import type { ServicioRouter } from '../routers/servicio.router.js';
 
 const adaptadores = new WeakMap<Server, WebSocketAdapter>();
 
-export function crearServidorHttp(router: ServicioRouter, websocket: WebSocketAdapter): Server {
-  const servidor = createServer((solicitud, respuesta) => router.manejar(solicitud, respuesta));
+export type TlsLocal = Pick<ServerOptions, 'key' | 'cert'>;
+
+export function crearServidorHttp(router: ServicioRouter, websocket: WebSocketAdapter, tls?: TlsLocal): Server {
+  if (tls && (!tls.key || !tls.cert)) throw new Error('TLS local requiere certificado y clave efímeros');
+  const manejar: RequestListener = (solicitud, respuesta) => router.manejar(solicitud, respuesta);
+  const servidor = tls ? crearHttps({ ...tls, minVersion: 'TLSv1.2' }, manejar) : createServer(manejar);
   servidor.headersTimeout = 5000;
   servidor.requestTimeout = 10000;
   servidor.keepAliveTimeout = 2000;

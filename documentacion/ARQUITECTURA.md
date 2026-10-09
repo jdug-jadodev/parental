@@ -162,3 +162,11 @@ raíz: pnpm install --frozen-lockfile --prod=false, pnpm run build y pnpm start.
 No se aplicó configuración de despliegue; producción permanece bloqueada.
 La herramienta local de interoperabilidad sigue en test/soporte/interoperabilidad.mjs;
 los consumidores Android deben ajustarse coordinadamente en otra tarea.
+
+Para integración JVM, la composición admite TLS local inyectado con key/cert solo
+en RAM. servidor.config.ts conserva el mismo router, límites HTTP y adaptador
+WebSocket sobre HTTPS; minVersion TLSv1.2. No hay nuevos endpoints/env privadas.
+Sin configuración pública no se permite TLS local y producción sigue bloqueada.
+Si crear HTTPS falla, dependencias.ts detiene el transporte para liberar timers.
+main.ts no cambia: sigue WS loopback por defecto. El harness opcional test:padre
+crea y cierra su WSS efímero; no es un modo de despliegue ni un servidor permanente.

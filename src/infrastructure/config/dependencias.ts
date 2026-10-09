@@ -12,7 +12,7 @@ import { WebSocketAdapter } from '../adapter/websocket.adapter.js';
 import { ServicioController } from '../controller/servicio.controller.js';
 import { ServicioRouter } from '../routers/servicio.router.js';
 import { ConfiguracionServidor } from './configuracion-servidor.js';
-import { crearServidorHttp } from './servidor.config.js';
+import { crearServidorHttp, type TlsLocal } from './servidor.config.js';
 import { crearTransporteWebSocket } from './websocket.config.js';
 import { CodecProtocolo } from '../adapter/protocol/codec-protocolo.js';
 import { VerificacionAutenticacionAdapter } from '../adapter/verificacion-autenticacion.adapter.js';
@@ -27,7 +27,8 @@ export function crearConfiguracionServidor(): ConfiguracionServidor {
   return new ConfiguracionServidor(new ConfigurarServidor(new ValidacionPublicaAdapter()));
 }
 
-export function crearServidorLocal(valores?: ConfiguracionRequestDto): Server {
+export function crearServidorLocal(valores?: ConfiguracionRequestDto, tls?: TlsLocal): Server {
+  if (tls && !valores) throw new Error('WSS local requiere configuración pública autenticada');
   const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
   let autenticacion: AutenticarConexion | undefined;
   let procesar: ProcesarMensaje | undefined;
@@ -43,5 +44,6 @@ export function crearServidorLocal(valores?: ConfiguracionRequestDto): Server {
   }
   const websocket = new WebSocketAdapter(new EvaluarConexion(Boolean(autenticacion)), autenticacion,
     autenticacion ? crearTransporteWebSocket() : undefined, procesar, new LimiteUpgradesAdapter(new RelojAdapter().ahora()));
-  return crearServidorHttp(new ServicioRouter(servicio), websocket);
+  try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
+  catch (error) { websocket.detener(); throw error; }
 }
