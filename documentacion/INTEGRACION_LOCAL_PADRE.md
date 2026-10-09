@@ -65,9 +65,10 @@ hijo apto. No promociona PREPARADO ni habilita controles de la APK.
 
 ## Pendientes y handoff al proyecto padre
 
-- Probar ControlPoliticas/ParentStore contra este relay en entorno JVM aislado,
-  con hijo simulado apto únicamente en tests, sin saltar guardias de producción
-  ni presentar presencia/ACK de relay como aplicación efectiva.
+- El padre ya reporta P08-B: ControlPoliticas/ParentStore contra este relay en
+  JVM aislado, con hijo simulado y guardias de producción conservadas. Evidencia
+  en su pruebas/EVIDENCIA_P08_B.md; no reejecutada en el turno de coordinación.
+  Pendientes reinicio real del relay y ACK totalmente perdido en ese recorrido.
 - APK, Keystore, autenticación del adulto, red Android e hijo real no probados.
   No hubo dispositivos ni ADB.
 - Una APK no puede usar sin más 127.0.0.1 del PC: en teléfono apunta al propio
@@ -75,10 +76,10 @@ hijo apto. No promociona PREPARADO ni habilita controles de la APK.
   LAN/publicación ni cambiar la app desde este proyecto.
 - Sin despliegue, certificado público, exportación real o CI remoto. Coordinar
   siguiente tarea con la IA del padre; CP/1 permanece igual.
-- Observación para esa IA: RelayConnection programa el próximo PING 10 s tras
-  PONG; la tabla de CP/1 indica heartbeat cada 15 s. No impide este intercambio
-  inicial ni exige cambiar el relay, pero la cadencia debe revisarse en el padre
-  antes de declarar conformidad completa. No se modificó ni probó ese ciclo largo.
+- La observación de cadencia fue atendida por el padre en P08-A (48e681b): su
+  relevo reporta PING cada 15 s desde envío y caducidad de 45 s. Es evidencia de
+  su proyecto, no una prueba nueva de esta sesión. Ver coordinación central
+  COORDINACION_PROYECTOS.md para siguientes unidades y puerta de vínculo operativo.
 
 Script opcional, no incluido en CI: los runners no contienen repo/clases/cache
 del padre. pnpm run verificar sigue independiente. Evidencia en ESTADO.md.

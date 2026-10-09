@@ -464,3 +464,47 @@ al PC; una prueba APK posterior exige entorno/TLS local autorizado específico.
 
 Sin cambios al padre/hijo, contrato, fixtures o dependencias; sin dispositivos,
 ADB, despliegue ni push. Conservados loopback, health 503 y producción bloqueada.
+
+## Coordinación central padre/hijo/relay preparada — 2026-10-09
+
+Propietario designa esta sesión coordinadora. Leídos en sus rutas explícitas
+parental_padre/COORDINACION_PROYECTOS.md y parental_hijo/
+COORDINACION_PADRE_HIJO_RENDER.md, instrucciones/estados y fuentes pertinentes.
+Padre HEAD 8f0aa33, implementación P08-B 77c2b10; hijo HEAD 3f160c4, base de relevo
+524ad8b; relay ce59ef6 antes de este cierre documental. Estado de ambos repos
+ajenos limpio en consultas git status --porcelain; sin escribir en ellos.
+
+Padre reporta 146 pruebas independientes y una integración JVM opcional contra
+relay real, ControlPoliticas/ParentStore, guardias, reintentos y reconciliación.
+Cadencia observada anteriormente atendida en P08-A 48e681b: 15 s desde envío y
+caducidad 45 s. No se reejecutaron esas pruebas en esta sesión. PREPARADO sigue
+sin puerta productiva de acreditación y no habilita órdenes. Hijo reporta 329
+resultados JVM y 23 Android anteriores: H05 abierta, sin oferta/aceptación inicial,
+cliente WSS ni enforcement completos. No hay integración entre dos APK acreditada.
+
+Ejecutada comparación directa Get-FileHash SHA-256 en los tres repositorios:
+contrato deee863f7587736d3e209f5a11a6e972a93004d0700c47eb3a2d136ad8f16a3c;
+schema eccf964fbb41869c47d86ddb0bfda6585136430bab297568d3c20b56607372bb;
+vectores 626b935f272aa4f7028fcb00c7640dceff2828418966e950a72f5590effe45e3.
+También inventario y hashes de los 29 archivos de compartido/ejemplos iguales.
+Solo evidencia de archivos congelados iguales, no nuevos tests o cruce móvil.
+
+Añadido COORDINACION_PROYECTOS.md central: fuentes/estados, bloqueos, handoffs
+preparados para cada IA, secuencia de puertas, propuesta TLS/red no aplicada,
+alcance de permisos y formato de devoluciones. Próxima prioridad hijo HIJO-C01:
+delimitar identidad/oferta y dependencia H05, sin saltar H08/H06/H10. Padre
+PADRE-C01: diseñar acreditación PREPARADO→VINCULADO sin promoción automática ni
+mensajes nuevos. Relay siguiente unidad propuesta: reinicio real y ACK totalmente
+perdido en recorrido integrado. Ninguna iniciada, enviada o delegada en este turno.
+
+Permisos físicos no se trasladan: hijo registra autorización histórica A13,
+pero padre/Render lo excluyen; esta sesión no usa dispositivos. Cualquier prueba
+futura requiere autorización específica y sesión del rol correspondiente; ante
+conflicto, consultar al propietario. No se eligió hostname, certificado o puerto,
+abrió LAN, instaló CA ni creó servicio/túnel. No trustAll ni credenciales nuevas.
+
+AGENTS/README incorporan coordinación central, sin quitar límites. Actualizado
+documentacion/INTEGRACION_LOCAL_PADRE.md con evidencia P08-A/B reportada para
+no repetir pendientes ya atendidos; evidencia histórica de ESTADO intacta.
+Tarea documental: no pnpm/Gradle/build/tests nuevos, ADB, subagentes, cambios a
+apps/contrato/fixtures, push, CI remoto o despliegue. Conservadas barreras locales.

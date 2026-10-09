@@ -8,6 +8,9 @@ Arquitectura hexagonal: src/ y paquete pnpm en raíz; leer documentacion/ARQUITE
 Leer README.md, ESTADO.md y documentacion/SPEC_RELAY_RENDER.md antes de continuar.
 Fase pública e integración móvil pendientes de autorización/coordinación.
 Una tarea por turno, respetar dependencias.
+Coordinación central en COORDINACION_PROYECTOS.md: leer relevos padre/hijo en
+sus rutas explícitas y preparar tareas para sus IAs, sin editar apps, lanzar
+subagentes, trasladar permisos físicos ni desplegar por la designación de coordinador.
 
 - Español claro en comunicación/documentación/comentarios/commits.
 - Código sin comentarios; explicar decisiones en documentación. Dominio/aplicación

@@ -86,6 +86,11 @@ en `documentacion/REVISION_SEGURIDAD.md`.
 
 ## Próximas etapas, una por turno
 
+Coordinación central de los tres proyectos en `COORDINACION_PROYECTOS.md`.
+El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
+carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
+sin editar apps ni trasladar autorizaciones físicas entre sesiones.
+
 CI preparado en `.github/workflows/verificar.yml`: Node 24 y pnpm fijado,
 verificación y carga corta en Ubuntu/Windows. Carga prolongada opcional manual.
 Sin push ni ejecución remota comprobada; ver `documentacion/CI.md`.
