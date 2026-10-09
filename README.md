@@ -86,6 +86,10 @@ en `documentacion/REVISION_SEGURIDAD.md`.
 
 ## Próximas etapas, una por turno
 
+CI preparado en `.github/workflows/verificar.yml`: Node 24 y pnpm fijado,
+verificación y carga corta en Ubuntu/Windows. Carga prolongada opcional manual.
+Sin push ni ejecución remota comprobada; ver `documentacion/CI.md`.
+
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.
 - Preparación de Render: `documentacion/DESPLIEGUE_RENDER.md` y plantilla inactiva

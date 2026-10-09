@@ -373,3 +373,42 @@ hallazgos, evidencia y límites. No apps, dispositivos, despliegue, push, CI rem
 ni modificaciones de compartido/fixtures. Sin servicios externos ni autopings HTTP.
 Conservados loopback, health 503 y producción bloqueada. Pendientes: TLS/proxy/
 readiness públicos autorizados, red lenta real e integración móvil coordinada.
+
+## CI preparado, sin ejecución remota — 2026-10-09
+
+Añadido .github/workflows/verificar.yml para GitHub Actions: push/pull_request/
+workflow_dispatch, matriz ubuntu-24.04/windows-2025, Node 24.21.0 desde .node-version
+y pnpm desde packageManager (10.0.0). Ejecuta pnpm run verificar, git diff
+--exit-code y carga corta; carga prolongada solo por opción manual y en Linux.
+Timeout 20 min por job, fail-fast desactivado y cancelación por referencia.
+Solo contents:read, checkout sin persistir credenciales, sin secretos, producción,
+servicios, cron, artefactos ni caché. No se aprobaron scripts de dependencias.
+
+Acciones fijadas a commits consultados vía API oficial GitHub: checkout v6
+d23441a48e516b6c34aea4fa41551a30e30af803, setup-node v6
+249970729cb0ef3589644e2896645e5dc5ba9c38 y pnpm/action-setup v4
+b906affcce14559ad1aafd4ab0e942779e9f58b1. Para pnpm se resolvió el tag anotado
+a commit. Se comprobaron los inputs usados en sus action.yml públicos.
+README actualizado y documentacion/CI.md explica activación, permisos y límites.
+
+Ejecutado actionlint v1.7.12 sobre el workflow: salida vacía, código 0. Binario
+Windows descargado del release oficial en temporal OpenCode; SHA256 contrastado
+con checksums del mismo release: 6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9.
+Shellcheck/pyflakes deshabilitados explícitamente; no se usa Python ni se afirma
+validación con esas herramientas. No se añadió dependencia al paquete.
+
+Ejecutado pnpm run verificar local en Windows/Node v24.21.0: instalación congelada,
+check/build correctos, 101 tests aprobados, 0 fallos/omitidos; 28 ejemplos,
+13 contraejemplos y 10 vectores/78 comprobaciones correctos. También ejecutado
+pnpm run test:carga: 70 ciclos, seis lotes en 31.608 ms, cero conexiones entre
+lotes, crecimiento heap +52.136 bytes, P95 PONG local 0,783 ms y P99 retraso
+del bucle 33,341 ms. Carga parcialmente concurrente con la verificación; no es
+benchmark aislado. No se repitió carga prolongada, audit ni wrapper PowerShell.
+git diff --exit-code -- src test scripts compartido pruebas package.json
+pnpm-lock.yaml confirmó que esos archivos versionados permanecen sin cambios.
+
+No se ejecutó GitHub Actions, ni runner Linux, push, configuración remota o
+protección de ramas. CI remoto queda preparado, no acreditado como operativo.
+Tras publicación autorizada deben pasar ambos jobs antes de exigir sus checks.
+Sin cambios a apps, código del relay, contrato, fixtures o dependencias;
+sin dispositivos ni despliegue. Loopback, health 503 y producción bloqueada.

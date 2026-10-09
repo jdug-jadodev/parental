@@ -1,0 +1,53 @@
+name: Verificación del servidor
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      carga_prolongada:
+        description: Ejecutar también la carga de cinco minutos en Linux
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: verificar-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Node 24 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025]
+    env:
+      NODE_ENV: test
+    steps:
+      - name: Obtener código sin conservar credenciales Git
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - name: Preparar Node 24
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version-file: .node-version
+          package-manager-cache: false
+      - name: Preparar pnpm desde packageManager
+        uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+        with:
+          run_install: false
+      - name: Verificar instalación congelada, compilación, tests y contrato
+        run: pnpm run verificar
+      - name: Comprobar que la verificación no modifica archivos versionados
+        run: git diff --exit-code
+      - name: Ejecutar carga local corta sobre el build verificado
+        run: pnpm run test:carga
+      - name: Ejecutar carga local prolongada solicitada manualmente
+        if: github.event_name == 'workflow_dispatch' && inputs.carga_prolongada && runner.os == 'Linux'
+        run: pnpm run test:carga:prolongada
