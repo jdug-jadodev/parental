@@ -197,3 +197,26 @@ Ejecutado pnpm run verificar con build desde dist limpio: 59 tests aprobados,
 Sin modificaciones a apps, compartido/ o fixtures; sin dispositivos, despliegue
 ni sockets habilitados. Loopback, health 503 y production bloqueado conservados.
 R02/R03 siguen pendientes. No se ejecutó el wrapper PowerShell en esta tarea.
+
+## R02 — autenticación local, desarrollo en curso — 2026-10-09
+
+Primer bloque: entidades de reto/intento/prueba/conexión autenticada y fallo;
+puerto de entrada AutenticarConexionEntrada y puertos de salida para reloj,
+entropía, retos y verificación. Caso de uso consume el reto antes de verificar,
+comprueba vínculo con socket/nonce/pareja y expiración monotónica exacta de 10 s,
+también tras completar la firma. Cancelación idempotente al desconectar.
+Adaptadores de salida: memoria acotada a 16 retos, UUID v4/nonce32 aleatorios,
+performance.now y verificación P-256 con claves públicas fijadas al arrancar.
+Se comprueba firma sobre bytes originales antes de interpretar el payload;
+ninguna clave recibida del cliente decide autoridad. Mappers específicos en adapter.
+
+Ejecutado pnpm run verificar: instalación congelada/check/build correctos,
+71 tests aprobados, 0 fallos/omitidos. Nuevas pruebas contra ambos fixtures AUTH:
+consumo único, otro socket, límite/limpieza, expiración exacta y durante firma,
+firma inválida, rol/nonce/pareja erróneos, propósito incompatible, clave propuesta
+y copias de bytes independientes. Esquema 28 ejemplos/13 contraejemplos correcto;
+10 vectores/78 comprobaciones correctos. Node v24.21.0.
+
+Este bloque aún no enlaza autenticación al transporte: upgrades siguen bloqueados.
+Siguiente bloque de R02: conexión del handshake local y pruebas con clientes Node.
+No apps, dispositivos, despliegue ni modificaciones al contrato/fixtures.
