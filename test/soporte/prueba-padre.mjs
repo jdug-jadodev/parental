@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { spawn, spawnSync } from 'node:child_process';
+import { fork, spawn, spawnSync } from 'node:child_process';
 import { createHash, generateKeyPairSync, randomBytes, randomUUID, sign } from 'node:crypto';
 import { once } from 'node:events';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -14,7 +14,8 @@ import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/c
 import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
 
 const argumentos = process.argv.slice(2);
-const fallos = argumentos[0] === '--fallos';
+const proceso = argumentos[0] === '--proceso';
+const fallos = proceso || argumentos[0] === '--fallos';
 if (fallos) argumentos.shift();
 assert.equal(argumentos.length, 2, 'Uso: pnpm run test:padre --ruta-padre RUTA');
 assert.equal(argumentos[0], '--ruta-padre');
@@ -62,7 +63,7 @@ const dentroDe = (promesa, ms) => {
   let timer;
   return Promise.race([promesa, new Promise((_, rechazar) => { timer = setTimeout(() => rechazar(new Error('Timeout de integración local')), ms); })]).finally(() => clearTimeout(timer));
 };
-let servidor, hijo;
+let servidor, hijo, relay, salidaRelay;
 try {
   const [tipo, publicaPadre, certB64, keyB64] = (await dentroDe(leerLinea(), 15000)).split('\t');
   assert.equal(tipo, 'LISTO');
@@ -72,10 +73,27 @@ try {
   const pareja = randomUUID();
   const env = { NODE_ENV: 'test', PUBLIC_ORIGIN: 'https://127.0.0.1', ACTIVE_PAIR_ID: pareja,
     PARENT_PUBLIC_KEY_B64: publicaPadre, CHILD_PUBLIC_KEY_B64: publicaHijo };
-  servidor = crearServidorLocal(env, { cert, key });
-  servidor.listen(0, '127.0.0.1');
-  await once(servidor, 'listening');
-  const origen = `https://127.0.0.1:${servidor.address().port}`;
+  const arrancar = async puerto => {
+    if (!proceso) {
+      servidor = crearServidorLocal(env, { cert, key });
+      servidor.listen(puerto, '127.0.0.1');
+      await once(servidor, 'listening');
+      return { puerto: servidor.address().port };
+    }
+    relay = fork(fileURLToPath(new URL('./relay-proceso.mjs', import.meta.url)), [], { stdio: ['ignore', 'ignore', 'ignore', 'ipc'] });
+    salidaRelay = new Promise(resolver => {
+      relay.once('error', () => resolver('error'));
+      relay.once('exit', () => resolver('exit'));
+    });
+    const listo = once(relay, 'message').then(([mensaje]) => mensaje);
+    relay.send({ env, certB64, keyB64, puerto });
+    const resultado = await dentroDe(Promise.race([listo, salidaRelay]), 10000);
+    assert.equal(typeof resultado, 'object', 'Relay terminó antes de escuchar');
+    assert.equal(resultado.pid, relay.pid);
+    return resultado;
+  };
+  const inicial = await arrancar(0);
+  const origen = `https://127.0.0.1:${inicial.puerto}`;
   const health = await new Promise((resolver, rechazar) => get(`${origen}/healthz`, { ca: cert }, respuesta => { respuesta.resume(); resolver(respuesta.statusCode); }).on('error', rechazar));
   assert.equal(health, 503);
   const codec = new CodecProtocolo(readFileSync(join(raiz, 'compartido/protocolo.schema.json')));
@@ -119,15 +137,19 @@ try {
   assert.equal(orden.bootId, bootId); assert.equal(orden.childSessionId, childSessionId); assert.equal(orden.commandNonce, commandNonce);
   if (fallos) {
     assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_SIN_ACK');
-    const port = servidor.address().port;
     const cierreHijo = once(hijo, 'close');
-    const cierreServidor = once(servidor, 'close');
-    cerrarServidorHttp(servidor);
-    await cierreServidor;
-    assert.equal((await cierreHijo)[0], 1012);
-    servidor = crearServidorLocal(env, { cert, key });
-    servidor.listen(port, '127.0.0.1');
-    await once(servidor, 'listening');
+    if (proceso) {
+      assert.ok(relay.kill('SIGKILL'));
+      assert.equal(await dentroDe(salidaRelay, 5000), 'exit');
+    } else {
+      const cierreServidor = once(servidor, 'close');
+      cerrarServidorHttp(servidor);
+      await dentroDe(cierreServidor, 5000);
+    }
+    assert.equal((await dentroDe(cierreHijo, 5000))[0], proceso ? 1006 : 1012);
+    const reiniciado = await arrancar(inicial.puerto);
+    assert.equal(reiniciado.puerto, inicial.puerto);
+    if (proceso) assert.notEqual(reiniciado.pid, inicial.pid);
     assert.equal(await dentroDe(leerLinea(), 20000), 'RECONECTADO');
     assert.equal(frames.length, 0);
     assert.notEqual(await conectarHijo(), conexionHijo);
@@ -143,7 +165,9 @@ try {
     assert.equal(await dentroDe(leerLinea(), 15000), 'OK\tREINICIO_SIN_ACK_SESION_NUEVA_SIN_REPLAY');
     assert.equal(await dentroDe(terminado, 5000), 0);
     assert.equal(frames.length, 0);
-    console.log('OK: ACK no emitido por hijo simulado, cierre 1012 y recreación de instancia WSS en el mismo proceso; padre JVM reautenticado, ticket viejo rechazado y nueva sincronización sin replay.');
+    console.log(proceso
+      ? 'OK: ACK omitido, proceso relay terminado abruptamente, cierre 1006 y nuevo PID en el mismo puerto; padre JVM reautenticado y sincronización sin replay.'
+      : 'OK: ACK no emitido por hijo simulado, cierre 1012 y recreación de instancia WSS en el mismo proceso; padre JVM reautenticado, ticket viejo rechazado y nueva sincronización sin replay.');
     console.log('Solo RelayConnection/core; no prueba agotamiento de reintentos, persistencia/reconciliación de ControlPoliticas ni aplicación real.');
   } else {
     hijo.send(firmar({ v: 1, kind: 'ACK', pairId: pareja, sender: 'CHILD', bootId, childSessionId, commandId: orden.commandId,
@@ -157,5 +181,9 @@ try {
 } finally {
   clearTimeout(limite); lectura.close(); jvm.kill();
   if (hijo) hijo.terminate();
+  if (relay && relay.exitCode === null && relay.signalCode === null) {
+    relay.kill('SIGKILL');
+    await dentroDe(salidaRelay, 5000);
+  }
   if (servidor?.listening) { const cerrado = once(servidor, 'close'); cerrarServidorHttp(servidor); await cerrado; }
 }

@@ -551,3 +551,38 @@ duradera. Es avance parcial: RELAY-C01 completo permanece pendiente. No acredita
 APK, Keystore, vínculo operativo, Device Owner ni aplicación efectiva de orden.
 Sin teléfonos/ADB, cambios a apps, push, despliegue o exposición LAN. Conservados
 loopback, health 503 y producción bloqueada.
+
+## Reinicio abrupto de proceso relay con padre JVM — 2026-10-09
+
+Continuación autorizada por el propietario; una unidad propia del servidor.
+Releídos relevos de coordinación padre/hijo: sin nuevas evidencias de cierre de
+vínculo operativo/H05. No se activan tareas físicas ni se modifican apps.
+
+Añadidos test/soporte/relay-proceso.mjs y script test:padre:proceso. Orquestador
+reutiliza la variante de fallos con relay en proceso Node independiente: listener
+loopback, puerto efímero inicial y health 503. Bootstrap público/TLS por IPC,
+privada efímera solo RAM; sin secretos en archivos, argumentos, env o logs.
+Worker termina al perder IPC o alcanzar 45 s; cleanup termina proceso de prueba.
+
+Después de recibir SET_POLICY en el hijo Node simulado sin emitir ACK, se
+termina abruptamente el relay, se espera salida y se comprueba cierre 1006.
+Nuevo proceso/PID en el mismo puerto: padre RelayConnection JVM reautentica,
+obtiene ticket nuevo y rechaza el viejo. Hijo recibe reto nuevo y SYNC_REQUEST
+nuevo, no la orden anterior. Padre verifica STATE firmado con nonce/sesión nuevos,
+sin ACK inventado ni replay observado en el recorrido.
+
+Ejecutado pnpm run test:padre:proceso --ruta-padre con ruta explícita
+C:\Users\Usuario\Documents\parental_padre dos veces, antes y después de
+pnpm run verificar: correcto en ambas. Ejecutadas también test:padre:fallos y
+test:padre con la misma ruta: correctas. verificar: check/build y 104 tests
+aprobados; 28 ejemplos/13 contraejemplos y 10 vectores/78 comprobaciones correctos.
+El driver compara hashes de contrato/schema/vectores entre padre y relay antes
+de escuchar. Estado git del padre/hijo vacío al finalizar las consultas.
+
+Reinicio demostrado del proceso Node local, no Render/Android/JVM del padre.
+ACK omitido por simulador, no pérdida de un ACK emitido. No ControlPoliticas ni
+ParentStore, agotamiento de reintentos o reconciliación duradera: RELAY-C01 sigue
+parcial. No acredita APK/Keystore, Device Owner, vínculo operativo ni APPLIED.
+Sin Gradle, ADB/teléfonos, cambios al contrato/fixtures/apps, LAN, push o despliegue.
+Actualizadas README, guía de integración y coordinación con alcance/pendientes.
+Código productivo sin cambios; health 503, loopback y producción bloqueada.

@@ -102,7 +102,10 @@ Gradle y no forma parte de CI. Ver `documentacion/INTEGRACION_LOCAL_PADRE.md`:
 no equivale a probar la APK, Keystore o políticas reales.
 Variante `pnpm run test:padre:fallos --ruta-padre RUTA`: ACK omitido y recreación
 de instancia WSS, reautenticación JVM y sincronización nueva sin replay. No
-sustituye pruebas de restart de proceso o de reintentos de ControlPoliticas.
+sustituye por sí sola pruebas de restart de proceso o reintentos de ControlPoliticas.
+`pnpm run test:padre:proceso --ruta-padre RUTA` termina abruptamente un proceso
+relay independiente y arranca otro en el mismo puerto: comprueba reconexión JVM
+sin replay, pero no reintentos/persistencia de ControlPoliticas ni APK reales.
 
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.

@@ -93,8 +93,17 @@ por el hijo simulado, cierre 1012, recreación del servidor WSS en el mismo puer
 reautenticación/ticket nuevo, rechazo de ticket antiguo y SYNC/STATE nuevos sin
 replay. Se recrea la instancia en el mismo proceso Node; **no reinicio de proceso**.
 ControlPoliticas/ParentStore no intervienen en este driver: siguen pendientes
-agotamiento real de sus reintentos, persistencia/reconciliación y restart de proceso
-en el recorrido integrado. No cerrar RELAY-C01 completo por esta prueba de red.
+agotamiento real de sus reintentos y persistencia/reconciliación.
+No cerrar RELAY-C01 completo por esta prueba de red.
+
+Avance siguiente: test:padre:proceso arranca relay Node independiente en loopback,
+lo termina abruptamente tras la orden sin ACK, comprueba su salida/cierre 1006 y
+arranca otro PID en el mismo puerto. RelayConnection JVM reautentica, invalida
+ticket viejo y sincroniza con sesión nueva sin replay. Variante ejecutada dos
+veces, incluida una tras pnpm run verificar (104 tests correctos). Reinicio de
+proceso relay local demostrado; no del padre/Android ni infraestructura Render.
+Las tres variantes JVM pasaron. Pendiente de RELAY-C01: agotamiento de reintentos
+y reconciliación con ControlPoliticas/ParentStore reales, sin editar el padre.
 
 ## 4. Secuencia de puertas
 

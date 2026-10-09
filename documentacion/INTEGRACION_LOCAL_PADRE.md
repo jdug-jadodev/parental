@@ -21,6 +21,7 @@ se libera el transporte preparado y no se escucha.
 pnpm run build
 pnpm run test:padre --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:fallos --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
+pnpm run test:padre:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 ```
 
 Requiere JDK 21 con java/javac en PATH o JAVA_HOME, clases debug ya compiladas
@@ -77,6 +78,27 @@ se verifica en JVM; no llega un ACK inventado o almacenado por el relay.
 Esto prueba recreación de instancia/listener en el mismo proceso Node, no muerte
 y arranque de un proceso independiente. Tampoco ejecuta ControlPoliticas ni
 agotamiento de sus dos reintentos/reconciliación duradera: siguen pendientes.
+
+### Variante de reinicio de proceso
+
+test:padre:proceso reutiliza el recorrido de fallos, pero arranca un proceso Node
+independiente mediante test/soporte/relay-proceso.mjs. Configuración pública y
+certificado/privada TLS efímeros pasan por IPC, nunca por archivos, argumentos,
+variables de entorno o logs. El listener solo escucha 127.0.0.1 y la prueba
+confirma health 503. El worker tiene límite de vida de 45 s y termina al perder
+el IPC; el orquestador también lo termina al cerrar o fallar la prueba.
+
+Una vez recibida la orden sin emitir ACK, el orquestador termina abruptamente
+ese proceso con SIGKILL (terminación forzada en Windows), espera su salida y
+comprueba cierre WebSocket 1006. Arranca un nuevo proceso con PID distinto en el
+mismo puerto y conserva únicamente la configuración de prueba, no el estado del
+relay. Padre JVM reautentica por su backoff normal, obtiene ticket nuevo y
+rechaza el anterior. Hijo simulado recibe reto nuevo y SYNC_REQUEST nuevo, sin
+la orden anterior; padre verifica STATE de sesión nueva y no recibe ACK ficticio.
+
+El reinicio corresponde al proceso Node de laboratorio, no Render, Android ni
+el proceso JVM del padre. No prueba cortes de energía, agotamiento de reintentos
+de ControlPoliticas, reconciliación duradera o una orden aplicada por el hijo.
 
 ## Pendientes y handoff al proyecto padre
 
