@@ -1,6 +1,6 @@
 # Control parental — servidor Render independiente
 
-Servidor Node.js 24 / TypeScript con `src/` y paquete npm en la raíz. Las apps padre e hijo no forman
+Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps padre e hijo no forman
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
 y los fixtures permanecen congelados.
 
@@ -19,13 +19,20 @@ configuración válida no se anuncia CP/1 listo hasta completar R02/R03.
 Desde la raíz del proyecto:
 
 ```sh
-npm run verificar
+pnpm run verificar
 ```
 
-Instala con `npm ci`, chequea TypeScript, compila, ejecuta tests, valida ejemplos
+Requiere Node 24 y pnpm 10.0.0 (fijado en `packageManager`). Instala con
+`pnpm install --frozen-lockfile`, chequea TypeScript, compila, ejecuta tests, valida ejemplos
 contra el esquema y verifica vectores criptográficos. Como alternativa Windows
 se conserva `powershell -File scripts/verificar.ps1` desde la raíz.
-Para arrancar la base local: `npm run build` y `npm start`.
+Para arrancar la base local: `pnpm run build` y `pnpm start`.
+
+El único lockfile activo es `pnpm-lock.yaml`, importado del anterior lockfile npm
+sin actualizar dependencias. `.npmrc` también configura pnpm. Los scripts de
+instalación de dependencias no están autorizados (`onlyBuiltDependencies: []`);
+no se aprobó el postinstall de esbuild. Sus binarios opcionales permiten las
+pruebas locales verificadas; no se afirma compatibilidad con plataformas no probadas.
 
 Sin variables públicas se permite la base local no operativa. Si se proporciona
 alguna de `PUBLIC_ORIGIN`, `ACTIVE_PAIR_ID`, `PARENT_PUBLIC_KEY_B64` o
@@ -43,7 +50,7 @@ nunca claves privadas, códigos de recuperación ni historial.
 Referencias: `documentacion/SPEC_RELAY_RENDER.md` y R01–R03 de
 `documentacion/PLAN_ORIGEN_PADRE.md` (histórico, no ejecutar tareas Android).
 La mención al antiguo verificador Python en documentación congelada/histórica
-no es una dependencia: su reemplazo es `npm run test:esquema` desde la raíz.
+no es una dependencia: su reemplazo es `pnpm run test:esquema` desde la raíz.
 
 La herramienta Node de interoperabilidad está en `test/soporte/interoperabilidad.mjs`.
 Una integración Kotlin futura debe apuntar a la raíz de `parental_render` y

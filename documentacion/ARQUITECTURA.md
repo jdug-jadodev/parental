@@ -46,7 +46,9 @@ No se reconstruyen los bytes del payload antes de verificar su firma.
 
 ## Estructura y compatibilidad
 
-Paquete npm, lockfile, tsconfig, .npmrc y .node-version residen en la raíz.
+Paquete pnpm, pnpm-lock.yaml, tsconfig, .npmrc y .node-version residen en la raíz.
+La versión de pnpm está fijada en packageManager; instalación reproducible con
+pnpm install --frozen-lockfile, sin autorización de scripts de dependencias.
 Los resultados nuevos están en dist/ y dependencias en node_modules/, ignorados.
 compartido/ y pruebas/ conservan contrato y fixtures congelados. documentacion/
 conserva especificaciones y evidencias históricas; sus rutas relay/ describen
@@ -54,5 +56,8 @@ el diseño anterior y no son instrucciones de arranque actuales.
 
 Para Render, al implementar R03 se usará la raíz del repositorio, no relay/.
 No se ha creado ni aplicado una configuración de despliegue.
+Al preparar Render se usarán pnpm install --frozen-lockfile --prod=false,
+pnpm run build y pnpm start, con la versión fijada de pnpm. Los comandos npm
+de la SPEC copiada y evidencias anteriores son referencias históricas.
 La herramienta de interoperabilidad usa ahora la raíz de este proyecto; cualquier
 ajuste del consumidor Android debe acordarse aparte, sin modificar las apps aquí.

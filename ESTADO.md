@@ -111,3 +111,37 @@ PowerShell ni integración JVM/Android; los dos tests de herramienta son Node lo
 Refactorización terminada; servidor sigue en R01. Próxima función: R02.
 No se modificó compartido/ ni los fixtures; no se ejecutaron comandos en las
 apps padre/hijo. No dispositivos, ADB, despliegue ni habilitación de WSS público.
+
+## Migración a pnpm — 2026-10-09
+
+Migración limitada a este servidor. Se fija pnpm@10.0.0 en packageManager,
+usando la versión local instalada, sin instalar/actualizar herramientas globales.
+pnpm-lock.yaml importado mediante pnpm import desde package-lock.json; comprobación
+Node antes de retirar el lockfile anterior: los 39 paquetes conservan versión
+e integridad. No se actualizaron dependencias directas ni transitivas.
+
+Eliminado package-lock.json tras comprobar la importación. .npmrc mantiene
+save-exact/engine-strict y exige la versión fijada del gestor. package.json
+declara onlyBuiltDependencies vacío: no se autoriza ningún script de instalación
+de dependencias. pnpm informó postinstall esbuild ignorado; los binarios opcionales
+permitieron compilar/probar en Windows sin aprobarlo.
+
+scripts/verificar.mjs exige invocación mediante pnpm e instala con
+pnpm install --frozen-lockfile; admite CLI JavaScript y ejecutable nativo Windows.
+scripts/verificar.ps1 delega al mismo verificador para evitar duplicar pasos.
+README, ARQUITECTURA y AGENTS actualizados; evidencias/SPEC copiada conservan
+comandos npm históricos, no instrucciones vigentes de instalación.
+Añadido test/gestor-paquetes.test.ts: rechazo antes de instalar si no se usa pnpm.
+
+Ejecutado: pnpm --version (10.0.0), node --version (v24.21.0), pnpm import,
+pnpm run check (correcto), comparación Node de los 39 paquetes, pnpm audit
+(sin vulnerabilidades conocidas) y pnpm run verificar (50 tests aprobados).
+Tras añadir dos tests del gestor y eliminar el lockfile npm, ejecutado
+powershell -NoProfile -File scripts/verificar.ps1: invoca pnpm run verificar;
+install --frozen-lockfile/check/build correctos, 52 tests aprobados,
+0 fallos/omitidos, 28 ejemplos aceptados y 13 contraejemplos rechazados,
+10 vectores firmados/78 comprobaciones documentales correctas.
+
+No se modificó src/, compartido/ ni fixtures, ni se operó sobre las apps.
+Siguen loopback, health 503, upgrades rechazados y producción bloqueada.
+Sin dispositivos, despliegue, autenticación nueva ni cambios de R02/R03.

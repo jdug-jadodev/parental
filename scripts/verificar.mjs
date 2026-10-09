@@ -6,10 +6,13 @@ function ejecutar(programa, argumentos, cwd) {
   const resultado = spawnSync(programa, argumentos, { cwd, stdio: 'inherit' });
   if (resultado.error || resultado.status !== 0) throw new Error(`Falló ${programa}: ${resultado.error?.message ?? resultado.status}`);
 }
-const npm = process.env.npm_execpath;
-if (!npm) throw new Error('Ejecuta desde la raíz: npm run verificar');
-for (const argumentos of [['ci'], ['run', 'check'], ['run', 'build'], ['test'], ['run', 'test:esquema']]) {
-  ejecutar(process.execPath, [npm, ...argumentos], fileURLToPath(raiz));
+const pnpm = process.env.npm_execpath;
+if (!pnpm || !process.env.npm_config_user_agent?.startsWith('pnpm/')) {
+  throw new Error('Ejecuta desde la raíz: pnpm run verificar');
+}
+for (const argumentos of [['install', '--frozen-lockfile'], ['run', 'check'], ['run', 'build'], ['test'], ['run', 'test:esquema']]) {
+  const nativo = pnpm.toLowerCase().endsWith('.exe');
+  ejecutar(nativo ? pnpm : process.execPath, nativo ? argumentos : [pnpm, ...argumentos], fileURLToPath(raiz));
 }
 ejecutar(process.execPath, [fileURLToPath(new URL('pruebas/verificar_vectores.mjs', raiz))], fileURLToPath(raiz));
 console.info('Verificación local terminada. Sin despliegue ni dispositivos.');

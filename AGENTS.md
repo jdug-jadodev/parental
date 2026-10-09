@@ -4,7 +4,7 @@ Proyecto independiente: solo servidor Node/TypeScript del relay WSS. No desarrol
 ni modificar las apps en parental_padre ni el repositorio del hijo.
 
 Proyecto extraído sin despliegue; R01 implementado localmente después de extracción.
-Arquitectura hexagonal: src/ y paquete npm en raíz; leer documentacion/ARQUITECTURA.md.
+Arquitectura hexagonal: src/ y paquete pnpm en raíz; leer documentacion/ARQUITECTURA.md.
 Leer README.md, ESTADO.md y documentacion/SPEC_RELAY_RENDER.md antes de continuar.
 Próxima tarea R02; R03 pendiente. Una tarea por turno, respetar dependencias.
 
@@ -21,5 +21,6 @@ Próxima tarea R02; R03 pendiente. Una tarea por turno, respetar dependencias.
 - Código heredado local: 127.0.0.1, health 503, upgrades rechazados y producción
   bloqueada. No quitar estas barreras para aparentar servicio listo.
 - Compilar/probar localmente, registrar solo lo ejecutado en ESTADO.md.
+- Usar pnpm fijado en packageManager y pnpm-lock.yaml; verificar con pnpm run verificar.
 - Commit por bloque de 500 líneas manuales de código/tests y al cerrar tarea;
   revisar lo preparado sin secretos. No borrar trabajo ajeno.

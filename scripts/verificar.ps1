@@ -7,11 +7,5 @@ function Ejecutar {
 }
 Push-Location (Split-Path $PSScriptRoot -Parent)
 try {
-    Ejecutar 'npm.cmd' @('ci')
-    Ejecutar 'npm.cmd' @('run', 'check')
-    Ejecutar 'npm.cmd' @('run', 'build')
-    Ejecutar 'npm.cmd' @('test')
-    Ejecutar 'npm.cmd' @('run', 'test:esquema')
-    Ejecutar 'node' @('pruebas/verificar_vectores.mjs')
-    Write-Host 'Verificación local del servidor terminada. Sin despliegue ni dispositivos.'
+    Ejecutar 'pnpm' @('run', 'verificar')
 } finally { Pop-Location }

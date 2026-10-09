@@ -4,6 +4,7 @@
   "private": true,
   "description": "Servidor independiente CP/1; desarrollo local sin tráfico público",
   "type": "module",
+  "packageManager": "pnpm@10.0.0",
   "engines": {
     "node": ">=24.0.0 <25"
   },
@@ -15,6 +16,9 @@
     "check": "tsc --noEmit -p tsconfig.json",
     "test:esquema": "node scripts/verificar-esquema.mjs",
     "verificar": "node scripts/verificar.mjs"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": []
   },
   "dependencies": {
     "ajv": "8.20.0",
