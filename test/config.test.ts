@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { generateKeyPairSync } from 'node:crypto';
 import { test } from 'node:test';
-import { crearControladorConfiguracion } from '../src/bootstrap/composicion.js';
-const leerConfiguracion = (valores: NodeJS.ProcessEnv) => crearControladorConfiguracion().manejar(valores);
+import { crearConfiguracionServidor } from '../src/infrastructure/config/dependencias.js';
+const leerConfiguracion = (valores: NodeJS.ProcessEnv) => crearConfiguracionServidor().leer(valores);
 
 const publica = (curva = 'prime256v1'): string => generateKeyPairSync('ec', { namedCurve: curva })
   .publicKey.export({ type: 'spki', format: 'der' }).toString('base64url');

@@ -3,9 +3,10 @@ import { once } from 'node:events';
 import type { IncomingMessage } from 'node:http';
 import { connect, type AddressInfo } from 'node:net';
 import { test } from 'node:test';
-import { crearServidorLocal } from '../src/bootstrap/composicion.js';
-import { crearTransporteWebSocket } from '../src/infrastructure/websocket/transporte.js';
-import { SolicitudConexion } from '../src/domain/conexion.js';
+import { crearServidorLocal } from '../src/infrastructure/config/dependencias.js';
+import { crearTransporteWebSocket } from '../src/infrastructure/config/websocket.config.js';
+import { SolicitudConexion } from '../src/domain/entities/solicitud-conexion.js';
+import { esSolicitudConexionValida } from '../src/application/validations/conexion.validation.js';
 
 test('R-LIMIT-01: transporte preparado sin listener, sin compresión y con límite 16 KiB', () => {
   const transporte = crearTransporteWebSocket();
@@ -49,5 +50,5 @@ test('R-LIMIT-01: upgrades inválidos rechazados y válidos aún bloqueados por 
       assert.match(String(datos), new RegExp(`^HTTP/1.1 ${codigo}`));
     } finally { socket.destroy(); }
   }
-  assert.equal(new SolicitudConexion('POST', '/ws', undefined, 'cp.v1').esValida(), false);
+  assert.equal(esSolicitudConexionValida(new SolicitudConexion('POST', '/ws', undefined, 'cp.v1')), false);
 });

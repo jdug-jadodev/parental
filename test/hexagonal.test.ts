@@ -1,24 +1,26 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { ConfigurarServidor } from '../src/application/use-cases/configurar-servidor.js';
-import { ConsultarServicio } from '../src/application/use-cases/consultar-servicio.js';
-import { EvaluarConexion } from '../src/application/use-cases/evaluar-conexion.js';
-import { SolicitudConfiguracion } from '../src/domain/configuracion.js';
-import { DecisionConexion, SolicitudConexion } from '../src/domain/conexion.js';
-import { ConsultaServicio, EstadoServicio, ResultadoConsulta } from '../src/domain/servicio.js';
-import { ConfiguracionController } from '../src/infrastructure/config/controllers/configuracion.controller.js';
-import { ConfiguracionMapper } from '../src/infrastructure/config/mappers/configuracion.mapper.js';
-import { ServicioController } from '../src/infrastructure/http/controllers/servicio.controller.js';
-import { ServicioMapper } from '../src/infrastructure/http/mappers/servicio.mapper.js';
-import { ConexionController } from '../src/infrastructure/websocket/controllers/conexion.controller.js';
-import { UpgradeEntity } from '../src/infrastructure/websocket/entities/upgrade.entity.js';
-import { ConexionMapper } from '../src/infrastructure/websocket/mappers/conexion.mapper.js';
-import { UpgradeMapper } from '../src/infrastructure/websocket/mappers/upgrade.mapper.js';
+import { ConfigurarServidor } from '../src/application/usecase/configurar-servidor.usecase.js';
+import { ConsultarServicio } from '../src/application/usecase/consultar-servicio.usecase.js';
+import { EvaluarConexion } from '../src/application/usecase/evaluar-conexion.usecase.js';
+import { SolicitudConfiguracion } from '../src/domain/entities/solicitud-configuracion.js';
+import { DecisionConexion } from '../src/domain/entities/decision-conexion.js';
+import { SolicitudConexion } from '../src/domain/entities/solicitud-conexion.js';
+import { ConsultaServicio } from '../src/domain/entities/consulta-servicio.js';
+import { EstadoServicio } from '../src/domain/entities/estado-servicio.js';
+import { ResultadoConsulta } from '../src/domain/entities/resultado-consulta.js';
+import { ConfiguracionServidor } from '../src/infrastructure/config/configuracion-servidor.js';
+import { ConfiguracionMapper } from '../src/application/mapper/configuracion.mapper.js';
+import { ServicioController } from '../src/infrastructure/controller/servicio.controller.js';
+import { ServicioMapper } from '../src/application/mapper/servicio.mapper.js';
+import { UpgradeEntity } from '../src/infrastructure/adapter/entities/upgrade.entity.js';
+import { UpgradeMapper } from '../src/infrastructure/adapter/mapper/upgrade.mapper.js';
+import { esSolicitudConexionValida } from '../src/application/validations/conexion.validation.js';
 
 test('hexagonal: caso de uso consulta un puerto de salida sustituible', () => {
   let llamadas = 0;
   const caso = new ConsultarServicio({ obtener: () => { llamadas++; return new EstadoServicio(false); } });
-  const resultado = caso.ejecutar(new ConsultaServicio('GET', '/healthz'));
+  const resultado = caso.ejecutar(new ConsultaServicio('SALUD'));
   assert.equal(llamadas, 1);
   assert.ok(resultado instanceof ResultadoConsulta);
   assert.equal(resultado.tipo, 'SALUD');
@@ -28,20 +30,20 @@ test('hexagonal: caso de uso consulta un puerto de salida sustituible', () => {
 test('hexagonal: controller HTTP inyecta puerto de entrada y mapea request/response', () => {
   const controller = new ServicioController({ ejecutar: (consulta) => {
     assert.ok(consulta instanceof ConsultaServicio);
-    assert.equal(consulta.ruta, '/healthz');
+    assert.equal(consulta.tipo, 'SALUD');
     return new ResultadoConsulta('SALUD', new EstadoServicio(false));
   } });
-  assert.deepEqual(controller.manejar({ metodo: 'GET', ruta: '/healthz' }), { status: 503, body: { ok: false, protocol: 1 } });
-  assert.deepEqual(ServicioMapper.aResponse(new ResultadoConsulta('NO_ENCONTRADO', new EstadoServicio(false))), {
-    status: 404, body: { error: 'Ruta no disponible' },
+  assert.deepEqual(controller.health(), { status: 503, body: { ok: false, protocol: 1 } });
+  assert.deepEqual(ServicioMapper.aResponse(new ResultadoConsulta('KEEPALIVE', new EstadoServicio(false))), {
+    status: 200, body: { alive: true },
   });
 });
 
 test('hexagonal: DTO HTTP y dominio no comparten identidad', () => {
-  const dto = { metodo: 'GET', ruta: '/healthz' };
+  const dto: { tipo: 'SALUD' | 'KEEPALIVE' } = { tipo: 'SALUD' };
   const dominio = ServicioMapper.aDominio(dto);
-  dto.ruta = '/otra';
-  assert.equal(dominio.ruta, '/healthz');
+  dto.tipo = 'KEEPALIVE';
+  assert.equal(dominio.tipo, 'SALUD');
   assert.ok(Object.isFrozen(dominio));
 });
 
@@ -51,8 +53,8 @@ test('hexagonal: caso de configuración delega validación pública en puerto de
     validarOrigen: (origen) => llamadas.push(origen),
     validarClave: (rol, publica) => llamadas.push(`${rol}:${publica}`),
   });
-  const controller = new ConfiguracionController(caso);
-  const resultado = controller.manejar({
+  const configuracion = new ConfiguracionServidor(caso);
+  const resultado = configuracion.leer({
     PUBLIC_ORIGIN: 'https://relay.example.com', ACTIVE_PAIR_ID: '12345678-1234-4123-8123-123456789abc',
     PARENT_PUBLIC_KEY_B64: 'publica-padre-de-doble', CHILD_PUBLIC_KEY_B64: 'publica-hijo-de-doble', NODE_ENV: 'test',
   });
@@ -87,22 +89,15 @@ test('hexagonal: entidad WebSocket y dominio hacen roundtrip sin introducir ws',
     const entidad = UpgradeMapper.aEntidad(solicitud);
     assert.ok(entidad instanceof UpgradeEntity);
     assert.deepEqual(UpgradeMapper.aDominio(entidad), solicitud);
-    assert.deepEqual(ConexionMapper.aDominio(ConexionMapper.aRequest(solicitud)), solicitud);
   }
   const duplicados = new UpgradeEntity('GET', '/ws', { 'sec-websocket-protocol': ['cp.v1', 'otro'] });
-  assert.equal(UpgradeMapper.aDominio(duplicados).esValida(), false);
+  assert.equal(esSolicitudConexionValida(UpgradeMapper.aDominio(duplicados)), false);
 });
 
-test('hexagonal: controller WebSocket recibe dominio y transforma decisión en response DTO', () => {
-  const controller = new ConexionController({ ejecutar: (solicitud) => {
-    assert.ok(solicitud instanceof SolicitudConexion);
-    assert.equal(solicitud.subprotocolo, 'cp.v1');
-    return new DecisionConexion('NO_DISPONIBLE');
-  } });
-  assert.deepEqual(controller.manejar({ metodo: 'GET', ruta: '/ws', origen: undefined, subprotocolo: 'cp.v1' }), { status: 503 });
+test('hexagonal: mapper WebSocket convierte decisiones sin pasar por DTOs duplicados', () => {
   for (const motivo of ['SOLICITUD_INVALIDA', 'NO_DISPONIBLE'] as const) {
     const decision = new DecisionConexion(motivo);
-    assert.deepEqual(ConexionMapper.deResponse(ConexionMapper.aResponse(decision)), decision);
+    assert.deepEqual(UpgradeMapper.deRechazo(UpgradeMapper.aRechazo(decision)), decision);
     assert.match(UpgradeMapper.aRechazo(decision).serializar(), new RegExp(`^HTTP/1.1 ${motivo === 'SOLICITUD_INVALIDA' ? 400 : 503}`));
   }
 });

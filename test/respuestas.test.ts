@@ -2,15 +2,16 @@ import assert from 'node:assert/strict';
 import { once } from 'node:events';
 import { connect, type AddressInfo } from 'node:net';
 import { test } from 'node:test';
-import { ServicioController } from '../src/infrastructure/http/controllers/servicio.controller.js';
-import { crearServidorHttp } from '../src/infrastructure/http/servidor-http.js';
-import { ConexionController } from '../src/infrastructure/websocket/controllers/conexion.controller.js';
+import { ServicioController } from '../src/infrastructure/controller/servicio.controller.js';
+import { crearServidorHttp } from '../src/infrastructure/config/servidor.config.js';
+import { WebSocketAdapter } from '../src/infrastructure/adapter/websocket.adapter.js';
+import { ServicioRouter } from '../src/infrastructure/routers/servicio.router.js';
 
 test('respuestas: fallos HTTP y de upgrade son genéricos y no exponen detalles', async (contexto) => {
   const fallar = (): never => { throw new Error('detalle-interno-de-doble'); };
   const servidor = crearServidorHttp(
-    new ServicioController({ ejecutar: fallar }),
-    new ConexionController({ ejecutar: fallar }),
+    new ServicioRouter(new ServicioController({ ejecutar: fallar })),
+    new WebSocketAdapter({ ejecutar: fallar }),
   );
   servidor.listen(0, '127.0.0.1');
   await once(servidor, 'listening');

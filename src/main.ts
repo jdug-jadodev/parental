@@ -1,13 +1,14 @@
 import { pathToFileURL } from 'node:url';
-import { crearControladorConfiguracion, crearServidorLocal } from './bootstrap/composicion.js';
-import { leerPuerto, VARIABLES_PUBLICAS } from './domain/configuracion.js';
+import { crearConfiguracionServidor, crearServidorLocal } from './infrastructure/config/dependencias.js';
+import { VARIABLES_PUBLICAS } from './infrastructure/config/configuracion-servidor.js';
+import { leerPuerto } from './application/validations/configuracion.validation.js';
 
 function iniciar(): void {
   if (process.env.NODE_ENV === 'production') {
     throw new Error('El servidor solo permite ejecución local. El relay público requiere R02–R03.');
   }
   if (VARIABLES_PUBLICAS.some((nombre) => process.env[nombre] !== undefined)) {
-    crearControladorConfiguracion().manejar(process.env);
+    crearConfiguracionServidor().leer(process.env);
   }
   const servidor = crearServidorLocal();
   servidor.on('error', () => {

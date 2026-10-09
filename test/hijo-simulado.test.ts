@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { once } from 'node:events';
 import type { AddressInfo } from 'node:net';
-import { crearServidorLocal } from '../src/bootstrap/composicion.js';
+import { crearServidorLocal } from '../src/infrastructure/config/dependencias.js';
 import { conectarHijoSimulado, leerEstadoSimulado } from './soporte/hijo-simulado.js';
 
 test('el doble de hijo utiliza un fixture firmado, no una confirmación inventada', async () => {

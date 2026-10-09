@@ -14,6 +14,11 @@ de 16 KiB, **todavía no conectado al servidor HTTP**.
 503, upgrades rechazados y arranque en producción bloqueado. Incluso con
 configuración válida no se anuncia CP/1 listo hasta completar R02/R03.
 
+HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
+`GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
+acredita autenticación, entrega de órdenes ni evita por sí solo la suspensión
+de Render. No se configuraron pings periódicos, cron ni servicios externos.
+
 ## Verificación con Node.js, sin Python
 
 Desde la raíz del proyecto:
@@ -61,26 +66,33 @@ No hace falta Android para verificar este servidor.
 
 ```text
 src/
-  domain/                       clases y reglas sin Node.js ni bibliotecas
   application/
-    ports/input/                contratos usados por los controladores
-    ports/output/               contratos usados por los casos de uso
-    use-cases/                  implementaciones de puertos de entrada
+    mapper/                     request DTO → dominio → response DTO
+    dtos/                       contratos de entrada/salida y DTOs CP/1
+    usecase/                    implementaciones de puertos de entrada
+    validations/                validaciones de aplicación
+  domain/
+    entities/                   una entidad por archivo, sin Node.js
+    ports/portin/               contratos de entrada con entidades de dominio
+    ports/portout/              contratos de salida con entidades de dominio
   infrastructure/
-    adapters/                   implementaciones de puertos de salida
-    config/                     controlador, DTOs y mapper de configuración
-    http/                       servidor, controlador, DTOs y mapper HTTP
-    websocket/                  controlador, DTOs, entidades, mappers y transporte
-    protocol/                   codec y criptografía técnica de CP/1
-  bootstrap/                    composición e inyección por constructor
+    controller/                 solo health y keepalive
+    routers/                    rutas HTTP exactas y respuestas de error
+    adapter/                    WebSocket y adaptadores de puertos de salida
+      entities/                 entidades del transporte WebSocket
+      mapper/                   dominio ↔ entidades de este adaptador
+      protocol/                 codec y criptografía técnica CP/1
+    config/                     servidor, WebSocket, entorno y dependencias
   main.ts                       arranque local y cierre
 test/                           pruebas unitarias, arquitectura y HTTP local
 ```
 
-Los controladores reciben puertos de entrada; los casos de uso reciben puertos
-de salida; solo `bootstrap/` construye las dependencias concretas. Los mappers
-separan DTO request → dominio, dominio → DTO response y dominio ↔ entidad
-del handshake WebSocket. No hay ORM ni entidades de base de datos.
+El router llama al controlador HTTP, que recibe un puerto de entrada.
+El adaptador WebSocket recibe directamente su puerto de entrada: no pasa por
+controladores HTTP ni DTOs intermedios de conexión. Los casos de uso reciben
+puertos de salida; `infrastructure/config/dependencias.ts` hace la composición
+por constructor. Los mappers de aplicación y del adaptador tienen responsabilidades
+distintas, sin cadenas de conversiones de ida y vuelta. No hay ORM ni base de datos.
 
 Los tipos del contrato CP/1 son DTOs de transporte, no entidades de dominio.
 Los bytes firmados siguen intactos: no pasan por mappers que reserialicen JSON.

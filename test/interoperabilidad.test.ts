@@ -3,9 +3,9 @@ import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
-import { CodecProtocolo } from '../src/infrastructure/protocol/codec-protocolo.js';
-import { ClaveVerificacion, CriptografiaProtocolo } from '../src/infrastructure/protocol/crypto-protocol.js';
-import type { Rol, SobreFirmado } from '../src/infrastructure/protocol/dtos/protocolo.dto.js';
+import { CodecProtocolo } from '../src/infrastructure/adapter/protocol/codec-protocolo.js';
+import { ClaveVerificacion, CriptografiaProtocolo } from '../src/infrastructure/adapter/protocol/crypto-protocol.js';
+import type { Rol, SobreFirmado } from '../src/application/dtos/protocolo.dto.js';
 
 const fixture = JSON.parse(readFileSync(new URL('../pruebas/vectores_crypto.json', import.meta.url), 'utf8')) as {
   publicKeys: Record<Rol, string>;

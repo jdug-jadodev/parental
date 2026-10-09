@@ -2,10 +2,10 @@ import assert from 'node:assert/strict';
 import { generateKeyPairSync, sign } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
-import { CodecProtocolo } from '../src/infrastructure/protocol/codec-protocolo.js';
-import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo, FirmaInvalida } from '../src/infrastructure/protocol/crypto-protocol.js';
-import { MensajeInvalido } from '../src/infrastructure/protocol/json-estricto.js';
-import type { Proposito, Rol, SobreFirmado } from '../src/infrastructure/protocol/dtos/protocolo.dto.js';
+import { CodecProtocolo } from '../src/infrastructure/adapter/protocol/codec-protocolo.js';
+import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo, FirmaInvalida } from '../src/infrastructure/adapter/protocol/crypto-protocol.js';
+import { MensajeInvalido } from '../src/infrastructure/adapter/protocol/json-estricto.js';
+import type { Proposito, Rol, SobreFirmado } from '../src/application/dtos/protocolo.dto.js';
 
 const codec = new CodecProtocolo(readFileSync(new URL('../compartido/protocolo.schema.json', import.meta.url)));
 const crypto = new CriptografiaProtocolo(codec);

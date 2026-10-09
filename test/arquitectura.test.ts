@@ -41,8 +41,8 @@ test('arquitectura: dominio y aplicación solo dependen hacia dentro', () => {
 
 test('arquitectura: controladores reciben puertos de entrada, casos de uso y adaptadores implementan sus contratos', () => {
   for (const { nombre, ast } of fuentes) {
-    const controlador = nombre.includes('/controllers/');
-    const implementacion = nombre.startsWith('application/use-cases/') || nombre.startsWith('infrastructure/adapters/');
+    const controlador = nombre.startsWith('infrastructure/controller/');
+    const implementacion = nombre.startsWith('application/usecase/') || /^infrastructure\/adapter\/[^/]+\.adapter\.ts$/.test(nombre) && !nombre.endsWith('/websocket.adapter.ts');
     if (!controlador && !implementacion) continue;
     visitar(ast, (nodo) => {
       if (ts.isClassDeclaration(nodo)) {
@@ -56,7 +56,7 @@ test('arquitectura: controladores reciben puertos de entrada, casos de uso y ada
         }
       }
       if (ts.isImportDeclaration(nodo) && ts.isStringLiteral(nodo.moduleSpecifier)) {
-        assert.doesNotMatch(nodo.moduleSpecifier.text, /(?:bootstrap|use-cases|adapters)\//, nombre);
+        assert.doesNotMatch(nodo.moduleSpecifier.text, /(?:dependencias|usecase)\//, nombre);
       }
     });
   }

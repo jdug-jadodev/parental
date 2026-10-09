@@ -1,63 +1,100 @@
 # Arquitectura del servidor
 
-## Dependencias y responsabilidades
+## Estructura y dependencias
 
-Dominio no importa infraestructura, Node.js ni librerías externas. Aplicación
-solo importa dominio y sus propios puertos. Los casos de uso implementan los
-puertos de entrada y reciben puertos de salida por constructor cuando necesitan
-acceso externo. No hay contenedor DI, decoradores ni service locator.
+- `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.
+- `application/dtos`: configuración, respuestas de servicio y contrato CP/1.
+- `application/usecase`: implementaciones de puertos de entrada.
+- `application/validations`: reglas de entrada/configuración y admisión del handshake.
+- `domain/entities`: una clase de entidad por archivo, inmutable y sin Node.js.
+- `domain/ports/portin` y `portout`: contratos que usan entidades de dominio,
+  no DTOs, sockets ni objetos criptográficos de infraestructura.
+- `infrastructure/controller`: únicamente health y keepalive.
+- `infrastructure/routers`: selección de rutas HTTP exactas y respuestas de error.
+- `infrastructure/adapter`: WebSocket de entrada y adaptadores de salida;
+  entidades, mapper específico y componentes técnicos del protocolo dentro.
+- `infrastructure/config`: configuración de HTTP/WebSocket, lectura del entorno
+  y raíz de composición en `dependencias.ts`.
 
-Infraestructura recibe esos puertos de entrada en los controladores. Los
-adaptadores `EstadoLocalAdapter` y `ValidacionPublicaAdapter` implementan los
-puertos de salida. El primero conserva estado no operativo; el segundo encapsula
-validación HTTPS y la importación criptográfica SPKI P-256. `bootstrap/composicion.ts`
-es la raíz de composición. `main.ts` limita el arranque a loopback y rechaza producción.
+Dominio solo importa dominio. Aplicación importa dominio y aplicación, nunca
+infraestructura ni librerías Node. Infraestructura depende hacia dentro.
+La inyección pertenece al arranque: `config/dependencias.ts` puede construir
+adaptadores y casos de uso sin introducir esa responsabilidad en el dominio.
+No hay contenedor DI, decoradores, service locator ni carpeta bootstrap paralela.
 
-## Flujos actuales
+## Flujos, sin conversiones duplicadas
 
-- HTTP: Node → request DTO → ServicioController → ConsultarServicioEntrada →
-  ConsultarServicio → EstadoServicioSalida → EstadoLocalAdapter. El resultado
-  de dominio se transforma en response DTO; Node escribe status, JSON y no-store.
-- Upgrade: IncomingMessage → UpgradeEntity → request DTO → ConexionController →
-  EvaluarConexionEntrada → EvaluarConexion. DecisionConexion → response DTO →
-  RechazoUpgradeEntity → HTTP de rechazo. UpgradeMapper también convierte
-  SolicitudConexion ↔ UpgradeEntity sin introducir sockets en el dominio.
-- Configuración: variables → DTO → ConfiguracionController → ConfigurarServidor →
-  ValidacionPublicaSalida. ConfiguracionMapper filtra las variables admitidas:
-  el dominio no recibe el resto del entorno. El resultado vuelve como DTO público
-  interno; no hay endpoint que publique claves o pareja.
+HTTP:
 
-EvaluarConexion es una regla pura y no necesita un puerto de salida ficticio.
-Las entidades actuales representan el handshake/rechazo, no conexiones autenticadas
-que todavía no existen. No se añade un adaptador de envío operativo para aparentar R02/R03.
+```text
+Node → ServicioRouter → ServicioController (health/keepalive)
+     → ServicioMapper → ConsultarServicioEntrada → ConsultarServicio
+     → EstadoServicioSalida → EstadoLocalAdapter
+     ← ResultadoConsulta ← response DTO ← JSON HTTP
+```
 
-## Respuestas y seguridad
+El dominio conoce el tipo de consulta, no rutas HTTP ni códigos de estado.
+El router rechaza rutas y métodos no admitidos antes de invocar el controlador.
 
-Health: 503 con `{ok:false,protocol:1}` mientras el adaptador indique no operativo.
-Ruta/método no admitidos: 404. Upgrade inválido: 400. Upgrade de CP/1 válido:
-503 porque falta autenticación. Fallos imprevistos: 500 sin detalles internos.
-Errores de arranque imprimen únicamente mensajes controlados, no el entorno.
+WebSocket:
 
-El transporte `ws` sigue desacoplado de HTTP, con noServer, límite de 16384 bytes
-y compresión deshabilitada. El dominio no contiene objetos ws, Buffer, Server,
-KeyObject ni Request. El codec y la verificación criptográfica quedan en
-infraestructura como componentes técnicos del contrato, no como reglas de negocio.
-No se reconstruyen los bytes del payload antes de verificar su firma.
+```text
+upgrade Node → WebSocketAdapter → UpgradeEntity → UpgradeMapper.aDominio
+             → EvaluarConexionEntrada → EvaluarConexion
+             ← DecisionConexion → UpgradeMapper.aRechazo → HTTP de rechazo
+```
 
-## Estructura y compatibilidad
+No existe ConexionController ni DTO de conexión intermedio. El mapper específico
+convierte dominio ↔ UpgradeEntity y DecisionConexion ↔ RechazoUpgradeEntity.
+Un rechazo 500 de transporte no se interpreta como una decisión de dominio.
+WebSocketAdapter es un adaptador de entrada: inyecta un puerto de entrada,
+no necesita fingir que implementa un puerto de salida. EstadoLocalAdapter y
+ValidacionPublicaAdapter sí implementan los puertos de salida correspondientes.
 
-Paquete pnpm, pnpm-lock.yaml, tsconfig, .npmrc y .node-version residen en la raíz.
-La versión de pnpm está fijada en packageManager; instalación reproducible con
-pnpm install --frozen-lockfile, sin autorización de scripts de dependencias.
-Los resultados nuevos están en dist/ y dependencias en node_modules/, ignorados.
-compartido/ y pruebas/ conservan contrato y fixtures congelados. documentacion/
-conserva especificaciones y evidencias históricas; sus rutas relay/ describen
-el diseño anterior y no son instrucciones de arranque actuales.
+Configuración:
 
-Para Render, al implementar R03 se usará la raíz del repositorio, no relay/.
-No se ha creado ni aplicado una configuración de despliegue.
-Al preparar Render se usarán pnpm install --frozen-lockfile --prod=false,
-pnpm run build y pnpm start, con la versión fijada de pnpm. Los comandos npm
-de la SPEC copiada y evidencias anteriores son referencias históricas.
-La herramienta de interoperabilidad usa ahora la raíz de este proyecto; cualquier
-ajuste del consumidor Android debe acordarse aparte, sin modificar las apps aquí.
+```text
+entorno → ConfiguracionServidor → ConfiguracionMapper → ConfigurarServidorEntrada
+        → ConfigurarServidor → ValidacionPublicaSalida → ValidacionPublicaAdapter
+        ← Configuracion ← response DTO interno
+```
+
+La lectura del entorno no es un controller ni una ruta pública. El mapper filtra
+las variables admitidas antes de entrar al dominio. Validaciones de aplicación
+comprueban campos requeridos, puerto, entorno y nivel de log; la entidad mantiene
+invariantes de pareja y claves distintas. El adaptador encapsula validación HTTPS
+e importación criptográfica SPKI P-256.
+
+## HTTP, liveness y seguridad
+
+- `GET /healthz`: 503 con `{ok:false,protocol:1}` mientras R02/R03 no estén listos.
+- `GET /keepalive`: 200 con `{alive:true}`, sin claves, pareja ni presencia.
+- Otras rutas/métodos y query strings: 404. No hay endpoints HTTP de negocio.
+- Upgrade inválido: 400; upgrade CP/1 válido: 503 hasta implementar autenticación.
+- Fallos inesperados HTTP/upgrade: 500 genérico, sin detalles internos.
+- Respuestas JSON con no-store; `main.ts` conserva loopback y bloqueo de producción.
+
+Keepalive es una respuesta de actividad del proceso, no disponibilidad funcional,
+autenticación ni prueba de entrega. No instala cron, autopings ni servicios externos,
+y no garantiza que Render no suspenda una instancia. Para uso habitual permanece
+la recomendación de la SPEC de una instancia que no se suspenda por inactividad.
+Se añade esta ruta por solicitud del propietario; la SPEC copiada conserva su
+tabla HTTP anterior como referencia histórica, sin cambiar CP/1.
+
+El transporte ws sigue sin enlazarse a HTTP, con noServer, maxPayload 16384 y
+compresión deshabilitada. Codec y criptografía permanecen en adapter/protocol.
+Los tipos CP/1 son DTOs, no entidades de dominio. Nunca se reserializan payloads
+firmados para verificar o reenviar. No se implementaron R02/R03 en esta reorganización.
+
+## Herramientas y compatibilidad
+
+pnpm fijado en packageManager, pnpm-lock.yaml y Node 24 en la raíz.
+Verificar con `pnpm run verificar`; instalación `pnpm install --frozen-lockfile`.
+Sin autorización de scripts de dependencias. dist/node_modules ignorados.
+compartido/ y fixtures conservan bytes congelados; las evidencias anteriores
+mantienen rutas y comandos históricos. Las apps no se modifican desde aquí.
+
+Render se preparará en R03 desde la raíz: pnpm install --frozen-lockfile --prod=false,
+pnpm run build y pnpm start. No se creó ni aplicó configuración de despliegue.
+La herramienta local de interoperabilidad sigue en test/soporte/interoperabilidad.mjs;
+los consumidores Android deben ajustarse coordinadamente en otra tarea.

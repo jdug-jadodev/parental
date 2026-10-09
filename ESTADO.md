@@ -145,3 +145,29 @@ install --frozen-lockfile/check/build correctos, 52 tests aprobados,
 No se modificó src/, compartido/ ni fixtures, ni se operó sobre las apps.
 Siguen loopback, health 503, upgrades rechazados y producción bloqueada.
 Sin dispositivos, despliegue, autenticación nueva ni cambios de R02/R03.
+
+## Simplificación de arquitectura solicitada — 2026-10-09
+
+Primer bloque: application/{mapper,dtos,usecase,validations}; domain/entities
+(una clase por archivo) y domain/ports/{portin,portout}; infrastructure/
+{controller,routers,adapter,config}. Composición en config/dependencias.ts,
+sin bootstrap paralelo. DTOs/mappers de aplicación fuera de infraestructura.
+Protocolo técnico, entidades y mapper WebSocket dentro de adapter/.
+
+Eliminados ConexionController y DTO/mapper de conexión duplicados; WebSocketAdapter
+inyecta EvaluarConexionEntrada y convierte directamente entidad → dominio →
+decisión → rechazo de transporte. ConfiguracionServidor reemplaza al controller
+de configuración sin exponer ruta HTTP. ServicioController solo health/keepalive;
+ServicioRouter resuelve rutas/métodos y errores; configuración HTTP solo cablea
+router y adaptador. Puerto/entorno/log y admisión de handshake en validations.
+
+Añadido GET /keepalive, 200 {alive:true}, distinto de health 503. Solo actividad
+del proceso: no disponibilidad CP/1 ni garantía contra suspensión de Render.
+Sin cron, autopings o integración externa. La SPEC copiada conserva HTTP antiguo
+como referencia; la ampliación solicitada se documenta en ARQUITECTURA/README.
+
+Ejecutado pnpm run verificar: instalación congelada/check/build correctos,
+52 tests aprobados (0 fallos/omitidos), 28 ejemplos y 13 contraejemplos correctos,
+10 vectores/78 comprobaciones. Contrato/fixtures intactos, R02/R03 pendientes.
+Pendiente del bloque de cierre: reforzar reglas de estructura y pruebas específicas
+de keepalive, router, adaptador WebSocket y entidades aisladas.

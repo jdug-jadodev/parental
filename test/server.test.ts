@@ -3,8 +3,8 @@ import { connect } from 'node:net';
 import type { AddressInfo } from 'node:net';
 import { once } from 'node:events';
 import { test } from 'node:test';
-import { crearServidorLocal } from '../src/bootstrap/composicion.js';
-import { leerPuerto } from '../src/domain/configuracion.js';
+import { crearServidorLocal } from '../src/infrastructure/config/dependencias.js';
+import { leerPuerto } from '../src/application/validations/configuracion.validation.js';
 
 test('la base local no afirma estar lista para operar CP/1', async (contexto) => {
   const servidor = crearServidorLocal();

@@ -1,7 +1,7 @@
 import { generateKeyPairSync, sign } from 'node:crypto';
 import { readFileSync } from 'node:fs';
-import { CodecProtocolo } from '../../src/infrastructure/protocol/codec-protocolo.ts';
-import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../src/infrastructure/protocol/crypto-protocol.ts';
+import { CodecProtocolo } from '../../src/infrastructure/adapter/protocol/codec-protocolo.ts';
+import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../src/infrastructure/adapter/protocol/crypto-protocol.ts';
 
 let entrada = '';
 for await (const bloque of process.stdin) {
