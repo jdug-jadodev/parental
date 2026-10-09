@@ -28,7 +28,7 @@ test('la base local no afirma estar lista para operar CP/1', async (contexto) =>
     socket.setTimeout(3000, () => socket.destroy(new Error('El servidor no respondió')));
     socket.setEncoding('utf8');
     await once(socket, 'connect');
-    socket.write('GET /ws HTTP/1.1\r\nHost: localhost\r\nConnection: Upgrade\r\nUpgrade: websocket\r\n\r\n');
+    socket.write('GET /ws HTTP/1.1\r\nHost: localhost\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Protocol: cp.v1\r\n\r\n');
     const [datos] = await once(socket, 'data');
     assert.match(String(datos), /^HTTP\/1\.1 503/);
     socket.destroy();

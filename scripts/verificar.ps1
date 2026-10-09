@@ -13,6 +13,7 @@ try {
         Ejecutar 'npm.cmd' @('run', 'check')
         Ejecutar 'npm.cmd' @('run', 'build')
         Ejecutar 'npm.cmd' @('test')
+        Ejecutar 'npm.cmd' @('run', 'test:esquema')
     } finally { Pop-Location }
     Ejecutar 'node' @('pruebas/verificar_vectores.mjs')
     Write-Host 'Verificación local del servidor terminada. Sin despliegue ni dispositivos.'
