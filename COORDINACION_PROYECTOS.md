@@ -55,8 +55,11 @@ sin alterar plan/contrato o activar producción. Revisado su diseño en lectura.
 PADRE-C01-R1 terminado en 95dfd02: resumen/formato/estatus/errores y declaraciones
 compatibles como propuesta. Revisión documental, sin pruebas nuevas. Propietario
 autoriza PADRE-C02 puro con pruebas/commit propios y sin ADB; handoff admitido
-con queue/resume=true, ejecución solicitada y sin resultado confirmado todavía.
-No promoción productiva por el acuerdo o validador. Puertas/orden del hijo pendientes.
+con queue/resume=true y posteriormente terminado en 8a6ae91: 21 tests nuevos,
+167 independientes reportados por padre; diagnóstico solo sourceSet JVM test,
+fuera de APK. Incidencia QR sintética previa pendiente, no corregida por rerun.
+PADRE-QR01 enviado/admitido para diagnóstico acotado. No promoción productiva
+por el acuerdo/validador; puertas/orden del hijo siguen pendientes.
 No duplicar tareas ya hechas ni descartar trabajo ajeno.
 
 ### H05-L01 — terminada al alcance aislado
@@ -151,11 +154,24 @@ Documentos propios y commit; sin tests/builds/código nuevo, migración/promoci�
 órdenes/UI, cambio de plan/contrato, dispositivos/ADB, LAN o despliegue. No otra
 tarea hijo hasta revisar acuerdo y presentar decisión de puertas/orden necesaria.
 
-### PADRE-C02 — validador puro autorizado y enviado
+### PADRE-C02 — terminado como diagnóstico JVM aislado
+
+Resultado revisado: 8a6ae91, pruebas/EVIDENCIA_PADRE_C02.md, relevo/ESTADO,
+RevisionVinculo.kt y configuración de sourceSet en lectura. Código solo en
+src/revisionAislada/kotlin incluido por test JVM, no main/androidTest/APK.
+Entradas defensivas, sobres re-verificados PAIR/MESSAGE/OFFLINE con claves
+vinculadas y contexto explícito; COHERENTE solo CONSISTENCIA_FICTICIA, sin
+token/promoción o llamador productivo. No auditoría física ni pruebas reejecutadas aquí.
+
+Padre reporta 21 tests nuevos y suite final 167 independientes (131 app, 30
+núcleo, 1 interop y 5 Node), 78 comprobaciones documentales correctas. Primera
+suite tuvo un NotFoundException en QR sintético P07 previo; focalizada y suite
+posteriores pasaron. Causa sin identificar, test no cambiado; no declararlo
+corregido. Repetición exitosa no borra la incidencia ni acredita QR/cámara reales.
 
 Propietario autoriza la propuesta explícita de validador puro y pruebas JVM,
 con commits propios y sin ADB. Confirmada sesión raíz padre por ruta exacta y
-bandeja vacía antes de envío; queue/resume=true admitido. No resultados aún.
+bandeja vacía antes de envío; queue/resume=true admitido. Resultado descrito arriba.
 
 Implementar aislado según diseño padre §7: entradas inmutables/defensivas de
 snapshot PREPARADO/aceptación PAIR verificable, revisión/generación/hash privado,
@@ -176,6 +192,27 @@ Pruebas/verificación local JVM necesarias y commit propio, sin ADB/instrumentac
 dispositivos, pruebas de migración/IO/commit, otros repos, CP/1 nuevo o cambio del
 plan hijo. Si exige más alcance, detener/devolver bloqueo. Registrar resultados
 reales y próxima unidad en coordinación/ESTADO; esperar revisión posterior.
+
+### PADRE-QR01 — diagnóstico QR sintético, enviado
+
+Una unidad local al padre, continuación autorizada de coordinación; sesión raíz
+por ruta exacta y bandeja vacía antes de envío. queue/resume=true admitido,
+sin resultados aún. Diagnosticar NotFoundException de OfflineChallengeSignerTest
+en el roundtrip de ambos QR, con presupuesto acotado de casos/repeticiones y
+registro de todos los resultados, no repetir indefinidamente hasta verde.
+
+Separar generación/contenido/firma variable, versión/máscara, margen/escala,
+lector sintético y orden/suite; preservar bytes y verificación CP/1 reales. Solo
+si causa reproducible está en imagen/soporte de TEST: regresión y corrección
+mínima de test permitidas. No retries/ignorar errores/quitar aserciones como
+solución. Si requiere cambiar QR/lector productivos, dependencias, cámara o
+semántica, detener/devolver propuesta sin hacerlo. Si no reproduce, declarar
+límites y causa pendiente, no falsa corrección.
+
+Build/tests JVM pertinentes, evidencia/coordinación/ESTADO y commit propios;
+sin fuentes productivas/PADRE-C02/promoción/UI, dispositivos/ADB, otros repos,
+CP/1/plan, certificados/LAN, push/despliegue. Hijo sin nueva asignación ni cierre
+H05. Decisión de puertas/orden se presentará separada del diagnóstico de calidad.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 

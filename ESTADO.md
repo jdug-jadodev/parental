@@ -896,3 +896,38 @@ nuevos o prompts automáticos de vuelta; revisar informe antes de siguiente unid
 Documentación propia central actualizada. Sin código productivo, apps editadas
 desde Render, build/tests propios nuevos, alteración de barreras locales o
 despliegue. Commit de cierre documental; pruebas padre aún no reportadas.
+
+## PADRE-C02 revisada y diagnóstico QR asignado — 2026-10-09
+
+Propietario informa cierre y solicita continuar. Leídos relevo/ESTADO padre,
+pruebas/EVIDENCIA_PADRE_C02.md y RevisionVinculo.kt, además de sourceSet de
+build.gradle.kts en lectura; git log -1 confirma 8a6ae91. Validador en carpeta
+revisionAislada solo test JVM; evidencia padre de cero clases Revision en main
+y 16 en debugUnitTest, no comprobación propia de APK. Sin promoción/producción.
+
+Padre reporta 21 tests nuevos, suite final 167 independientes y 78 comprobaciones
+documentales correctas. Son resultados ajenos, no reejecutados por Render.
+Entradas defensivas y sobres re-verificados con CP/1/roles/propósitos/contexto;
+diagnóstico solo CONSISTENCIA_FICTICIA, no autorización física o persistencia.
+Hijo sigue en HIJO-C02 cb62a73/H05 abierta y puertas/orden sin decisión nueva.
+
+Incidencia durante primera suite padre: NotFoundException en
+OfflineChallengeSignerTest.ambosQrSeLeenLocalmenteYLaRespuestaConservaFirmaOffline.
+Focalizada y suite siguientes correctas; causa no identificada, test/QR sin
+cambiar ni declarar corregidos. Leído test en lectura: roundtrip de imagen
+sintética con QrLocal/crypto reales y claves efímeras. No causa inferida aquí.
+
+Confirmada una sesión raíz padre por ruta exacta y bandeja vacía antes de enviar
+PADRE-QR01: diagnóstico JVM acotado con presupuesto y todos los resultados,
+distinguiendo reto/respuesta, contenido/firma, QR/margen/escala/lector y orden.
+Regresión/corrección mínima permitida únicamente si causa reproducible está en
+test/soporte sintético. Preservar bytes y firmas, no retries/errores ignorados o
+aserciones quitadas. Si afecta producción/dependencias/cámara/CP1 o no reproduce,
+devolver límites/propuesta y detener esa vía sin falsa corrección.
+
+API admite con delivery=queue/resume=true: ejecución solicitada, sin resultado
+confirmado. Solo tests/build JVM pertinentes y docs/commit propios; sin ADB,
+instrumentación/dispositivos, fuentes productivas/órdenes/migración, plan/contrato,
+repos ajenos, certificados/LAN/push/despliegue. No tareas nuevas al hijo o
+sesiones/subagentes creados. Actualizada coordinación propia; no build/tests
+del relay, apps editadas aquí o cambio de barreras. Commit documental propio.
