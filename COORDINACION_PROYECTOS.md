@@ -43,15 +43,44 @@ versión nueva y cambios coordinados; no adaptar el relay unilateralmente.
 
 ## 3. Unidades por proyecto — handoffs admitidos por API
 
-Estado actual: propietario autoriza coordinación directa con las sesiones
-existentes y confirma aceptación del aviso del hijo. HIJO-C01 y PADRE-C01
-enviados con queue/resume=true y admitidos por API. Se solicitó ejecución de
-una unidad de diseño por proyecto, no implementación productiva ni operación
-física. No declarar tareas terminadas hasta recibir documentos/evidencias/commit.
-Si la IA ya completó la unidad o tiene trabajo incompatible, debe informarlo,
-no duplicar tareas ni descartar su trabajo. Los textos siguientes son sus alcances.
+Estado actual: HIJO-C01 terminado en d350bf6 y PADRE-C01 en 0e7b5db, ambos
+diseños documentales sin pruebas nuevas o aceptación física. Revisados sus
+relevos y padre/DISENO_ACREDITACION_VINCULO.md en lectura. Propietario autoriza
+ahora H05-L01 del hijo con pruebas/commit propios, sin ADB. Handoff admitido por
+API con queue/resume=true; ejecución solicitada, no resultado confirmado.
+PADRE-C02 no activada: espera acuerdo sobre evidencia pública del hijo y revisión
+de la siguiente unidad. No duplicar tareas ya hechas ni descartar trabajo ajeno.
+
+### H05-L01 — implementación aislada autorizada y enviada al hijo
+
+Alcance: coordinador de presentación OFFLINE en proyección RAM, integrando
+QrOffline/RecoveryController con identidad, estado, reloj/contexto y ejecutor
+inyectados. Sin alias/vínculo reales, Android Keystore/cámara, herramientas,
+dispositivos, WSS ni cableado de UI/permisos de producción. Solo build/tests JVM
+necesarios en el repo hijo y commits propios según sus instrucciones.
+
+Aceptación: bytes QR solo entran por controlador; sesión limitada requiere firma
+y contexto correctos; cancelación/fondo, nueva generación, expiración o respuesta
+tardía invalidan trabajos/desafíos/permisos. Consumo impreso durable antes de
+sesión, sin devolver códigos gastados al cancelar; espera persistida y respuesta
+OFFLINE válida independientes. Emergencia accesible; nada de ALLOWED/APPLIED,
+wipe o Ajustes libres. Pruebas de pausa/cancelación en firma/IO, respuesta vieja,
+RAM recreada, boot/reloj discontinuos, fronteras de vigencia, escritura fallida
+y consumo sin devolución, contrastadas con tests existentes.
+
+H05 permanece abierta y H06/H08/H10/H11 no se activan por este paso. No aprobada
+todavía la separación de puertas de H05 propuesta por el hijo: tampoco cambios
+de dependencias, CP/1 o ceremonia física/migración del padre. Si la unidad exige
+esas decisiones, detener y reportar bloqueo. Entregar archivos, comandos/tests
+realmente ejecutados, alcance y limitaciones, commit y siguiente unidad propuesta
+en su coordinación/ESTADO; el coordinador revisará antes de asignar más trabajo.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
+
+Resultado revisado: d350bf6. Diseño terminado; detectado ciclo funcional entre
+recuperación operativa H05 e identidad/H08/herramientas H11, no ciclo explícito
+del grafo. Identidad/oferta productiva detenida. Propuesta de separar puerta
+aislada de acreditación integral pendiente de acuerdo, sin alterar plan/contrato.
 
 Prioridad bloqueante para conectividad. Entregar a la IA del hijo:
 
@@ -72,6 +101,13 @@ operativa ni mostrar un QR real. Tras revisión se asignará una sola implementa
 del plan del hijo. H08 depende de H05; H10 requiere H07/H08/H09/R03: no saltarlos.
 
 ### PADRE-C01 — diseño de acreditación de vínculo operativo
+
+Resultado revisado: 0e7b5db, padre/DISENO_ACREDITACION_VINCULO.md. Ceremonia
+presencial propuesta bajo CP/1; STATE no acredita PAIR_ACCEPT exacto y respuesta
+OFFLINE no prueba consumo/aplicación. Sin recibos automáticos inventados ni
+promoción PREPARADO. Si se requiere acreditación remota criptográfica completa,
+proponer versión acordada antes de implementar. Validador puro PADRE-C02 propuesto,
+no activado; ceremonia/migración/operaciones físicas y sus dependencias pendientes.
 
 Entregar a la IA del padre después de fijar el alcance de la siguiente unidad:
 

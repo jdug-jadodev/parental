@@ -765,3 +765,38 @@ mensajes automáticos; revisar antes de asignar siguiente unidad.
 Actualizada coordinación central con estado enviado/admitido y límites. Turno
 propio de comunicación/documentación: sin build/tests nuevos, cambios al contrato
 o código productivo. No declarar tareas terminadas por haber enviado el prompt.
+
+## Revisión de diseños y asignación H05-L01 — 2026-10-09
+
+Propietario informa cierre de ambas IAs y pregunta siguiente paso. Leídos sus
+relevos completos y padre/DISENO_ACREDITACION_VINCULO.md en lectura, además de
+dependencias H05/H06 del plan hijo. git log -1 confirma hijo d350bf6 y padre
+0e7b5db. Diseños terminados, sin pruebas nuevas: no integración física cerrada.
+
+Hijo identifica ciclo funcional de recuperación operativa H05/H08/H11; grafo
+explícito sin ciclo. Detiene identidad/oferta productiva y propone H05-L01 como
+implementación aislada sin cerrar H05. Padre propone ceremonia presencial CP/1,
+sin recibos automáticos: STATE no prueba PAIR_ACCEPT exacto y respuesta OFFLINE
+no demuestra consumo/aplicación. Propone PADRE-C02 puro, condicionado a revisión
+y acuerdo sobre evidencia pública del hijo. No aprobadas migración/promoción,
+separación de puertas del plan hijo ni semánticas CP/1 nuevas en este turno.
+
+Propietario responde sí a asignar H05-L01 al hijo con pruebas/commit propios y
+sin ADB. Comprobada por API una única sesión raíz en ruta exacta parental_hijo,
+bandeja vacía y sin H05-L01 pendiente antes de enviar. Enviado handoff con
+delivery=queue/resume=true y admisión confirmada. Ejecución solicitada, no lectura,
+resultados o tarea terminada confirmados. No se crea sesión/subagente ni se
+interrumpe trabajo. Padre no recibe nueva asignación; PADRE-C02 queda pendiente.
+
+Alcance hijo: coordinador OFFLINE RAM con dependencias inyectadas y pruebas JVM,
+firma/contexto correctos antes de sesión limitada, invalidación de desafíos/
+trabajos/permisos, consumo durable sin devolución y emergencia conservada.
+Sin cámara/Keystore/vínculo/herramientas/WSS/UI de producción, ADB o Android
+instrumentado. H05 abierta; H06/H08/H10/H11 no activadas. Si exige cambiar esas
+puertas o CP/1, detener y devolver bloqueo. Exigidos documentación de comandos
+y resultados realmente ejecutados, commit y siguiente unidad propuesta.
+
+Coordinación central actualizada con diseños revisados y nueva autorización.
+Sin editar repos ajenos, dispositivos, pruebas/build propios nuevos, cambios al
+relay productivo/contrato, push, LAN o despliegue. Turno propio de comunicación/
+documentación con commit de cierre; pruebas del hijo aún pendientes de informe.
