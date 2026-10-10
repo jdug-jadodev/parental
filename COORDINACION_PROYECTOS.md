@@ -52,9 +52,11 @@ OFFLINE aislado, 17 tests nuevos y 346 resultados JVM reportados por el hijo.
 No reejecutados aquí ni evidencia Android nueva. H05 sigue abierta.
 HIJO-C02 terminado en cb62a73: puertas A/B/C1/C2 y resumen público propuestos,
 sin alterar plan/contrato o activar producción. Revisado su diseño en lectura.
-PADRE-C01-R1 enviado/admitido por API para revisar acuerdo público y corregir
-incompatibilidades, solo documentación. PADRE-C02 no activada: espera revisión
-del padre y asignación explícita, sin promoción productiva por esa revisión.
+PADRE-C01-R1 terminado en 95dfd02: resumen/formato/estatus/errores y declaraciones
+compatibles como propuesta. Revisión documental, sin pruebas nuevas. Propietario
+autoriza PADRE-C02 puro con pruebas/commit propios y sin ADB; handoff admitido
+con queue/resume=true, ejecución solicitada y sin resultado confirmado todavía.
+No promoción productiva por el acuerdo o validador. Puertas/orden del hijo pendientes.
 No duplicar tareas ya hechas ni descartar trabajo ajeno.
 
 ### H05-L01 — terminada al alcance aislado
@@ -129,10 +131,16 @@ ESTADO y commit propios. Sin código/tests/build nuevos, UI/dispositivos/ADB,
 cambios CP/1, permisos, LAN o despliegue. El coordinador revisará/trasladará y
 pedirá decisión antes de activar nuevas puertas; no bucles entre agentes.
 
-### PADRE-C01-R1 — revisión del acuerdo público, enviada
+### PADRE-C01-R1 — acuerdo público revisado
+
+Resultado revisado: 95dfd02, diseño padre §7 y relevo. Sin corrección de formato
+necesaria al hijo. Commit local confirmado no significa vínculo operativo; solo
+comparación presencial del resumen público y declaraciones separadas de firmas.
+El padre acepta correspondencia A/B/C1/C2 como propuesta, no modificación del
+plan ni habilitación de H06/H08. Sin tests/builds o evidencia física nuevos.
 
 Unidad documental al padre, sesión existente/ruta exacta y bandeja vacía antes
-del envío. queue/resume=true, admisión confirmada; no resultado confirmado aún.
+del envío. queue/resume=true y admisión confirmada; resultado revisado arriba.
 Revisar diseño hijo cb62a73 contra PADRE-C01: acuerdo explícito o correcciones
 de formato/estatus/errores, declaraciones presenciales frente a firmas y límites
 de la matriz de puertas. Hash privado PAIR del padre no se convierte en recibo
@@ -142,6 +150,32 @@ Acotar inputs/supuestos/negativos del futuro PADRE-C02 puro, sin implementarlo.
 Documentos propios y commit; sin tests/builds/código nuevo, migración/promoción,
 órdenes/UI, cambio de plan/contrato, dispositivos/ADB, LAN o despliegue. No otra
 tarea hijo hasta revisar acuerdo y presentar decisión de puertas/orden necesaria.
+
+### PADRE-C02 — validador puro autorizado y enviado
+
+Propietario autoriza la propuesta explícita de validador puro y pruebas JVM,
+con commits propios y sin ADB. Confirmada sesión raíz padre por ruta exacta y
+bandeja vacía antes de envío; queue/resume=true admitido. No resultados aún.
+
+Implementar aislado según diseño padre §7: entradas inmutables/defensivas de
+snapshot PREPARADO/aceptación PAIR verificable, revisión/generación/hash privado,
+resumen observado, STATE/contexto verificados, MAINTENANCE OFFLINE/observaciones
+y señales locales explícitas. Firmas/clave/purpose mediante codec/crypto CP/1,
+nunca payload/booleano como prueba criptográfica. Sin Android/IO/red/reloj oculto,
+UI, migración/escritura, promoción, órdenes, recibos o token de autorización.
+
+Solo diagnóstico coherente/incompleta/rechazada y causa sin datos sensibles;
+entrada igual produce salida igual, sin mutarla. Obligaciones del llamador sobre
+autoridad en vivo/Keystore/contexto y veracidad de observaciones documentadas;
+tests positivos ficticios etiquetados no habilitan ruta productiva o transición.
+Negativos del diseño para datos/snapshot/aceptación/resumen, falta de observación,
+STATE/contexto ajeno/viejo, acción indebida, boot/generación/cancelación/autoridad,
+canal/fondo y reloj vencido/discontinuo. Frescura desde solicitud, no recepción.
+
+Pruebas/verificación local JVM necesarias y commit propio, sin ADB/instrumentación,
+dispositivos, pruebas de migración/IO/commit, otros repos, CP/1 nuevo o cambio del
+plan hijo. Si exige más alcance, detener/devolver bloqueo. Registrar resultados
+reales y próxima unidad en coordinación/ESTADO; esperar revisión posterior.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 

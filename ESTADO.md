@@ -863,3 +863,36 @@ Coordinación central actualizada con diseño revisado y revisión padre enviada
 Siguiente: recibir acuerdo/correcciones y presentar decisión de orden/puertas
 antes de implementar más. Sin nueva tarea hijo, pruebas/builds propios, cambios
 al relay productivo o apps desde esta sesión. Commit propio de documentación.
+
+## Acuerdo padre revisado y PADRE-C02 asignada — 2026-10-09
+
+Propietario informa cierre de revisión padre; leídos relevo y diseño §7 en lectura,
+git log -1 confirma 95dfd02. Padre acepta HIJO-C02 cb62a73 como especificación
+compatible: cuatro datos públicos, formato de huellas, commit local pendiente
+de acreditación, fallos y declaraciones presenciales separadas. Sin pruebas nuevas
+o implementación de puertas. A/B/C1/C2 son propuesta, no cambio de PLAN_HIJO.
+
+Tras presentar siguiente unidad pura, propietario responde ok, continúa a
+PADRE-C02 con pruebas/commit propios y sin ADB. Releído alcance padre §7 y
+coordinación central; confirmada única sesión raíz padre en ruta explícita y
+bandeja vacía antes de envío. Prompt PADRE-C02 admitido por API con
+delivery=queue/resume=true: ejecución solicitada, no resultado confirmado.
+
+Validador puro/negativos JVM con entradas inmutables y pruebas criptográficas
+CP/1 existentes: snapshot/PAIR, revisión/hash privado/resumen, STATE/contexto,
+OFFLINE MAINTENANCE/observaciones separadas y señales locales explícitas.
+Diagnóstico únicamente; sin Android/IO/red/reloj oculto/UI, ParentStore o
+Metadatos modificados/migrados, transición VINCULADO, autorización u órdenes.
+Obligaciones del llamador y observaciones ficticias de tests claramente separadas
+de evidencia física. No payload/booleano estructural como DocumentoVerificado.
+Exigidos negativos y verificación local pertinente JVM, documentación/commit de
+cambios propios, preservación de trabajo ajeno y parada si requiere más alcance.
+
+Hijo sin nueva asignación: H05 abierta, puertas/orden pendientes de decisión.
+No ADB/instrumentación/dispositivos, CP/1 nuevo, permisos, LAN, certificados,
+push/despliegue o repos ajenos autorizados por el handoff. No sesiones/subagentes
+nuevos o prompts automáticos de vuelta; revisar informe antes de siguiente unidad.
+
+Documentación propia central actualizada. Sin código productivo, apps editadas
+desde Render, build/tests propios nuevos, alteración de barreras locales o
+despliegue. Commit de cierre documental; pruebas padre aún no reportadas.
