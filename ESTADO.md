@@ -931,3 +931,39 @@ instrumentación/dispositivos, fuentes productivas/órdenes/migración, plan/con
 repos ajenos, certificados/LAN/push/despliegue. No tareas nuevas al hijo o
 sesiones/subagentes creados. Actualizada coordinación propia; no build/tests
 del relay, apps editadas aquí o cambio de barreras. Commit documental propio.
+
+## Requisito nuevo: control local normal del adulto — 2026-10-10
+
+Propietario precisa que el código maestro permite uso normal del teléfono, no
+solo mantenimiento; la entrada a la interfaz de control de app hijo también
+lo exige y debe permitir bloqueo local sin conexión al padre. Padre conserva
+control remoto. Consultado CP/1 §9/9.A: actualmente prohíbe ALLOW offline y usa
+códigos por propósito/único consumo; el requisito nuevo cambia esa semántica.
+No se reinterpretó mantenimiento ni se modificó contrato/fixtures unilateralmente.
+
+Preguntas al propietario mediante herramienta: confirma desbloqueo local también
+cuando el propio hijo no tiene internet; confirma que tras reiniciar queda
+bloqueado y requiere autorización nueva. Emergencia sin código y Keyguard Android
+sin bypass son límites del diseño. No código universal/fijo ni secreto en relay.
+Decisiones no autorizan dispositivos/provisión/instalaciones/quiosco/borrado/CA,
+LAN, push o despliegue. Generación/cambio/recuperación del código, sesiones/duración,
+precedencia local/remota, diagnóstico/STATE/ACK/migración y orden del hijo requieren
+propuesta y acuerdo; no inferir aprobación de nuevas puertas o CP/2 implementada.
+
+Añadido documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md: requisitos confirmados,
+conflicto con CP/1, transición/versionado coordinado, límites de seguridad y
+preguntas/diseño HIJO-C03. Código de app no evita bloqueo ordinario Android.
+Documentación/README central actualizada; copia compartido CP/1 sin cambios.
+
+Confirmada sesión raíz hijo por ruta explícita y bandeja vacía antes de envío.
+HIJO-C03 admitida por API delivery=queue/resume=true: una unidad documental de
+control local/versionado/matriz de eventos/credencial/amenazas/pruebas futuras,
+sin código/tests/builds, plan/contrato editados o permisos físicos. Exigidos
+coordinación/ESTADO y commit propio; revisar con padre/acordar versión antes de
+asignar implementación. Ejecución solicitada, no resultados confirmados.
+
+Padre recibe solo aviso informativo admitido con queue/resume=false: preservar
+PADRE-QR01, no nueva tarea/cambio de validador/producción/CP1 o interrupción.
+No se crearon sesiones/subagentes, alteraron permisos o editaron apps desde Render.
+Turno propio de requisitos/coordinación/documentación: no build/tests nuevos,
+código productivo/contrato modificado, teléfonos, LAN, push o despliegue.

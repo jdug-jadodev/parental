@@ -1,9 +1,28 @@
 # Coordinación central — padre, hijo y relay
 
-Fecha: 2026-10-09. Coordinador: sesión de parental_render, por petición del propietario.
+Última actualización: 2026-10-10. Coordinador: sesión de parental_render, por petición del propietario.
 Este documento organiza el trabajo; no autoriza editar las apps, operar teléfonos,
 abrir LAN, instalar certificados, aprovisionar, borrar datos, hacer push o desplegar.
 Una tarea por turno. Cada IA implementa y registra resultados en su propio repo.
+
+## Cambio funcional vigente — control local del adulto
+
+Propietario solicita bloqueo/desbloqueo normal local con código maestro y entrada
+protegida a la app del hijo, además del control remoto del padre. Confirma uso
+normal también sin internet en el hijo y bloqueo obligatorio tras reinicio.
+Requisitos/diseño pendiente en documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md.
+Emergencia sin código; no código universal ni secretos en relay. Esto contradice
+prohibición de ALLOW offline de CP/1: proponer versión coordinada antes de cambiar semántica/
+esquema/fixtures. No se aprueba CP/2 ni bypass por esta petición funcional.
+HIJO-C03 enviado/admitido por API con queue/resume=true para diseño documental,
+sin implementación/permisos físicos. No resultado confirmado todavía.
+Padre recibió aviso informativo queue/resume=false, sin nueva tarea o interrupción;
+PADRE-QR01 puede continuar. Nuevas funciones no sustituyen su diagnóstico.
+
+La decisión de bloquear tras reinicio y permitir uso local sin internet sí está
+confirmada; credencial/generación/recuperación, duración/sesión administrativa,
+precedencia local/remota, STATE/ACK y migración siguen pendientes de diseño/acuerdo.
+No inferir de este requisito aprobación del orden H05/H08/H11 o quiosco.
 
 ## 1. Fuentes y situación comprobada
 
