@@ -14,8 +14,9 @@ import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/c
 import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
 
 const argumentos = process.argv.slice(2);
-const politicas = argumentos[0] === '--politicas';
-const proceso = argumentos[0] === '--proceso';
+const politicasProceso = argumentos[0] === '--politicas-proceso';
+const politicas = politicasProceso || argumentos[0] === '--politicas';
+const proceso = politicasProceso || argumentos[0] === '--proceso';
 const fallos = proceso || argumentos[0] === '--fallos';
 if (fallos || politicas) argumentos.shift();
 assert.equal(argumentos.length, 2, 'Uso: pnpm run test:padre --ruta-padre RUTA');
@@ -60,7 +61,8 @@ const java = nombre => process.env.JAVA_HOME ? join(process.env.JAVA_HOME, 'bin'
 const compilacion = spawnSync(java('javac'), ['-encoding', 'UTF-8', '-cp', classpath.join(delimiter), '-d', temporal,
   join(raiz, 'test/soporte/PruebaPadre.java'), join(raiz, 'test/soporte/PruebaPoliticas.java')], { encoding: 'utf8', timeout: 30000 });
 if (compilacion.status !== 0) throw new Error(`No se compiló el driver JVM: ${compilacion.stderr ?? ''}`);
-const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre', ...(politicas ? ['politicas'] : fallos ? ['fallos'] : [])], { stdio: ['pipe', 'pipe', 'pipe'] });
+const modoJvm = politicasProceso ? ['politicas-proceso'] : politicas ? ['politicas'] : fallos ? ['fallos'] : [];
+const jvm = spawn(java('java'), ['-cp', [temporal, ...classpath].join(delimiter), 'dev.controlparental.parent.network.PruebaPadre', ...modoJvm], { stdio: ['pipe', 'pipe', 'pipe'] });
 jvm.stderr.resume();
 const terminado = new Promise(resolver => { jvm.once('error', () => resolver(-1)); jvm.once('exit', codigo => resolver(codigo)); });
 const lectura = createInterface({ input: jvm.stdout });
@@ -103,8 +105,29 @@ try {
   };
   const inicial = await arrancar(0);
   const origen = `https://127.0.0.1:${inicial.puerto}`;
-  const health = await new Promise((resolver, rechazar) => get(`${origen}/healthz`, { ca: cert }, respuesta => { respuesta.resume(); resolver(respuesta.statusCode); }).on('error', rechazar));
-  assert.equal(health, 503);
+  const comprobarHealth = async () => {
+    const health = await dentroDe(new Promise((resolver, rechazar) => get(`${origen}/healthz`, { ca: cert }, respuesta => {
+      respuesta.resume(); resolver(respuesta.statusCode);
+    }).on('error', rechazar)), 5000);
+    assert.equal(health, 503);
+  };
+  await comprobarHealth();
+  const reiniciar = async () => {
+    const cierreHijo = once(hijo, 'close');
+    if (proceso) {
+      assert.ok(relay.kill('SIGKILL'));
+      assert.equal(await dentroDe(salidaRelay, 5000), 'exit');
+    } else {
+      const cierreServidor = once(servidor, 'close');
+      cerrarServidorHttp(servidor);
+      await dentroDe(cierreServidor, 5000);
+    }
+    assert.equal((await dentroDe(cierreHijo, 5000))[0], proceso ? 1006 : 1012);
+    const reiniciado = await arrancar(inicial.puerto);
+    assert.equal(reiniciado.puerto, inicial.puerto);
+    if (proceso) assert.notEqual(reiniciado.pid, inicial.pid);
+    await comprobarHealth();
+  };
   const codec = new CodecProtocolo(readFileSync(join(raiz, 'compartido/protocolo.schema.json')));
   const cripto = new CriptografiaProtocolo(codec);
   const clavePadre = ClaveVerificacion.desdeSpki('PARENT', publicaPadre);
@@ -165,29 +188,29 @@ try {
     hijo.send(estado(nuevaSync, '2', randomBytes(32).toString('base64url'), 'ACCEPTED_PENDING_ENFORCEMENT'), { binary: false });
     assert.equal(await dentroDe(leerLinea(), 10000), 'HASH_AJENO_NO_RESUELVE');
     hijo.send(estado(nuevaSync, '3', documento.payloadSha256B64, 'ACCEPTED_PENDING_ENFORCEMENT'), { binary: false });
+    if (politicasProceso) {
+      assert.equal(await dentroDe(leerLinea(), 10000), 'PENDIENTE_PERSISTIDO');
+      await reiniciar();
+      jvm.stdin.write('RELAY_REINICIADO\n');
+      assert.equal(await dentroDe(leerLinea(), 20000), 'RECONECTADO_POLITICAS');
+      assert.equal(frames.length, 0);
+      assert.notEqual(await conectarHijo(), conexionHijo);
+      jvm.stdin.write('HIJO_LISTO\n');
+    }
     const syncReapertura = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
     assert.equal(syncReapertura.kind, 'SYNC_REQUEST'); assert.notEqual(syncReapertura.syncNonce, nuevaSync.syncNonce);
     assert.equal(await dentroDe(leerLinea(), 10000), 'ALMACEN_REABIERTO');
     hijo.send(estado(syncReapertura, '1', documento.payloadSha256B64, 'ENFORCEMENT_FAILED', randomUUID()), { binary: false });
-    assert.equal(await dentroDe(leerLinea(), 10000), 'OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM');
+    assert.equal(await dentroDe(leerLinea(), 10000), politicasProceso
+      ? 'OK\tPOLITICAS_REINICIO_SIN_REPLAY_RECONCILIACION_RAM'
+      : 'OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM');
     assert.equal(await dentroDe(terminado, 5000), 0); assert.equal(frames.length, 0);
     console.log('OK: ControlPoliticas/ParentStore JVM reales, ACK omitido, dos reintentos idénticos y nueva sincronización; hash ajeno no resuelve la orden y reconciliación pendiente/fallo tras reapertura cifrada en RAM.');
+    if (politicasProceso) console.log('OK: reinicio abrupto de proceso relay con orden pendiente, nuevo PID/reto/ticket, contexto antiguo invalidado y ninguna orden reproducida antes de reconciliar.');
     console.log('VINCULADO/isDeviceOwner solo ficticios de test; no acredita APK, Keystore, almacenamiento físico ni orden aplicada.');
   } else if (fallos) {
     assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_SIN_ACK');
-    const cierreHijo = once(hijo, 'close');
-    if (proceso) {
-      assert.ok(relay.kill('SIGKILL'));
-      assert.equal(await dentroDe(salidaRelay, 5000), 'exit');
-    } else {
-      const cierreServidor = once(servidor, 'close');
-      cerrarServidorHttp(servidor);
-      await dentroDe(cierreServidor, 5000);
-    }
-    assert.equal((await dentroDe(cierreHijo, 5000))[0], proceso ? 1006 : 1012);
-    const reiniciado = await arrancar(inicial.puerto);
-    assert.equal(reiniciado.puerto, inicial.puerto);
-    if (proceso) assert.notEqual(reiniciado.pid, inicial.pid);
+    await reiniciar();
     assert.equal(await dentroDe(leerLinea(), 20000), 'RECONECTADO');
     assert.equal(frames.length, 0);
     assert.notEqual(await conectarHijo(), conexionHijo);

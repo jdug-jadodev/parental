@@ -635,3 +635,43 @@ reinicio Android ni almacenamiento físico/Keystore. Reinicio de relay se probó
 en variante de transporte separada. Coordinación/README/guía actualizadas con
 estas coberturas y límites. Sin push, despliegue, LAN, cambios productivos o apps.
 Barreras health 503, loopback y producción bloqueada conservadas.
+
+## Políticas pendientes con reinicio abrupto del relay — 2026-10-09
+
+Propietario pide continuar y recuerda commits para cualquier cambio autorizado
+en otros proyectos. Se mantiene alcance: cambios solo en parental_render y commit
+de cierre propio; no se modifica padre/hijo ni se trasladan permisos físicos.
+Releídos sus relevos: PREPARADO productivo e H05 abierta continúan pendientes.
+
+Añadido test:padre:politicas:proceso, reutilizando los drivers existentes.
+Relay Node independiente desde el inicio; ControlPoliticas/ParentStore y cifrado
+reales compilados del padre. Dos reintentos idénticos sin ACK, SYNC nuevo y STATE
+correlacionado pendiente de aplicación. Driver conserva registro y notifica
+PENDIENTE_PERSISTIDO antes de permitir reinicio. Orquestador termina relay,
+espera salida/cierre 1006 y arranca PID distinto en mismo puerto. Health 503
+confirmado antes/después, bootstrap TLS solo RAM/IPC y listener solo loopback.
+
+RelayConnection JVM reconecta con backoff normal, AUTH/PONG y ticket nuevo.
+Ticket viejo no permite enviar el comando persistido. ControlPoliticas anterior
+invalida contexto a SIN_ESTADO al avanzar reloj, sin borrar pendiente ni aumentar
+contador o enviar orden. Hijo Node reautentica con reto nuevo; store se cierra y
+reabre sobre archivo AES/GCM RAM. Control nuevo sincroniza, recibe STATE firmado
+de nueva sesión/id/seq/hash correlacionados y resuelve ENFORCEMENT_FAILED simulado.
+Tres envíos totales (original + dos reintentos), contador 1, sin replay ni APPLIED.
+
+Ejecutada nueva variante dos veces, antes y después de pnpm run verificar, con
+--ruta-padre C:\Users\Usuario\Documents\parental_padre: ambas correctas.
+verificar: check/build y 104 tests aprobados; 28 ejemplos/13 contraejemplos y
+10 vectores/78 comprobaciones correctos. Ejecutadas también test:padre,
+test:padre:fallos, test:padre:proceso y test:padre:politicas con misma ruta:
+las cuatro aprobadas. git status --porcelain de padre/hijo vacío en consultas
+finales; sin Gradle, modificación de sus builds/fuentes ni uso de dispositivos.
+
+Refactor mínimo del orquestador para compartir reinicio/health entre variantes;
+sin cambio productivo o CP/1. README/guía/coordinación actualizadas. Cobertura
+combinada local completada al alcance de archivo RAM, no reinicio Android/JVM
+del padre ni persistencia física. ACK omitido, no pérdida de ACK emitido en red.
+VINCULADO/Device Owner/autoridad/enforcement y reloj de políticas solo fixtures
+de test. No acredita vínculo operativo ni restricciones reales. Handoffs padre/
+hijo siguen preparados; no existe envío automático. Sin LAN, push o despliegue;
+health 503 y producción bloqueada conservados.

@@ -81,9 +81,10 @@ public class PruebaPadre {
             exigir(conexion.getEstado().getValue().getFase() == FaseRelay.AUTENTICADO);
             exigir(conexion.getEstado().getValue().getCanalSano());
             Long ticket = conexion.sesionPoliticas(); exigir(ticket != null);
-            if (args.length == 1 && args[0].equals("politicas")) {
+            if (args.length == 1 && (args[0].equals("politicas") || args[0].equals("politicas-proceso"))) {
                 PruebaPoliticas.ejecutar(conexion, recibidos, canal, publica, entrada[2], pareja, origen,
-                    mensaje -> CriptografiaProtocolo.INSTANCE.firmarSobre(mensaje, Proposito.MESSAGE, clavePadre, firmante));
+                    mensaje -> CriptografiaProtocolo.INSTANCE.firmarSobre(mensaje, Proposito.MESSAGE, clavePadre, firmante),
+                    args[0].equals("politicas-proceso"));
                 return;
             }
             String syncNonce = nonce();

@@ -69,7 +69,8 @@ public class PruebaPoliticas {
         PruebaPoliticas.<Unit>esperar(c -> control.recibir(ticket, frame, c));
     }
     public static void ejecutar(RelayConnection conexion, BlockingQueue<byte[]> frames, BufferedReader canal,
-            String publica, String publicaHijo, String pareja, String origen, Function1<Mensaje, SobreFirmado> firmar) throws Exception {
+            String publica, String publicaHijo, String pareja, String origen, Function1<Mensaje, SobreFirmado> firmar,
+            boolean reiniciarRelay) throws Exception {
         CoroutineScope scope = CoroutineScopeKt.CoroutineScope(Dispatchers.getIO());
         KeyGenerator generador = KeyGenerator.getInstance("AES"); generador.init(256);
         SecretKey aes = generador.generateKey();
@@ -107,6 +108,22 @@ public class PruebaPoliticas {
             recibir(control, conexion, frames);
             exigir(control.getResultado().getValue().getFase() == FasePolitica.PENDIENTE_APLICACION);
             exigir(original.equals(leer(store).getPendiente()));
+            if (reiniciarRelay) {
+                Long anterior = conexion.sesionPoliticas(); exigir(anterior != null);
+                System.out.println("PENDIENTE_PERSISTIDO");
+                exigir("RELAY_REINICIADO".equals(canal.readLine()));
+                long vence = System.nanoTime() + TimeUnit.SECONDS.toNanos(15);
+                while ((anterior.equals(conexion.sesionPoliticas()) || !conexion.getEstado().getValue().getCanalSano()) && System.nanoTime() < vence) {
+                    conexion.avanzarReloj(); Thread.sleep(10);
+                }
+                Long actual = conexion.sesionPoliticas(); exigir(actual != null && !anterior.equals(actual));
+                exigir(!conexion.enviarPolitica(anterior, Base64.getUrlDecoder().decode(original.getFrameB64())));
+                PruebaPoliticas.<Unit>esperar(control::avanzarReloj);
+                exigir(control.getResultado().getValue().getFase() == FasePolitica.SIN_ESTADO);
+                exigir(original.equals(leer(store).getPendiente()) && envios[0] == 3 && frames.isEmpty());
+                System.out.println("RECONECTADO_POLITICAS");
+                exigir("HIJO_LISTO".equals(canal.readLine()));
+            }
             PruebaPoliticas.<Unit>esperar(store::cerrar);
             reabierto = new ParentStore(archivo, cifrador, scope);
             exigir(original.equals(leer(reabierto).getPendiente()));
@@ -120,7 +137,8 @@ public class PruebaPoliticas {
             exigir(leer(reabierto).getPendiente() == null && leer(reabierto).getContadorLocal().equals("1"));
             exigir(envios[0] == 3 && frames.isEmpty());
             conexion.segundoPlano(); exigir(conexion.sesionPoliticas() == null);
-            System.out.println("OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM");
+            System.out.println(reiniciarRelay ? "OK\tPOLITICAS_REINICIO_SIN_REPLAY_RECONCILIACION_RAM"
+                : "OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM");
         } finally {
             if (reabierto != null) PruebaPoliticas.<Unit>esperar(reabierto::cerrar);
             PruebaPoliticas.<Unit>esperar(store::cerrar);

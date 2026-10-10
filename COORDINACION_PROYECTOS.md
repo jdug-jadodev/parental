@@ -118,6 +118,18 @@ Coberturas locales ampliadas por variantes separadas; pendientes combinación de
 restart con ControlPoliticas, pérdida en tránsito de un ACK realmente emitido y
 persistencia/reinicio físicos del padre. No declarar integración móvil completa.
 
+Avance combinado: test:padre:politicas:proceso probado con clases padre reales y
+relay en proceso independiente. Tras agotar reintentos y persistir aplicación
+pendiente, reinicio abrupto/cierre 1006/nuevo PID, health 503 conservado y nueva
+autenticación. Ticket/contexto anteriores invalidados sin borrar ni enviar la
+orden incierta. Reapertura cifrada RAM y STATE nuevo correlacionado resuelven
+fallo simulado; contador 1 y solo tres envíos. Cinco variantes JVM y 104 tests
+aprobados. Cubierta la combinación restart/políticas al alcance de laboratorio.
+Quedan pérdida de ACK emitido en tránsito y persistencia/reinicio físicos del
+padre; ninguna evidencia de APK hijo, vínculo operativo o restricciones reales.
+Siguiente prioridad entre proyectos sigue siendo HIJO-C01/H05 y PADRE-C01,
+handoffs preparados sin canal automático ni modificaciones a sus repositorios.
+
 ## 4. Secuencia de puertas
 
 1. Revisar propuesta hijo/H05 y diseño de acreditación padre, una unidad por turno.

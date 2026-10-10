@@ -23,6 +23,7 @@ pnpm run test:padre --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:fallos --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:politicas --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
+pnpm run test:padre:politicas:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 ```
 
 Requiere JDK 21 con java/javac en PATH o JAVA_HOME, clases debug ya compiladas
@@ -139,6 +140,30 @@ No prueba ACK emitido y perdido en tránsito, restricciones reales, reinicio del
 padre, almacenamiento físico ni reintentos combinados con restart del relay.
 El reinicio de proceso relay está cubierto por la variante de transporte separada.
 Estas variantes opcionales no forman parte de CI ni sustituyen las puertas físicas.
+
+### Políticas pendientes durante reinicio del relay
+
+test:padre:politicas:proceso combina los dos recorridos sin modificar el padre.
+El relay escucha en un proceso Node independiente desde el inicio. Tras agotar
+los dos reintentos sin ACK y recibir STATE correlacionado de aplicación pendiente,
+el driver comprueba que la intención sigue persistida y espera al orquestador.
+Este termina abruptamente el proceso relay, espera su salida/cierre 1006 y arranca
+otro PID en el mismo puerto. Health 503 se comprueba antes y después del reinicio.
+
+El padre JVM conserva su conexión lógica, store y ControlPoliticas. Al avanzar
+el reloj de transporte, RelayConnection reconecta por su backoff normal, pasa
+AUTH/PONG y obtiene ticket nuevo. El ticket antiguo rechaza el envío de los bytes
+persistidos, y avanzar ControlPoliticas invalida su contexto a SIN_ESTADO sin
+reproducir ni borrar la intención pendiente. El hijo simulado reautentica con
+reto nuevo. Se cierra/reabre el store cifrado RAM y se crea un control nuevo.
+Solo entonces se solicita STATE con nonce nuevo; una sesión del hijo nueva con
+id/seq/hash coincidentes resuelve ENFORCEMENT_FAILED simulado. No hay cuarta orden,
+reinicio de duración ni APPLIED ficticio: contador 1 y tres envíos se mantienen.
+
+El archivo RAM y clave AES del padre sobreviven en la misma JVM: no es reinicio
+Android ni almacenamiento físico. Todos los ACK son omitidos por el simulador,
+no emitidos y perdidos en tránsito. Reautenticación/TLS/WSS/restart Node reales;
+autoridad, vinculación, Device Owner, tiempo de políticas y enforcement ficticios.
 
 ## Pendientes y handoff al proyecto padre
 

@@ -109,6 +109,9 @@ sin replay, pero no reintentos/persistencia de ControlPoliticas ni APK reales.
 `pnpm run test:padre:politicas --ruta-padre RUTA` usa ControlPoliticas/ParentStore
 JVM reales: ACK omitido, dos reintentos idénticos y reconciliación tras reapertura
 cifrada en RAM. Vínculo y Device Owner ficticios solo en test, nunca acreditación física.
+`pnpm run test:padre:politicas:proceso --ruta-padre RUTA` combina políticas sin
+ACK, reinicio abrupto del proceso relay y reconciliación posterior sin repetir
+la orden pendiente. El almacenamiento del padre sigue siendo de laboratorio en RAM.
 
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.
