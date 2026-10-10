@@ -737,3 +737,31 @@ automático configurado. No se crearon sesiones/subagentes ni se reanudó o
 interrumpió otra IA. Ningún aviso enviado al padre en este turno. No apps/ADB,
 build/tests nuevos, cambios de contrato, push o despliegue. Turno de comunicación
 y documentación únicamente, con commit de cierre propio del relay.
+
+## Coordinación directa con padre e hijo autorizada — 2026-10-09
+
+Propietario confirma haber aceptado el aviso del hijo y solicita coordinación
+directa para avanzar. Releídos relevos: H05 abierta y PREPARADO productivo siguen
+sin evidencia nueva de cierre. Consultados metadatos de sesión hijo y listado
+de sesiones raíz por ruta parental_padre: un único destino padre. GET inbox de
+ambas sesiones vacío antes de enviar; sin leer historiales ni credenciales.
+
+Enviados HIJO-C01 y PADRE-C01 por API a las sesiones raíz existentes, con
+delivery=queue/resume=true. Ambas entradas admitidas; ejecución solicitada,
+no resultado ni lectura confirmados. Cada IA recibe una unidad de diseño/
+documentación, instrucciones de no duplicar unidad ya hecha o descartar trabajo
+incompatible, actualizar coordinación/ESTADO propios y hacer commit de sus cambios.
+Mensaje identifica origen IA coordinadora y la autorización del propietario,
+sin presentar pruebas JVM/booleanos del simulador como aceptación física.
+
+Hijo: identidad/oferta y dependencia H05, sin saltar H06/H08/H10. Padre: diseño
+de acreditación PREPARADO→VINCULADO, separando evidencias software y físicas,
+sin habilitar órdenes ni cambiar CP/1. Ninguna implementación productiva nueva,
+ADB/instalación/quiosco/borrado/CA/LAN/push/despliegue autorizados por los mensajes.
+No se crearon sesiones/subagentes ni se modificaron permisos, modelos o apps
+desde Render. Resultados se devolverán en documentos/respuesta, sin bucles de
+mensajes automáticos; revisar antes de asignar siguiente unidad.
+
+Actualizada coordinación central con estado enviado/admitido y límites. Turno
+propio de comunicación/documentación: sin build/tests nuevos, cambios al contrato
+o código productivo. No declarar tareas terminadas por haber enviado el prompt.

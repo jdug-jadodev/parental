@@ -41,7 +41,15 @@ Comparación documental, no prueba criptográfica nueva. Repetir antes de cada c
 Cualquier diferencia de esquema/firmas/semántica bloquea integración: acordar
 versión nueva y cambios coordinados; no adaptar el relay unilateralmente.
 
-## 3. Próxima unidad por proyecto — handoffs preparados, sin tareas activadas
+## 3. Unidades por proyecto — handoffs admitidos por API
+
+Estado actual: propietario autoriza coordinación directa con las sesiones
+existentes y confirma aceptación del aviso del hijo. HIJO-C01 y PADRE-C01
+enviados con queue/resume=true y admitidos por API. Se solicitó ejecución de
+una unidad de diseño por proyecto, no implementación productiva ni operación
+física. No declarar tareas terminadas hasta recibir documentos/evidencias/commit.
+Si la IA ya completó la unidad o tiene trabajo incompatible, debe informarlo,
+no duplicar tareas ni descartar su trabajo. Los textos siguientes son sus alcances.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 
@@ -204,8 +212,8 @@ Handoff adicional preparado para la IA del hijo, aún no enviado:
 
 ## 7. Cómo devolver resultados y activar una tarea
 
-El propietario/IA responsable recibe el handoff; hasta confirmar recepción figura
-como **preparado**, no como iniciado o delegado. No existe canal automático entre
+Un handoff sin envío figura como **preparado**. Una admisión API acredita
+**enviado/admitido**, no lectura, tarea iniciada o terminada. No existe canal automático entre
 sesiones configurado en el proyecto. OpenCode V2 permite comunicación explícita
 por su API local: descubrir la sesión por ruta exacta y enviar a su bandeja con
 delivery=queue/resume=false permite informar sin reanudar ni interrumpir ejecución.
@@ -232,5 +240,25 @@ no lectura confirmada, ejecución iniciada ni autorización física nueva.
 Se corrigió la codificación de un primer aviso cancelando solo esa entrada propia
 y enviando su reemplazo UTF-8; queda un aviso válido, no dos tareas duplicadas.
 No se crearon sesiones, subagentes ni se reanudó/interrumpió la IA del hijo.
-El padre aún no recibió aviso por API. No se editaron apps ni se inspeccionaron
+El padre no recibió aviso en ese primer turno. No se editaron apps ni se inspeccionaron
 historiales de conversación o credenciales; solo metadatos de la sesión objetivo.
+
+### Coordinación directa autorizada y primeras unidades enviadas
+
+Propietario solicita avanzar coordinándose directamente con padre/hijo y confirma
+que aceptó el aviso del hijo. Comprobada una única sesión raíz del padre por
+ruta exacta y las bandejas de ambas sesiones vacías antes del envío. No se leyó
+historial de conversaciones ni se alteraron sesiones, modelos o permisos.
+
+Enviados HIJO-C01 y PADRE-C01 a las sesiones existentes con queue/resume=true:
+API confirma admisión y se solicita ejecución sin interrumpir trabajos activos.
+Alcance solo diseño/documentación propia, una unidad por IA, commits propios y
+devolución en sus archivos de coordinación/ESTADO. Prohibidas nuevas operaciones
+físicas, código productivo, cambios CP/1, apps ajenas, push o despliegue por estos
+mensajes. No se crearon sesiones/subagentes ni se concedieron permisos de herramientas.
+
+No montar bucle de mensajes entre IAs: resultados en documentos/respuesta del rol;
+el coordinador revisa y decide siguiente unidad. Si ya está hecha, devolver commit;
+si hay tarea incompatible, preservar trabajo y reportar bloqueo. No activar la
+siguiente implementación hasta revisar propuesta, dependencias y aceptación.
+Sin resultados confirmados todavía; ninguna unidad se declara cerrada por el envío.
