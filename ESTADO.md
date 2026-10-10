@@ -800,3 +800,35 @@ Coordinación central actualizada con diseños revisados y nueva autorización.
 Sin editar repos ajenos, dispositivos, pruebas/build propios nuevos, cambios al
 relay productivo/contrato, push, LAN o despliegue. Turno propio de comunicación/
 documentación con commit de cierre; pruebas del hijo aún pendientes de informe.
+
+## H05-L01 revisada y propuesta HIJO-C02 enviada — 2026-10-09
+
+Propietario pide continuar. Leídos relevo hijo H05-L01, cabecera ESTADO y
+CoordinadorOffline.kt en lectura; git log -1 confirma c7fb842 y estado git hijo
+vacío en consulta. Hijo reporta 17 tests nuevos y 346 resultados JVM núcleo+debug
+correctos, release 170 repetidos correctos. No reejecutados aquí ni sumados como
+pruebas independientes. H05-L01 aislada terminada; H05 operativa sigue abierta.
+
+Coordinador RAM/ejecutor serial y controlador verifican firma/contexto antes de
+sesión; cancelación retira proyección sin esperar firma/IO, no devuelve consumos.
+No wiring Android ni validación física nueva. Releído diseño padre para comparar
+evidencia presencial, además de CP/1 §5 y coordinación central. PADRE-C02 sigue
+pendiente: falta acordar resumen público del hijo y puertas funcionales H05.
+
+GET inbox hijo vacío antes de enviar HIJO-C02; entrada admitida por API con
+delivery=queue/resume=true. Una unidad documental: propuesta de matriz de puertas
+aisladas/pre-vínculo/integrales y evidencia requerida, sin cambiar PLAN_HIJO ni
+cerrar H05. Especificar resumen público post-commit H08 (pairId, huellas ambas
+públicas, origen) basado en estado persistido, reapertura sin revinculación,
+errores/secretos excluidos y correspondencia con diseño padre/CP/1 §5. No STATE
+como recibo remoto de aceptación/consumo, semánticas nuevas o H06 por JVM.
+Devolver propuesta de pruebas/acuerdo para padre, coordinación/ESTADO y commit.
+
+Sin código/tests/build nuevos del hijo por esa unidad ni UI/Keystore/cámara,
+herramientas/WSS, dispositivos/ADB, plan/contrato, permisos o despliegue. Padre
+no recibe asignación nueva. Ejecución solicitada, sin resultado confirmado.
+Sin sesiones/subagentes nuevos ni prompts de respuesta automáticos. Coordinador
+revisará propuesta antes de solicitar decisiones/activar más puertas.
+
+Cambios propios solo en documentación de Render; sin apps editadas aquí,
+build/pruebas propios nuevos, LAN, push o cambio de barreras del relay.

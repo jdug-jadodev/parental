@@ -47,11 +47,23 @@ Estado actual: HIJO-C01 terminado en d350bf6 y PADRE-C01 en 0e7b5db, ambos
 diseños documentales sin pruebas nuevas o aceptación física. Revisados sus
 relevos y padre/DISENO_ACREDITACION_VINCULO.md en lectura. Propietario autoriza
 ahora H05-L01 del hijo con pruebas/commit propios, sin ADB. Handoff admitido por
-API con queue/resume=true; ejecución solicitada, no resultado confirmado.
-PADRE-C02 no activada: espera acuerdo sobre evidencia pública del hijo y revisión
-de la siguiente unidad. No duplicar tareas ya hechas ni descartar trabajo ajeno.
+API con queue/resume=true y posteriormente terminado en c7fb842: coordinador
+OFFLINE aislado, 17 tests nuevos y 346 resultados JVM reportados por el hijo.
+No reejecutados aquí ni evidencia Android nueva. H05 sigue abierta.
+HIJO-C02 enviado/admitido por API al continuar coordinación: propuesta documental
+de puertas y resumen público, sin alterar plan/contrato o activar producción.
+PADRE-C02 no activada: espera esa propuesta y acuerdo sobre evidencia pública.
+No duplicar tareas ya hechas ni descartar trabajo ajeno.
 
-### H05-L01 — implementación aislada autorizada y enviada al hijo
+### H05-L01 — terminada al alcance aislado
+
+Resultado revisado: c7fb842, relevo/ESTADO y CoordinadorOffline.kt en lectura.
+17 tests nuevos; hijo reporta 346 resultados núcleo+debug correctos y release
+170 casos repetidos correctos, no sumados como independientes. Cancelación,
+trabajos tardíos, espera/consumo duradero y vigencia probados con archivo/contexto/
+reloj simulados y crypto/QR reales. Sin cámara/lifecycle/Keystore/herramientas
+reales ni nuevas pruebas físicas. Proyección sin actualización no es autoridad:
+la respuesta vuelve a comprobar contexto/firma en RecoveryController.
 
 Alcance: coordinador de presentación OFFLINE en proyección RAM, integrando
 QrOffline/RecoveryController con identidad, estado, reloj/contexto y ejecutor
@@ -74,6 +86,31 @@ de dependencias, CP/1 o ceremonia física/migración del padre. Si la unidad exi
 esas decisiones, detener y reportar bloqueo. Entregar archivos, comandos/tests
 realmente ejecutados, alcance y limitaciones, commit y siguiente unidad propuesta
 en su coordinación/ESTADO; el coordinador revisará antes de asignar más trabajo.
+
+### HIJO-C02 — propuesta de puertas y resumen público, enviada
+
+Siguiente unidad documental asignada a la sesión existente del hijo con
+queue/resume=true; bandeja vacía antes de envío, admisión confirmada. No resultado
+confirmado todavía. No implementación ni cambio de plan autorizados por esta tarea.
+
+Entregables: matriz de garantías aisladas ya probadas, puerta local previa a
+identidad/vinculación y acreditación operativa integral, con evidencia exigida y
+dependencias/bloqueos; mínimas unidades pendientes antes de proponer revisión de
+dependencias. H06/enforcement nunca se habilita por una etiqueta parcial o JVM.
+H05 permanece abierta; la división propuesta requiere revisión/acuerdo explícitos.
+
+Especificar resumen público post-commit H08 basado en estado persistido íntegro:
+pairId, huellas comparables de ambas públicas y origen HTTPS exacto; distinguir
+oferta/captura/commit confirmado de acreditación operativa. Reapertura sin cambiar
+claves/revincular, errores/crash/corrupción/identidad perdida y ausencia de secretos
+o hashes de recuperación en ese resumen. CP/1 §5 exige comparación presencial;
+no recibos remotos inventados ni STATE como prueba de PAIR_ACCEPT exacto/consumo.
+
+Leer diseño del padre en su ruta explícita, sin editarlo. Devolver propuesta de
+pruebas futuras y acuerdo a revisar por padre antes de PADRE-C02, con coordinación,
+ESTADO y commit propios. Sin código/tests/build nuevos, UI/dispositivos/ADB,
+cambios CP/1, permisos, LAN o despliegue. El coordinador revisará/trasladará y
+pedirá decisión antes de activar nuevas puertas; no bucles entre agentes.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 
