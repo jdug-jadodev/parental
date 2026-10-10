@@ -50,9 +50,11 @@ ahora H05-L01 del hijo con pruebas/commit propios, sin ADB. Handoff admitido por
 API con queue/resume=true y posteriormente terminado en c7fb842: coordinador
 OFFLINE aislado, 17 tests nuevos y 346 resultados JVM reportados por el hijo.
 No reejecutados aquí ni evidencia Android nueva. H05 sigue abierta.
-HIJO-C02 enviado/admitido por API al continuar coordinación: propuesta documental
-de puertas y resumen público, sin alterar plan/contrato o activar producción.
-PADRE-C02 no activada: espera esa propuesta y acuerdo sobre evidencia pública.
+HIJO-C02 terminado en cb62a73: puertas A/B/C1/C2 y resumen público propuestos,
+sin alterar plan/contrato o activar producción. Revisado su diseño en lectura.
+PADRE-C01-R1 enviado/admitido por API para revisar acuerdo público y corregir
+incompatibilidades, solo documentación. PADRE-C02 no activada: espera revisión
+del padre y asignación explícita, sin promoción productiva por esa revisión.
 No duplicar tareas ya hechas ni descartar trabajo ajeno.
 
 ### H05-L01 — terminada al alcance aislado
@@ -87,11 +89,26 @@ esas decisiones, detener y reportar bloqueo. Entregar archivos, comandos/tests
 realmente ejecutados, alcance y limitaciones, commit y siguiente unidad propuesta
 en su coordinación/ESTADO; el coordinador revisará antes de asignar más trabajo.
 
-### HIJO-C02 — propuesta de puertas y resumen público, enviada
+### HIJO-C02 — propuesta documental terminada
 
-Siguiente unidad documental asignada a la sesión existente del hijo con
-queue/resume=true; bandeja vacía antes de envío, admisión confirmada. No resultado
-confirmado todavía. No implementación ni cambio de plan autorizados por esta tarea.
+Resultado revisado: cb62a73, hijo/DISENO_PUERTAS_Y_RESUMEN_PUBLICO.md.
+Matriz propuesta A (aislado), B (evidencia local previa a vínculo), C1 (recuperación
+real antes de endurecer), C2 (acreditación integral presencial con STATE/WSS).
+B no habilita H08 en el plan actual; C1 no se sustituye por C2 ni espera WSS
+para probar salida local. H06 nunca por JVM; repetir recuperación/emergencia
+bajo restricciones después de cualquier endurecimiento autorizado. División y
+cambio de orden pendientes de decisión: no cambiados PLAN_HIJO ni CP/1.
+
+Resumen propuesto: pairId completo, SHA-256 SPKI DER de ambas públicas P-256,
+64 hex mayúsculos en 16 grupos de cuatro y origen HTTPS exacto, desde snapshot
+persistido íntegro/readback. Formato cotejado en lectura con PreparacionVinculo.huella
+del padre, no con datos reales. Texto de commit local con acreditación pendiente;
+legados sin procedencia, corrupción/identidad perdida no fabrican confirmación.
+Sin pruebas/builds nuevos en HIJO-C02. Propuesta no es funcionalidad H08 implementada.
+
+La unidad documental se asignó a la sesión existente del hijo con queue/resume=true,
+bandeja vacía antes del envío y admisión confirmada. Su resultado está revisado
+arriba; la asignación no autorizó implementación ni cambio de plan.
 
 Entregables: matriz de garantías aisladas ya probadas, puerta local previa a
 identidad/vinculación y acreditación operativa integral, con evidencia exigida y
@@ -111,6 +128,20 @@ pruebas futuras y acuerdo a revisar por padre antes de PADRE-C02, con coordinaci
 ESTADO y commit propios. Sin código/tests/build nuevos, UI/dispositivos/ADB,
 cambios CP/1, permisos, LAN o despliegue. El coordinador revisará/trasladará y
 pedirá decisión antes de activar nuevas puertas; no bucles entre agentes.
+
+### PADRE-C01-R1 — revisión del acuerdo público, enviada
+
+Unidad documental al padre, sesión existente/ruta exacta y bandeja vacía antes
+del envío. queue/resume=true, admisión confirmada; no resultado confirmado aún.
+Revisar diseño hijo cb62a73 contra PADRE-C01: acuerdo explícito o correcciones
+de formato/estatus/errores, declaraciones presenciales frente a firmas y límites
+de la matriz de puertas. Hash privado PAIR del padre no se convierte en recibo
+remoto exigido al hijo; no se añaden campos/mensajes CP/1 o prueba automática.
+
+Acotar inputs/supuestos/negativos del futuro PADRE-C02 puro, sin implementarlo.
+Documentos propios y commit; sin tests/builds/código nuevo, migración/promoción,
+órdenes/UI, cambio de plan/contrato, dispositivos/ADB, LAN o despliegue. No otra
+tarea hijo hasta revisar acuerdo y presentar decisión de puertas/orden necesaria.
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 

@@ -832,3 +832,34 @@ revisará propuesta antes de solicitar decisiones/activar más puertas.
 
 Cambios propios solo en documentación de Render; sin apps editadas aquí,
 build/pruebas propios nuevos, LAN, push o cambio de barreras del relay.
+
+## HIJO-C02 revisada y acuerdo trasladado al padre — 2026-10-09
+
+Propietario solicita continuar tras HIJO-C02. Leídos relevo y nuevo diseño
+hijo/DISENO_PUERTAS_Y_RESUMEN_PUBLICO.md completo; git log -1 confirma cb62a73.
+Estado git hijo vacío en consulta. Resultado documental, sin pruebas nuevas o
+implementación de puertas/resumen. Leídos relevo padre y PreparacionVinculo.huella:
+formato propuesto SHA-256 SPKI DER, hex mayúsculos agrupados de cuatro coincide
+conceptualmente con código actual; revisión sin claves/datos reales ni ejecutar
+software. No inferir aceptación física por coincidencia de diseño.
+
+Hijo propone A aislada, B evidencia previa a vínculo, C1 recuperación real antes
+de endurecer y C2 acreditación integral con WSS/STATE/ceremonia. Evita exigir
+H10 para salida local previa a H06; B no habilita H08 según plan actual. Plan,
+H05 y decisión de ciclo/orden siguen sin cambiar; ninguna puerta aprobada aquí.
+Resumen post-commit propuesto: pairId/huellas ambas públicas/origen exacto, de
+snapshot durable íntegro/readback y acreditación pendiente. Sin nuevos recibos,
+secretos o STATE como certificado de PAIR_ACCEPT exacto/consumo OFFLINE.
+
+Confirmada una única sesión raíz padre en ruta explícita y bandeja vacía antes
+de envío. PADRE-C01-R1 admitido por API con delivery=queue/resume=true: revisar
+compatibilidad y dar acuerdo o correcciones, acotar futuro PADRE-C02 puro pero
+no implementarlo. Solo documentos/commit propios; sin código/tests/builds,
+migración/promoción VINCULADO, órdenes, cambio de puertas/contrato, dispositivos,
+ADB/CA/LAN/push/despliegue o repos externos. Ejecución solicitada, sin resultado
+confirmado todavía; no subagentes/sesiones nuevas ni prompts automáticos de vuelta.
+
+Coordinación central actualizada con diseño revisado y revisión padre enviada.
+Siguiente: recibir acuerdo/correcciones y presentar decisión de orden/puertas
+antes de implementar más. Sin nueva tarea hijo, pruebas/builds propios, cambios
+al relay productivo o apps desde esta sesión. Commit propio de documentación.
