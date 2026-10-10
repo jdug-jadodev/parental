@@ -41,7 +41,7 @@ Comparación documental, no prueba criptográfica nueva. Repetir antes de cada c
 Cualquier diferencia de esquema/firmas/semántica bloquea integración: acordar
 versión nueva y cambios coordinados; no adaptar el relay unilateralmente.
 
-## 3. Próxima unidad por proyecto — handoffs preparados, no enviados
+## 3. Próxima unidad por proyecto — handoffs preparados, sin tareas activadas
 
 ### HIJO-C01 — propuesta acotada de identidad/oferta y dependencia con H05
 
@@ -206,7 +206,12 @@ Handoff adicional preparado para la IA del hijo, aún no enviado:
 
 El propietario/IA responsable recibe el handoff; hasta confirmar recepción figura
 como **preparado**, no como iniciado o delegado. No existe canal automático entre
-sesiones. Las IAs actualizan solo su archivo de coordinación y ESTADO.md, con:
+sesiones configurado en el proyecto. OpenCode V2 permite comunicación explícita
+por su API local: descubrir la sesión por ruta exacta y enviar a su bandeja con
+delivery=queue/resume=false permite informar sin reanudar ni interrumpir ejecución.
+Una entrada admitida en bandeja no demuestra lectura o trabajo iniciado. Activar
+la sesión/tarea requiere acuerdo explícito; no crea subagentes ni traslada permisos.
+Las IAs actualizan solo su archivo de coordinación y ESTADO.md, con:
 
 - Tarea única, HEAD/commit de implementación y dependencias todavía abiertas.
 - Comandos realmente ejecutados, resultado y alcance JVM/Android/simulado/físico.
@@ -216,3 +221,16 @@ sesiones. Las IAs actualizan solo su archivo de coordinación y ESTADO.md, con:
 
 El coordinador relee ambos relevos, registra aquí y en ESTADO.md la decisión y
 prepara el siguiente handoff. No modificar retrospectivamente evidencias históricas.
+
+### Primer aviso por API a la sesión existente del hijo
+
+Por petición del propietario se comprobó el servicio local OpenCode y su OpenAPI.
+Identificada una única sesión raíz con ubicación exacta parental_hijo. Enviado
+informe del relay 8385410, seis variantes JVM/104 tests, límites y próxima propuesta
+HIJO-C01. Entrada confirmada en bandeja con queue/resume=false: **aviso en cola**,
+no lectura confirmada, ejecución iniciada ni autorización física nueva.
+Se corrigió la codificación de un primer aviso cancelando solo esa entrada propia
+y enviando su reemplazo UTF-8; queda un aviso válido, no dos tareas duplicadas.
+No se crearon sesiones, subagentes ni se reanudó/interrumpió la IA del hijo.
+El padre aún no recibió aviso por API. No se editaron apps ni se inspeccionaron
+historiales de conversación o credenciales; solo metadatos de la sesión objetivo.

@@ -715,3 +715,25 @@ en disco del padre o disponibilidad pública Render. Siguiente bloqueo son hando
 HIJO-C01/H05 y PADRE-C01; preparados sin envío automático y sin tocar apps.
 No ADB/teléfonos, cambios al contrato/fixtures/productivo, LAN, push o despliegue.
 Conservadas barreras locales y producción bloqueada.
+
+## Comunicación con sesión OpenCode del hijo — 2026-10-09
+
+Propietario pregunta por conexión a la sesión existente del hijo. Consultados
+skill OpenCode/documentación V2 y OpenAPI del servicio local. Ejecutados
+opencode service status y API de listado de sesiones filtrado por ruta exacta
+C:\Users\Usuario\Documents\parental_hijo y parentID=null: una sesión raíz.
+Solo metadatos; sin exportar/leer historiales, credenciales o configurar servidores.
+
+Enviado informe de relay HEAD 8385410 (104 tests/seis variantes JVM), límites de
+laboratorio y propuesta HIJO-C01 a esa sesión por API prompt con delivery=queue
+y resume=false. Primer aviso tenía codificación incorrecta en pipe PowerShell;
+cancelada únicamente esa entrada propia de bandeja y sustituida por aviso UTF-8.
+GET inbox confirma presencia del reemplazo en cola. No lectura confirmada,
+ejecución activada, tarea delegada ni permisos físicos nuevos. Mensaje identifica
+su origen como IA coordinadora, no como autorización directa del propietario.
+
+Corregida coordinación central: existe canal API explícito disponible, no envío
+automático configurado. No se crearon sesiones/subagentes ni se reanudó o
+interrumpió otra IA. Ningún aviso enviado al padre en este turno. No apps/ADB,
+build/tests nuevos, cambios de contrato, push o despliegue. Turno de comunicación
+y documentación únicamente, con commit de cierre propio del relay.
