@@ -94,6 +94,7 @@ public class PruebaPoliticas {
             System.out.println("ORDEN_DURADERA");
             for (int i = 1; i <= 3; i++) {
                 exigir(("AVANZAR_" + (i * 5000)).equals(canal.readLine()));
+                exigir(frames.isEmpty());
                 tiempo[0] = i * 5000L;
                 PruebaPoliticas.<Unit>esperar(control::avanzarReloj);
                 exigir(original.equals(leer(store).getPendiente()));

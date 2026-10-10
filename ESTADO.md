@@ -675,3 +675,43 @@ VINCULADO/Device Owner/autoridad/enforcement y reloj de políticas solo fixtures
 de test. No acredita vínculo operativo ni restricciones reales. Handoffs padre/
 hijo siguen preparados; no existe envío automático. Sin LAN, push o despliegue;
 health 503 y producción bloqueada conservados.
+
+## Pérdida en tránsito de ACK emitidos — 2026-10-09
+
+Continuación solicitada; una unidad del relay, sin cambios a padre/hijo. Releídos
+sus relevos: PREPARADO productivo/H05 abierta siguen sin nuevas evidencias.
+Añadidos proxy-perdida-ack.mjs y test:padre:ack-perdido. Proxy WSS solo loopback,
+puerto efímero, TLS 1.2 mínimo/hostname y confianza limitada al certificado de
+test. Padre JVM → proxy → relay real; hijo simulado → relay directo. CHALLENGE/
+AUTH/PING/PONG atraviesan proxy sin cambiar bytes ni sustituir autenticación.
+Health 503 comprobado en ambos listeners. Una conexión puente, cp.v1, sin Origin,
+frames 16 KiB, salida 64 KiB, sin compresión y plazo de conexión 10 s. Solo test,
+no proxy de despliegue ni relajación de seguridad en producción; privadas TLS RAM.
+
+Hijo Node emite tres ACK firmados ACCEPTED_PENDING_ENFORCEMENT para los tres
+SET_POLICY idénticos. Relay los retransmite, proxy verifica firma CHILD/MESSAGE
+y los descarta. Callback de envío correcto y comparación directa de los bytes
+interceptados con cada ACK emitido; exactamente tres descartes y cero errores
+del filtro. Cola JVM sin ACK antes de cada avance del reloj de políticas.
+ControlPoliticas/ParentStore reales compilados conservan pendiente, agotan dos
+reintentos y sincronizan. STATE ajeno no resuelve; correcto conserva pendiente;
+tras reapertura cifrada RAM, STATE correlacionado de nueva sesión resuelve fallo
+simulado, contador 1, sin cuarta orden ni APPLIED. TLS/red/firmas reales; tiempo
+de políticas, autoridad, VINCULADO, Device Owner y enforcement solo fixtures.
+
+Ejecutado test:padre:ack-perdido con --ruta-padre explícita
+C:\Users\Usuario\Documents\parental_padre tres veces (inicial, tras ajustes y
+contra build final): correctas. pnpm run verificar: check/build y 104 tests
+aprobados; 28 ejemplos/13 contraejemplos y 10 vectores/78 comprobaciones correctos.
+También ejecutadas test:padre, test:padre:fallos, test:padre:proceso,
+test:padre:politicas y test:padre:politicas:proceso con misma ruta: aprobadas.
+Driver propio compilado solo en temporal OpenCode, sin Gradle ni cambios al padre.
+git status --porcelain de padre e hijo vacío en las consultas finales.
+
+README/guía/coordinación actualizados. RELAY-C01 local cerrada al alcance JVM:
+reinicio real del proceso relay, pérdida selectiva de ACK emitido, reintentos y
+reconciliación cubiertos. No aceptación física/APK/Android/Keystore, persistencia
+en disco del padre o disponibilidad pública Render. Siguiente bloqueo son handoffs
+HIJO-C01/H05 y PADRE-C01; preparados sin envío automático y sin tocar apps.
+No ADB/teléfonos, cambios al contrato/fixtures/productivo, LAN, push o despliegue.
+Conservadas barreras locales y producción bloqueada.

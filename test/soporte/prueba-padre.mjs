@@ -12,10 +12,12 @@ import { crearServidorLocal } from '../../dist/src/infrastructure/config/depende
 import { cerrarServidorHttp } from '../../dist/src/infrastructure/config/servidor.config.js';
 import { CodecProtocolo } from '../../dist/src/infrastructure/adapter/protocol/codec-protocolo.js';
 import { bytesFirma, ClaveVerificacion, CriptografiaProtocolo } from '../../dist/src/infrastructure/adapter/protocol/crypto-protocol.js';
+import { crearProxyPerdidaAck } from './proxy-perdida-ack.mjs';
 
 const argumentos = process.argv.slice(2);
 const politicasProceso = argumentos[0] === '--politicas-proceso';
-const politicas = politicasProceso || argumentos[0] === '--politicas';
+const ackPerdido = argumentos[0] === '--ack-perdido';
+const politicas = ackPerdido || politicasProceso || argumentos[0] === '--politicas';
 const proceso = politicasProceso || argumentos[0] === '--proceso';
 const fallos = proceso || argumentos[0] === '--fallos';
 if (fallos || politicas) argumentos.shift();
@@ -74,7 +76,7 @@ const dentroDe = (promesa, ms) => {
   let timer;
   return Promise.race([promesa, new Promise((_, rechazar) => { timer = setTimeout(() => rechazar(new Error('Timeout de integración local')), ms); })]).finally(() => clearTimeout(timer));
 };
-let servidor, hijo, relay, salidaRelay;
+let servidor, hijo, relay, salidaRelay, proxy;
 try {
   const [tipo, publicaPadre, certB64, keyB64] = (await dentroDe(leerLinea(), 15000)).split('\t');
   assert.equal(tipo, 'LISTO');
@@ -131,6 +133,15 @@ try {
   const codec = new CodecProtocolo(readFileSync(join(raiz, 'compartido/protocolo.schema.json')));
   const cripto = new CriptografiaProtocolo(codec);
   const clavePadre = ClaveVerificacion.desdeSpki('PARENT', publicaPadre);
+  if (ackPerdido) {
+    const claveHijo = ClaveVerificacion.desdeSpki('CHILD', publicaHijo);
+    proxy = await crearProxyPerdidaAck({ destino: origen.replace('https:', 'wss:') + '/ws', cert, key,
+      descartar: bytes => codec.leerFrame(bytes).kind === 'SIGNED' && cripto.verificarSobre(bytes, claveHijo, 'MESSAGE').mensaje.kind === 'ACK' });
+    const healthProxy = await dentroDe(new Promise((resolver, rechazar) => get(`${proxy.origen}/healthz`, { ca: cert }, respuesta => {
+      respuesta.resume(); resolver(respuesta.statusCode);
+    }).on('error', rechazar)), 5000);
+    assert.equal(healthProxy, 503);
+  }
   const firmar = (payload, purpose) => {
     const bytes = codec.codificarPayload(payload);
     const sigB64 = sign('sha256', bytesFirma(purpose, bytes), { key: identidadHijo.privateKey, dsaEncoding: 'der' }).toString('base64url');
@@ -155,7 +166,7 @@ try {
     return reto.connectionId;
   };
   const conexionHijo = await conectarHijo();
-  jvm.stdin.write(`${origen}\t${pareja}\t${publicaHijo}\n`);
+  jvm.stdin.write(`${proxy?.origen ?? origen}\t${pareja}\t${publicaHijo}\n`);
   const sync = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
   assert.equal(sync.kind, 'SYNC_REQUEST'); assert.equal(sync.pairId, pareja);
   const bootId = randomUUID(), childSessionId = randomUUID(), commandNonce = randomBytes(32).toString('base64url');
@@ -170,10 +181,22 @@ try {
   if (politicas) {
     assert.equal(orden.action, 'LOCK_FOR'); assert.equal(orden.durationSec, 60); assert.equal(orden.seq, '1');
     assert.equal(await dentroDe(leerLinea(), 5000), 'ORDEN_DURADERA');
+    const emitirAck = async () => {
+      if (!ackPerdido) return;
+      const ack = firmar({ v: 1, kind: 'ACK', pairId: pareja, sender: 'CHILD', bootId, childSessionId,
+        commandId: orden.commandId, seq: orden.seq, commandPayloadSha256B64: documento.payloadSha256B64,
+        result: 'ACCEPTED_PENDING_ENFORCEMENT', mode: 'LOCKED', reason: 'OK', remainingSec: null }, 'MESSAGE');
+      const interceptado = once(proxy.eventos, 'descartado');
+      await new Promise((resolver, rechazar) => hijo.send(ack, { binary: false }, error => error ? rechazar(error) : resolver()));
+      const [bytes] = await dentroDe(interceptado, 5000);
+      assert.deepEqual(bytes, ack);
+    };
+    await emitirAck();
     for (let i = 1; i <= 2; i++) {
       jvm.stdin.write(`AVANZAR_${i * 5000}\n`);
       assert.deepEqual(await recibir(), documento.bytesFrame());
       assert.equal(await dentroDe(leerLinea(), 5000), `REINTENTO_${i}`);
+      await emitirAck();
     }
     jvm.stdin.write('AVANZAR_15000\n');
     const nuevaSync = cripto.verificarSobre(await recibir(), clavePadre, 'MESSAGE').mensaje;
@@ -205,7 +228,10 @@ try {
       ? 'OK\tPOLITICAS_REINICIO_SIN_REPLAY_RECONCILIACION_RAM'
       : 'OK\tPOLITICAS_SIN_ACK_DOS_REINTENTOS_RECONCILIACION_RAM');
     assert.equal(await dentroDe(terminado, 5000), 0); assert.equal(frames.length, 0);
-    console.log('OK: ControlPoliticas/ParentStore JVM reales, ACK omitido, dos reintentos idénticos y nueva sincronización; hash ajeno no resuelve la orden y reconciliación pendiente/fallo tras reapertura cifrada en RAM.');
+    if (ackPerdido) {
+      assert.equal(proxy.descartados, 3); assert.equal(proxy.errores.length, 0);
+      console.log('OK: tres ACK firmados emitidos por hijo simulado y retransmitidos intactos por relay, descartados en proxy WSS antes del padre; dos reintentos idénticos y reconciliación STATE sin APPLIED.');
+    } else console.log('OK: ControlPoliticas/ParentStore JVM reales, ACK omitido, dos reintentos idénticos y nueva sincronización; hash ajeno no resuelve la orden y reconciliación pendiente/fallo tras reapertura cifrada en RAM.');
     if (politicasProceso) console.log('OK: reinicio abrupto de proceso relay con orden pendiente, nuevo PID/reto/ticket, contexto antiguo invalidado y ninguna orden reproducida antes de reconciliar.');
     console.log('VINCULADO/isDeviceOwner solo ficticios de test; no acredita APK, Keystore, almacenamiento físico ni orden aplicada.');
   } else if (fallos) {
@@ -242,6 +268,7 @@ try {
 } finally {
   clearTimeout(limite); lectura.close(); jvm.kill();
   if (hijo) hijo.terminate();
+  if (proxy) await proxy.cerrar();
   if (relay && relay.exitCode === null && relay.signalCode === null) {
     relay.kill('SIGKILL');
     await dentroDe(salidaRelay, 5000);

@@ -24,6 +24,7 @@ pnpm run test:padre:fallos --ruta-padre "C:\Users\Usuario\Documents\parental_pad
 pnpm run test:padre:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:politicas --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 pnpm run test:padre:politicas:proceso --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
+pnpm run test:padre:ack-perdido --ruta-padre "C:\Users\Usuario\Documents\parental_padre"
 ```
 
 Requiere JDK 21 con java/javac en PATH o JAVA_HOME, clases debug ya compiladas
@@ -164,6 +165,37 @@ El archivo RAM y clave AES del padre sobreviven en la misma JVM: no es reinicio
 Android ni almacenamiento físico. Todos los ACK son omitidos por el simulador,
 no emitidos y perdidos en tránsito. Reautenticación/TLS/WSS/restart Node reales;
 autoridad, vinculación, Device Owner, tiempo de políticas y enforcement ficticios.
+
+### ACK emitidos y perdidos en tránsito
+
+test:padre:ack-perdido usa el recorrido de políticas y proxy-perdida-ack.mjs,
+exclusivamente de laboratorio. El hijo Node se conecta directamente al relay
+real; el padre JVM se conecta mediante un proxy WSS efímero en 127.0.0.1. Este
+abre WSS hacia el relay confiando solo en el certificado efímero con SAN correcto.
+Ambos tramos mantienen TLS/hostname; el padre sigue rechazando TLS sin confianza.
+El proxy reenvía bytes de CHALLENGE/AUTH/AUTH_OK y PING/PONG sin crear autoridad:
+el relay sigue autenticando la firma del padre antes de permitir sus mensajes.
+
+El proxy admite solo /ws y cp.v1 sin Origin, una conexión puente, frames de 16 KiB,
+sin compresión, salida de 64 KiB y plazo de conexión de 10 s. Health permanece
+503 en relay y proxy. No es proxy productivo ni configuración TLS de Render;
+no tiene claves de firma ni sustituye la validación del relay. TLS de test solo
+en RAM. Cierra sockets de ambos tramos y listener al terminar/fallar el harness.
+
+El hijo responde a los tres SET_POLICY idénticos (original y dos reintentos) con
+ACK firmados ACCEPTED_PENDING_ENFORCEMENT. Se confirma envío por WebSocket; el
+proxy recibe desde el relay, verifica propósito MESSAGE/firma CHILD y descarta
+únicamente ACK. La prueba compara los bytes interceptados con los emitidos y
+comprueba tres descartes y cero errores del filtro. No hay recepción de ACK en
+la cola JVM antes de avanzar reloj/reconciliar. STATE y demás frames atraviesan
+el proxy intactos. No se cambia CP/1 ni se reserializan los mensajes retransmitidos.
+
+ControlPoliticas persiste la intención, agota los dos reintentos y pide STATE
+nuevo. Hash ajeno no resuelve; correlación correcta conserva aplicación pendiente.
+Reapertura cifrada RAM y nueva sincronización resuelven fallo simulado conservando
+contador 1, sin cuarta orden ni APPLIED. Fallo de entrega selectivo inyectado en
+la red de laboratorio, no un fallo observado en Android/Render o una garantía
+ante toda pérdida de paquetes. No demuestra enforcement ni persistencia física.
 
 ## Pendientes y handoff al proyecto padre
 

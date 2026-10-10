@@ -80,7 +80,7 @@ Entregar a la IA del padre después de fijar el alcance de la siguiente unidad:
 No usar un booleano de Device Owner enviado por un simulador como acreditación
 física. VINCULADO de P08-B está aislado en tests y no resuelve esta puerta.
 
-### RELAY-C01 — avance parcial de transporte local
+### RELAY-C01 — cobertura JVM local completada, no aceptación física
 
 Ampliar pruebas locales integradas con padre JVM para reinicio real del relay y
 ACK totalmente perdido hasta agotar reintentos, sin cola/reproducción y sin APPLIED
@@ -129,6 +129,18 @@ Quedan pérdida de ACK emitido en tránsito y persistencia/reinicio físicos del
 padre; ninguna evidencia de APK hijo, vínculo operativo o restricciones reales.
 Siguiente prioridad entre proyectos sigue siendo HIJO-C01/H05 y PADRE-C01,
 handoffs preparados sin canal automático ni modificaciones a sus repositorios.
+
+Cierre de cobertura local: test:padre:ack-perdido usa proxy WSS efímero solo
+loopback, TLS/hostname y AUTH del relay intactos. Hijo emite tres ACK firmados;
+relay los retransmite byte a byte y proxy los descarta antes del padre. Dos
+reintentos exactos, pendiente conservado y reconciliación STATE probados con
+ControlPoliticas/ParentStore reales compilados. Seis variantes JVM y 104 tests
+correctos. Pérdida de ACK emitido cubierta por inyección selectiva en laboratorio.
+RELAY-C01 local completada al alcance definido; no sustituye evidencia del hijo
+real, almacenamiento/reinicio Android, aceptación física o despliegue Render.
+No seguir ampliando simulaciones para aparentar avance móvil: activar handoffs
+HIJO-C01 y PADRE-C01 desde sus sesiones y releer resultados antes del siguiente
+cruce. Propietario debe entregarles el documento central; no existe envío automático.
 
 ## 4. Secuencia de puertas
 

@@ -112,6 +112,9 @@ cifrada en RAM. Vínculo y Device Owner ficticios solo en test, nunca acreditaci
 `pnpm run test:padre:politicas:proceso --ruta-padre RUTA` combina políticas sin
 ACK, reinicio abrupto del proceso relay y reconciliación posterior sin repetir
 la orden pendiente. El almacenamiento del padre sigue siendo de laboratorio en RAM.
+`pnpm run test:padre:ack-perdido --ruta-padre RUTA` pierde en un proxy WSS local
+tres ACK firmados realmente emitidos/retransmitidos, antes de llegar al padre.
+Valida dos reintentos y reconciliación por STATE; el proxy es solo de test.
 
 - R02 completado localmente con fixtures y clientes Node simulados.
 - R03 implementado y probado localmente con clientes Node; fase pública pendiente.

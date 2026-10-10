@@ -22,6 +22,7 @@
     "test:padre:proceso": "node test/soporte/prueba-padre.mjs --proceso",
     "test:padre:politicas": "node test/soporte/prueba-padre.mjs --politicas",
     "test:padre:politicas:proceso": "node test/soporte/prueba-padre.mjs --politicas-proceso",
+    "test:padre:ack-perdido": "node test/soporte/prueba-padre.mjs --ack-perdido",
     "verificar": "node scripts/verificar.mjs"
   },
   "pnpm": {
