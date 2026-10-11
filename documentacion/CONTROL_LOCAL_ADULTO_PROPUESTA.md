@@ -101,3 +101,21 @@ unidades automáticamente ni modificar repos ajenos.
 Padre recibe aviso de requisitos nuevos sin interrumpir PADRE-QR01; esa incidencia
 de calidad sigue siendo independiente. No adaptar todavía su validador, UI,
 aceptación o protocolo al nuevo código. Relay solo coordina este diseño.
+
+## 6. Resultado de diseño y revisión pendiente
+
+HIJO-C03 terminado en 9ae6c99; diseño hijo/DISENO_CONTROL_LOCAL_ADULTO.md
+revisado en lectura por coordinador, sin pruebas nuevas. Distingue administración
+RAM de autorización normal por boot y códigos únicos de recuperación; propone
+precedencia por revisión fresca y modo efectivo separado de última orden remota.
+PADRE-C03 asignado solo para revisión documental y decisiones, aún sin resultado.
+
+Los 30 min de permiso normal por defecto, cinco minutos administrativos, código
+aleatorio de 26 caracteres, KDF/coste y alcance de apps son recomendaciones del
+diseño, **no aprobaciones del propietario**. Padre revisará riesgos/alternativas,
+reconciliación y cambios mínimos coordinados; después se presentarán elecciones
+al propietario antes de ADR/versión e implementación. CP/1 permanece congelado.
+
+PADRE-QR01 terminó en a8e4ffc con caso fijo del fallo del detector y bytes/firma
+válidos. No se corrigió lector ni debe usarse PURE_BARCODE como bypass de cámara.
+PADRE-QR02 requiere asignación aparte; este diseño no resuelve el defecto QR.

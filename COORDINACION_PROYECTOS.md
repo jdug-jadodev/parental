@@ -14,15 +14,39 @@ Requisitos/diseño pendiente en documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md.
 Emergencia sin código; no código universal ni secretos en relay. Esto contradice
 prohibición de ALLOW offline de CP/1: proponer versión coordinada antes de cambiar semántica/
 esquema/fixtures. No se aprueba CP/2 ni bypass por esta petición funcional.
-HIJO-C03 enviado/admitido por API con queue/resume=true para diseño documental,
-sin implementación/permisos físicos. No resultado confirmado todavía.
-Padre recibió aviso informativo queue/resume=false, sin nueva tarea o interrupción;
-PADRE-QR01 puede continuar. Nuevas funciones no sustituyen su diagnóstico.
+HIJO-C03 terminado en 9ae6c99, diseño revisado en lectura. PADRE-C03 enviado/
+admitido con queue/resume=true para revisar ese diseño y concretar decisiones;
+no resultado aún. Sin implementación/permisos físicos o versión nueva aprobada.
+PADRE-QR01 terminado en a8e4ffc: fallo QR reproducido, lector no corregido.
+PADRE-QR02 propuesto, no asignado; no ocultar ese defecto por prioridad nueva.
 
 La decisión de bloquear tras reinicio y permitir uso local sin internet sí está
 confirmada; credencial/generación/recuperación, duración/sesión administrativa,
 precedencia local/remota, STATE/ACK y migración siguen pendientes de diseño/acuerdo.
 No inferir de este requisito aprobación del orden H05/H08/H11 o quiosco.
+
+### HIJO-C03 revisada y PADRE-C03 enviada
+
+Diseño hijo/DISENO_CONTROL_LOCAL_ADULTO.md separa administración RAM, permiso
+normal por boot y recuperación limitada. Propone credencial reutilizable propia
+de instalación, verificador/KDF protegido, espera independiente, rotación/olvido
+y revisión de control para últimas acciones frescas locales/remotas. STATE/ACK
+deben distinguir modo efectivo de resultado de orden remota anterior. No código
+maestro en padre/relay, bytes firmados intactos, sin downgrade CP/1 encubierto.
+
+Duración normal 30 min por defecto, sesión administrativa cinco minutos, código
+aleatorio 26 caracteres, KDF/coste, precedencia, apps aprobadas y migración son
+**recomendaciones pendientes**, no decisiones del propietario. Permiso local
+offline y bloqueo tras reinicio sí confirmados. No implementar límites nuevos
+o restringir silenciosamente «uso normal» por esas recomendaciones.
+
+PADRE-C03 documental revisará correspondencia/reconciliación/recuperación,
+cambios mínimos por rol y lista breve de elecciones del propietario antes de
+ADR/versión/puertas. Única sesión raíz padre/bandeja vacía confirmadas antes del
+envío. Sin tests/builds/código nuevo, C02 modificado, CP/1/fixtures/plan/ADR
+aceptados editados, teléfonos/ADB o despliegue. No nueva unidad hijo ni QR02
+automática. El relay revisará implicaciones de versión/autenticación/routing
+al acordar propuesta, sin credenciales ni lógica de desbloqueo en el servidor.
 
 ## 1. Fuentes y situación comprobada
 
@@ -77,8 +101,9 @@ autoriza PADRE-C02 puro con pruebas/commit propios y sin ADB; handoff admitido
 con queue/resume=true y posteriormente terminado en 8a6ae91: 21 tests nuevos,
 167 independientes reportados por padre; diagnóstico solo sourceSet JVM test,
 fuera de APK. Incidencia QR sintética previa pendiente, no corregida por rerun.
-PADRE-QR01 enviado/admitido para diagnóstico acotado. No promoción productiva
-por el acuerdo/validador; puertas/orden del hijo siguen pendientes.
+PADRE-QR01 terminó en a8e4ffc: detector QR falla con contenido reproducible,
+sin corrección productiva; PADRE-QR02 no asignada. No promoción productiva por
+el acuerdo/validador; puertas/orden del hijo siguen pendientes.
 No duplicar tareas ya hechas ni descartar trabajo ajeno.
 
 ### H05-L01 — terminada al alcance aislado

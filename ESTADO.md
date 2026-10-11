@@ -967,3 +967,41 @@ PADRE-QR01, no nueva tarea/cambio de validador/producción/CP1 o interrupción.
 No se crearon sesiones/subagentes, alteraron permisos o editaron apps desde Render.
 Turno propio de requisitos/coordinación/documentación: no build/tests nuevos,
 código productivo/contrato modificado, teléfonos, LAN, push o despliegue.
+
+## HIJO-C03 revisada y revisión PADRE-C03 asignada — 2026-10-10
+
+Propietario informa cierre. Leídos relevo/diseño completo del hijo y evidencia
+PADRE-QR01/relevo del padre en lectura; git log -1 confirma hijo 9ae6c99 y
+padre a8e4ffc. HIJO-C03 solo documental: control local normal offline con
+administración independiente, reinicio bloqueado, credencial propia de instalación,
+KDF/verificador propuestos, espera/recuperación separadas y revisión/STATE/ACK
+para precedencia/reconciliación. Sin código/test/build nuevo o CP/2 aprobada.
+
+30 min de permiso por defecto, cinco minutos administrativos, 26 caracteres de
+código aleatorio, KDF/coste, apps aprobadas y demás opciones son recomendaciones
+del hijo, NO decisiones del propietario. Offline local y reboot bloqueado sí
+confirmados. No se imponen límites/alcance nuevos por aceptar entrega de diseño.
+
+Padre reporta diagnóstico acotado de 128 frames con tres respuestas fallidas;
+fixture fijo confirma detector seleccionando patrón interno incorrecto. Control
+PURE y otras máscaras leen bytes/firma, no receta segura para cámara. Muestreo
+falló; caracterización precisada y suite final 132 app correctas incluyen fallo
+conocido explícito, no corrección. No reejecutado aquí. QRLocal/lector productivo
+sin cambiar: PADRE-QR02 propuesta requiere revisión/asignación aparte.
+
+Confirmada sesión raíz padre por ruta exacta y bandeja vacía antes de envío.
+PADRE-C03 admitido por API delivery=queue/resume=true: revisión documental del
+diseño hijo/reconciliación/precedencia, protección local/olvido/rotación, mínimos
+de versión/dominios/subprotocolo y migración por rol; elecciones concretas para
+propietario antes de implementación/puertas. CP/1 y copias/fixtures congelados.
+No resultado confirmado todavía. Sin asignar QR02 o nueva tarea hijo en este turno.
+
+Prohibidos código/tests/builds nuevos, validador C02/producción/UI/credencial/
+Keystore/cámara, plan/ADR aceptados/contrato editados, dispositivos/ADB/CA/LAN,
+push/despliegue o repos ajenos en esa revisión. Commit/documentación propios,
+sin subagentes/prompts de vuelta. Revisión relay posterior al acuerdo sin
+secretos/estado de credencial ni lógica de desbloqueo en servidor.
+
+Actualizados requisitos/README/coordinación propia con resultados y pendientes.
+Sin apps editadas desde Render, pruebas/builds propios nuevos o cambios a
+CP/1/relay productivo/barreras. Cierre propio documental con commit.
