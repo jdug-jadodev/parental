@@ -128,3 +128,31 @@ y confirmaciones de revisiones anteriores. Sin red no afirmar bloqueo actual del
 hijo. Preservar incertidumbre/seq/esperas/consumos/identidad en migración, sin
 inventar credencial o APPLIED. Fuente REMOTA al perder red, duración, sesión,
 alcance de apps, credencial y recuperación siguen elecciones pendientes.
+
+## 7. Decisiones del propietario — 2026-10-11
+
+Respuestas expresas recogidas tras revisar PADRE-C03:
+
+- Desbloqueo local normal con duración elegida por el adulto en cada acción;
+  al vencer vuelve bloqueado. No default silencioso de 30 minutos. Rango y
+  presentación del tiempo todavía por acordar.
+- Permitir todas las apps normales, no solo una lista parental autorizada.
+  Controles administrativos del hijo protegidos por código; viabilidad y límites
+  Android/enforcement necesitan diseño y pruebas, sin prometer protección física.
+- Ambas autoridades pueden cambiar el modo: última acción válida y confirmada
+  en hijo gana. Bloqueo remoto nuevo puede revocar permiso local y desbloqueo local
+  posterior puede volver a permitir. Contextos/paquetes/timers viejos no mandan.
+- Autorización REMOTA conserva el permiso aunque el hijo pierda internet, hasta
+  su vencimiento, bloqueo válido nuevo o reinicio. También LOCAL funciona offline.
+  La reconexión no renueva ni restaura permisos vencidos/revocados. Esto cambia
+  adicionalmente la regla CP/1 de bloqueo al perder internet; exige versión nueva.
+- Administración permanece mientras se está en controles, con caducidad breve
+  todavía por definir. Salir o pasar a fondo cierra y pide código al volver.
+  Cerrar administración no revoca por sí solo autorización normal ya comprometida.
+
+Reinicio siempre bloqueado y emergencia sin código permanecen requisitos.
+Credencial/formato/generación/entrega, intentos/esperas, recuperación/rotación,
+duraciones/rangos concretos, LOCK_FOR y migración todavía pendientes. No se
+aprobaron cinco minutos administrativos, 26 caracteres, KDF/coste, contrato
+CP/2 o implementación por estas respuestas. Primero concretar esas elecciones
+y la propuesta conjunta; no asignar silenciosamente código o permisos físicos.

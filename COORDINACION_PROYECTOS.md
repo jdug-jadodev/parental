@@ -71,6 +71,21 @@ No nuevas asignaciones, orden/planes alterados o CP/2 acordado por «continúa»
 Defecto QR sigue abierto, sin QR02 asignada. Emergencia y bloqueo tras reboot
 siguen requisitos confirmados. No pruebas físicas o cambios de apps desde Render.
 
+### Decisiones funcionales confirmadas — 2026-10-11
+
+Propietario elige tiempo de desbloqueo local en cada acción, todas las apps
+normales (sin lista parental), última acción válida confirmada en hijo entre
+ambas autoridades, y conservar permiso REMOTO al perder internet hasta plazo/
+bloqueo nuevo/reinicio. Administración cierra al salir o pasar a fondo, sin
+revocar por ello el uso permitido; caducidad breve todavía por concretar.
+Detalle en §7 de documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md.
+
+Conservar REMOTO offline también contradice CP/1: no cambiarlo unilateralmente.
+Pendientes formato/entrega/recuperación/rotación de credencial, intentos/esperas,
+rangos/duración administrativa, LOCK_FOR y migración/versionado. No 26 caracteres
+o cinco minutos aprobados. Sin nueva asignación o autorización física por estas
+respuestas; las entregas hijo/padre previas son propuestas anteriores al acuerdo.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

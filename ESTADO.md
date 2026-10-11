@@ -1027,3 +1027,19 @@ para propietario. No nueva asignación de implementación/QR02, CP/2 aprobada,
 contrato/fixtures/plan/ADR aceptados modificados, teléfonos/ADB, apps editadas,
 LAN/push/despliegue o barreras relajadas. Solo revisión/documentación propia;
 git diff --check y revisión de preparado antes de commit de cierre.
+
+### Respuestas del propietario sobre control local — 2026-10-11
+
+Herramienta de preguntas: elegir tiempo cada desbloqueo local; todas las apps
+normales; ambas autoridades pueden cambiar mediante última acción válida
+confirmada en hijo; permiso remoto continúa al perder internet hasta vencimiento/
+bloqueo nuevo/reinicio; administración cierra al salir/fondo y exige código al
+volver, caducidad breve pendiente. Cierre administrativo no cancela uso normal.
+Reboot bloqueado y emergencia sin código permanecen. No imponer lista de apps.
+
+Registrado §7 de propuesta y coordinación central. REMOTO offline cambia también
+regla CP/1: todavía no modificación de contrato/fixtures/código. Pendientes
+credencial/entrega/rotación/olvido, intentos/esperas, rangos/plazo administrativo,
+LOCK_FOR y versión/migración. No formato de 26 caracteres, cinco minutos o KDF
+aprobados; no nuevas tareas a sesiones, permisos físicos, pruebas/builds, apps
+editadas, LAN o despliegue. Solo documentación propia y cierre con commit.
