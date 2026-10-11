@@ -1058,3 +1058,25 @@ normalización/respuesta, transacción/reset/revocación y olvido completo pendi
 No pruebas/builds nuevos, apps/contrato/fixtures editados, nuevas asignaciones a
 sesiones, dispositivos/ADB/LAN/push/despliegue o permisos físicos. Solo documentos
 propios, revisión de diff/preparado y commit de cierre.
+
+## HIJO-C04 documental enviada — 2026-10-11
+
+Propietario solicita continuar tras código 5–10 dígitos/pregunta personalizada.
+Leídos coordinación central/relevo hijo en ruta explícita; repo propio limpio al
+inicio. Consultada documentación API V2 y esquema /openapi.json del servicio,
+confirmado cuerpo prompt y sesión raíz hijo en ruta exacta con bandeja vacía.
+Asignada HIJO-C04 queue/resume=true, admisión confirmada; no entrega/resultados aún.
+
+Una unidad de consolidación documental sobre HIJO-C03 9ae6c99 y revisión padre
+984693c, incorporando todas decisiones centrales §§7–8 y separación estado efectivo/
+resultado remoto, acciones/contextos/timers viejos inválidos, ambos permisos offline,
+uso de todas apps normales, pregunta/PIN protegidos. Proponer parámetros pendientes
+sin declararlos aprobados y riesgos sin garantías físicas: intentos/esperas de ambas
+vías resistentes a alternancia/reboot, normalización, KDF/protección, reset atómico/
+revocación/olvido, sesión/rangos/LOCK_FOR y transición mínima de tres roles.
+
+Solo diseño/relevo/ESTADO y commit propios del hijo; sin código/tests/builds,
+planes/ADR aceptados/CP1/fixtures cambiados, dispositivos/ADB/CA/LAN/push/despliegue
+o apps editadas desde Render. Sin nueva tarea padre/QR02, subagentes/sesiones o
+puertas aprobadas. Es admisión, no ejecución terminada ni versión acordada.
+Actualizados coordinación/propuesta/estado propios; revisión de diff y commit.

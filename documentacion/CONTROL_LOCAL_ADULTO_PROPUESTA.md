@@ -185,3 +185,14 @@ uso normal o administración permanente; precisar autorización específica de r
 No añadir obligatoriamente un código de recuperación adicional como sustituto de
 la pregunta elegida. CP/1/fixtures permanecen intactos; diseño conjunto por actualizar
 antes de implementación y sin nueva asignación o permiso físico en este turno.
+
+## 9. Consolidación HIJO-C04 asignada
+
+2026-10-11: propietario solicita continuar. HIJO-C04 enviada/admitida para
+actualizar diseño hijo con §§7–8 y precisiones PADRE-C03. Solo documentación,
+sin resultado confirmado ni código/contrato nuevo autorizado. Proponer seguridad
+de PIN/pregunta, transacción de reset/revocación y matriz/lifecycle/contextos,
+decisiones técnicas pendientes y siguiente unidad mínima para revisión. No más
+lista parental/26 caracteres o default 30 min contra decisiones expresas.
+No trasladar recuperación a servidor ni crear una apertura automática por reset.
+Revisión de versión/planes y autorización de implementación siguen posteriores.

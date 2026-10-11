@@ -16,14 +16,16 @@ prohibición de ALLOW offline de CP/1: proponer versión coordinada antes de cam
 esquema/fixtures. No se aprueba CP/2 ni bypass por esta petición funcional.
 HIJO-C03 terminado en 9ae6c99, diseño revisado en lectura. PADRE-C03 terminado
 en 984693c y revisado en lectura: compatible como propuesta con precisiones;
-opciones del propietario pendientes. Sin implementación/permisos físicos o
+decisiones nuevas del propietario recogidas en §§7–8 de la propuesta central;
+HIJO-C04 asignada para consolidarlas. Sin implementación/permisos físicos o
 versión nueva aprobada.
 PADRE-QR01 terminado en a8e4ffc: fallo QR reproducido, lector no corregido.
 PADRE-QR02 propuesto, no asignado; no ocultar ese defecto por prioridad nueva.
 
-La decisión de bloquear tras reinicio y permitir uso local sin internet sí está
-confirmada; credencial/generación/recuperación, duración/sesión administrativa,
-precedencia local/remota, STATE/ACK y migración siguen pendientes de diseño/acuerdo.
+Confirmados reboot bloqueado, permisos offline LOCAL/REMOTO, tiempo elegido,
+ambas autoridades, todas las apps normales, administración cerrada al salir,
+código numérico 5–10 y pregunta personalizada. Parámetros de seguridad/lifecycle,
+STATE/ACK y migración/versionado siguen pendientes de diseño/acuerdo.
 No inferir de este requisito aprobación del orden H05/H08/H11 o quiosco.
 
 ### HIJO-C03 revisada y PADRE-C03 enviada
@@ -98,6 +100,26 @@ atómico. Riesgo de cinco dígitos/pregunta adivinable explícito, no garantía 
 Pendientes normalización, intentos/esperas, lifecycle del reset, cambios autorizados
 y respuesta olvidada/corrupción. Diseños hijo/padre anteriores necesitan actualización;
 sin nueva tarea automática, CP/2 aprobada, implementación o permisos de dispositivos.
+
+### HIJO-C04 — consolidación de decisiones asignada
+
+Continuación solicitada por propietario tras decisiones de credencial. Una tarea
+documental en sesión existente hijo, con HIJO-C03/PADRE-C03 y §§7–8 centrales en
+lectura. Esquema servido /openapi.json consultado; ruta explícita y bandeja vacía
+confirmadas antes de envío queue/resume=true admitido. No resultado confirmado.
+
+Actualizar matriz/credencial/recuperación/precedencia y mínimos de versión; distinguir
+requisitos de recomendaciones (duraciones/rangos, normalización, límites/esperas,
+KDF/protección, reset/rotación/revocación, olvido completo, LOCK_FOR/migración).
+Evitar bypass alternando pregunta/PIN o reiniciando, emergencia independiente;
+sin prometer protección física ni volver a lista de apps contra requisito.
+Reset solo establece código nuevo, sin uso normal automático o administración
+permanente. Propuesta atómica/contextual, sin secretos en padre/relay/exportaciones.
+
+Diseño/relevo/ESTADO y commit propios; sin código/tests/builds, contrato/fixtures/
+plan/ADR aceptados modificados, nuevos permisos físicos/ADB o despliegue. No tarea
+nueva padre/QR02, sesiones/subagentes o promoción de H05/puertas. Revisar entrega
+antes de versión/implementación; no generar siguiente unidad automáticamente.
 
 ## 1. Fuentes y situación comprobada
 
