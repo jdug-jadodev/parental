@@ -156,3 +156,32 @@ duraciones/rangos concretos, LOCK_FOR y migración todavía pendientes. No se
 aprobaron cinco minutos administrativos, 26 caracteres, KDF/coste, contrato
 CP/2 o implementación por estas respuestas. Primero concretar esas elecciones
 y la propuesta conjunta; no asignar silenciosamente código o permisos físicos.
+
+## 8. Código numérico y recuperación — 2026-10-11
+
+Propietario define código maestro como serie de números y recuperación mediante
+pregunta. Tras consultar longitud y configuración, confirma:
+
+- Código numérico de **5 a 10 dígitos**, longitud elegida por el adulto. No imponer
+  ocho dígitos, 26 caracteres o generación aleatoria como requisito aprobado.
+  Tratar como cadena de dígitos, sin conversión a entero que pierda ceros iniciales.
+- **Pregunta personalizada**, con respuesta configurada por el adulto en el hijo.
+  Recuperación local sin internet para establecer código nuevo, no revelar anterior.
+  No enviar código/respuesta/verificadores al padre/relay ni guardarlos en logs,
+  repositorio, QR o exportación pública. No se solicitaron secretos reales aquí.
+
+Pregunta visible no es secreto; respuesta sí. Una respuesta conocida por el menor
+o deducible puede eludir el código. Cinco dígitos ofrecen solo 100.000 combinaciones:
+no afirmar alta entropía ni resistencia física por este formato. Diseñar protección
+de verificadores/KDF y límites/esperas persistidos para ambas vías, sin bypass por
+reinicio y sin afectar emergencia. Parámetros/coste y garantías requieren revisión
+y pruebas, no cifras inventadas ni teléfonos autorizados por esta decisión.
+
+Pendientes: reglas de respuesta (mayúsculas/acentos/espacios), límites de longitud,
+intentos/esperas, configuración/cambio autorizado de pregunta y código, transacción
+de recuperación y revocación de sesiones/permisos, y tratamiento de respuesta
+olvidada/registro corrupto. No convertir recuperación correcta automáticamente en
+uso normal o administración permanente; precisar autorización específica de reset.
+No añadir obligatoriamente un código de recuperación adicional como sustituto de
+la pregunta elegida. CP/1/fixtures permanecen intactos; diseño conjunto por actualizar
+antes de implementación y sin nueva asignación o permiso físico en este turno.

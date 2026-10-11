@@ -1043,3 +1043,18 @@ credencial/entrega/rotación/olvido, intentos/esperas, rangos/plazo administrati
 LOCK_FOR y versión/migración. No formato de 26 caracteres, cinco minutos o KDF
 aprobados; no nuevas tareas a sesiones, permisos físicos, pruebas/builds, apps
 editadas, LAN o despliegue. Solo documentación propia y cierre con commit.
+
+### Código maestro numérico y pregunta personalizada — 2026-10-11
+
+Propietario especifica recuperación por pregunta y código numérico. Herramienta
+de preguntas confirma rango 5–10 dígitos y pregunta personalizada configurada
+por adulto, opción de recuperación local offline para cambiar código sin mostrar
+anterior. No pedidos/recogidos códigos ni respuestas reales. Registrados propuesta
+central §8 y coordinación, sin imponer ocho dígitos o 26 caracteres aleatorios.
+
+Riesgo explícito de PIN corto/respuesta deducible; proteger ambos verificadores,
+limitar intentos/esperas persistidos sin impedir emergencia. Diseño KDF/parámetros,
+normalización/respuesta, transacción/reset/revocación y olvido completo pendientes.
+No pruebas/builds nuevos, apps/contrato/fixtures editados, nuevas asignaciones a
+sesiones, dispositivos/ADB/LAN/push/despliegue o permisos físicos. Solo documentos
+propios, revisión de diff/preparado y commit de cierre.

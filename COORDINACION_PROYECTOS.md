@@ -86,6 +86,19 @@ rangos/duración administrativa, LOCK_FOR y migración/versionado. No 26 caracte
 o cinco minutos aprobados. Sin nueva asignación o autorización física por estas
 respuestas; las entregas hijo/padre previas son propuestas anteriores al acuerdo.
 
+### Credencial y recuperación confirmadas — 2026-10-11
+
+Propietario elige código maestro numérico de 5 a 10 dígitos y pregunta personalizada
+con respuesta configurada por adulto para recuperación local offline y cambio de
+código, no exposición del anterior. Detalle y límites en §8 de propuesta central.
+Sin secretos reales recogidos. No credencial aleatoria de 26 caracteres o longitud
+fija de ocho aprobadas. Pregunta no secreta/respuesta secreta: evitar datos deducibles
+y diseñar límites persistidos de ambas vías, KDF/verificadores protegidos y reset
+atómico. Riesgo de cinco dígitos/pregunta adivinable explícito, no garantía física.
+Pendientes normalización, intentos/esperas, lifecycle del reset, cambios autorizados
+y respuesta olvidada/corrupción. Diseños hijo/padre anteriores necesitan actualización;
+sin nueva tarea automática, CP/2 aprobada, implementación o permisos de dispositivos.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
