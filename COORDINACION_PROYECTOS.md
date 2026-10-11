@@ -1,6 +1,6 @@
 # Coordinación central — padre, hijo y relay
 
-Última actualización: 2026-10-10. Coordinador: sesión de parental_render, por petición del propietario.
+Última actualización: 2026-10-11. Coordinador: sesión de parental_render, por petición del propietario.
 Este documento organiza el trabajo; no autoriza editar las apps, operar teléfonos,
 abrir LAN, instalar certificados, aprovisionar, borrar datos, hacer push o desplegar.
 Una tarea por turno. Cada IA implementa y registra resultados en su propio repo.
@@ -14,9 +14,10 @@ Requisitos/diseño pendiente en documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md.
 Emergencia sin código; no código universal ni secretos en relay. Esto contradice
 prohibición de ALLOW offline de CP/1: proponer versión coordinada antes de cambiar semántica/
 esquema/fixtures. No se aprueba CP/2 ni bypass por esta petición funcional.
-HIJO-C03 terminado en 9ae6c99, diseño revisado en lectura. PADRE-C03 enviado/
-admitido con queue/resume=true para revisar ese diseño y concretar decisiones;
-no resultado aún. Sin implementación/permisos físicos o versión nueva aprobada.
+HIJO-C03 terminado en 9ae6c99, diseño revisado en lectura. PADRE-C03 terminado
+en 984693c y revisado en lectura: compatible como propuesta con precisiones;
+opciones del propietario pendientes. Sin implementación/permisos físicos o
+versión nueva aprobada.
 PADRE-QR01 terminado en a8e4ffc: fallo QR reproducido, lector no corregido.
 PADRE-QR02 propuesto, no asignado; no ocultar ese defecto por prioridad nueva.
 
@@ -47,6 +48,28 @@ envío. Sin tests/builds/código nuevo, C02 modificado, CP/1/fixtures/plan/ADR
 aceptados editados, teléfonos/ADB o despliegue. No nueva unidad hijo ni QR02
 automática. El relay revisará implicaciones de versión/autenticación/routing
 al acordar propuesta, sin credenciales ni lógica de desbloqueo en el servidor.
+
+### PADRE-C03 revisada — 2026-10-11
+
+Leídos relevo y padre/REVISION_CONTROL_LOCAL_ADULTO.md completos; HEAD confirmado
+984693c. Revisión documental compatible con HIJO-C03, sin tests/builds nuevos.
+Precisiones: revisión global independiente de seq remoto, escritor único, segunda
+acción contra contexto sustituido requiere nueva confirmación; timers viejos de
+LOCK_FOR también se invalidan. ACK anterior solo puede resolver su resultado
+correlacionado, no reemplazar modo efectivo de STATE posterior. Estado sin canal
+es desconocido, no prueba de bloqueo: podría existir autorización LOCAL offline.
+
+Esperas/consumos/seq/pendientes e identidad deben preservarse en transición; no
+fabricar credencial, autorización o acreditación. Migración presencial propuesta,
+no ejecutada/autorizada. KDF/coste/antirollback físicos no acreditados. No añadir
+recibos PAIR/OFFLINE o recuperación nueva como requisito implícito de este cambio.
+
+Siguiente paso: elecciones concretas del propietario sobre duración normal,
+sesión administrativa, alcance de apps, credencial, precedencia y pérdida de red
+de permiso REMOTO; después concretar recuperación/rotación y versión coordinada.
+No nuevas asignaciones, orden/planes alterados o CP/2 acordado por «continúa».
+Defecto QR sigue abierto, sin QR02 asignada. Emergencia y bloqueo tras reboot
+siguen requisitos confirmados. No pruebas físicas o cambios de apps desde Render.
 
 ## 1. Fuentes y situación comprobada
 

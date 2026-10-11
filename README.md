@@ -90,8 +90,9 @@ Coordinación central de los tres proyectos en `COORDINACION_PROYECTOS.md`.
 Nuevo requisito de control local del adulto (2026-10-10), todavía sin implementar:
 `documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md`. Desbloqueo normal con código
 incluso sin internet y bloqueo tras reinicio requieren acuerdo de nueva versión;
-CP/1 y sus fixtures siguen congelados. HIJO-C03 diseñada, revisión PADRE-C03
-pendiente; ninguna implementación de control local normal o versión nueva aprobada.
+CP/1 y sus fixtures siguen congelados. HIJO-C03 diseñada y PADRE-C03 revisada;
+decisiones del propietario pendientes, sin control local normal implementado ni
+versión nueva aprobada.
 El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
 carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
 sin editar apps ni trasladar autorizaciones físicas entre sesiones.

@@ -108,7 +108,9 @@ HIJO-C03 terminado en 9ae6c99; diseño hijo/DISENO_CONTROL_LOCAL_ADULTO.md
 revisado en lectura por coordinador, sin pruebas nuevas. Distingue administración
 RAM de autorización normal por boot y códigos únicos de recuperación; propone
 precedencia por revisión fresca y modo efectivo separado de última orden remota.
-PADRE-C03 asignado solo para revisión documental y decisiones, aún sin resultado.
+PADRE-C03 terminado en 984693c y revisado el 2026-10-11: compatible como propuesta
+con precisiones, sin opciones/versión/implementación aprobadas. Revisión completa
+en padre/REVISION_CONTROL_LOCAL_ADULTO.md del repositorio padre, solo en lectura.
 
 Los 30 min de permiso normal por defecto, cinco minutos administrativos, código
 aleatorio de 26 caracteres, KDF/coste y alcance de apps son recomendaciones del
@@ -119,3 +121,10 @@ al propietario antes de ADR/versión e implementación. CP/1 permanece congelado
 PADRE-QR01 terminó en a8e4ffc con caso fijo del fallo del detector y bytes/firma
 válidos. No se corrigió lector ni debe usarse PURE_BARCODE como bypass de cámara.
 PADRE-QR02 requiere asignación aparte; este diseño no resuelve el defecto QR.
+
+Precisiones de revisión: serializar acciones contra revisión vigente, separar seq
+remoto de revisión global y resultado de orden del modo efectivo; invalidar timers
+y confirmaciones de revisiones anteriores. Sin red no afirmar bloqueo actual del
+hijo. Preservar incertidumbre/seq/esperas/consumos/identidad en migración, sin
+inventar credencial o APPLIED. Fuente REMOTA al perder red, duración, sesión,
+alcance de apps, credencial y recuperación siguen elecciones pendientes.
