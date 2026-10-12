@@ -1080,3 +1080,21 @@ planes/ADR aceptados/CP1/fixtures cambiados, dispositivos/ADB/CA/LAN/push/despli
 o apps editadas desde Render. Sin nueva tarea padre/QR02, subagentes/sesiones o
 puertas aprobadas. Es admisión, no ejecución terminada ni versión acordada.
 Actualizados coordinación/propuesta/estado propios; revisión de diff y commit.
+
+## HIJO-C04 interrumpida y reanudada — 2026-10-12
+
+Leídos relevo hijo y HEAD: todavía HIJO-C03 9ae6c99, sin entrega C04. Repo Render
+limpio al inicio. API última respuesta C04 msg_12b67ac12001ft5fzJk39Jh3ql terminada
+finish=error/type=aborted/Step interrupted; tres reads externos (padre/propuesta/
+coordinación central) con Tool execution interrupted. Sin causa adicional inferida.
+No permisos pendientes observados, no sesión activa observada ni bandeja pendiente.
+No se editaron permisos ni se declaró tarea terminada por outcome de sesión.
+
+Consultado esquema prompt /openapi.json. Por continuación del propietario se envía
+reanudación MISMA HIJO-C04 en sesión existente, con requisitos completos/precisiones
+PADRE-C03 incluidos para trabajar sobre documentos locales sin ampliar accesos.
+queue/resume=true admitido: ejecución solicitada, entrega pendiente. Preservar
+parcial e informar bloqueo, sin nueva unidad/subagentes/sesiones o tarea padre/QR02.
+Mismos límites: solo documentación/commit hijo, sin código/tests/builds/CP1/fixtures/
+planes aceptados modificados, apps editadas desde Render, dispositivos/ADB/LAN/push/
+despliegue. Actualizados coordinación/estado propios y commit documental de cierre.

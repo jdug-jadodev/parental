@@ -1,6 +1,6 @@
 # Coordinación central — padre, hijo y relay
 
-Última actualización: 2026-10-11. Coordinador: sesión de parental_render, por petición del propietario.
+Última actualización: 2026-10-12. Coordinador: sesión de parental_render, por petición del propietario.
 Este documento organiza el trabajo; no autoriza editar las apps, operar teléfonos,
 abrir LAN, instalar certificados, aprovisionar, borrar datos, hacer push o desplegar.
 Una tarea por turno. Cada IA implementa y registra resultados en su propio repo.
@@ -120,6 +120,20 @@ Diseño/relevo/ESTADO y commit propios; sin código/tests/builds, contrato/fixtu
 plan/ADR aceptados modificados, nuevos permisos físicos/ADB o despliegue. No tarea
 nueva padre/QR02, sesiones/subagentes o promoción de H05/puertas. Revisar entrega
 antes de versión/implementación; no generar siguiente unidad automáticamente.
+
+### HIJO-C04 interrumpida y reanudada — 2026-10-12
+
+Propietario pide continuar. Relevo hijo todavía sin C04 y HEAD 9ae6c99; API muestra
+último paso C04 terminado con finish=error, aborted/Step interrupted. Tres lecturas
+externas quedaron Tool execution interrupted; no inferir fallo de permisos o causa
+distinta. No permisos pendientes ni sesión activa observada, bandeja vacía antes
+de reanudar. No entrega/commit confirmados; el inicio no equivale a tarea terminada.
+
+Reanudada la MISMA unidad en sesión existente, queue/resume=true admitido, con
+requisitos y precisiones de padre íntegros en mensaje para no depender de lecturas
+externas. Sin ampliar permisos, crear sesiones/subagentes o duplicar asignación.
+Conservar parcial, informar bloqueos; límites documentales/CP1/dispositivos intactos.
+Resultado pendiente, no nueva tarea padre/QR02 o implementación autorizada.
 
 ## 1. Fuentes y situación comprobada
 
