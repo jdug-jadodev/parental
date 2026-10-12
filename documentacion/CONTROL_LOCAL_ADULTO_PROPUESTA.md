@@ -282,3 +282,18 @@ Sin instalación/restricciones/ADB, tests/builds/APK, permisos concedidos, datos
 reales de uso o cambios en planes/ADR/CP1/fixtures/repos ajenos por esta unidad.
 Envío admitido queue/resume=true a sesión existente del hijo; entrega todavía
 pendiente. No permisos ampliados/sesiones nuevas por las consultas de documentación.
+
+## 14. HIJO-C06 revisada; primer acumulador de laboratorio
+
+2026-10-12: C06 terminado en ae1c7eb, diseño íntegro revisado. Señal de pantalla/
+Keyguard no es humano usando; acceso UsageStats, definición métrica/total, retención
+del marcador/día/zona y aviso con padre cerrado requieren decisión/revisión. No
+se han aprobado por aceptar entrega documental ni por solicitar continuar.
+
+HIJO-L02 enviada/admitida para modelo puro solo test JVM: sumar intervalos de
+evidencia sintética explícita, subtotal conocido/calidad y snapshot absoluto con
+ventana/boot/reloj/repositorio inyectados. Sin elegir fuente Android/métrica humana,
+día/zona productivos o añadir retención de marcador pendiente. Pruebas negativas
+de doble conteo/huecos/proceso/boot/IO/ventanas/overflow, sin uso real o autorización
+de apps. Resultado diagnóstico, fuera main/APK/androidTest, no implementación
+operativa del contador ni avisos. Revisión posterior antes de integración/versionado.

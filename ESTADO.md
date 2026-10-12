@@ -1160,3 +1160,30 @@ dispositivos/CA/LAN/push/despliegue/CP1/fixtures/planes/ADR aceptados modificado
 Añadidos §§11–13 propuesta central, coordinación y este estado. Servidor no almacena
 uso/historial ni añade servicio push/cron externo por esta petición. No contratos/
 codecs/barreras/privacidad real alterados o pruebas propias nuevas; commit documental.
+
+## HIJO-C06 revisada e HIJO-L02 JVM aislada enviada — 2026-10-12
+
+Propietario solicita continuar. Leídos relevo C06 y documento completo (316 líneas)
+ARQUITECTURA_BLOQUEO_Y_SENALES_MINIMAS.md, HEAD ae1c7eb confirmado; árbol Render
+limpio al inicio. Arquitectura/señales solo documentales: no pruebas reales de
+uso/bloqueo/notificación, semántica indicador/total/permisos de uso no aprobados.
+Proxy pantalla/Keyguard vs humano, eventos API34/acceso especial minimizados,
+subtotal parcial/gaps vs autorizado, día/zona/retención marcador y padre cerrado
+continúan preguntas/diseño a revisar. CP1/puertas/planes sin cambiar.
+
+Asignada HIJO-L02 por continuación de coordinación: primera pieza código/test de
+laboratorio para acumulador de intervalos explícitos FICTICIAS_JVM y diagnóstico
+absoluto/subtotal/calidad, solo sourceSet test fuera main/APK/androidTest. Ventana,
+boot/reloj/repositorio inyectados, sin IO/datos/apps reales o métrica humana elegida.
+Duplicados/solapamientos/atrasos/overflow/gaps/proceso/boot/IO/readback/ventanas 23–25h/
+snapshots viejos entre casos pedidos; no rellenar desconocido con autorizado o cero,
+no crear marcador/historial real pendiente de aceptación. Pruebas JVM focalizadas/
+regresión pertinente y evidencia propia; no Android/persistencia real/firmas/CP1
+o telemetría productiva. Aislamiento comprobable por sourceSet/clases sin instalar.
+
+Consultado esquema /openapi.json, raíz hijo por ruta y bandeja vacía. Admisión API
+queue/resume=true confirmada; no entrega/tests/commit nuevos confirmados aún. Sin
+deps nuevas, código productivo/notificaciones/WSS/KDF/Keystore/fixtures/plan/ADR
+aceptados editados, dispositivos/ADB/CA/LAN/push/despliegue/repos ajenos/subagentes/
+sesiones nuevas o asignaciones padre/QR02. Documentos propios actualizados; commit
+de coordinación. No builds/tests propios nuevos o secretos/datos reales recogidos.

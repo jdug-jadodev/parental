@@ -189,6 +189,31 @@ aceptados editados, permisos de uso reales/políticas/dispositivos/ADB/LAN/despl
 o nueva tarea padre/QR02. Sin subagentes/sesiones/promoción H05/H06 o versión nueva.
 Resultado pendiente; revisar deltas de privacidad/contrato antes de implementación.
 
+### HIJO-C06 revisada y laboratorio HIJO-L02 enviado — 2026-10-12
+
+Relevo e informe ARQUITECTURA_BLOQUEO_Y_SENALES_MINIMAS.md completos revisados,
+HEAD ae1c7eb confirmado. C06 solo documental. Indica proxy interactivo/Keyguard
+distinto de humano usando; interacción reciente requiere acceso especial y API34
+puede entregar más datos por paquete. Fuente/métrica/permisos no elegidos. Total
+estimado/subtotal parcial distinto de tiempo autorizado, día/zona/retención y
+marcador único aún propuestas. WSS sin app padre viva/red no garantiza notificación.
+No contrato/versión/H05/puertas aprobados o datos de uso reales recopilados.
+
+Propietario solicita continuar; HIJO-L02 asignada en sesión existente: componente
+solo sourceSet test JVM, fuera APK/main/androidTest, con intervalos FICTICIAS_JVM
+explícitos, suma/subtotal/calidad y snapshots absolutos diagnósticos. Políticas de
+ventana inyectadas, no fijar día/zona/métrica/permisos de producto. Sin marcador
+durable o historial/intervalos reales. Testear duplicación/solapamiento/atrasos/
+overflow, boot/proceso/huecos, commit/readback inciertos, límites 23/25h/salto de
+ventana y snapshots viejos; nunca llenar gap por tiempo permitido o afirmar uso
+humano/Android probado. Build/sourceSet test mínimo y pruebas JVM pertinentes.
+
+API/esquema/ruta raíz/bandeja vacía comprobados; queue/resume=true admitido, no
+resultado confirmado. Código/tests aislados y evidencia/relevo/ESTADO/commit hijo;
+sin dependencias nuevas, producción/UI/IO real/protocolo/planes/fixtures/puertas,
+dispositivos/ADB/LAN/notificaciones/WSS/push/despliegue o tarea padre/QR02. Detener
+si exige semántica pendiente antes de ampliar; no otra tarea automática/subagentes.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
