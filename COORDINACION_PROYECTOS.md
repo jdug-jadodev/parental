@@ -158,6 +158,37 @@ Proponer prototipo/pruebas futuras sin ejecutarlos. Solo documento/relevo/ESTADO
 commit hijo, sin código/tests/builds/plan/ADR/CP1/fixtures/dispositivos/ADB/LAN/
 despliegue o nuevas tareas padre/QR02. Sin cerrar H05 o autorizar H06/versionado.
 
+### HIJO-C05 revisada y precisiones/avisos nuevos — 2026-10-12
+
+HEAD hijo confirmado 94b1bbe; leído informe VIABILIDAD_ANDROID_TODAS_APPS.md
+completo y relevo. Viabilidad condicionada documental, no pruebas físicas.
+Android no aporta lease de política con expiración autónoma independiente del
+controlador; candidato HOME/Lock Task/catálogo técnico requiere probar timers/
+Doze/crash/boot/emergencia/escapes. No inviolabilidad ni cumplimiento certificados.
+
+Propietario acepta HOME propio y exige instalar/actualizar durante desbloqueo,
+proteger Ajustes/admin/desinstalación hijo. Corrige expresamente «sí evaluar sin
+garantizar»: hacer bloqueo lo más resistente posible y corregir fallos iterativos,
+no aceptar ventanas/fallos conocidos como producto terminado ni autorizar teléfonos.
+Solicita avisos de tiempo agotado, uso actual, total diario y falta de internet/
+conexión. Detalle decisiones y límites §§11–12 propuesta central; sin recopilar
+apps/contenido/ubicación o historial de uso por aplicación. No secretos en relay.
+
+HIJO-C06 documental enviada/admitida queue/resume=true, esquema API y ruta de
+sesión raíz/bandeja vacía comprobados. Consolidar arquitectura con instalación
+libre y mínima medición local/avisos: fuentes oficiales/precisión/permisos, tiempo
+autorizado distinto de uso observado; conexión no prueba interacción. Sin datos,
+mostrar desconocido, no cero o «sin internet» inventados. WSS no es push fiable
+con app cerrada; sin red no aviso remoto inmediato. Aviso no reemplaza enforcement.
+Agregado offline del día/horario/cambio de reloj/proceso/sync/retención por proponer,
+sin estado de uso/historial en servidor o servicio externo nuevo unilateral.
+
+Entregar documento incremental, riesgos/elecciones breves y próxima implementación
+aislada propuesta, no ejecutar. Sin código/tests/builds/CP1/fixtures/plan/ADR
+aceptados editados, permisos de uso reales/políticas/dispositivos/ADB/LAN/despliegue
+o nueva tarea padre/QR02. Sin subagentes/sesiones/promoción H05/H06 o versión nueva.
+Resultado pendiente; revisar deltas de privacidad/contrato antes de implementación.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

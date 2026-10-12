@@ -210,3 +210,75 @@ Comparar opciones oficiales/limitaciones, distinguir lista técnica de paquetes 
 lista parental no solicitada y detectar incompatibilidades antes de contrato/código.
 No pruebas físicas, builds o implementación; resultado y elección de arquitectura
 pendientes. Prototipo seguro y evidencia física futura solo propuestas por revisar.
+
+## 11. HIJO-C05 revisada y precisiones del propietario — 2026-10-12
+
+HIJO-C05 terminado en 94b1bbe, informe VIABILIDAD_ANDROID_TODAS_APPS.md y relevo
+íntegros revisados en lectura. Viabilidad condicionada, no certificación: candidato
+HOME/Lock Task persistente con catálogo técnico de todas apps normales. Android
+no aporta lease de política que expire independientemente del controlador; cierre
+ante crash/Doze/reboot y escapes requieren pruebas. No afirmar bloqueo inviolable.
+Las consultas oficiales del hijo son evidencia documental, no ensayos físicos.
+
+Propietario confirma/puntualiza:
+
+- HOME propio aceptado. Bloqueado debe presentar pantalla única que el menor no
+  pueda abandonar; adulto libera remotamente o desde controles locales protegidos.
+  Mantener emergencia/Keyguard y expiración de uso como requisitos anteriores.
+- **Instalar y actualizar durante uso desbloqueado**, no solo mantenimiento.
+  Todas apps normales siguen incluidas sin selección parental. Investigar carreras
+  de instalación/apertura/reemplazo sin ocultarlas con otra restricción no aprobada.
+- Proteger Ajustes/administración, desinstalación de hijo y vías para quitar la
+  protección. El alcance de ajustes cotidianos frente a cambios administrativos
+  necesita matriz técnica; no asumir que un paquete Settings se separa por actividad.
+- Corrige expresamente la opción «sí, evaluar sin garantizar»: quiere hacer el
+  bloqueo lo más resistente posible y corregir fallos descubiertos de forma
+  iterativa. **No es aceptación de ventanas/fallos conocidos como entrega final**
+  ni autorización de operar teléfonos. No prometer imposibilidad absoluta que
+  las APIs no demuestran; presentar límites encontrados y solución/revisión.
+
+## 12. Nuevos avisos y total diario — requisito, diseño pendiente
+
+Propietario solicita aviso al padre de:
+
+1. Tiempo permitido agotado.
+2. Que el menor está usando el teléfono.
+3. Cuánto tiempo lleva de uso total en el día.
+4. Falta de conexión/internet en el hijo.
+
+Esto amplía el alcance previo: antes no se recopilaba uso. Diseñar solo estado
+de uso y agregado diario mínimo; no apps consultadas/contenido/ubicación/historial
+por aplicación, sin inferir autorización para capturarlos. Agregado de duración
+no es dato de relay persistente: servidor sigue sin almacenar uso/historial.
+
+Distinguir tiempo autorizado de uso observado: pantalla encendida, desbloqueo
+Android, foreground de nuestra app o PONG no demuestran interacción humana.
+Definir fuente/precisión/permisos y estados confirmado/posible/desconocido antes
+de afirmar «está usando»; investigar APIs oficiales sin activar permisos ahora.
+Sin observación fiable no rellenar uso con cero ni duración permitida completa.
+
+Vencimiento de plazo no prueba bloqueo aplicado; avisar ambos hechos separados.
+Internet validado localmente, canal WSS, presencia del relay y frescura del último
+reporte son señales distintas. Sin comunicación, padre informa desconexión/estado
+desconocido, no causa «hijo sin internet» inventada. No aviso inmediato garantizado
+si hijo/relay/padre sin red, proceso muerto o Android difiere ejecución. Padre debe
+seguir accesible para interpretar estado desconocido; avisos no corrigen enforcement.
+
+Proponer medición local offline agregada, reloj monotónico para intervalos, límites
+de día/zona/hora civil, proceso/reboot e incertidumbre; sync firmado fresco posterior
+sin doble conteo ni reenvío de órdenes. Retención mínima y qué se hace con vencimiento
+ocurrido sin red deben definirse explícitamente, no crear cola/historial oculto.
+Notificaciones Android/permiso/canal/lifecycle del padre por proponer: WSS no es
+push fiable con app cerrada. No añadir FCM/servicio externo/keepalive anti-suspensión
+unilateralmente, recopilar datos reales o editar CP/1/fixtures por estos avisos.
+
+## 13. HIJO-C06 — arquitectura mínima y señales de uso, enviada
+
+Una unidad documental para incorporar §§11–12 a la arquitectura candidata y
+presentar fuentes oficiales, matriz de estados/medición/alertas, límites y próxima
+implementación aislada mínima. Reutilizar C04/C05, no reescribir todo o reparar QR.
+Cambios exactos de contrato/versión requerirán revisión conjunta antes de código.
+Sin instalación/restricciones/ADB, tests/builds/APK, permisos concedidos, datos
+reales de uso o cambios en planes/ADR/CP1/fixtures/repos ajenos por esta unidad.
+Envío admitido queue/resume=true a sesión existente del hijo; entrega todavía
+pendiente. No permisos ampliados/sesiones nuevas por las consultas de documentación.

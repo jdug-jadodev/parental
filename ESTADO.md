@@ -1125,3 +1125,38 @@ física. Documento/relevo/ESTADO y commit hijo; sin código/tests/builds/planes/
 aceptados/CP1/fixtures cambiados, dispositivos/ADB/CA/LAN/push/despliegue o repos
 ajenos editados. No tarea nueva padre/QR02, H05 cerrada/H06 autorizada, versión
 acordada o subagentes/sesiones creados. Actualizados docs propios y commit de cierre.
+
+## HIJO-C05 revisada y requisitos de avisos/arquitectura HIJO-C06 — 2026-10-12
+
+Leídos relevo hijo C05 e informe íntegro (317 líneas), HEAD 94b1bbe comprobado.
+Repo propio limpio al inicio. Viabilidad documental condicionada, no apps/prototipo
+o enforcement probado; falta cierre real ante timer/Doze/crash/boot y escapes de
+catálogo/instalaciones/admin. Fuentes HTTP200 reportadas por hijo, no consultas/
+pruebas físicas propias. C05 no garantiza inviolabilidad ni ventana cero.
+
+Preguntas al propietario: acepta HOME propio; instalar/actualizar estando permitido,
+no solo mantenimiento; pantalla bloqueada única y protección Ajustes/admin/desinstalar
+hijo. Corrige respuesta «sí evaluar sin garantizar»: hacer lo más posible para
+resistencia y corregir fallos descubiertos iterativamente, no aceptar fallos conocidos
+como entrega ni permisos físicos. Solicita aviso de tiempo agotado/uso/total diario/
+falta conexión hijo. Mensaje posterior repite y corrige esa última elección; aplicado
+como corrección, no autorización nueva de pruebas/instalación o garantía absoluta.
+
+Explicado que WSS/pantalla encendida no prueban uso y sin comunicación no prueba
+causa internet ni aviso inmediato. Diseño ampliado solo a indicador y agregado diario
+mínimos, sin apps usadas/contenido/ubicación/historial por app ni datos reales. Vencimiento
+distinto de bloqueo aplicado, tiempo autorizado de observado, internet local de canal/
+presencia/frescura; estado desconocido sin evidencia. Notificaciones/lifecycle padre,
+fuentes/permisos/coste/retención/día/zona/crash/offline/sync están por proponer y revisar.
+
+Consultado esquema API, sesión raíz hijo por ruta exacta/bandeja vacía. HIJO-C06
+admitida queue/resume=true: unidad documental arquitectura mínima/instalación libre/
+medición y avisos con fuentes oficiales, riesgos/elecciones y siguiente unidad aislada
+propuesta, no ejecutada. Requisitos íntegros en mensaje para no depender de lecturas
+externas. Sin resultado todavía, permisos ampliados/subagentes/sesiones o tarea QR02/
+padre. Docs/relevo/ESTADO y commit propios hijo, sin código/tests/builds/APK/ADB/políticas/
+dispositivos/CA/LAN/push/despliegue/CP1/fixtures/planes/ADR aceptados modificados.
+
+Añadidos §§11–13 propuesta central, coordinación y este estado. Servidor no almacena
+uso/historial ni añade servicio push/cron externo por esta petición. No contratos/
+codecs/barreras/privacidad real alterados o pruebas propias nuevas; commit documental.
