@@ -135,6 +135,29 @@ externas. Sin ampliar permisos, crear sesiones/subagentes o duplicar asignación
 Conservar parcial, informar bloqueos; límites documentales/CP1/dispositivos intactos.
 Resultado pendiente, no nueva tarea padre/QR02 o implementación autorizada.
 
+### HIJO-C04 revisada y HIJO-C05 asignada — 2026-10-12
+
+Propietario informa cierre; HEAD hijo confirmado 4636d30. Relevo y diseño completos
+revisados en lectura: incorpora PIN 5–10/pregunta personalizada, tiempo elegido,
+todas apps, permisos de ambas fuentes offline, autoridad RAM separada y reset
+solo cambia código. Sin implementación/tests/builds/versión/puertas aprobadas.
+Normalización/límites/esperas agregadas/KDF, caducidad/reset/revocación, rango/
+LOCK_FOR, olvido doble y migración son propuestas pendientes, no decisiones nuevas.
+
+Antes de fijar contrato se prioriza viabilidad del requisito de todas las apps
+normales y retorno real a bloqueo. HIJO-C05 documental enviada a sesión existente
+hijo, esquema API y ruta/bandeja vacía comprobados, queue/resume=true admitido.
+Sin resultados aún. Usar fuentes oficiales Android, inspección propia en lectura
+y matriz de garantías/límites: Lock Task/HOME/DevicePolicyManager, suspensión y
+excepciones, apps nuevas/visibilidad/escapes, timer/Doze/proceso/boot/emergencia.
+
+No convertir lista técnica en lista parental ni lockNow en bloqueo continuo;
+si no se puede cumplir, devolver incompatibilidad/alternativas sin cambiar requisito.
+No APIs privadas/accesibilidad/overlays como atajo o garantías físicas por documentos.
+Proponer prototipo/pruebas futuras sin ejecutarlos. Solo documento/relevo/ESTADO y
+commit hijo, sin código/tests/builds/plan/ADR/CP1/fixtures/dispositivos/ADB/LAN/
+despliegue o nuevas tareas padre/QR02. Sin cerrar H05 o autorizar H06/versionado.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

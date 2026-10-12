@@ -196,3 +196,17 @@ decisiones técnicas pendientes y siguiente unidad mínima para revisión. No m�
 lista parental/26 caracteres o default 30 min contra decisiones expresas.
 No trasladar recuperación a servidor ni crear una apertura automática por reset.
 Revisión de versión/planes y autorización de implementación siguen posteriores.
+
+## 10. HIJO-C04 revisada y evaluación de viabilidad
+
+2026-10-12: hijo terminó HIJO-C04 en 4636d30. Relevo y diseño íntegros revisados
+por coordinador: requisitos §§7–8 incorporados. Solo entrega documental; parámetros
+de duración/esperas/normalización/KDF/reset, LOCK_FOR/olvido y versión siguen pendientes.
+
+HIJO-C05 asignada para evaluar con documentación oficial Android si todas las
+apps normales pueden coexistir con bloqueo real al vencer plazo, también con
+Doze/proceso muerto/boot, sin escapes administrativos o pérdida de emergencia.
+Comparar opciones oficiales/limitaciones, distinguir lista técnica de paquetes de
+lista parental no solicitada y detectar incompatibilidades antes de contrato/código.
+No pruebas físicas, builds o implementación; resultado y elección de arquitectura
+pendientes. Prototipo seguro y evidencia física futura solo propuestas por revisar.

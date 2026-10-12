@@ -1098,3 +1098,30 @@ parcial e informar bloqueo, sin nueva unidad/subagentes/sesiones o tarea padre/Q
 Mismos límites: solo documentación/commit hijo, sin código/tests/builds/CP1/fixtures/
 planes aceptados modificados, apps editadas desde Render, dispositivos/ADB/LAN/push/
 despliegue. Actualizados coordinación/estado propios y commit documental de cierre.
+
+## HIJO-C04 revisada y viabilidad HIJO-C05 enviada — 2026-10-12
+
+Propietario informa cierre. Leídos relevo hijo §§resultado C04 y diseño completo
+hijo/DISENO_CONTROL_LOCAL_ADULTO.md (409 líneas) en lectura; HEAD 4636d30 confirma
+consolidación. Repo Render limpio al inicio. C04 solo documental, decisiones de
+PIN/pregunta/tiempo/todas apps/ambas fuentes offline fieles; reset específico,
+revisión/seq distintos, ACK/STATE separados, contexto/timers viejos inválidos.
+No normalización/cupos/KDF/caducidad/reset/rangos/LOCK_FOR/olvido/migración aprobados.
+Sin pruebas/builds nuevas reportadas o reejecutadas aquí, H05 sigue abierta.
+
+Prioridad técnica: viabilidad oficial Android de todas las apps normales con
+retorno a bloqueo bajo timer/Doze/proceso/boot/escapes sin impedir emergencia.
+Consultado /openapi.json y sesión raíz hijo por ruta explícita, bandeja vacía.
+HIJO-C05 queue/resume=true admitida, sin resultado confirmado: una unidad documental
+con fuentes oficiales/fechas, lectura propia y matriz capacidades/límites frente
+a requisitos, API34 del laboratorio y SDK del repo, sin garantías Samsung ficticias.
+Comparar Lock Task/HOME/DPM/suspensión/paquetes no suspendibles/lista técnica dinámica,
+apps nuevas/admin/perfiles/intents/PiP y timers/Direct Boot, no lockNow como enforcement
+persistente o acceso privado/accesibilidad/overlays como bypass. Si incompatible,
+devolver límites/alternativas sin reinterpretar todas apps como lista parental.
+
+Prototipo/pruebas negativas futuras solo propuestas; no ejecución/autorización
+física. Documento/relevo/ESTADO y commit hijo; sin código/tests/builds/planes/ADR
+aceptados/CP1/fixtures cambiados, dispositivos/ADB/CA/LAN/push/despliegue o repos
+ajenos editados. No tarea nueva padre/QR02, H05 cerrada/H06 autorizada, versión
+acordada o subagentes/sesiones creados. Actualizados docs propios y commit de cierre.
