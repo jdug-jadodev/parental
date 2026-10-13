@@ -1273,3 +1273,25 @@ No resultado confirmado aún, docs/relevo/ESTADO/commit hijo sin código/tests/b
 CP1/fixtures/planes/ADR aceptados/Android/dispositivos/ADB/CA/LAN/push/despliegue o
 repos ajenos modificados. Sin tarea nueva padre/QR02/subagentes/sesiones. Se revisará
 relay antes de acordar versión/schema/sincronizar; documentación propia y commit.
+
+## HIJO-C07 interrumpida y reanudada con fuente completa — 2026-10-13
+
+Propietario reporta interrupción. API última respuesta hijo msg_1363cc51e001SBaGAimpH6gkQF
+terminó stop y confirma dos lecturas externas interrumpidas/sin cambios o commit
+C07. No permisos ni bandeja pendientes. Consultado esquema prompt y ruta raíz;
+no causa inferida, acceso externo o permisos ampliados.
+
+Intentado incluir draft540 líneas/§17 íntegros en un único envío CLI desde Node;
+spawn no confirmó admisión y terminó status propio1. No resultado positivo supuesto.
+Consultados help API/último usuario/bandeja: último previo y cero pendientes.
+Se segmentó la fuente en cinco bloques ≤8000 caracteres de contexto con resume=false,
+todos admitidos, luego MISMA reanudación C07 con §17 íntegro/resume=true admitida.
+No otras tareas/sesiones/subagentes o escritura en apps/repos externos; solo lectura
+por Node del draft padre y propuesta propia para transmitir texto público de diseño.
+
+Fuente correcta a acreditar: texto íntegro suministrado por coordinador, no lectura
+externa del hijo. Evitar reiterar lecturas bloqueadas/ampliar permisos. Mismos deltas
+de contrato pendientes/cleanup semanal/push evaluado/LOCK_FOR eliminado, solo docs
+propias del hijo/relevo/ESTADO/commit; no código/tests/builds/dispositivos/ADB/CP1/
+fixtures/planes/ADR/despliegue autorizados. Ejecución solicitada, no entrega aún.
+Registrado coordinación/estado propios, revisión de diff y commit documental.

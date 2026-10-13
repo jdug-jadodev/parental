@@ -283,6 +283,23 @@ sin ampliar permisos; resumen íntegro incluido. Docs/relevo/ESTADO/commit propi
 sin código/tests/builds/CP1/fixtures/planes/dispositivos/ADB/despliegue o padre
 editado. Revisión propia relay antes de acuerdo/sincronización, no CP2 aprobada.
 
+### HIJO-C07 reanudada con fuente íntegra — 2026-10-13
+
+Propietario informa interrupción. API última respuesta hijo confirma dos lecturas
+externas interrumpidas (draft padre y §17 central), sin cambios/commit C07. Bandeja
+y permisos pendientes vacíos, ruta raíz comprobada. No inferir causa o ampliar
+permisos. Reanudar misma unidad, no asignación duplicada/versión aprobada.
+
+El primer envío completo no confirmó admisión; comprobado último mensaje usuario
+previo y bandeja vacía. Fuente completa se transmitió después en cinco partes de
+contexto queue/resume=false por límite de longitud de invocación Windows, y mensaje
+final de MISMA C07 con §17 íntegro y queue/resume=true admitido. No sesiones nuevas,
+subagentes o prompts de vuelta: segmentación de un documento, no tareas distintas.
+Evitar lecturas externas, acreditar texto suministrado por coordinador como fuente;
+puede revisar todo el borrador sin trasladar acceso a otros repos. Resultado pendiente.
+Mismos límites documentales/contrato/Android/permisos físicos, sin tests/builds o
+código nuevos aquí. No próxima unidad automática, conservar parcial y reportar bloqueo.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
