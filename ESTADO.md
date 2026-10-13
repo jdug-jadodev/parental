@@ -1465,3 +1465,15 @@ apagada/Doze/reinicio/permitir desde LOCKED/reemplazo. No producto/H05/H06/remot
 o historial acreditados. Siguiente propuesta acotada: LOCKED → permitir un minuto
 → otra app → bloqueo automático; no enviada ni autorizada físicamente aún.
 Render solo revisó/documentó: sin ADB/apps/CP1/servidor/despliegue/tests/builds nuevos.
+
+## HIJO-PROT03: ensayo desde bloqueo autorizado y enviado — 2026-10-13
+
+Propietario aprueba «ok, hagamoslo»: partir de LOCKED, permitir un minuto, usar
+otra app y volver automáticamente a LOCKED. Consultados esquema API/destino raíz
+hijo y bandeja vacía; asignación HIJO-PROT03 admitida queue/resume=true.
+Ensayo único reversible solo A13 debug, usando APK existente si es posible,
+con aviso/presencia/salida segura antes de aplicar y confirmación si reinstala
+o repite tras fallo. Verificar modos reales y deadline, salida/restauración final
+sin snapshot/plan/servicio pendientes; emergencia/Keyguard/ADB conservados.
+A56 excluido, sin nuevos permisos/restricciones/reboot/crash o producto aprobado.
+Resultado pendiente; Render sin dispositivos, apps, tests/builds o despliegue.

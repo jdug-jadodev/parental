@@ -453,6 +453,22 @@ usar otra app y verificar retorno automático, siempre con nueva confirmación
 física en sesión hijo. Propuesta no enviada ni autorización física nueva.
 A56 excluido; Render sin dispositivos/apps/CP1/despliegue modificados.
 
+### HIJO-PROT03 enviada por aprobación del propietario
+
+Propietario responde «ok, hagamoslo» al recorrido propuesto LOCKED → permitir
+un minuto → otra app → bloqueo automático. HIJO-PROT03 enviada/admitida a sesión
+existente hijo con queue/resume=true tras comprobar esquema API, destino exacto
+y bandeja vacía. Solo ensayo reversible A13 debug, preferentemente APK final
+existente; aviso y coordinación presencial/salida segura antes de aplicar.
+Si requiere reinstalación o repetir tras fallo, solicitar confirmación concreta.
+
+Observar LOCKED inicial, permiso autenticado desde bloqueo, NONE efectivo,
+deadline original, retorno autónomo y LOCKED final; salida adulta/restauración,
+sin snapshot/plan/servicio pendientes. Preservar emergencia/Keyguard/ADB/políticas
+ajenas. A56 excluido, sin nuevas restricciones/permisos Android/reinicio/crash.
+Resultado pendiente; no acredita producto ni supervivencia del temporizador.
+Render no opera teléfonos ni modifica apps/CP1/servidor/despliegue.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
