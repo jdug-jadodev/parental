@@ -297,3 +297,41 @@ día/zona productivos o añadir retención de marcador pendiente. Pruebas negati
 de doble conteo/huecos/proceso/boot/IO/ventanas/overflow, sin uso real o autorización
 de apps. Resultado diagnóstico, fuera main/APK/androidTest, no implementación
 operativa del contador ni avisos. Revisión posterior antes de integración/versionado.
+
+## 15. HIJO-L02 revisada y simplificación de uso — 2026-10-12
+
+HIJO-L02 terminado en c6e8d5d. Código/test/evidencia completos revisados en lectura:
+modelo FICTICIAS_JVM solo src/test, CAS/readback simulados, O(1), 22 tests nuevos.
+Hijo reporta 199 tests debug ejecutados correctos, núcleo 169 UP-TO-DATE no
+reejecutado. Primer fallo de expectativa conservado y corregido explícitamente.
+Exclusión main/JAR debug reportada, no APK nuevo inspeccionado aquí. No medición
+real, integración Android o pruebas reejecutadas por Render.
+
+Preguntas de medición/retención/push quedaron interrumpidas **sin respuestas**.
+No tomar opciones recomendadas como decisiones. Propietario precisa después:
+
+- Por ahora no prioriza investigar escapes; quiere posponer esa revisión y
+  corregir los que aparezcan. Esto sustituye la prioridad anterior de revisión
+  exhaustiva previa, no demuestra ausencia de escapes o seguridad inviolable.
+  Mantener protecciones básicas de administración/desinstalación, emergencia,
+  recuperación y bloqueo temporal/boot; no quitar guardas o autorizar teléfonos.
+  La entrega inicial deberá identificar lo no probado; no presentarla como
+  certificación de bloqueo resistente a todos los ataques.
+- Define «uso» como pantalla desbloqueada al conceder tiempo por el adulto.
+  Para el diseño se separa **tiempo permitido/consumido** de interacción humana:
+  no es necesario detectar persona/toques ni pedir acceso al historial de uso
+  de otras apps para contabilizar permiso. No adaptar métricas de observación
+  FICTICIAS_JVM como si fueran duración real de actividad.
+
+Contar duración transcurrida de autorizaciones efectivamente aceptadas/vigentes,
+no sumar el tiempo solicitado por anticipado. Plazo cuenta desde aceptación
+duradera, no pulsación/envío del padre. Distintos permisos reemplazados no deben
+sumar tramos solapados ni reiniciar el tiempo consumido del día. Aviso «permitido»
+no asegura persona usando o enforcement exitoso: mantener fallo/desconocido aparte.
+Keyguard Android y pantalla apagada no equivalen automáticamente a revocar permiso;
+precisar su tratamiento en contador sin pausar/renovar silenciosamente el plazo.
+
+Quedan sin respuesta retención del día/historial y avisos con padre cerrado/push;
+zona/día/intervalos inciertos/reset y definición final del contador por acordar.
+Sin elegir proveedor push, crear servicios/credenciales o recopilar datos reales.
+HIJO-L02 queda laboratorio de evidencia sintética, no promoción a contador productivo.

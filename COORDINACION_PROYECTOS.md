@@ -214,6 +214,23 @@ sin dependencias nuevas, producción/UI/IO real/protocolo/planes/fixtures/puerta
 dispositivos/ADB/LAN/notificaciones/WSS/push/despliegue o tarea padre/QR02. Detener
 si exige semántica pendiente antes de ampliar; no otra tarea automática/subagentes.
 
+### HIJO-L02 revisada y cambio de prioridad/métrica
+
+HEAD hijo c6e8d5d confirmado, código/tests/evidencia íntegros revisados. 22 tests
+nuevos/199 debug ejecutados correctos reportados; núcleo 169 UP-TO-DATE. Primer
+fallo de expectativa documentado; exclusión main/JAR debug reportada, no APK real
+nuevo o pruebas reejecutadas aquí. Modelo solo FICTICIAS_JVM, sin integración.
+
+Preguntas sobre uso/retención/push interrumpidas sin respuesta. Propietario después
+pospone revisión de escapes y define uso como tiempo concedido/pantalla desbloqueada,
+no detector humano. Diseñar tiempo permitido/consumido desde aceptación vigente,
+sin UsageStats/historial apps por esa métrica, ni sumar duration solicitada entera.
+Mantener protección básica/recuperación/emergencia y errores; revisión pospuesta
+no certificado inviolable, guardas eliminadas o permiso físico. Detalle §15 central.
+Tratamiento Keyguard/pantalla apagada, día/retención y padre cerrado/push pendientes.
+Aviso informativo hijo admitido queue/resume=false sin nueva ejecución/tarea para no integrar antes
+de versión/contrato o convertir laboratorio en telemetría productiva.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

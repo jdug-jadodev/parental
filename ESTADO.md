@@ -1187,3 +1187,29 @@ deps nuevas, código productivo/notificaciones/WSS/KDF/Keystore/fixtures/plan/AD
 aceptados editados, dispositivos/ADB/CA/LAN/push/despliegue/repos ajenos/subagentes/
 sesiones nuevas o asignaciones padre/QR02. Documentos propios actualizados; commit
 de coordinación. No builds/tests propios nuevos o secretos/datos reales recogidos.
+
+## HIJO-L02 revisada y aclaración del propietario — 2026-10-12
+
+Leídos relevo/evidencia y ambos archivos Kotlin L02 íntegros, HEAD c6e8d5d confirmado.
+467 líneas modelo/tests solo laboratorio; repo Render limpio al inicio. Hijo reporta
+22 tests nuevos, 199 debug ejecutados correctos y 169 núcleo UP-TO-DATE (no ejecutados
+nuevos); primer focalizado 19 con fallo de expectativa RECHAZADO/INCIERTO registrado,
+corregido sin alterar política; CAS/readback/huecos/duplicados/ventanas y exclusión
+main/JAR debug reportados. No reejecutado aquí ni integración/contador Android real.
+
+Herramienta de preguntas medición/retención/avisos app padre cerrada interrumpida,
+sin respuestas: no opciones aprobadas. Usuario precisa luego posponer escapes y
+definir uso como pantalla desbloqueada/tiempo que adulto concede. Incorporado §15
+propuesta central y coordinación: tiempo permitido/consumido, no interacción humana
+o duración de apps; no acceso UsageStats requerido para esta métrica. Tiempo vigente
+desde aceptación duradera, no suma adelantada de duración solicitada o solapada.
+Separar de enforcement/Keyguard físico/frescura y fallo/desconocido sin éxito ficticio.
+Tratamiento pantalla apagada/Keyguard, día/retención y push padre cerrado pendientes.
+
+Escapes exhaustivos pospuestos, sin quitar protecciones básicas/guardas, cancelar
+emergencia/recuperación o otorgar autorización física/garantía inviolable. No nuevas
+pruebas/builds/código/app/contrato/fixtures/plan modificado, datos reales de uso o
+dependencias/servicios/credenciales push añadidos. Solo docs propios; aviso hijo
+informativo sin tarea/ejecución nueva para reflejar steering antes de integración.
+Aviso a sesión existente hijo admitido queue/resume=false; no lectura/código
+actualizado confirmado por esa admisión, ni siguiente unidad enviada.
