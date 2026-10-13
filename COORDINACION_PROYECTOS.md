@@ -300,6 +300,40 @@ puede revisar todo el borrador sin trasladar acceso a otros repos. Resultado pen
 Mismos límites documentales/contrato/Android/permisos físicos, sin tests/builds o
 código nuevos aquí. No próxima unidad automática, conservar parcial y reportar bloqueo.
 
+### HIJO-C07 revisada y revisión propia relay — 2026-10-13
+
+HEAD8b25c24 confirmado. Relevo y REVISION_PADRE_C04_DELTAS_CP2.md íntegros leídos.
+Corrige eliminación LOCK_FOR y retención semanal/arrays≤8/epoch/cutoff/catch-up/
+anti-resurrección, separación ledger autorizado vs L02 observado y push solo
+hint no autoridad. Solo evidencia documental, no tests/builds o contrato aprobado.
+
+Revisión propia documentacion/REVISION_RELAY_CP2_PROPUESTA.md: configuración/perfil
+exacto, upgrade/codec/dominio/bytes y routing sin contador/historial. Leídos adapters
+de protocolo/composición y puntos cp.v1/CPv1/límites: servidor todavía no admite v2.
+Ejercicio Node sintético de tamaño ocho buckets: payload2966/frame4122/profundidad4,
+sin codec/firma/fixture/semántica válida ni cota formal; mantener8192/16384 propuestos.
+Sin código/contrato/fixtures/guardas editados o pruebas propias de protocolo nuevas.
+
+Pendientes: rango/local libre/política calendario, draft consolidado y PAIR/OFFLINE
+seguro antes de acuerdo/sync. Push proveedor/emisión aparte, no endpoint/tokens o
+secreto en relay. No nueva asignación/puertas/versión autorizados por esta revisión.
+
+Propietario ratifica por preguntas: ALLOW libre en padre e hijo, ALLOW_FOR entre
+1min y24h en minutos enteros sin preselección, limpieza domingo21 zona local con
+catch-up antes mostrar/enviar y purga conservadora ante calendario incierto sin
+cancelar permiso. §18 central. Rango futuro60..86400 múltiplo60, no7d; elecciones
+no aprueban schema/CP2/puertas/permisos físicos o proveedor push. Consolidar draft
+y PAIR/OFFLINE segura antes de congelar/sincronizar.
+
+PADRE-C04-R1 asignada/admitida queue/resume=true: consolidar UN draft técnico con
+C07/revisión relay y decisiones ratificadas, retirar alternativas supersedidas,
+definir mínimos PAIR/OFFLINE/migración sin corte de recuperación. Fuente íntegra
+HIJO-C07 enviada en3 partes y revisión propia en1 de contexto resume=false antes
+de asignación final, para evitar acceso externo/límite Windows; no otras tareas.
+Esquema API/ruta raíz padre/bandeja vacía comprobados. Resultado pendiente.
+Sin freeze/schema/CP1/fixtures/planes/puertas/código/tests/builds/Android/permisos
+físicos/push servicios/QR02/despliegue/repos ajenos o subagentes/sesiones nuevas.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

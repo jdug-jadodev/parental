@@ -402,3 +402,26 @@ HIJO-C07 documental enviada/admitida para deltas exactos de §§17 y revisión d
 draft del padre. Entrega pendiente; sin contrato/schema/copias sincronizados,
 implementación/tests/builds/permisos físicos o proveedor push activado. Revisión
 de hijo y relay antes de acuerdo de versión, no cambios unilaterales de CP1.
+
+## 18. Revisión conjunta y últimas elecciones de acciones/calendario — 2026-10-13
+
+HIJO-C07 terminado en 8b25c24, revisión/deltas completos leídos. Revisión propia
+relay en documentacion/REVISION_RELAY_CP2_PROPUESTA.md; no implementación CP2.
+
+Propietario responde expresamente:
+
+- **Permitir libre en ambos clientes**, padre y controles protegidos del hijo,
+  además de permitir por tiempo/bloquear inmediato. Libre hasta nueva decisión
+  válida o reboot; hijo exige autoridad local/código, no administración abierta al niño.
+- **Permiso temporal de 1 minuto a 24 horas**, minutos enteros y sin preselección.
+  durationSec debe ser 60..86400 múltiplo de 60 en contrato futuro; actualizar
+  remainingSec/máximos/combinaciones. No heredar máximo 7 días del draft/CP1.
+- **Limpieza domingo21 en zona local configurada**, con catch-up al iniciar antes
+  de mostrar/enviar si estaba apagado. Calendario no fiable: ocultar y purgar
+  conservadoramente historial sin cancelar permiso. No borrado de bytes instantáneo
+  mientras apagado o forense; no resurrección por snapshots/backup/push viejos.
+
+Estas elecciones cierran los puntos funcionales de rango/local libre/calendario,
+no aprueban schema/campos CP2/push proveedor o permisos físicos. Consolidar borrador
+con HIJO-C07/revisión relay y definir PAIR/OFFLINE de nueva instalación/transición
+sin cortar recuperación antes de acuerdo de tres roles y sincronización.

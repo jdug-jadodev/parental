@@ -1295,3 +1295,45 @@ de contrato pendientes/cleanup semanal/push evaluado/LOCK_FOR eliminado, solo do
 propias del hijo/relevo/ESTADO/commit; no código/tests/builds/dispositivos/ADB/CP1/
 fixtures/planes/ADR/despliegue autorizados. Ejecución solicitada, no entrega aún.
 Registrado coordinación/estado propios, revisión de diff y commit documental.
+
+## HIJO-C07 revisada y evaluación relay CP2 — 2026-10-13
+
+Leídos relevo y revisión hijo completos (298 líneas), HEAD8b25c24 confirmado;
+repo Render limpio al inicio. Entrega documental, no tests/builds. Acierta retirar
+LOCK_FOR/deferred/WAITING_ALLOW, mínimo ocho fechas de domingo21 a domingo21 y
+cleanup/tombstone sin reiniciar permiso/seq/códigos; contador autorizado distinto
+L02, push hint sin autoridad. Parámetros/PAIR/OFFLINE/migración aún por cerrar.
+
+Leídos composition dependencias.ts, directorio protocol y búsquedas cp.v1/CPv1/
+límites en src: servidor aún cp.v1/CPv1/esquema congelado, v2 no implementada.
+Añadida revisión propia documentacion/REVISION_RELAY_CP2_PROPUESTA.md sobre perfil
+exacto/config/upgrade/codec/crypto/puertos/routing y exclusión secretos/historial/
+push-emisión en relay. No se editaron fuentes, esquema/copias/fixtures/planes/apps.
+
+Ejecutado Node local para tamaño JSON sintético ocho días: payload2966bytes,
+frame4122bytes, profundidad4. Rellenos deliberados (zona64 no IANA, contadores máximos,
+combinaciones no válidas y sig72 bytes no DER) solo medir longitud, no validación,
+firma o cota formal. Sin archivos/fixtures producidos; salida acentos degradados por
+PowerShell no altera conteos ASCII/sintéticos. No pnpm/tests/builds propios nuevos
+por revisión documental. Barreras loopback/health503/producción siguen intactas.
+
+Falta ratificar rango/alcance libre/purga-calendario y consolidar draft, recuperación
+PAIR/OFFLINE segura y acuerdo de versión antes de schemas/tests/sync/implementación.
+Sin dispositivos/ADB/CA/LAN/push/despliegue/credenciales o nueva asignación automática.
+
+Preguntas propietario contestadas: permitir libre en ambos clientes, temporal1min–24h
+minutos enteros/sin preselección, cleanup zona local domingo21/catch-up antes lectura-
+publicación/purga conservadora calendario incierto sin cancelar permiso. Registrado
+§18 central/coordinación, futuro duration60..86400 múltiplo60; no versión/schema
+aprobados o proveedor push elegido por respuestas. PAIR/OFFLINE/contrato final por
+consolidar antes de código/sync, sin nuevo test/dispositivo/despliegue autorizado.
+
+Asignada PADRE-C04-R1 para consolidar un draft coherente con C07/relay/reglas finales
+y mínimos PAIR/OFFLINE/migración; no otra lista de alternativas supersedidas. API
+schema/ruta raíz padre/bandeja vacía comprobados. Fuentes completas C07 en3 partes
+y revisión propia en1 de contexto resume=false; asignación final resume=true admitida.
+Segmentación para evitar lecturas externas/interrupciones y límite Windows, no tareas
+distintas. Sin entrega confirmada aún, no freeze/schema/copias CP1/planes/puertas
+editados o código/tests/builds/Android/dispositivos/ADB/LAN/push servicios/QR02/
+despliegue/repos ajenos/subagentes/sesiones nuevos. Solo documentación propia,
+ejercicio de longitud descrito y coordinación, revisión de preparado y commit.
