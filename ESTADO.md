@@ -1213,3 +1213,31 @@ dependencias/servicios/credenciales push añadidos. Solo docs propios; aviso hij
 informativo sin tarea/ejecución nueva para reflejar steering antes de integración.
 Aviso a sesión existente hijo admitido queue/resume=false; no lectura/código
 actualizado confirmado por esa admisión, ni siguiente unidad enviada.
+
+## PADRE-C04 borrador de contrato propuesto enviado — 2026-10-12
+
+Propietario confirma métrica simplificada y pide continuar. Leídos coordinación
+central y relevo padre, HEAD984693c confirmado; repo propio limpio al inicio.
+Consultado esquema /openapi.json/ruta raíz padre/bandeja vacía, PADRE-C04 admitida
+queue/resume=true. Ejecución solicitada, sin borrador final/tests/commit confirmados.
+Sin duplicar aviso/tarea hijo o asignar QR02; nota hijo previa sigue informativa.
+
+Una unidad documental de contrato exacto propuesto separado de compartido: campos/
+tipos/canonización/firmas/límites/versionado/subprotocolo/contextos/rechazos, revisión
+global/seq, resultado remoto/estado efectivo/ACK/timers viejos, total absoluto de
+tiempo autorizado consumido y frescura/incertidumbre. No detectar humano/UsageStats
+o contar duration entero solicitado como consumido. Política durable puede explicar
+intervalo autorizado conocido mismo boot, distinta de intervalos observados L02;
+sin contadores dobles/gaps humanos falsos. Credencial/pregunta y catálogo privados.
+
+Requisitos confirmados y cambio prioridad escapes incluidos íntegros en mensaje
+para evitar dependencia de lecturas externas; retención/día/push/LOCK_FOR/rangos/
+admin/cupos/KDF/olvido/migración todavía propuestas claramente no aprobadas. Pedidos
+ejemplos documentales/casos negativos, mapa mínimo y pocas elecciones bloqueantes,
+no contrato definitivo/puertas nuevas. Revisión siguiente hijo/relay antes de acuerdo.
+
+Solo documento/relevo/ESTADO y commit padre; sin código/tests/builds/CP1/esquema/
+fixtures/plan/ADR aceptados/validador C02 editados, Android/notificaciones/dispositivos/
+ADB/CA/LAN/push/despliegue/repos ajenos o subagentes/sesiones nuevas. No servicios
+push/credenciales/datos reales recogidos, guardas/barreras relajadas o pruebas propias
+nuevas. Actualizados docs propios y commit de coordinación.

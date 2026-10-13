@@ -335,3 +335,17 @@ Quedan sin respuesta retención del día/historial y avisos con padre cerrado/pu
 zona/día/intervalos inciertos/reset y definición final del contador por acordar.
 Sin elegir proveedor push, crear servicios/credenciales o recopilar datos reales.
 HIJO-L02 queda laboratorio de evidencia sintética, no promoción a contador productivo.
+
+## 16. PADRE-C04 — propuesta exacta de contrato preparada para revisión
+
+2026-10-12: propietario confirma aclaración §15 y solicita continuar. Asignada y
+admitida PADRE-C04 para documento propio de contrato propuesto: campos/tipos/rangos,
+contextos/firmas/versionado/subprotocolo, revisión global vs secuencia remota,
+STATE/ACK/contador absoluto de tiempo permitido y ejemplos negativos documentales.
+Retención/día/push/duraciones/LOCK_FOR pendientes con alternativas identificadas,
+no funcionalidades aprobadas silenciosamente. No se edita CP1/esquema/fixtures.
+
+Preservar identidad/reservas/pendientes/consumos/esperas y ceremonia explícita;
+sin downgrade de semántica nueva bajo CP1. Propuesta mínima reutilizable para
+revisión hijo/relay y acuerdo posterior de versión antes de código/sincronización.
+Sin nueva implementación/tests/builds o autorización física. Entrega pendiente.

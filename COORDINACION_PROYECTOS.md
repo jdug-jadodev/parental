@@ -231,6 +231,33 @@ Tratamiento Keyguard/pantalla apagada, día/retención y padre cerrado/push pend
 Aviso informativo hijo admitido queue/resume=false sin nueva ejecución/tarea para no integrar antes
 de versión/contrato o convertir laboratorio en telemetría productiva.
 
+### PADRE-C04 — borrador exacto del contrato propuesto, enviado
+
+Propietario confirma simplificación de uso y solicita continuar. Padre HEAD
+984693c/relevo consultados en lectura; no nueva entrega o QR02. Sesión raíz por
+ruta exacta/bandeja vacía/esquema prompt comprobados. PADRE-C04 admitida con
+queue/resume=true, una unidad documental para propuesta concreta de versión nueva,
+no implementación ni modificación de CP1/compartido/fixtures. Resultado pendiente.
+
+Contexto íntegro comunicado: código/pregunta, todas apps/instalación durante permiso,
+HOME/guardas básicas, ambos permisos offline, reboot bloqueado/administración separada,
+prioridad escapes pospuesta y uso = tiempo autorizado consumido, no detector humano.
+Retención/zonas/push y parámetros aún propuestos, no respuestas ficticias de preguntas
+interrumpidas. Identificar elecciones imprescindibles y recomendación sin aprobarlas.
+
+Borrador en documento propio: tipos/campos/canonización/límites/contextos/firmas/
+versión/subprotocolo/rechazos cruzados; revisión global vs seq, STATE efectivo vs
+resultado remoto, ACK/timers/órdenes viejos, contador absoluto de tiempo permitido,
+frescura/incertidumbre/sync y ejemplos conceptuales negativos. Sin secretos/datos
+por app o historial/colas/medición en relay. Credencial local no exige reset remoto.
+Mantener acciones existentes hasta decisión explícita de LOCK_FOR/duraciones;
+preservar identidad/seq/reservas/consumos/esperas en transición. CP2 es propuesta,
+no versión acordada. Siguiente revisión hijo/relay antes de sincronización/código.
+
+Docs/relevo/ESTADO/commit padre, sin código/tests/builds/dispositivos/ADB/contrato
+congelado/plan/ADR aceptados editados, nuevos servicios push/permisos, CA/LAN/push
+git/despliegue/repos ajenos o subagentes/sesiones. No tarea nueva hijo por este turno.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
