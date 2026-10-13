@@ -1477,3 +1477,23 @@ o repite tras fallo. Verificar modos reales y deadline, salida/restauración fin
 sin snapshot/plan/servicio pendientes; emergencia/Keyguard/ADB conservados.
 A56 excluido, sin nuevos permisos/restricciones/reboot/crash o producto aprobado.
 Resultado pendiente; Render sin dispositivos, apps, tests/builds o despliegue.
+
+## HIJO-PROT03 lograda y restaurada — revisión 2026-10-13
+
+HEAD hijo 478f97d confirmado; relevo y evidencia íntegros revisados en lectura.
+Un único recorrido desde LOCKED: permiso adulto de un minuto, NONE y uso de otra
+app, regreso autónomo a LOCKED (+429 ms del deadline), cancelación sin salida,
+emergencia y salida autenticada correctas. Final NONE, políticas restauradas por
+readback, sin snapshot/plan/servicio pendientes; adulto confirmó uso normal.
+
+Hijo ajustó con autorización el gate ADB debug para renovar bajo bloqueo propio
+íntegro sin modificar políticas ni desbloquear. APK realmente ensayado coincide
+con final instalado; no hubo ensayo fallido previo ni cambios después del ensayo.
+Reporta 238 JVM debug correctos/5 nuevos y prueba focalizada de un test tres veces;
+no reejecutados aquí. Núcleo/compileReleaseKotlin UP-TO-DATE, no APK release probado.
+
+Sigue siendo laboratorio A13/API34 interactivo con servicio/proceso vivo, no
+pantalla apagada/Doze/crash/reboot/persistencia o producto H05/H06/remoto/código
+maestro final acreditados. Rollback externo desde LOCKED no ejercitado. A56 fuera.
+Render solo revisó/documentó, sin ADB/apps/CP1/servidor/tests/builds/despliegue
+modificados o siguiente tarea enviada. APK/grant/canal debug permanecen en A13.

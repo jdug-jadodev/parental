@@ -469,6 +469,27 @@ ajenas. A56 excluido, sin nuevas restricciones/permisos Android/reinicio/crash.
 Resultado pendiente; no acredita producto ni supervivencia del temporizador.
 Render no opera teléfonos ni modifica apps/CP1/servidor/despliegue.
 
+### HIJO-PROT03 revisada: recorrido desde bloqueo logrado
+
+Commit hijo 478f97d confirmado; relevo y evidencia
+`pruebas/EVIDENCIA_HIJO_PROT03.md` completos revisados. Único recorrido físico:
+LOCKED inicial → permiso autenticado de un minuto → NONE/otra app → retorno
+automático y LOCKED verificado a +429 ms del deadline → salida adulta/restauración.
+Cancelación no desbloqueó y emergencia permaneció accesible. Final NONE,
+sin snapshot/plan/servicio pendientes, uso normal confirmado por adulto.
+
+Ajuste debug mínimo autorizado antes del ensayo: renovar gate ADB exclusivamente
+bajo LOCKED propio íntegro, mediante lecturas sin writes ni salida. No ensayo
+fallido del APK previo ni causa histórica PROT01 deducida. APK ensayado y final
+instalado coinciden; no cambios posteriores al recorrido. Hijo reporta 238 JVM
+debug correctos (5 nuevos) y prueba focalizada de un test tres veces; no
+reejecutados por Render. Núcleo/release UP-TO-DATE, sin APK release probado.
+
+Limitado a A13/API34 interactivo con proceso/servicio vivo. Pantalla apagada,
+Doze/crash/reinicio/persistencia/remoto/código maestro final no acreditados;
+rollback externo desde LOCKED no ejercitado. A56 excluido. No nueva tarea
+enviada ni operación física desde Render; CP1 y barreras públicas intactos.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
