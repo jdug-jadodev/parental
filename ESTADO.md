@@ -1241,3 +1241,35 @@ fixtures/plan/ADR aceptados/validador C02 editados, Android/notificaciones/dispo
 ADB/CA/LAN/push/despliegue/repos ajenos o subagentes/sesiones nuevas. No servicios
 push/credenciales/datos reales recogidos, guardas/barreras relajadas o pruebas propias
 nuevas. Actualizados docs propios y commit de coordinación.
+
+## PADRE-C04 revisada y elecciones funcionales recibidas — 2026-10-13
+
+Relevo y borrador padre completos (540 líneas) leídos en lectura, HEAD1582e66
+confirmado; árbol Render limpio. Propuesta de versiones/firmas/campos/contextos/
+STATE/ACK/contador técnico, no contrato aprobado/codec implementado/tests nuevos.
+No pruebas padre/relay reejecutadas aquí. Resultado documental validado como draft.
+
+Preguntas al propietario: cuenta permiso aunque pantalla apagada/Keyguard; historial
+varios días con limpieza cada domingo21; sí evaluar push con padre cerrado; elimina
+opción bloqueo temporal y apertura automática. Solo permiso por tiempo/bloqueo al
+agotarse, bloqueo inmediato o permitir libre hasta nuevo bloqueo/reboot. No rango
+1min–7d aprobado por retirar función; no deferredAllowSec/timer apertura en v2 futura.
+
+Registrado §17 central/coordinación: ampliar retención mínima a agregados diarios
+semanales, limpieza local/catch-up y epoch/frescura para no resucitar borrados por
+sync viejo. Zona/hora/DST/errores/proceso/boot por precisar, sin uso por app/intervalo
+o historial relay. Push solo evaluación privacidad/emisión/tokens/coste/datos mínimos,
+sin SDK/cuenta/servicio/credencial/despliegue autorizado. Deadline monotónico distinto
+del calendario limpieza y permiso no prueba humano/enforcement. Próxima revisión
+hijo antes de draft actualizado/acuerdo tres roles; CP1/fixtures/plan/barreras intactos.
+
+Consultados esquema API/sesión raíz hijo por ruta y bandeja vacía. HIJO-C07 admitida
+queue/resume=true: única revisión documental de draft padre y deltas exactos nuevos,
+con resumen completo para evitar bloqueos de lecturas externas, sin ampliar permisos.
+Retirar LOCK_FOR y precisar catálogo de mensajes/contextos/retención semanal/frescura/
+contador autorización durable/cleanup catch-up/anti-resurrección y transición segura;
+push solo deltas mínimos a revisión posterior de proveedor/emisión/permisos.
+No resultado confirmado aún, docs/relevo/ESTADO/commit hijo sin código/tests/builds/
+CP1/fixtures/planes/ADR aceptados/Android/dispositivos/ADB/CA/LAN/push/despliegue o
+repos ajenos modificados. Sin tarea nueva padre/QR02/subagentes/sesiones. Se revisará
+relay antes de acordar versión/schema/sincronizar; documentación propia y commit.

@@ -1,6 +1,6 @@
 # Coordinación central — padre, hijo y relay
 
-Última actualización: 2026-10-12. Coordinador: sesión de parental_render, por petición del propietario.
+Última actualización: 2026-10-13. Coordinador: sesión de parental_render, por petición del propietario.
 Este documento organiza el trabajo; no autoriza editar las apps, operar teléfonos,
 abrir LAN, instalar certificados, aprovisionar, borrar datos, hacer push o desplegar.
 Una tarea por turno. Cada IA implementa y registra resultados en su propio repo.
@@ -257,6 +257,31 @@ no versión acordada. Siguiente revisión hijo/relay antes de sincronización/c�
 Docs/relevo/ESTADO/commit padre, sin código/tests/builds/dispositivos/ADB/contrato
 congelado/plan/ADR aceptados editados, nuevos servicios push/permisos, CA/LAN/push
 git/despliegue/repos ajenos o subagentes/sesiones. No tarea nueva hijo por este turno.
+
+### PADRE-C04 revisada y decisiones del propietario — 2026-10-13
+
+HEAD1582e66 confirmado, relevo/draft íntegros revisados. Propuesta exacta técnica,
+no aprobación de CP2/schema/fixtures o pruebas nuevas. Propietario confirma tiempo
+de permiso incluyendo pantalla apagada/Keyguard; pide historial diario de varios
+días borrado cada domingo21; autoriza evaluación de push, no activación; elimina
+LOCK_FOR/apertura automática expresamente. Quedan permitir temporizado/bloquear
+ahora/permitir libre hasta bloqueo o reboot. Rango 1min–7d no respondido/aprobado.
+Detalle §17 central; estas decisiones sustituyen alternativas anteriores pendientes.
+
+Historial requiere buckets semanales mínimos hijo/padre y limpieza local/catch-up/
+anti-resurrección por sync viejo; servidor continúa sin historial de uso. Push
+requiere propuesta aparte de seguridad/tokens/emisión/coste, no secretos/SDK o
+servicios en relay por inferencia. Revisión hijo antes de actualizar/congelar draft.
+
+HIJO-C07 enviada/admitida queue/resume=true a sesión raíz hijo, ruta/esquema/
+bandeja vacía comprobados: revisión documental de draft y deltas exactos de estas
+decisiones. No resultado aún. Retirar LOCK_FOR/apertura, definir bucket semanal/
+cleanup/catch-up/anti-resurrección y contador autorización durable; compatibilidad/
+recuperación y mínimos de aviso push sin activar proveedor/emisión/tokens/servicio.
+Fuente externa en lectura solo si accesible, reportar bloqueo/revisión parcial
+sin ampliar permisos; resumen íntegro incluido. Docs/relevo/ESTADO/commit propios,
+sin código/tests/builds/CP1/fixtures/planes/dispositivos/ADB/despliegue o padre
+editado. Revisión propia relay antes de acuerdo/sincronización, no CP2 aprobada.
 
 ## 1. Fuentes y situación comprobada
 

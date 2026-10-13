@@ -349,3 +349,56 @@ Preservar identidad/reservas/pendientes/consumos/esperas y ceremonia explícita;
 sin downgrade de semántica nueva bajo CP1. Propuesta mínima reutilizable para
 revisión hijo/relay y acuerdo posterior de versión antes de código/sincronización.
 Sin nueva implementación/tests/builds o autorización física. Entrega pendiente.
+
+## 17. PADRE-C04 revisada y decisiones funcionales — 2026-10-13
+
+PADRE-C04 terminó en 1582e66. Leídos relevo y BORRADOR_CP2_ORDENES_Y_TIEMPO.md
+íntegros en lectura. Campos/versiones/dominios/contextos propuestos, no contrato
+aprobado. CP1 sigue intacto, sin tests/builds o codec nuevo por esa entrega.
+
+Respuestas expresas del propietario:
+
+- **Cuenta el permiso**: tiempo autorizado transcurrido, incluyendo pantalla
+  apagada y Keyguard. No interacción humana ni duración por app; no UsageStats.
+  La cuenta atrás sigue su plazo monotónico, no pausa por pantalla/red.
+- **Historial de varios días, limpieza cada domingo a las 21:00**. Sustituye la
+  propuesta de solo bucket actual/sin historial. Diseñar zona horaria local
+  configurada, corte semanal, mínimo agregado por día y eliminación en hijo/padre.
+  No historial por app/contenido ni persistencia de uso en relay. No se aprobó
+  retener datos indefinidamente o más allá del corte por ausencia de red.
+- **Evaluar push** para avisos con app padre cerrada. Solo diseño y revisión de
+  proveedor/privacidad/seguridad/datos mínimos/coste/entrega/credenciales. No cuenta,
+  SDK, token real, servicio/despliegue/credencial autorizado por la elección.
+- **Eliminar bloqueo temporal con apertura automática (LOCK_FOR)**. No lo quiere.
+  Acciones requeridas: permitir por tiempo y bloquear al vencer, bloquear inmediato,
+  permitir libre hasta nuevo bloqueo/reinicio. No apertura diferida/timer de
+  desbloqueo ni deferredAllowSec en versión nueva. CP1 conserva sus bytes/semántica
+  históricos; no borrar botón/codec v1 unilateralmente para aparentar versión nueva.
+
+El rango propuesto 1 minuto–7 días no quedó aprobado: el propietario respondió
+retirando esa función, no eligiendo su rango. Alcance de permiso libre en controles
+locales/remotos y rangos/caducidades de producto deben quedar explícitos en revisión.
+
+Historial requiere mínimo multibucket acotado semanal (no fila por intervalo/app),
+snapshot absoluto fresco sin sumar retransmisiones. Deadline de permiso monotónico
+distinto del calendario de limpieza. Corte domingo21 debe ejecutarse localmente
+sin depender de red, con catch-up antes de leer/publicar tras proceso apagado/boot;
+definir cambio de zona/hora/DST, incertidumbre y eliminación segura. No reconstruir
+datos borrados desde snapshot antiguo o sincronización tardía; marcador/época de
+retención evita resurrección en padre. No prometer borrado instantáneo con proceso
+muerto sin demostrar capacidad; presentar cómo se cumple el límite y errores.
+
+Push no implica vigilancia/cola de órdenes: avisos mínimos autenticados y estado
+confirmado por WSS/sync, no órdenes ejecutadas desde una notificación no verificada.
+Si requiere componente de emisión/almacenamiento de tokens separado, proponerlo con
+consentimiento y límites antes de cambiar arquitectura relay sin secretos/historial.
+Sin comunicación el estado/red del hijo sigue desconocido, no causa inventada.
+
+Siguiente revisión técnica del hijo debe incorporar estas decisiones antes de
+acuerdo conjunto y actualizar el borrador; no congelar la variante de §8 anterior
+de solo día/última expiración o LOCK_FOR. CP/2 sigue provisional.
+
+HIJO-C07 documental enviada/admitida para deltas exactos de §§17 y revisión del
+draft del padre. Entrega pendiente; sin contrato/schema/copias sincronizados,
+implementación/tests/builds/permisos físicos o proveedor push activado. Revisión
+de hijo y relay antes de acuerdo de versión, no cambios unilaterales de CP1.
