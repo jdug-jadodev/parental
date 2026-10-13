@@ -1444,3 +1444,24 @@ Aviso y nueva confirmación específica antes instalación/ensayo físico en ses
 cualquier permiso Android adicional requiere autorización, solo A13, A56 excluido.
 Sin nueva operación física/tests/builds propios o cambios CP1/apps/relay/despliegue
 desde Render. Resultado de PROT02 pendiente; no reenviar asignación duplicada.
+
+## HIJO-PROT02 lograda en ensayo interactivo — revisión 2026-10-13
+
+HEAD hijo 5dbfa3f confirmado; relevo y evidencia completa revisados en lectura.
+Un minuto elegido por adulto, uso de otra app y retorno autónomo: LOCKED observado
+a +1308 ms del deadline (alarma +17 ms, solicitud +60 ms). Cancelación sin salida,
+emergencia y salida autenticada confirmadas; NONE final, readback de restauración,
+sin snapshot pendiente, plan cancelado/servicio detenido. Notificación concedida
+por adulto en UI; APK/canal/grant debug permanecen, no servicio activo.
+
+Hijo reporta 233 JVM debug correctos/12 nuevos, builds correctos y prueba focalizada
+de capacidad de un test ejecutada tres veces. Núcleo/compileReleaseKotlin
+UP-TO-DATE, sin nueva ejecución; no pruebas reejecutadas por Render. APK ensayado
+y final con guarda yaLOCKED distintos, actualización final sin otro minuto;
+exclusión release por clases/manifest, no APK release probado.
+
+No persistencia del permiso debug si muere proceso, ni prueba física de pantalla
+apagada/Doze/reinicio/permitir desde LOCKED/reemplazo. No producto/H05/H06/remoto
+o historial acreditados. Siguiente propuesta acotada: LOCKED → permitir un minuto
+→ otra app → bloqueo automático; no enviada ni autorizada físicamente aún.
+Render solo revisó/documentó: sin ADB/apps/CP1/servidor/despliegue/tests/builds nuevos.

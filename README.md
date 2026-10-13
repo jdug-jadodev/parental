@@ -102,6 +102,9 @@ No requiere Render; esta sesión no opera teléfonos y A56 queda fuera de ese bl
 R1 del hijo (4faea1f): bloqueo LOCKED real y salida autenticada/restauración
 acreditados según evidencia revisada. HIJO-PROT02 enviada para permiso temporal
 debug y bloqueo automático al vencer; ensayo nuevo sujeto a confirmación del dueño.
+PROT02 (5dbfa3f): minuto y retorno automático desde otra app logrados en A13
+interactivo, proceso vivo; salida/restauración verificadas según evidencia hijo.
+No acredita pantalla apagada, muerte del proceso, reinicio ni control remoto.
 El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
 carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
 sin editar apps ni trasladar autorizaciones físicas entre sesiones.

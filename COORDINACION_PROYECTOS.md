@@ -429,6 +429,30 @@ concederlos. Solo A13 con selector explícito, emergencia/salida/rollback previa
 seguros y restauración final sin relock tardío. A56 excluido. Render no opera
 dispositivos ni modifica apps/CP1/servidor; resultado PROT02 todavía pendiente.
 
+### HIJO-PROT02 revisada: minuto y bloqueo automático logrados
+
+Commit hijo 5dbfa3f confirmado; relevo y evidencia
+`pruebas/EVIDENCIA_HIJO_PROT02.md` íntegros revisados. Ensayo único de un minuto:
+adulto eligió tiempo y abrió otra app; retorno autónomo al prototipo y LOCKED
+corroborado. Alarma +17 ms, solicitud +60 ms, LOCKED verificado +1308 ms respecto
+al deadline. No prometer cierre al segundo exacto. Cancelación/emergencia/salida
+autenticada confirmadas; NONE final, políticas restauradas, plan cancelado y
+servicio detenido. APK y permiso/canal de notificación debug permanecen.
+
+233 JVM debug correctos (12 nuevos), builds y tres ejecuciones focalizadas de un
+test reportados, no reejecutados por Render. Núcleo y compilación release
+UP-TO-DATE; exclusión debug revisada por hijo, no APK release probado. Guarda
+final para bloquear cuando ya LOCKED instalada, sin repetir ensayo temporal;
+evidencia distingue APK ensayado del final. No causa histórica PROT01 acreditada.
+
+Resultado limitado a A13 interactivo/API34 y servicio/proceso vivo. Pantalla
+apagada/Doze/crash/reinicio y permitir desde LOCKED no probados físicamente.
+Temporizador debug no persiste; no H05/H06/producto/remoto/historial certificados.
+Siguiente comprobación mínima propuesta: partir de LOCKED, permitir un minuto,
+usar otra app y verificar retorno automático, siempre con nueva confirmación
+física en sesión hijo. Propuesta no enviada ni autorización física nueva.
+A56 excluido; Render sin dispositivos/apps/CP1/despliegue modificados.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
