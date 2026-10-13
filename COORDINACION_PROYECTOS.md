@@ -353,6 +353,36 @@ para contrato separado o bloqueo con delta exacto. Sin implementación schema/
 tests/builds o nueva tarea por su cuenta en C08. Resultado pendiente. Tras gate
 favorable iniciar unidad separada de contrato/pruebas, no Android/sync v1 automático.
 
+### Prioridad actual: HIJO-PROT01, bloqueo real reversible A13
+
+Propietario pide probar bloqueo primero y mejorar después; identifica A13 para
+hijo y A56 para padre. Consultadas instrucciones/relevo/estado hijo: C08 termina
+en 3cc206e, APTO contrato separado según relevo, no implementación/puertas físicas.
+Se prioriza ahora prueba local DEBUG independiente de protocolo/relay; no ampliar
+documentación o esperar Render para comprobar entrar/salir de bloqueo.
+
+Autorización específica obtenida por pregunta: «Sí, prueba reversible». IA hijo
+puede instalar/actualizar APK DEBUG SOLO A13 SM-A135M y probar/restaurar políticas
+Lock Task propias, con salida temporal mediante credencial Android existente;
+no solicitar secreto en chat/cambiar credencial. Aviso antes aplicar políticas,
+verificar credencial/salida segura/rollback y emergencia antes entrar. No borrar,
+reprovisionar, desactivar ADB o endurecer permanentemente. Si salida no segura,
+detener antes restringir. Esta autorización es del hijo, no de esta sesión Render.
+
+HIJO-PROT01 enviada/admitida queue/resume=true a sesión existente hijo; esquema
+API/ruta exacta/bandeja vacía comprobados. Código/tests/APK debug y prueba física
+reversible con selector único A13/todo adb -s, sin connected tests indiscriminados
+o A56 consultado/modificado. Prototipo fuera release, no código maestro final o
+autorización CP1 normal/bypass productivo. Estado observado LOCKED vs PINNED,
+entrada/salida/cancelación/Inicio-Atrás-Recientes básicos/emergencia sin llamadas;
+restauración políticas propias comprobada y evidencia/commit hijo al cierre.
+
+Sin nuevas restricciones generales/suspensión masiva/HOME permanente/Keystore
+reemplazado/servidor/push/deps innecesarias/CP1/fixtures/planes/ADR aceptados/QR02.
+H05/H06/temporizadores/reboot/remoto/producto completo no acreditados por prototipo.
+A56 disponible solo reservado integración padre futura, no operación autorizada
+en este bloque. Render no opera ningún dispositivo; barreras públicas intactas.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

@@ -449,3 +449,27 @@ fuentes propias; no reabrir elecciones confirmadas. Resultado pendiente.
 La aptitud de especificación no acredita enforcement/recuperación físicos. Tras
 gate favorable, asignar unidad de contrato/schema/pruebas separada con trazabilidad
 de acuerdo y copias v1 intactas; no modificar v1 o integrar Android automáticamente.
+
+## 20. Prototipo debug de bloqueo real prioritario — 2026-10-13
+
+Usuario prioriza comprobar bloqueo antes de mejoras/integración completa. C08 termina
+en 3cc206e APTO para contrato separado según relevo revisado; preparar CP2 mantiene
+autorización previa pero ahora no bloquea prototipo Android independiente de perfil.
+No autorizar CP1 con semántica local nueva: prototipo visible exclusivamente DEBUG,
+sin firma/ACK/órdenes/pairing o modificación de esquema/fixtures/producto release.
+
+Dueño identifica A13 hijo/A56 padre disponibles y responde a autorización concreta
+«Sí, prueba reversible»: IA hijo instala/actualiza debug en A13 SM-A135M, verifica
+salida segura antes bloquear, prueba Lock Task/restaura políticas propias. Credencial
+Android existente como autenticación TEMPORAL de adulto para laboratorio, no código
+maestro final (puede ser conocida por menor). No pedirla en chat/capturarla/cambiarla.
+Aviso previo a acciones físicas, emergencia y Keyguard conservados; rollback local
+dirigido preparado sin desactivar ADB ni bloquear la salida. Sin borrar/reprovisionar
+o restricciones permanentes. Si falta credencial/owner/salida segura, no entrar.
+
+HIJO-PROT01 admitida para código/tests/APK debug y ensayo reversible básico
+entrada/bloqueo observado/salida autenticada/cancelación/Home-Atrás-Recientes,
+emergencia sin llamadas y restauración. Todo dirigido único A13 por selector
+verificado, A56 no se consulta/modifica por esta tarea. Render no opera dispositivos.
+H05/H06 y recuperación productiva/temporizador/reboot/remoto/seguridad final no
+acreditados por este experimento; solo evidencia real del recorrido probado.

@@ -1365,3 +1365,34 @@ se asignará separada al superar gate, no apps productivas automáticamente.
 Actualizados propuesta/README/coordinación/revisión relay/este estado propios. No
 fuentes/contrato congelado/fixtures/planes/secretos o datos reales modificados,
 guardas/health503/producción relajados o tests propios nuevos; commit documental.
+
+## HIJO-PROT01: autorización concreta y bloqueo debug real — 2026-10-13
+
+Usuario pide iniciar primera prueba de bloqueo hijo y disponibilidad A13/A56.
+Leídos AGENTS raíz/hijo, estado y relevo hijo C08, HEAD3cc206e confirmado; árbol
+Render limpio. Gate APTO según relevo, no lectura completa de nota C08 o nueva
+prueba/schema por Render. Se prioriza ahora código/prototipo Android local,
+sin esperar servidor/contrato ni reinterpretar CP1 como control local normal.
+
+Pregunta de autorización específica: dueño responde «Sí, prueba reversible».
+IA hijo autorizada instalar/actualizar APK DEBUG solo A13 SM-A135M, probar Lock Task
+y restaurar políticas que cambie; salida temporal adulto credencial Android existente,
+no secreto en chat/log/UIcaptura ni cambio de PIN. Aviso antes políticas, verificar
+salida/credencial/Owner/selector/rollback primero; si no seguro detener antes aplicar.
+Emergencia/Keyguard/ADB preservados, sin borrado/reprovisión/endurecimiento permanente.
+
+Consultado esquema prompt API y ruta raíz hijo/bandeja vacía; HIJO-PROT01 admitida
+queue/resume=true. Una unidad código/tests/compilación APK debug, exclusión release y
+ensayo físico básico autorizado en proyecto hijo, no Render. Bloqueo observado LOCKED
+no PINNED/intención ficticia, salir adulto/cancelación/fondo/reentrada, Inicio-Atrás-
+Recientes/emergencia sin llamadas/restauración propia con resultados explícitos.
+No A56 leído/tocado/tests conectados globales; solo selector único A13/todo adb -s
+en esa sesión, sin seriales/secretos almacenados. No nuevas sesiones/subagentes.
+
+Sin restricciones amplias/HOME permanente/suspensión masiva/PIN nuevo/overlays/APIs
+privadas o engaño de código maestro definitivo por credencial Android de laboratorio.
+No CP1/fixtures/planes/ADR aceptados/producto release/servidor/push/QR02 modificados,
+H05/H06 cerrados o permiso remoto/reboot/temporizadores acreditados por este bloque.
+A56 disponible reservado futura integración padre, sin operación física asignada.
+Render no usó ADB/dispositivos o relajó loopback/health503/producción/despliegue.
+Documentos propios y coordinación actualizados; sin tests/builds propios nuevos.

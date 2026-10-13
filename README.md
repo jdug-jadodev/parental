@@ -96,6 +96,9 @@ versión nueva aprobada.
 Preparación separada de CP/2 y pruebas locales autorizada el 2026-10-13, condicionada
 a comprobación técnica final HIJO-C08. Aún sin esquema/codec nuevo o integración
 Android; no modificar CP/1 ni desplegar por esa autorización.
+Prioridad de prueba (2026-10-13): HIJO-PROT01, bloqueo local real reversible en
+APK debug del hijo/A13, con autorización física específica gestionada por su IA.
+No requiere Render; esta sesión no opera teléfonos y A56 queda fuera de ese bloque.
 El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
 carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
 sin editar apps ni trasladar autorizaciones físicas entre sesiones.
