@@ -1425,3 +1425,22 @@ Sin producción/CP1/CP2schema/planes/ADR/servidor/historial/push/QR02 editados, 
 reprovision/PIN/Owner/ADB restringidos, H05/H06/tiempos/remote/reboot certificados o
 subagentes/sesiones nuevos. Render no usó ADB/LAN/despliegue/tests/builds nuevos.
 Documentos propios/propuesta/coord actualizados, revisión preparado y commit.
+
+## Bloqueo debug R1 logrado; HIJO-PROT02 admitida — 2026-10-13
+
+Evidencia hijo R1 íntegra revisada: commit 4faea1f, LOCKED observado en A13,
+navegación/cancelación/Keyguard sin salida, emergencia manual disponible; salida
+autenticada, NONE final y readback de restauración sin snapshot pendiente.
+221 JVM debug correctos/16 nuevos y prueba instrumentada focalizada antes/después
+reportados, no reejecutados por Render. No rollback externo desde LOCKED probado,
+causa histórica PROT01 demostrada ni producto/H05/H06/remoto/reinicio certificados.
+
+HIJO-PROT02 enviada/admitida queue/resume=true tras consultar API/destino/bandeja:
+permiso temporal debug 1–1440 minutos enteros sin preselección, deadline monotónico,
+prueba propuesta de un minuto usando otra app y bloqueo automático real verificado.
+Salida/restauración deben cancelar callbacks para evitar relock tardío; explicitar
+limitaciones proceso/Doze/reinicio, sin confundir timer disparado con LOCKED.
+Aviso y nueva confirmación específica antes instalación/ensayo físico en sesión hijo;
+cualquier permiso Android adicional requiere autorización, solo A13, A56 excluido.
+Sin nueva operación física/tests/builds propios o cambios CP1/apps/relay/despliegue
+desde Render. Resultado de PROT02 pendiente; no reenviar asignación duplicada.

@@ -407,6 +407,28 @@ A56 excluido, todo adb -s único A13, sin endurecer/wipe/Owner/PIN/ADB cambiados
 Sin CP1/CP2schema/historial/push/planes/H05-H06 aprobados/repos ajenos o servidor
 modificados; no subagentes/sesiones. Resultado pendiente, Render sin dispositivos.
 
+### Bloqueo R1 logrado y HIJO-PROT02 enviada
+
+Revisada evidencia `pruebas/EVIDENCIA_HIJO_PROT01_R1.md` del hijo, commit 4faea1f:
+LOCKED observado en A13 y mantenido tras navegación/cancelación/Keyguard. Adulto
+confirmó emergencia disponible y salida autenticada; NONE final, políticas propias
+restauradas por readback y sin snapshot pendiente. Rollback ADB no probado desde
+LOCKED. 221 JVM debug correctos y prueba focalizada antes/después reportados por
+hijo, no reejecutados aquí. No acredita producto final/H05/H06/remoto/reinicio.
+
+HIJO-PROT02 ya enviada/admitida a sesión existente, queue/resume=true: implementar
+permiso temporal exclusivamente debug, minutos enteros 1–1440 sin preselección,
+con prueba propuesta de un minuto y bloqueo automático desde otra app. Deadline
+monotónico/generaciones/cancelación segura, sin credencial nueva al vencer ni
+cancelación del permiso por cerrar sesión adulta. Verificar LOCKED real, no solo
+disparo de temporizador. Dependencias de proceso/Doze/reinicio deben explicitarse.
+
+Nueva instalación y ensayo requieren aviso y confirmación específica en sesión
+hijo; permisos Android adicionales, si imprescindibles, requieren aprobación antes
+concederlos. Solo A13 con selector explícito, emergencia/salida/rollback previamente
+seguros y restauración final sin relock tardío. A56 excluido. Render no opera
+dispositivos ni modifica apps/CP1/servidor; resultado PROT02 todavía pendiente.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

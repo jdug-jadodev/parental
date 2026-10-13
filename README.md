@@ -99,6 +99,9 @@ Android; no modificar CP/1 ni desplegar por esa autorización.
 Prioridad de prueba (2026-10-13): HIJO-PROT01, bloqueo local real reversible en
 APK debug del hijo/A13, con autorización física específica gestionada por su IA.
 No requiere Render; esta sesión no opera teléfonos y A56 queda fuera de ese bloque.
+R1 del hijo (4faea1f): bloqueo LOCKED real y salida autenticada/restauración
+acreditados según evidencia revisada. HIJO-PROT02 enviada para permiso temporal
+debug y bloqueo automático al vencer; ensayo nuevo sujeto a confirmación del dueño.
 El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
 carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
 sin editar apps ni trasladar autorizaciones físicas entre sesiones.
