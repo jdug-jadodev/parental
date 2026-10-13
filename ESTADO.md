@@ -1497,3 +1497,15 @@ pantalla apagada/Doze/crash/reboot/persistencia o producto H05/H06/remoto/códig
 maestro final acreditados. Rollback externo desde LOCKED no ejercitado. A56 fuera.
 Render solo revisó/documentó, sin ADB/apps/CP1/servidor/tests/builds/despliegue
 modificados o siguiente tarea enviada. APK/grant/canal debug permanecen en A13.
+
+## HIJO-PROT04 enviada: pantalla apagada al vencer — 2026-10-13
+
+Propietario pide continuar. API/schema/destino raíz hijo y bandeja vacía comprobados;
+HIJO-PROT04 admitida queue/resume=true. Revisar/ajustar exclusivamente debug para
+deadline monotónico original y bloqueo vencido pendiente bajo Keyguard, retorno
+oficial a LOCKED al desbloquear y cancelación segura sin relock tardío. No éxito
+por Keyguard/alarma entregada ni garantía de cierre sin ventana de acceso.
+Tests/builds pertinentes antes ensayo; pedir autorización concreta en sesión hijo
+antes instalar/probar minuto con pantalla apagada. Solo A13, emergencia/salida/ADB
+preservados, A56 excluido; sin Doze forzado/reboot/crash/persistencia/remoto/CP2.
+Resultado pendiente; no nuevos dispositivos/apps/tests/builds/despliegue de Render.

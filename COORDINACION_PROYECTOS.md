@@ -490,6 +490,22 @@ Doze/crash/reinicio/persistencia/remoto/código maestro final no acreditados;
 rollback externo desde LOCKED no ejercitado. A56 excluido. No nueva tarea
 enviada ni operación física desde Render; CP1 y barreras públicas intactos.
 
+### HIJO-PROT04 enviada: vencimiento con pantalla apagada/Keyguard
+
+Propietario solicita continuar. HIJO-PROT04 enviada/admitida queue/resume=true
+tras comprobar esquema API/destino raíz hijo/bandeja vacía. Una unidad debug:
+conservar deadline original y bloqueo vencido pendiente cuando Keyguard impida
+entrar; comprobar retorno a LOCKED al desbloquear, sin conceder minuto nuevo.
+No desactivar Keyguard ni confundir su protección con Lock Task confirmado.
+Si hay ventana de acceso tras desbloquear, medir/declarar límite sin garantías.
+
+Revisión/código mínimo/tests primero; aviso y autorización específica en sesión
+hijo antes instalación y ensayo nuevo de un minuto con pantalla apagada natural.
+Solo A13, adulto presente/salida/emergencia/rollback seguros, A56 excluido. No
+Doze forzado/crash/reinicio/persistencia/producto/CP2 incluidos ni restricciones
+nuevas para forzar éxito. Cancelación de ensayo debe impedir relock tardío y
+restaurar políticas propias. Resultado pendiente; Render no opera dispositivos.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
