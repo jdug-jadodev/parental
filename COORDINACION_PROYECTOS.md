@@ -383,6 +383,30 @@ H05/H06/temporizadores/reboot/remoto/producto completo no acreditados por protot
 A56 disponible solo reservado integración padre futura, no operación autorizada
 en este bloque. Render no opera ningún dispositivo; barreras públicas intactas.
 
+### HIJO-PROT01 parcial revisada y R1 asignada
+
+HEADd38d3ad confirmado, evidencia/relevo y Activity/Politicas/Tickets íntegros
+leídos. Hijo reporta205JVM debug/6nuevos/0fallos, APKdebug/instrumentado instalados,
+instrumentación focalizada1 OK antes/después. Core/release compile UP-TO-DATE,
+exclusión release por clases/manifest no APK release. No pruebas reejecutadas aquí.
+Usuario informó «no hizo nada»: bloqueo LOCKED no acreditado, causa desconocida.
+Rollbackresult1/NONE/sin snapshot y uso normal finales, no restore desde LOCKED
+demostrado. No manuales bajo bloqueo aprobados o temporizador/remote/reboot listos.
+
+HIJO-PROT01-R1 enviada/admitida queue/resume=true, esquema/ruta raíz/bandeja vacía
+comprobados. Corregir diagnóstico por gates/fases y entrada pendiente/asíncrona
+acotada si hace falta; hipótesis readback/LOCKED inmediatos o tickets/lifecycle,
+no causa confirmada. Tests de fakes/timeout/callbackcancelado/rollback y APK debug;
+no quitar validaciones/seguir aplicando políticas hasta verde para arreglarlo.
+
+Antes de reinstalar/aplicar nueva prueba requiere aviso y NUEVA confirmación
+concreta del propietario en sesión hijo, mismo alcance A13 reversible; sin dueño/
+credencial/rollback/emergencia seguros entregar preparado y bloqueo físico, no
+operar. Una entrada diagnóstica inicial; repetición adicional coordinar explícita.
+A56 excluido, todo adb -s único A13, sin endurecer/wipe/Owner/PIN/ADB cambiados.
+Sin CP1/CP2schema/historial/push/planes/H05-H06 aprobados/repos ajenos o servidor
+modificados; no subagentes/sesiones. Resultado pendiente, Render sin dispositivos.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

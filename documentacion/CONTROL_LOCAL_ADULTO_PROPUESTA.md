@@ -473,3 +473,17 @@ emergencia sin llamadas y restauración. Todo dirigido único A13 por selector
 verificado, A56 no se consulta/modifica por esta tarea. Render no opera dispositivos.
 H05/H06 y recuperación productiva/temporizador/reboot/remoto/seguridad final no
 acreditados por este experimento; solo evidencia real del recorrido probado.
+
+## 21. Primera prueba parcial y corrección acotada
+
+HIJO-PROT01 d38d3ad revisada: código y APK debug instalados, pruebas JVM/focalizada
+reportadas correctas, pero adulto informa sin cambio/bloqueo. LOCKED no acreditado
+y diagnóstico genérico no localiza causa. Estado final NONE/sin snapshot/uso normal,
+no salida/restauración desde quiosco real probada. No declarar función operativa.
+
+HIJO-PROT01-R1 asignada para diagnóstico enumerado seguro y corrección de entrada/
+verificación temporal si procede, con tests/compilación, sin más documentos generales.
+Hipótesis de checks inmediatos Android o gates/tickets no confirmadas; preservar
+autoridad/validación/timeout/rollback. Repetición física sólo tras aviso y nueva
+confirmación local específica del adulto, mismo A13 reversible, sin A56. No nuevas
+restricciones, instalación/producto release/temporizador/remoto autorizados por R1.

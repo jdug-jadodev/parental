@@ -1396,3 +1396,32 @@ H05/H06 cerrados o permiso remoto/reboot/temporizadores acreditados por este blo
 A56 disponible reservado futura integración padre, sin operación física asignada.
 Render no usó ADB/dispositivos o relajó loopback/health503/producción/despliegue.
 Documentos propios y coordinación actualizados; sin tests/builds propios nuevos.
+
+## HIJO-PROT01 parcial revisada y diagnóstico R1 enviado — 2026-10-13
+
+Leídos relevo/evidencia PROT01 completos y fuentes Activity/Politicas/Tickets en
+lectura, HEADd38d3ad confirmado; árbol Render limpio. Hijo reporta205JVMdebug/6nuevos,
+APKdebug e instrumentado compilados/instalados A13, instrumentación1OK antes/después;
+core/release compile UP-TO-DATE no nueva ejecución. Exclusión release por clases/
+manifest, no APK nuevo release. No pruebas reejecutadas aquí o dispositivo operado.
+
+Resultado físico parcial: adulto dice «no hizo nada», sin LOCKED/causa acreditados.
+Se detuvo/rollbackresult1/NONE/sin snapshot/uso normal confirmado. No demuestra
+restore desde LOCKED/cambio efectivo de políticas, manuales bajo bloqueo pendientes.
+Error genérico Activity oculta gates/etapas. Politicas compara modo/readback inmediato
+tras escrituras/startLockTask; Tickets consume/invalida referencias/lifecycle. Son
+hipótesis a diagnosticar, no causa técnica confirmada por revisión.
+
+Consultado schema API/ruta raíz hijo/bandeja vacía; HIJO-PROT01-R1 admitida
+queue/resume=true para diagnóstico enumerado/entrada pendiente acotada y testsfakes/
+timeout/cancelación/callback viejo/readback/rollback, APKdebug. Sin relajar checks,
+inventar LOCKED/APPLIED o repetir políticas hasta verde. Antes nueva instalación/
+aplicación requiere aviso/nueva confirmación específica propietario sesión hijo,
+mismo alcance A13 reversible y credencialAndroid temporal/emergencia/ADB conservados.
+Si no seguro, preparado/BLOQUEADO_FISICO sin operar. Una entrada diagnóstica inicial;
+otra repetición por coordinación explícita, A56 no leído/tocado/todo adb -s A13.
+
+Sin producción/CP1/CP2schema/planes/ADR/servidor/historial/push/QR02 editados, reset/
+reprovision/PIN/Owner/ADB restringidos, H05/H06/tiempos/remote/reboot certificados o
+subagentes/sesiones nuevos. Render no usó ADB/LAN/despliegue/tests/builds nuevos.
+Documentos propios/propuesta/coord actualizados, revisión preparado y commit.
