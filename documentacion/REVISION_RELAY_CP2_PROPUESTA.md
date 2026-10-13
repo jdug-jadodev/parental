@@ -84,3 +84,22 @@ en los tres codecs (incluido base64url/sobre/UTF-8/profundidad/array 9/orden/ext
 
 Sin código/CP1/fixtures/planes/credenciales/apps modificados, builds/tests nuevos,
 dispositivos/ADB/permisos/CA/LAN/push/despliegue o barreras locales relajadas.
+
+## Revisión R1 y autorización posterior
+
+PADRE-C04-R1 75eb56e íntegro revisado el 2026-10-13. Integra correcciones de
+acciones/rango/local libre/contador/semanal, propone PAIR/OFFLINE/dominos y
+procedencia de recuperación legada sin permitir MESSAGEv1 como autoridadv2.
+No barrera funcional adicional del relay identificada por lectura; la revisión
+final del hijo debe confirmar alta/recuperación. Regla DST primera ocurrencia/
+primer instante válido posterior propuesta técnica, no ancla de permiso.
+
+STATE inventario91 miembros/84 escalares/15 objetos/array8 e hipótesis de strings/
+escaping se corresponden con estructura descrita; cota manual7116 payload/9788
+frame es candidata **condicional**, no codec probado. Mantener límites8192/16384
+y comprobar derivación/fronteras en próxima unidad local, no afirmar tests verdes.
+
+Propietario autoriza preparar CP2 separada/esquema/validadores/pruebas locales
+después del gate técnico final hijo HIJO-C08. No publicabilidad/Android/servicio
+push/credenciales/migración autorizados. Configuración/codec/upgrade actuales siguen
+solo CP1 y barreras intactas; contrato definitivo por generar tras gate favorable.

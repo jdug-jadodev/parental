@@ -334,6 +334,25 @@ Esquema API/ruta raíz padre/bandeja vacía comprobados. Resultado pendiente.
 Sin freeze/schema/CP1/fixtures/planes/puertas/código/tests/builds/Android/permisos
 físicos/push servicios/QR02/despliegue/repos ajenos o subagentes/sesiones nuevas.
 
+### PADRE-C04-R1 revisada y fase contrato/pruebas autorizada
+
+HEAD75eb56e confirmado, relevo/draft747 líneas íntegros leídos. R1 consolida reglas
+finales/retención/push conceptual y PAIR/OFFLINE/hashes versionados/procedencia legada.
+Solo lectura documental, sin codec/pruebas nuevas o alta/migración operativas.
+Inventario/cotas manuales condicionales no son pruebas de límites ejecutadas.
+
+Propietario aprueba por pregunta «Sí, contrato y pruebas»: preparar CP2 como versión
+nueva SEPARADA/esquema/validadores/tests LOCALES tras comprobación final del hijo.
+CP1 congelado, incompatibilidad bloqueante se devuelve antes integrar apps. No
+autorización física/Android/servicio push/credenciales/despliegue/H05/H06/puertas.
+
+HIJO-C08 admitida queue/resume=true, ruta/esquema API/bandeja vacía comprobados;
+R1 íntegro suministrado en7 partes resume=false antes de asignación final, para
+no repetir lecturas externas. Una unidad de veredicto técnico final, compatible
+para contrato separado o bloqueo con delta exacto. Sin implementación schema/
+tests/builds o nueva tarea por su cuenta en C08. Resultado pendiente. Tras gate
+favorable iniciar unidad separada de contrato/pruebas, no Android/sync v1 automático.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

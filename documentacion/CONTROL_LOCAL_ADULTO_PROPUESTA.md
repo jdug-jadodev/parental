@@ -425,3 +425,27 @@ Estas elecciones cierran los puntos funcionales de rango/local libre/calendario,
 no aprueban schema/campos CP2/push proveedor o permisos físicos. Consolidar borrador
 con HIJO-C07/revisión relay y definir PAIR/OFFLINE de nueva instalación/transición
 sin cortar recuperación antes de acuerdo de tres roles y sincronización.
+
+## 19. Preparación de CP/2 y pruebas locales autorizada — 2026-10-13
+
+PADRE-C04-R1 terminó en 75eb56e. Draft integrado completo (747 líneas) y relevo
+revisados: incorpora decisiones finales, tablas PAIR/OFFLINE propuestas y hash
+de recuperación nuevo con procedencia de hashes legados preservada. Inventario/
+cotas manuales condicionales examinados, no pruebas de codec ejecutadas aquí.
+
+Propietario responde **«Sí, contrato y pruebas»**: autoriza preparar nueva versión
+CP/2 separada y empezar esquema/validadores/pruebas locales **tras comprobación
+técnica final del hijo**. CP/1 congelado; incompatibilidad bloqueante debe devolverse
+antes de integrar apps. No autorización de APK/dispositivos/ADB/servicios push/
+credenciales/LAN/despliegue, endurecimiento, migración o cierre de H05/H06.
+
+HIJO-C08 enviada/admitida para comprobación final acotada, no implementar todavía
+en esa unidad. Fuente R1 íntegra suministrada en siete partes de contexto, sin
+lecturas externas/permisos ampliados. Veredicto pedido: apto para generar contrato
+separado o bloqueo concreto con correcciones exactas. Revisar nuevas tablas local
+PAIR/OFFLINE/hashes/continuidad, calendario y coherencia de campos/límites con
+fuentes propias; no reabrir elecciones confirmadas. Resultado pendiente.
+
+La aptitud de especificación no acredita enforcement/recuperación físicos. Tras
+gate favorable, asignar unidad de contrato/schema/pruebas separada con trazabilidad
+de acuerdo y copias v1 intactas; no modificar v1 o integrar Android automáticamente.

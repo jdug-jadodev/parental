@@ -1337,3 +1337,31 @@ distintas. Sin entrega confirmada aún, no freeze/schema/copias CP1/planes/puert
 editados o código/tests/builds/Android/dispositivos/ADB/LAN/push servicios/QR02/
 despliegue/repos ajenos/subagentes/sesiones nuevos. Solo documentación propia,
 ejercicio de longitud descrito y coordinación, revisión de preparado y commit.
+
+## R1 revisada y preparación contrato/tests CP2 autorizada — 2026-10-13
+
+Leídos relevo padre y draft integrado completos (747 líneas), HEAD75eb56e confirmado;
+árbol Render limpio al inicio. Consolida reglas finales/mínimos de PAIR/OFFLINE/
+hashes nuevos y legados con procedencia/consumo preservados. Solo revisión, sin
+ejecución propia de tests/builds/scripts nuevos; tamaños7116/9788 y general11224
+son derivaciones manuales condicionales del padre, no cotas probadas de codec.
+Añadida revisión incremental propia relay con esas precisiones/gate próximo.
+
+Preguntado propietario por fase nueva: responde «Sí, contrato y pruebas». Autoriza
+CP2 como versión SEPARADA/esquema/validadores/pruebas LOCALES TRAS comprobación
+técnica final hijo. Mantener CP1 congelado/devolver incompatibilidad antes integrar
+apps. Sin permisos de APK/dispositivos/ADB/push servicios/cuentas/credenciales/LAN/
+despliegue, endurecimiento/migración/H05/H06 o integración Android implícitos.
+
+API esquema prompt/ruta raíz hijo/bandeja vacía comprobados. HIJO-C08 admitida
+queue/resume=true para veredicto final acotado: PAIR/OFFLINE/recuperación legada/
+calendario/campos/bytes, apto contrato separado o bloqueo exacto. R1 íntegro leído
+en Node y suministrado7 partes de contexto resume=false + tarea final, evitando
+externos/traslado de permisos. No otras tareas/subagentes/sesiones/prompts de vuelta.
+En C08 solo docs/Git/commit, no schema/tests/builds/código/CP1/fixtures/planes/Android/
+dispositivos/push/despliegue/QR02. Resultado pendiente; fase implementación contrato
+se asignará separada al superar gate, no apps productivas automáticamente.
+
+Actualizados propuesta/README/coordinación/revisión relay/este estado propios. No
+fuentes/contrato congelado/fixtures/planes/secretos o datos reales modificados,
+guardas/health503/producción relajados o tests propios nuevos; commit documental.

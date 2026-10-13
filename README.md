@@ -93,6 +93,9 @@ incluso sin internet y bloqueo tras reinicio requieren acuerdo de nueva versión
 CP/1 y sus fixtures siguen congelados. HIJO-C03 diseñada y PADRE-C03 revisada;
 decisiones del propietario pendientes, sin control local normal implementado ni
 versión nueva aprobada.
+Preparación separada de CP/2 y pruebas locales autorizada el 2026-10-13, condicionada
+a comprobación técnica final HIJO-C08. Aún sin esquema/codec nuevo o integración
+Android; no modificar CP/1 ni desplegar por esa autorización.
 El padre reporta P08-B integrado localmente; el hijo mantiene H05 abierta y
 carece todavía de vinculación/WSS operativos. Handoffs preparados para sus IAs,
 sin editar apps ni trasladar autorizaciones físicas entre sesiones.
