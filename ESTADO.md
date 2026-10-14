@@ -1590,3 +1590,20 @@ Verificar LOCKED automático real y salida/desarme/restauración; nueva autoriza
 específica antes instalar/armar/reiniciar A13, sin asumir adb reboot/botón funcional.
 A56 excluido. Resultado pendiente; no nuevos tests/builds/ADB/apps/CP1/servidor/
 despliegue de Render o acreditación de producto/red/remoto/persistencia de proceso.
+
+## LOCAL04 lograda; LOCAL05 admitida con reglas de red — 2026-10-14
+
+Commit hijo 6ab6c1c confirmado; relevo completo y evidencia LOCAL04 §§1–fin revisados.
+Único reboot A13 por ADB autorizado aparte, autobloqueo real sin acción parental:
+LOCKED a 4068 ms de USER_UNLOCKED, no cero ventana certificado. Desarme/salida adulta
+final NONE/sin snapshots, registro adulto conservado; no armado permanente.
+Hijo reporta 320 debug/265 release JVM correctos (14 nuevos compartidos), tres
+Android DP/fake correctos, APK debug físico=final; no reejecutados por Render.
+
+Usuario decide gracia 10 segundos desde señal negativa Android validada y excepción
+offline local expresa por código adulto. NORMAL revocado no revive al reconectar,
+excepción no automática/no revocada sólo por red, reboot invalida ambas. Android
+validado no prueba DNS/relay, reacción al corte físico puede demorarse. Registrado §23.
+API/schema/destino/bandeja comprobados; LOCAL05 admitida queue/resume=true para MAIN.
+Aviso/autorización antes instalar/grants/cortar red A13; A56 excluido. Resultado
+pendiente; sin nuevos tests/builds/ADB/apps/CP1/servidor/despliegue desde Render.

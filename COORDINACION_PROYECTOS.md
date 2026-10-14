@@ -611,6 +611,29 @@ Solo A13, A56 excluido, rollback/salida adulta listos antes armar; desarme/resta
 al terminar para evitar bloqueo inesperado futuro. Sin HOME persistente/ADB/red/CP2/
 restricciones nuevas sin aprobación ni producto final acreditado. Resultado pendiente.
 
+### LOCAL04 lograda; reglas de red acordadas y LOCAL05 enviada
+
+2026-10-14: HEAD hijo 6ab6c1c confirmado; evidencia LOCAL04 y relevo revisados.
+Autobloqueo tras único reinicio ADB explícitamente autorizado: LOCKED observado
+4068 ms después de USER_UNLOCKED, sin abrir app/pulsar bloquear/código parental.
+No garantiza cero ventana ni supervivencia crash. Salida adulta/desarme/restauración
+final NONE/sin intención o snapshots pendientes; datos/código conservados. Hijo
+reporta 320 debug/265 release JVM correctos (14 nuevos compartidos), tres Android
+DP fake correctos; no reejecutados por Render.
+
+Propietario elige «Tras 10 segundos» desde señal negativa de red Android validada
+y «Sí, excepción local» a autorizar uso offline expresamente con código adulto.
+NORMAL se revoca si pérdida persiste 10.000 ms; reconexión posterior no revive.
+EXCEPCION_OFFLINE local explícita no se revoca por estar offline, nunca automática;
+reinicio invalida ambas. Red validada no acredita DNS/relay, sin promesa instantánea.
+
+LOCAL05 enviada/admitida queue/resume=true tras API/destino/bandeja comprobados:
+modelo/observer MAIN fuera Activity, permisos locales mínimos normal/excepción y
+readback de bloqueo real. Señal/plazo acordados, no nueva física autorizada.
+Instalación/permisos y corte/restauración de conexión requieren aviso/confirmación
+específica en sesión hijo, solo A13/A56 excluido, sin DNS/VPN/reinicio/otras políticas.
+Resultado pendiente; Render sin dispositivos/CP1/servidor/despliegue modificados.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

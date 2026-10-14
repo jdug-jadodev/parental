@@ -514,3 +514,25 @@ no autorización implícita para restringir ahora teléfonos o activar servicios
 Nuevo requisito confirmado, todavía no implementado ni probado. CP1 congelado;
 gate C08 aprobó el borrador anterior, no esta nueva semántica. Incorporar el delta
 antes de implementar CP2/integración móvil, sin abrir otra revisión general.
+
+## 23. Detección y excepción offline confirmadas — 2026-10-14
+
+Propietario responde «Tras 10 segundos» para solicitar bloqueo cuando Android
+indique ausencia de red predeterminada con internet validado. Gracia monotónica
+de 10.000 ms desde la señal negativa, no garantía desde el corte físico real.
+Si recupera validación antes de vencer la gracia, no se revoca el permiso por
+ese corte breve ni se renueva su duración. Una vez revocado, reconexión no abre.
+Red validada de Android no comprueba DNS específico, relay o presencia del padre;
+sus fallos y restricciones de configuración siguen siendo piezas separadas.
+
+Responde «Sí, excepción local»: adulto puede autorizar uso offline expresamente
+con su código. Distinguir permiso NORMAL sujeto a red de EXCEPCION_OFFLINE local;
+no crear excepción automáticamente por desconexión/reconexión/recuperación.
+La pérdida de validación revoca NORMAL tras gracia, no la excepción expresamente
+concedida para uso offline. Reinicio invalida ambos y exige autorización nueva.
+Emergencia/recuperación del código permanecen independientes del permiso de uso.
+Esto resuelve la pregunta pendiente de §22, no autoriza cambios físicos de red.
+
+HIJO-LOCAL05 enviada para implementación MAIN de regla/observación fuera Activity,
+permisos locales mínimos y bloqueo observado. Sin ampliar CP1 ni implementar aquí
+protocolo remoto/CP2, DNS/VPN o garantizar supervivencia del proceso.
