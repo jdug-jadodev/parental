@@ -564,6 +564,29 @@ realmente segura. Nueva instalación/ensayo exige aviso/confirmación específic
 en sesión hijo, único A13/todo adb -s, A56 excluido. Sin reboot/red/CP2/push/
 despliegue o cierre H05/H06. Resultado pendiente, Render sin dispositivos/apps.
 
+### LOCAL02 lograda; LOCAL03 enviada para protección de la app
+
+2026-10-14: revisados commit hijo 4431593, relevo y evidencia LOCAL02 íntegra.
+Bloqueo MAIN LOCKED y salida con código adulto fresco (no PIN Android) acreditados;
+cancelación/fondo no abrieron, emergencia disponible. Final NONE, snapshot propio
+eliminado tras readback, sesión cerrada y registro adulto conservado. Hijo reporta
+284 debug/229 release JVM correctos (18 nuevos compartidos), dos Android de archivos
+con políticas fake OK; no reejecutados aquí. Rollback externo desde LOCKED no probado.
+
+LOCAL03 enviada/admitida queue/resume=true tras API/destino/bandeja comprobados:
+protección MAIN autenticada contra desinstalar y borrar datos/modificar app por
+Ajustes, DPM oficial y snapshot/readbacks propios. No confundir bloqueo de
+desinstalación con protección de datos. Si gestión de apps exige restricción
+global, declarar alcance y pedir autorización específica antes aplicarla.
+No desactivar ADB, suspender Settings, cambiar red/HOME ni endurecer masivamente.
+
+Nueva instalación/aplicación física requiere aviso/confirmación en sesión hijo,
+solo A13, A56 excluido. Comprobar controles inhibidos sin desinstalar/borrar datos
+o forzar detención; restaurar baseline al cerrar, no políticas permanentes sin
+permiso adicional. Protección y salida de quiosco son obligaciones separadas.
+Resultado pendiente, no H05/H06/reboot/red/remoto/producto final acreditados.
+Render no opera dispositivos ni modifica apps/CP1/servidor/despliegue.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
