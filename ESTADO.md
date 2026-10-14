@@ -1607,3 +1607,19 @@ validado no prueba DNS/relay, reacción al corte físico puede demorarse. Regist
 API/schema/destino/bandeja comprobados; LOCAL05 admitida queue/resume=true para MAIN.
 Aviso/autorización antes instalar/grants/cortar red A13; A56 excluido. Resultado
 pendiente; sin nuevos tests/builds/ADB/apps/CP1/servidor/despliegue desde Render.
+
+## LOCAL05 implementada sin física; R1 para gate FGS — 2026-10-14
+
+HEAD hijo b2f59f8 confirmado; evidencia LOCAL05/estado y manifest/ControlRedService
+leídos. 342 debug/287 release JVM correctos (22 nuevos compartidos) reportados,
+APK generados no instalados, tres Android DP preparados no ejecutados; no reejecutados
+por Render. Gate lintRelease error ForegroundServicePermission, sin validación física.
+Documentación Android oficial HTTP200 revisada: Device Owner es alternativa elegible
+para systemExempted, no exige además alarmas. Checks de API34/Owner presentes.
+
+API/schema/destino/bandeja comprobados; LOCAL05-R1 admitida queue/resume=true para
+confirmar falso positivo y excepción sólo del detector/nodo MAIN si procede, con
+justificación y guardas runtime, nunca suppression global o nuevos permisos de
+alarmas. Revisar fallo de FGS no autorice uso. Lint verde no prueba runtime A13.
+Nueva aprobación física antes instalar/armar/cortar red, OFFLINE ensayo separado;
+A56 excluido. Resultado pendiente. Render sin tests/builds/ADB/apps/CP1/despliegue.

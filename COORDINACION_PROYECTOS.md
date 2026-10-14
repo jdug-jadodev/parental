@@ -634,6 +634,30 @@ Instalación/permisos y corte/restauración de conexión requieren aviso/confirm
 específica en sesión hijo, solo A13/A56 excluido, sin DNS/VPN/reinicio/otras políticas.
 Resultado pendiente; Render sin dispositivos/CP1/servidor/despliegue modificados.
 
+### LOCAL05 bloqueada por lint; R1 enviada para resolución acotada
+
+2026-10-14: commit hijo b2f59f8 confirmado; evidencia LOCAL05/ESTADO, manifest MAIN
+y ControlRedService completos revisados. Modelo/red/autoridad implementados,
+342 debug/287 release JVM correctos (22 nuevos compartidos) reportados; sin física.
+lintRelease falla ForegroundServicePermission por exigir permisos de alarmas.
+Fuente oficial `https://developer.android.com/develop/background-work/services/fgs/service-types`
+consultada HTTP200: System exempted admite Device Owner como criterio alternativo
+a alarmas. Servicio comprueba API34/Owner antes de startForeground; no runtime probado.
+
+LOCAL05-R1 enviada/admitida queue/resume=true tras API/destino/bandeja comprobados.
+Confirmar discrepancia detector y resolver sin permisos innecesarios. Si se confirma
+falso positivo, autorizada excepción lint sólo ForegroundServicePermission en nodo
+ControlRedService, con fuente/justificación y checks runtime intactos, nunca global
+o baseline/abortOnError=false. Revisar fallo de arranque de servicio no acepte uso.
+No afirmar runtime por lint verde. Error debug preexistente separado, sin ocultarlo.
+
+Tras gate correcto, instalación/notificación/armado/corte de red exige aviso y
+confirmación específica en sesión hijo; sólo A13, A56 excluido. Readback LOCKED,
+reconexión sin apertura y restauración final; OFFLINE físico requiere aprobación
+separada, no cortes/radios automáticos. Resultado pendiente, sin cambios CP1/servidor
+o dispositivos por Render. Relevo hijo consultado aún sin cierre LOCAL05; evidencia/
+ESTADO sí contienen entrega, R1 debe dejar devolución inequívoca.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
