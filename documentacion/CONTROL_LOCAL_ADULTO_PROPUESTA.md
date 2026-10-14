@@ -487,3 +487,30 @@ Hipótesis de checks inmediatos Android o gates/tickets no confirmadas; preserva
 autoridad/validación/timeout/rollback. Repetición física sólo tras aviso y nueva
 confirmación local específica del adulto, mismo A13 reversible, sin A56. No nuevas
 restricciones, instalación/producto release/temporizador/remoto autorizados por R1.
+
+## 22. Cambio vigente: desconexión bloquea sin reapertura automática
+
+El propietario cambia el requisito anterior de conservar uso autorizado sin
+internet y confirma: «sí, que siga bloqueado hasta que el adulto autorice».
+La pérdida de la conexión requerida debe interrumpir el permiso de uso vigente,
+incluso si queda tiempo. Recuperar conexión no reanuda el permiso anterior:
+el hijo permanece bloqueado hasta una autorización adulta nueva y válida.
+La regla se plantea para permisos de uso temporales y libres, locales y remotos;
+no borrar consumos, identidad, secuencias o historial por esta transición.
+
+Esta sección prevalece sobre las afirmaciones anteriores de continuidad offline;
+esas secciones conservan el acuerdo histórico, no el comportamiento vigente.
+Recuperación local de credencial y emergencia deben seguir accesibles sin internet;
+no equivalen por sí mismas a autorizar uso normal. Falta precisar si el adulto
+puede conceder un nuevo permiso local mientras la conexión continúa ausente.
+
+Pendiente definir señal de conexión requerida, plazo de detección y tratamiento
+de fallo del relay frente a fallo de internet. Ausencia del padre, ACK o PONG no
+prueban por sí solos internet disponible/ausente ni bloqueo aplicado. No garantizar
+reacción instantánea, continuidad de red o impedir todo fallo mediante DNS.
+Cambios de DNS/VPN y políticas de red requieren implementación/evidencia propia,
+no autorización implícita para restringir ahora teléfonos o activar servicios.
+
+Nuevo requisito confirmado, todavía no implementado ni probado. CP1 congelado;
+gate C08 aprobó el borrador anterior, no esta nueva semántica. Incorporar el delta
+antes de implementar CP2/integración móvil, sin abrir otra revisión general.

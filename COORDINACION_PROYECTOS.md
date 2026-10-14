@@ -506,6 +506,19 @@ Doze forzado/crash/reinicio/persistencia/producto/CP2 incluidos ni restricciones
 nuevas para forzar éxito. Cancelación de ensayo debe impedir relock tardío y
 restaurar políticas propias. Resultado pendiente; Render no opera dispositivos.
 
+### Cambio confirmado: desconexión bloquea y reconexión no abre
+
+Propietario pide bloqueo aun con tiempo restante si se pierde la conexión y
+confirma mantenerlo hasta nueva autorización adulta. Sustituye continuidad offline
+del permiso vigente: recuperar conexión no reanuda el permiso anterior. Ver §22
+de `documentacion/CONTROL_LOCAL_ADULTO_PROPUESTA.md`; recuperación de credencial/
+emergencia offline conservadas, sin borrar consumos/identidad por desconexión.
+Pendientes señal/plazo de detección y si se admite nueva autorización local sin
+conexión. No confundir ausencia del padre/fallo relay con internet del hijo.
+Delta posterior al gate C08: debe incorporarse antes de CP2, CP1 sigue congelado.
+Solo registro de decisión, sin nueva asignación o restricciones físicas; PROT04
+no se amplía automáticamente a red/DNS/VPN. No función implementada/probada.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

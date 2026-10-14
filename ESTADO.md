@@ -1509,3 +1509,14 @@ Tests/builds pertinentes antes ensayo; pedir autorización concreta en sesión h
 antes instalar/probar minuto con pantalla apagada. Solo A13, emergencia/salida/ADB
 preservados, A56 excluido; sin Doze forzado/reboot/crash/persistencia/remoto/CP2.
 Resultado pendiente; no nuevos dispositivos/apps/tests/builds/despliegue de Render.
+
+## Nueva regla de desconexión confirmada — 2026-10-13
+
+Propietario confirma permanecer bloqueado hasta nueva autorización adulta tras
+pérdida de la conexión requerida, aunque hubiera tiempo restante. Reconexión no
+reanuda permiso viejo; sustituye continuidad offline antes acordada. Registrado
+en propuesta §22 y coordinación, sin implementación/pruebas o nueva asignación.
+Recuperación de credencial/emergencia offline conservadas; no reset de consumos.
+Señal/plazo de detección y nueva autorización local estando offline pendientes de
+precisar. CP1 intacto, nuevo delta aún no cubierto por gate C08 del borrador previo.
+No ampliación automática de PROT04 a red/DNS/VPN, dispositivos o despliegue.
