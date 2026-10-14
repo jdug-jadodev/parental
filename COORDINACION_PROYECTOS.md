@@ -587,6 +587,30 @@ permiso adicional. Protección y salida de quiosco son obligaciones separadas.
 Resultado pendiente, no H05/H06/reboot/red/remoto/producto final acreditados.
 Render no opera dispositivos ni modifica apps/CP1/servidor/despliegue.
 
+### LOCAL03 revisada; LOCAL04 enviada para bloqueo tras reinicio
+
+2026-10-14: evidencia/relevo LOCAL03 completos revisados, cierre hijo 644dbef.
+PARCIAL_RESTAURADO: readbacks activos y restauración exacta logrados; borrar datos/
+deshabilitar observados inhibidos, caché disponible. Desinstalar/forzar detención
+ya inhibidos en baseline, no atribuir cambio a estas políticas. Final NONE y sin
+snapshots/protecciones nuevas; no perseguir caché como requisito general siguiente.
+306 debug/251 release JVM correctos (22 nuevos compartidos), tres Android de
+archivos/políticas fake correctos reportados por hijo, no reejecutados aquí.
+
+Propietario pide continuar tras push de tres proyectos comprobado: Render 076a78c,
+hijo 644dbef, padre 75eb56e coincidían con remotos y árboles limpios al cierre.
+LOCAL04 enviada/admitida queue/resume=true tras comprobar API/destino/bandeja:
+intención MAIN durable de enrolamiento/bloqueo y reinicio vuelve bloqueado sin
+recuperar permisos o sesiones. Direct Boot conserva Keyguard/emergencia y no
+abre credenciales CE antes del desbloqueo Android. Verificar LOCKED real automático,
+no inferirlo de boot/Keyguard; declarar ventana/impedimento si Android no permite.
+
+Activación e instalación/reinicio físico requieren nueva coordinación/autorización
+específica en sesión hijo, considerar botón averiado y no asumir permiso adb reboot.
+Solo A13, A56 excluido, rollback/salida adulta listos antes armar; desarme/restauración
+al terminar para evitar bloqueo inesperado futuro. Sin HOME persistente/ADB/red/CP2/
+restricciones nuevas sin aprobación ni producto final acreditado. Resultado pendiente.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

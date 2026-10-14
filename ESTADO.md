@@ -1571,3 +1571,22 @@ gestión de apps, si imprescindible, exige explicación/confirmación específic
 Aviso/permiso antes instalar/aplicar; ensayo A13 no destructivo y restauración
 final, A56 excluido. No ADB deshabilitado/Settings suspendido/red/reboot/CP2 nuevo.
 Resultado pendiente, Render sin apps/dispositivos/tests/builds/despliegue nuevos.
+
+## LOCAL03 revisada y LOCAL04 enviada — 2026-10-14
+
+Leídos relevo/evidencia LOCAL03 completos. Cierre hijo 644dbef parcial restaurado:
+políticas/readbacks activos y restaurados, datos/deshabilitar inhibidos, caché aún
+disponible; desinstalar/force-stop ya inhibidos antes y no efecto nuevo demostrado.
+Final NONE/sin snapshots/protección nueva, credenciales conservadas. Hijo reporta
+306 debug/251 release JVM correctos (22 nuevos compartidos), tres Android fake/
+AtomicFile OK, lintRelease correcto tras corregir NewApi; no reejecutados por Render.
+
+Push solicitado antes de continuar: tres proyectos comprobados limpios y remotos
+coincidentes (Render 076a78c/hijo 644dbef/padre 75eb56e); sin despliegue ni CI aprobado
+por esa comprobación. Ahora API/destino/bandeja comprobados y LOCAL04 admitida
+queue/resume=true para bloqueo MAIN tras reinicio, intención durable independiente
+de snapshot, permisos/sesiones anteriores inválidos, Keyguard/emergencia preservados.
+Verificar LOCKED automático real y salida/desarme/restauración; nueva autorización
+específica antes instalar/armar/reiniciar A13, sin asumir adb reboot/botón funcional.
+A56 excluido. Resultado pendiente; no nuevos tests/builds/ADB/apps/CP1/servidor/
+despliegue de Render o acreditación de producto/red/remoto/persistencia de proceso.
