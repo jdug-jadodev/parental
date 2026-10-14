@@ -519,6 +519,29 @@ Delta posterior al gate C08: debe incorporarse antes de CP2, CP1 sigue congelado
 Solo registro de decisión, sin nueva asignación o restricciones físicas; PROT04
 no se amplía automáticamente a red/DNS/VPN. No función implementada/probada.
 
+### Prioridad de implementación: HIJO-LOCAL01 enviada
+
+Propietario pide avanzar rápido y terminar protecciones locales antes QR/remoto.
+Revisados relevo/evidencia PROT04-R1 y commit hijo f9eeeea: vencimiento original
+bajo pantalla apagada/Keyguard confirmado; retorno original no validado porque
+adulto pulsó Permitir de nuevo. Segundo LOCKED no acredita primer deadline.
+Final restaurado. No se encadena otra repetición aislada como puerta general.
+
+HIJO-LOCAL01 enviada/admitida queue/resume=true, API/destino/bandeja comprobados:
+implementar UI y persistencia segura de acceso adulto con código numérico 5–10
+dígitos, ceros conservados, recuperación por pregunta personalizada para código
+nuevo, sesión RAM invalidada al salir/fondo/proceso. Una unidad productiva local,
+separada de autoridad CP1 y prototipo debug; tests/build/APK y evidencia reales.
+Bootstrap protegido, sin alta abierta tras corrupción/credencial existente,
+sin almacenar secretos en claro o revelar código anterior. No concede uso normal.
+
+Es prerrequisito práctico para endurecer ajustes/desinstalación posteriormente,
+no cierre H05/H06 ni aplicación de restricciones en este bloque. Nueva regla de
+desconexión transmitida como contexto: reconexión no abre, sin implementar red
+o resolver autorización de uso offline ahora. Recuperación/emergencia conservadas.
+Instalación/configuración física requiere aviso/confirmación específica en sesión
+hijo; A56 excluido, Render sin dispositivos. Resultado LOCAL01 pendiente.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

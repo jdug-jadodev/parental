@@ -1520,3 +1520,19 @@ Recuperación de credencial/emergencia offline conservadas; no reset de consumos
 Señal/plazo de detección y nueva autorización local estando offline pendientes de
 precisar. CP1 intacto, nuevo delta aún no cubierto por gate C08 del borrador previo.
 No ampliación automática de PROT04 a red/DNS/VPN, dispositivos o despliegue.
+
+## HIJO-LOCAL01 enviada: acceso adulto operativo antes de endurecer — 2026-10-13
+
+Leídos relevo y evidencia PROT04-R1 completos; HEAD hijo f9eeeea confirmado.
+Primer vencimiento apagado/Keyguard acreditado, retorno original no: hubo segundo
+permiso manual. Segundo LOCKED y restauración finales no validan ese retorno.
+Sin repetir ahora otra prueba aislada para retrasar implementación del producto.
+
+Tras petición de avanzar, API/schema/destino/bandeja comprobados y HIJO-LOCAL01
+admitida queue/resume=true: código numérico 5–10, pregunta/recuperación offline a
+código nuevo, UI/persistencia segura/bootstrap protegido/sesión RAM y tests/build.
+Unidad local separada de CP1/prototipo, no permite uso o aplica políticas nuevas.
+Contexto de desconexión sin reapertura transmitido; señal/plazo/autorización de
+uso offline pendientes, no implementados en LOCAL01. H05/H06 siguen abiertos.
+Aviso/confirmación antes instalación/configuración física; A56 excluido y Render
+sin ADB/apps/servidor/CP1/tests/builds/despliegue nuevos. Resultado pendiente.
