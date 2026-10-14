@@ -1536,3 +1536,20 @@ Contexto de desconexión sin reapertura transmitido; señal/plazo/autorización 
 uso offline pendientes, no implementados en LOCAL01. H05/H06 siguen abiertos.
 Aviso/confirmación antes instalación/configuración física; A56 excluido y Render
 sin ADB/apps/servidor/CP1/tests/builds/despliegue nuevos. Resultado pendiente.
+
+## LOCAL01 validada y LOCAL02 enviada — 2026-10-13
+
+HEAD hijo 8533ae4 confirmado; evidencia LOCAL01 y relevo completos leídos.
+Puerta adulta MAIN configurada/entrada/cambio por pregunta/fondo/cierre validados
+por adulto; final NONE/sesión cerrada/registro conservado. Hijo reporta 266 debug/
+211 release JVM correctos (19 nuevos compartidos) y cinco Android de almacén OK;
+no reejecutados por Render. APK debug físico coincide con final, release unsigned
+no instalado. LintRelease 0 errores/11 avisos; lintDebug y verificador APK genérico
+fallaron, con causas y comprobaciones alternativas registradas, no verificación total.
+
+Consultados API/schema/destino/bandeja vacía y HIJO-LOCAL02 admitida queue/resume=true:
+bloqueo MAIN gobernado por código adulto, estado LOCKED observado, recuperación
+sin autorización de uso y salida autenticada/restauración de ensayo. No producto
+normal ALLOW/ALLOW_FOR o red implementados, políticas Ajustes/desinstalación nuevas
+o H05/H06 cerrados. Aviso/confirmación específica antes instalar/probar físicamente
+solo A13, A56 excluido. Resultado pendiente; Render sin apps/ADB/tests/builds nuevos.

@@ -542,6 +542,28 @@ o resolver autorización de uso offline ahora. Recuperación/emergencia conserva
 Instalación/configuración física requiere aviso/confirmación específica en sesión
 hijo; A56 excluido, Render sin dispositivos. Resultado LOCAL01 pendiente.
 
+### LOCAL01 validada; HIJO-LOCAL02 enviada para bloqueo MAIN
+
+Revisados evidencia completa/relevo LOCAL01 y commit hijo 8533ae4. Adulto confirmó
+alta, código/panel protegido, fondo exige nueva entrada, pregunta cambia código
+y no concede administración, nuevo código válido y cierre. Final NONE, sesión
+cerrada, registro adulto configurado conservado. 266 debug/211 release JVM correctos
+(19 nuevos compartidos), cinco Android de almacén correctos reportados por hijo;
+no reejecutados aquí. Release unsigned construido/no físico; lintRelease sin errores,
+lintDebug y verificador genérico APK fallaron, motivos/alcance en evidencia hijo.
+
+HIJO-LOCAL02 enviada/admitida queue/resume=true tras comprobar API/destino/bandeja:
+conectar puerta adulta MAIN con bloquear ahora, Lock Task observado y salida
+autenticada reversible de ensayo. Recuperación cambia código sin abrir; cancelación/
+fondo/muerte de sesión no desbloquean. Snapshot/readback/restauración propios,
+sin bypass debug en release o autoridad de PIN Android para salida cotidiana.
+No habilitar permitir normal como si nueva regla de red estuviera implementada.
+
+Todavía no aplicar Ajustes/desinstalación/HOME persistente: primero salida MAIN
+realmente segura. Nueva instalación/ensayo exige aviso/confirmación específica
+en sesión hijo, único A13/todo adb -s, A56 excluido. Sin reboot/red/CP2/push/
+despliegue o cierre H05/H06. Resultado pendiente, Render sin dispositivos/apps.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
