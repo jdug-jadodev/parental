@@ -680,6 +680,29 @@ sesión hijo, A13 únicamente/A56 excluido. OFFLINE/corte extra requiere aprobac
 aparte; excepción de módem de R1 no se hereda. No boot/crash/Doze/DNS/LOCAL03 nuevas
 políticas o producto final acreditados. Resultado pendiente, Render sin dispositivos.
 
+### LOCAL06 temporal MAIN logrado; LOCAL07 enviada para DNS/VPN
+
+2026-10-14: commit hijo 45476e6 confirmado; evidencia/relevo LOCAL06 completos
+revisados. NORMAL temporal de un minuto desde LOCKED, uso de otra app y LOCKED
+automático a +1109 ms del deadline original; sin nuevo código al vencer. Final
+NONE/snapshots y DP ausentes/servicio detenido por salida adulta, datos conservados.
+377 debug/322 release JVM correctos (29 nuevos compartidos), cuatro Android DP
+fake correctos reportados; no reejecutados por Render. OFFLINE/pantalla apagada/
+Doze/crash/reboot con permiso vigente no probados físicamente.
+
+LOCAL07 enviada/admitida queue/resume=true tras API/destino/bandeja comprobados:
+protección MAIN de configuración DNS privado/VPN mediante restricciones oficiales,
+snapshot/readbacks/autoridad adulta/restauración propios. No modifica DNS real,
+activa VPN, bloquea Settings entero o retira restricciones al permitir uso.
+Restricción de configuración no desactiva configuración previa ni garantiza
+continuidad de internet/ausencia de evasiones; declarar capacidad/efecto observado.
+
+Nueva instalación/aplicación/navegación física exige aviso/confirmación específica,
+incluido alcance global si existe, sólo A13/A56 excluido. Comprobar controles sin
+cambiarlos/cortar red y restaurar baseline al terminar. Sin políticas permanentes
+sin autorización adicional, CP1/CP2/red del router/despliegue o producto final.
+Resultado pendiente; Render no dispositivos ni cambios en apps.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

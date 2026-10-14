@@ -1639,3 +1639,20 @@ temporal MAIN 1–1440 minutos sin default, deadline original, red10s NORMAL y
 excepción OFFLINE explícita. Nueva física A13 exige aviso/confirmación; corte extra/
 OFFLINE requiere alcance específico, no hereda excepción al módem del ensayo previo.
 A56 excluido; resultado pendiente, sin tests/builds/apps/ADB/CP1/despliegue de Render.
+
+## LOCAL06 lograda; LOCAL07 DNS/VPN enviada — 2026-10-14
+
+HEAD hijo 45476e6 confirmado; evidencia/relevo LOCAL06 íntegros leídos. Campo vacío,
+adulto eligió un minuto NORMAL, otra app y retorno LOCKED automático: +1109 ms
+deadline, +796 ms solicitud. Salida adulta final NONE/servicio y DP ausentes,
+snapshots limpios/registro adulto conservado. Hijo reporta 377 debug/322 release JVM
+correctos (29 nuevos compartidos), cuatro Android DP/fake OK; no reejecutados aquí.
+OFFLINE temporal/apagado/Doze/crash/reboot con permiso físico siguen pendientes.
+
+API/schema/destino/bandeja comprobados; LOCAL07 admitida queue/resume=true para
+proteger configuración DNS privado/VPN mediante DPM, snapshot y restauración
+autenticada independientes de permisos de uso. No cambiar valores DNS/VPN ni
+inferir continuidad de red o desactivación de configuración previa por restricción.
+Aviso/confirmación antes instalar/aplicar/navegar A13, A56 excluido, ensayo no
+destructivo sin cortes y restauración final; no permisos permanentes implícitos.
+Resultado pendiente; sin tests/builds/ADB/apps/CP1/servidor/despliegue de Render.
