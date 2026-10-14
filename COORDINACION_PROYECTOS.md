@@ -658,6 +658,28 @@ separada, no cortes/radios automáticos. Resultado pendiente, sin cambios CP1/se
 o dispositivos por Render. Relevo hijo consultado aún sin cierre LOCAL05; evidencia/
 ESTADO sí contienen entrega, R1 debe dejar devolución inequívoca.
 
+### LOCAL05-R1 física lograda; LOCAL06 enviada para temporal MAIN
+
+2026-10-14: commit hijo 2582dea confirmado, evidencia/relevo R1 íntegros revisados.
+FGS/callback operativos y permiso NORMAL libre aceptado; corte manual A13 autorizado
+expresamente al propietario desde su app de módem, sin operar/consultar router por
+sesiones. LOCKED a 10965 ms de señal negativa Android, no del corte físico exacto;
+reconexión mantuvo bloqueo. FINALIZAR adulto restauró NONE/DP ausentes/servicio
+detenido, código conservado. OFFLINE física no autorizada/no probada.
+348 debug/293 release JVM correctos (6 nuevos compartidos), tres Android DP OK
+reportados por hijo, no reejecutados aquí. LintRelease verde, limitaciones intactas.
+
+LOCAL06 enviada/admitida queue/resume=true tras API/destino/bandeja comprobados:
+permitir por tiempo MAIN 1–1440 minutos enteros sin preselección, deadline monotónico
+original y autoridad adulta fresca, integrado con NORMAL/red10s y excepción OFFLINE
+expresa. Fondo/cierre sesión no cancela uso, vencimiento bloquea sin nuevo PIN,
+reconexión no renueva; referencias viejas no afectan acción válida posterior.
+
+Nueva instalación/ensayo minuto NORMAL requiere aviso/confirmación específica en
+sesión hijo, A13 únicamente/A56 excluido. OFFLINE/corte extra requiere aprobación
+aparte; excepción de módem de R1 no se hereda. No boot/crash/Doze/DNS/LOCAL03 nuevas
+políticas o producto final acreditados. Resultado pendiente, Render sin dispositivos.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

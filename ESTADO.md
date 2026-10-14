@@ -1623,3 +1623,19 @@ justificación y guardas runtime, nunca suppression global o nuevos permisos de
 alarmas. Revisar fallo de FGS no autorice uso. Lint verde no prueba runtime A13.
 Nueva aprobación física antes instalar/armar/cortar red, OFFLINE ensayo separado;
 A56 excluido. Resultado pendiente. Render sin tests/builds/ADB/apps/CP1/despliegue.
+
+## LOCAL05-R1 física lograda y LOCAL06 enviada — 2026-10-14
+
+HEAD hijo 2582dea confirmado; evidencia/relevo R1 íntegros leídos. Un NORMAL libre,
+FGS/callback confirmados, corte manual de conectividad A13 autorizado al propietario
+por su app de módem sin sesiones operando router: LOCKED a 10965 ms desde señal
+negativa Android, reconexión no abrió. Final NONE/DP ausentes/servicio detenido y
+uso normal por salida adulta. OFFLINE física pendiente, sin permiso permanente.
+348 debug/293 release JVM correctos (6 nuevos compartidos), tres Android DP OK
+reportados, no reejecutados aquí; lintRelease verde, debug previo pendiente.
+
+API/schema/destino/bandeja comprobados; LOCAL06 admitida queue/resume=true para
+temporal MAIN 1–1440 minutos sin default, deadline original, red10s NORMAL y
+excepción OFFLINE explícita. Nueva física A13 exige aviso/confirmación; corte extra/
+OFFLINE requiere alcance específico, no hereda excepción al módem del ensayo previo.
+A56 excluido; resultado pendiente, sin tests/builds/apps/ADB/CP1/despliegue de Render.
