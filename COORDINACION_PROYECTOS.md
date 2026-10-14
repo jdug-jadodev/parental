@@ -721,6 +721,28 @@ Solo A13/A56 excluido, mantener salida/emergencia/código, restauración final.
 Resultado pendiente, sin DNS/VPN/Doze/reboot/crash o producto final acreditados;
 Render no opera dispositivos ni sobrescribe decisión pendiente del hijo.
 
+### LOCAL08 aceptada con límites; PADRE-QR02 enviada
+
+2026-10-14: cierre hijo 45f7a44 confirmado; evidencia/relevo LOCAL08 completos
+revisados. Propietario aceptó cerrar sin repetir: OFFLINE un minuto estando sin
+validación venció y LOCKED a +337 ms del deadline; apagado ocurrió después y no
+prueba reenforcement del primer deadline bajo Keyguard. Segundo permiso autónomo
+separado no subsana esa prueba. Final restaurado/NONE/sin pilotos/servicio/snapshots,
+sin nuevo código/build/tests ejecutados (Gradle tests UP-TO-DATE). LOCAL07 cancelada.
+
+Para avanzar hacia padre, leídos AGENTS/estado/relevo padre y evidencia QR01 íntegra.
+PADRE-QR02 enviada/admitida queue/resume=true tras esquema API/destino raíz/bandeja
+vacía: corregir QrLocal productivo con fixture público fijo y regresión exacta
+bytes/firmas. No cambiar máscara/contenido, usar PURE_BARCODE como bypass de cámara,
+excluir tests o promover vínculo PREPARADO. No nueva revisión documental general.
+
+Instalación/cámara A56 requiere aviso/confirmación específica en sesión padre,
+único selector A56 y A13 excluido. Primera cámara sólo fixture público si autorizada,
+no QR real/vinculación entre teléfonos en este bloque. Contexto nuevo red10s/
+excepción offline/DNSVPN cancelada enviado sin reinterpretar CP1 o implementar CP2.
+Resultado pendiente. Preparar QR no acredita remoto/producto hijo terminado;
+Render no modifica apps ni opera dispositivos, relay mantiene barreras públicas.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

@@ -1670,3 +1670,19 @@ temporal MAIN con apagado/Keyguard, vencimiento/retorno original sin nuevo Permi
 salida/restauración. Confirmación específica antes nueva física/corte/lockNow/
 reinstalación si necesaria; A13 único/A56 excluido, módem anterior no hereda permiso.
 Resultado pendiente; sin nuevos tests/builds/ADB/apps/CP1/servidor/despliegue de Render.
+
+## LOCAL08 aceptada; PADRE-QR02 enviada — 2026-10-14
+
+HEAD hijo 45f7a44 confirmado; evidencia/relevo LOCAL08 íntegros leídos. Dueño acepta
+cierre parcial sin repetir: OFFLINE primer minuto sin validación venció/LOCKED a
++337 ms deadline; apagado antes/deadline bajo Keyguard no acreditados, segundo
+permiso manual separado. Final NONE/snapshots y DP ausentes/servicio detenido/uso
+normal; no nuevos tests ejecutados (UP-TO-DATE), sin código/build/instalación nuevos.
+
+Leídos AGENTS específico/estado/relevo padre y evidencia QR01; esquema API/destino
+raíz padre/bandeja vacía comprobados. PADRE-QR02 admitida queue/resume=true para
+corregir lector productivo y regresión fixture público exacto bytes/firmas.
+No CP1/CP2/vínculo PREPARADO promocionados o integración real autorizada por fix.
+Aviso/confirmación antes instalación/cámara A56, sólo fixture público primera fase;
+A13 excluido. Contexto deltas red10s/offline/DNSVPN cancelada suministrado al padre.
+Resultado pendiente; no nuevo reensayo hijo o apps/tests/builds/ADB/despliegue Render.
