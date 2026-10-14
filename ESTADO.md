@@ -1656,3 +1656,17 @@ inferir continuidad de red o desactivación de configuración previa por restric
 Aviso/confirmación antes instalar/aplicar/navegar A13, A56 excluido, ensayo no
 destructivo sin cortes y restauración final; no permisos permanentes implícitos.
 Resultado pendiente; sin tests/builds/ADB/apps/CP1/servidor/despliegue de Render.
+
+## LOCAL07 cancelada según hijo; LOCAL08 admitida — 2026-10-14
+
+Sin nuevo commit/evidencia LOCAL07: HEAD hijo 45476e6, API sesión succeeded y
+bandeja vacía. Leído ESTADO.md hijo: decisión del propietario cancela restricciones
+y validaciones DNS/VPN; árbol hijo tiene ese archivo modificado. Trabajo ajeno
+preservado/no editado ni comprometido aquí, no reanudar asignación cancelada.
+No certificado de cero evasiones ni cambio inferido de regla red validada10s.
+
+API/schema/destino comprobados y LOCAL08 admitida queue/resume=true: OFFLINE
+temporal MAIN con apagado/Keyguard, vencimiento/retorno original sin nuevo Permitir,
+salida/restauración. Confirmación específica antes nueva física/corte/lockNow/
+reinstalación si necesaria; A13 único/A56 excluido, módem anterior no hereda permiso.
+Resultado pendiente; sin nuevos tests/builds/ADB/apps/CP1/servidor/despliegue de Render.

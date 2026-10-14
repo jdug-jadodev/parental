@@ -703,6 +703,24 @@ cambiarlos/cortar red y restaurar baseline al terminar. Sin políticas permanent
 sin autorización adicional, CP1/CP2/red del router/despliegue o producto final.
 Resultado pendiente; Render no dispositivos ni cambios en apps.
 
+### LOCAL07 cancelada en sesión hijo; LOCAL08 integrada enviada
+
+2026-10-14: HEAD hijo sigue 45476e6, no evidencia LOCAL07/código nuevo. Consulta
+API: sesión succeeded/bandeja vacía; ESTADO hijo contiene decisión del propietario
+de no implementar ni probar restricciones DNS/VPN. Git muestra solo ESTADO.md
+modificado, trabajo preservado sin edición/commit por Render. No reactivar LOCAL07
+ni presentar su cancelación como protección aplicada o cero evasiones.
+
+LOCAL08 enviada/admitida queue/resume=true tras comprobar API/destino: único
+recorrido OFFLINE temporal MAIN un minuto, pantalla apagada/Keyguard, vencimiento
+y retorno a LOCKED con referencia/deadline originales al desbloquear Android,
+sin pulsar Permitir otra vez. Regla NORMAL/red10s no revocada por inferencia.
+Requiere aviso/nueva confirmación física para armado/corte manual/restauración/
+lockNow/despertar y posible instalación; excepción anterior de módem no se hereda.
+Solo A13/A56 excluido, mantener salida/emergencia/código, restauración final.
+Resultado pendiente, sin DNS/VPN/Doze/reboot/crash o producto final acreditados;
+Render no opera dispositivos ni sobrescribe decisión pendiente del hijo.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

@@ -536,3 +536,14 @@ Esto resuelve la pregunta pendiente de §22, no autoriza cambios físicos de red
 HIJO-LOCAL05 enviada para implementación MAIN de regla/observación fuera Activity,
 permisos locales mínimos y bloqueo observado. Sin ampliar CP1 ni implementar aquí
 protocolo remoto/CP2, DNS/VPN o garantizar supervivencia del proceso.
+
+## 24. Cancelación de restricciones DNS/VPN reportada por el hijo
+
+2026-10-14: leído `parental_hijo/ESTADO.md`, sección «Decisión del propietario —
+LOCAL07 cancelada»: no implementar restricciones ni realizar validaciones de DNS
+o VPN; no son autoridad para conceder uso. Fuente todavía modificada sin commit
+en hijo al consultar, preservada sin edición por Render. LOCAL07 no se reanuda.
+No acredita cero evasiones ni anula por inferencia la regla NORMAL/red validada10s
+y reconexión sin apertura confirmada aquí; si hubiera cambio adicional, aclararlo.
+Siguiente comprobación asignada: OFFLINE temporal MAIN con vencimiento bajo
+Keyguard y retorno original, no nueva autorización; nueva física requiere permiso.
