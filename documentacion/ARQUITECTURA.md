@@ -122,6 +122,14 @@ e importación criptográfica SPKI P-256.
 
 ## HTTP, liveness y seguridad
 
+Arranque inicial cerrado autorizado: `crearServidorInicialCerrado` compone los
+mismos controller/router/EstadoLocalAdapter y WebSocketAdapter sin autenticador,
+transporte WebSocket ni procesador. Exige RELAY_MODE=bootstrap y ausencia de las
+cuatro variables de pareja/origen; nunca cambia a operativo por añadir claves.
+Sólo esa rama explícita en main escucha HTTP en0.0.0.0 incluso en producción;
+perfiles de relay y modo por defecto conservan las barreras anteriores. Render
+usa keepalive como health de proceso durante bootstrap, no disponibilidad CP.
+
 - `GET /healthz`: 503 con `{ok:false,protocol:1}`; fase pública no autorizada/validada.
 - `GET /keepalive`: 200 con `{alive:true}`, sin claves, pareja ni presencia.
 - Otras rutas/métodos y query strings: 404. No hay endpoints HTTP de negocio.

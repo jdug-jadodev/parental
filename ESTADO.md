@@ -1,5 +1,34 @@
 # Estado del servidor separado
 
+## Arranque inicial cerrado para Render — 2026-10-15
+
+Propietario autoriza prepararlo mientras ambas apps terminan, no desplegar.
+GET/api/session/active confirmó padre e hijo running durante este bloque;
+no nuevas tareas ni cambios en sus repositorios/dispositivos.
+
+Modo explícito RELAY_MODE=bootstrap en main/fábrica de dependencias. Permite
+HTTP0.0.0.0 con NODE_ENVproduction, sin autenticador, servidor WebSocket ni
+procesador. Todas las variables de pareja/origen se rechazan aun vacías. Modo
+desconocido/puerto/entorno/log inválidos abortan. Sin modo explícito persiste
+rechazo de producción; creadores CP1/CP2operativos conservan sus barreras.
+Keepalive200 sólo proceso; health503 intacto. Plantilla inicial separada con
+healthCheckPath/keepalive, despliegue automático desactivado, pnpm fijado y build
+con devDependencies. Guía documentacion/DESPLIEGUE_INICIAL_CERRADO.md.
+
+Verificación completa ejecutada: `pnpm run verificar` correcto, **175tests,
+0fallos,0omitidos** (6nuevos), esquemaCP1 28/13 y vectores10/78. Log temporal
+bootstrap-verificar.log. Primera pasada: error de tipado en entorno de test
+corregido con NodeJS.ProcessEnv y timeout5s de test legado de arranque al correr
+en paralelo; test legado sin cambios pasó en verificación integral. Tests nuevos
+de subprocesos usan15s para inicio bajo carga; sin cambios de timeoutAUTH/protocolo.
+
+Además ejecutado localmente artefacto compilado dist/src/main.js con configuración
+production/bootstrap y claves ausentes: keepalive200, health503, upgradeCP2rechazado400,
+stderr vacío. El test de proceso TS también rechazó upgradeCP1 con503. No contacto
+Render, push, despliegue, altas, ADB ni pruebas físicas. Commit local no está
+publicado: debe subirse antes de que el propietario despliegue. El relay público
+autenticado y ceremonia siguen siendo bloques posteriores, no activación oculta.
+
 ## E2E01 en curso — STATE piloto — 2026-10-15
 
 Bloque routing local completado tras STATE `d2fddc4`: nueva composición explícita

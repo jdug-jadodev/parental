@@ -11,7 +11,8 @@ import { ValidacionPublicaAdapter } from '../adapter/validacion-publica.adapter.
 import { WebSocketAdapter } from '../adapter/websocket.adapter.js';
 import { ServicioController } from '../controller/servicio.controller.js';
 import { ServicioRouter } from '../routers/servicio.router.js';
-import { ConfiguracionServidor } from './configuracion-servidor.js';
+import { ConfiguracionServidor, VARIABLES_PUBLICAS } from './configuracion-servidor.js';
+import { validarEntorno, validarNivelLog } from '../../application/validations/configuracion.validation.js';
 import { crearServidorHttp, type TlsLocal } from './servidor.config.js';
 import { crearTransporteWebSocket } from './websocket.config.js';
 import { CodecProtocolo } from '../adapter/protocol/codec-protocolo.js';
@@ -37,6 +38,19 @@ import { CriptografiaStateCp2 } from '../adapter/protocol/cp2/criptografia-state
 
 export function crearConfiguracionServidor(): ConfiguracionServidor {
   return new ConfiguracionServidor(new ConfigurarServidor(new ValidacionPublicaAdapter()));
+}
+
+export function crearServidorInicialCerrado(valores: ConfiguracionRequestDto): Server {
+  if (valores.RELAY_MODE !== 'bootstrap') throw new Error('El arranque cerrado requiere RELAY_MODE=bootstrap');
+  validarNivelLog(valores.LOG_LEVEL, validarEntorno(valores.NODE_ENV));
+  if (VARIABLES_PUBLICAS.some((nombre) => valores[nombre] !== undefined)) {
+    throw new Error('El arranque cerrado no admite configuración de pareja ni PUBLIC_ORIGIN');
+  }
+  const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
+  const websocket = new WebSocketAdapter(new EvaluarConexion(false), undefined, undefined, undefined,
+    new LimiteUpgradesAdapter(new RelojAdapter().ahora()));
+  try { return crearServidorHttp(new ServicioRouter(servicio), websocket); }
+  catch (error) { websocket.detener(); throw error; }
 }
 
 export function crearServidorLocal(valores?: ConfiguracionRequestDto, tls?: TlsLocal): Server {

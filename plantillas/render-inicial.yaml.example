@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: parental-relay
+    runtime: node
+    numInstances: 1
+    autoDeployTrigger: "off"
+    buildCommand: corepack enable && pnpm install --frozen-lockfile --prod=false && pnpm run build
+    startCommand: pnpm start
+    healthCheckPath: /keepalive
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: error
+      - key: RELAY_MODE
+        value: bootstrap

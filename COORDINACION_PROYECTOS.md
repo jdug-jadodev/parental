@@ -1,5 +1,23 @@
 # Coordinación central — padre, hijo y relay
 
+## Preparación de despliegue inicial cerrado — 2026-10-15
+
+Propietario aclara que necesita desplegar para obtener la URL y autoriza preparar
+ese arranque mientras apps terminan. No requiere URL previa ni claves familiares.
+Se implementa bootstrapHTTP explícito, nunca relay anónimo: NODE_ENVproduction,
+LOG_LEVELerror, RELAY_MODEbootstrap, escucha0.0.0.0/PORT de Render. Variables de
+pareja/origen ausentes; presentes fallan, no cambian a modo operativo.
+Health check inicial /keepalive sólo confirma proceso; /healthz503 intacto.
+Ningún transporte WebSocket/autenticador/procesador creado por este perfil.
+Sin RELAY_MODE producción sigue abortando; perfiles operativos siguen locales.
+
+Guía documentacion/DESPLIEGUE_INICIAL_CERRADO.md y plantilla separada. Propietario
+despliega tras subir el código; push/despliegue no ejecutados por esta autorización.
+Verificación175tests correctos y smoke local del compilado correctos. Ambas apps
+siguen running según API durante preparación; no se reasignan ni se editan.
+Después: URL HTTPS real → ceremonia autorizada/exportación pública → bloque de
+habilitación CP2 autenticado verificado. Bootstrap no autoriza pasos físicos.
+
 ## Piloto vertical E2E01 solicitado por propietario — 2026-10-15
 
 Propietario necesita funcionalidad hoy: priorizado vincular/conectar/bloquear/

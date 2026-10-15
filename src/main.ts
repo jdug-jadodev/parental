@@ -1,21 +1,26 @@
 import { pathToFileURL } from 'node:url';
-import { crearServidorLocal } from './infrastructure/config/dependencias.js';
+import { crearServidorInicialCerrado, crearServidorLocal } from './infrastructure/config/dependencias.js';
 import { cerrarServidorHttp } from './infrastructure/config/servidor.config.js';
 import { VARIABLES_PUBLICAS } from './infrastructure/config/configuracion-servidor.js';
 import { leerPuerto } from './application/validations/configuracion.validation.js';
 
 function iniciar(): void {
-  if (process.env.NODE_ENV === 'production') {
+  const modo = process.env.RELAY_MODE;
+  if (modo !== undefined && modo !== 'bootstrap') throw new Error('RELAY_MODE inválido; sólo se admite bootstrap explícito');
+  const inicialCerrado = modo === 'bootstrap';
+  if (process.env.NODE_ENV === 'production' && !inicialCerrado) {
     throw new Error('El servidor solo permite ejecución local. El relay público requiere autorización y validación.');
   }
   const configurado = VARIABLES_PUBLICAS.some((nombre) => process.env[nombre] !== undefined);
-  const servidor = crearServidorLocal(configurado ? process.env : undefined);
+  const puerto = leerPuerto(process.env.PORT);
+  const servidor = inicialCerrado ? crearServidorInicialCerrado(process.env) : crearServidorLocal(configurado ? process.env : undefined);
   servidor.on('error', () => {
-    console.error('No se pudo iniciar el servidor local. Revisa el puerto.');
+    console.error('No se pudo iniciar el servidor. Revisa el puerto.');
     process.exitCode = 1;
   });
-  servidor.listen(leerPuerto(process.env.PORT), '127.0.0.1', () => {
-    console.info('Base local iniciada; /healthz indica que CP/1 todavía no está operativo.');
+  servidor.listen(puerto, inicialCerrado ? '0.0.0.0' : '127.0.0.1', () => {
+    console.info(inicialCerrado ? 'Arranque inicial cerrado: HTTP disponible, relay deshabilitado y WebSockets rechazados.'
+      : 'Base local iniciada; /healthz indica que CP/1 todavía no está operativo.');
   });
   const detener = (): void => {
     cerrarServidorHttp(servidor);

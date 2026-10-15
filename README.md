@@ -6,6 +6,12 @@ y los fixtures permanecen congelados.
 
 ## Estado: R01–R03 locales, sin despliegue
 
+**Primer despliegue cerrado preparado:** `RELAY_MODE=bootstrap` permite únicamente
+HTTP en producción para obtener la URL de Render, sin WebSockets ni pareja.
+Usar health check `/keepalive` (200 de proceso); `/healthz` conserva503.
+Instrucciones: [despliegue inicial cerrado](documentacion/DESPLIEGUE_INICIAL_CERRADO.md).
+175tests correctos. No desplegado; no habilita el relay público ni control móvil.
+
 **Avance CP2-E2E01:** composición explícita `crearServidorRelayCp2Local` autentica
 `cp.v2` y retransmite SYNC/órdenes/STATE/ACK firmados. `pnpm run verificar`:
 169tests correctos, incluido recorrido con dos clientes Node y un hijo simulado.
@@ -21,8 +27,10 @@ al socket, nonce de 32 bytes y expiración monotónica de 10 segundos.
 R03 reenvía SYNC_REQUEST/SET_POLICY del padre y STATE/ACK del hijo tras validar
 firma, pareja y rol. Mantiene intactos los bytes originales y no guarda órdenes.
 
-**No operativo públicamente:** escucha solo en `127.0.0.1`, `/healthz` devuelve
-503 y arranque en producción bloqueado. Sin configuración se rechazan upgrades;
+**Relay no operativo públicamente:** los perfiles de relay escuchan solo en
+`127.0.0.1`, `/healthz` devuelve503 y su arranque en producción está bloqueado.
+La única excepción es el HTTP inicial cerrado explícito, sin relay.
+Sin configuración se rechazan upgrades;
 con configuración válida se permite autenticación y reenvío exclusivamente local.
 Health 503 se conserva como barrera hasta autorizar y validar la fase pública.
 
