@@ -743,6 +743,25 @@ excepción offline/DNSVPN cancelada enviado sin reinterpretar CP1 o implementar 
 Resultado pendiente. Preparar QR no acredita remoto/producto hijo terminado;
 Render no modifica apps ni opera dispositivos, relay mantiene barreras públicas.
 
+### PADRE-QR02 corregida; F01 física autorizada y enviada
+
+2026-10-14: padre 94d1746 confirmado; relevo/evidencia QR02 íntegros revisados.
+Corrección geométrica con cuatro orientaciones acotadas/UTF8 y bytes/firmas
+preservados, sin PURE/máscara/deps cambiadas. Padre reporta suite fixture 173 casos
+distintos y normal 141 app correctos, builds/lint debug-release correctos;
+no reejecutados aquí. APK debug preparado hash 7f394739… completo en evidencia,
+release unsigned no físico. Corrección sintética no acredita cámara ni vinculación.
+
+Dueño responde «sí» a instalar/actualizar APK debug A56 y probar QR público en PC,
+sin A13 ni vincular teléfonos. PADRE-QR02-F01 enviada/admitida queue/resume=true
+tras esquema API/destino/bandeja comprobados. Avisar antes instalar/coordinar
+cámara, selector único A56/todo adb -s; no testAPK/instrumentación/grants especiales
+sin permiso adicional. Fixture respuesta PARENT puede/debe rechazarse por tipo:
+distinguir decode óptico de aceptación, error genérico no acredita bytes exactos.
+No borrar datos/identidad/ParentStore o promover PREPARADO para probarlo.
+Cerrar cámara y registrar hash/observaciones/datos conservados; resultado pendiente.
+Render no opera dispositivos; CP1/CP2/relay/despliegue sin cambios por esta prueba.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
