@@ -1,5 +1,16 @@
 # Control parental — servidor Render independiente
 
+## C8 — alternativa sin cámara en implementación local
+
+Contrato separado [C8/1](contrato-c8/CONTRATO_C8_1.md): código temporal de8
+caracteres alfanuméricos, un uso y encuentro en RAM; conserva firmas/guardas CP2.
+Implementados codec/posesión provisional, coordinador y WebSocket local `/pair`,
+`c8.v1`, con composición explícita `crearServidorEncuentroC8Local`. No admite
+producción ni se selecciona desde CLI. HTTP mantiene sólo health/keepalive y
+health503. No habilita ningún socket nuevo en Render, bootstrap o `cp.v2`.
+No confundir READY/SENT con pareja guardada ni orden aplicada. Ambas apps están
+implementando su integración; las APK instaladas todavía no contienen C8.
+
 Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps padre e hijo no forman
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
 y los fixtures permanecen congelados.

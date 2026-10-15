@@ -3,8 +3,9 @@ import { Socket } from 'node:net';
 import type { Duplex } from 'node:stream';
 import { performance } from 'node:perf_hooks';
 import WebSocket, { type WebSocketServer } from 'ws';
-import type { CoordinarEncuentroC8 } from '../../application/usecase/coordinar-encuentro-c8.usecase.js';
-import type { SalidaEncuentroC8 } from '../../application/dtos/encuentro-c8.dto.js';
+import type { CoordinarEncuentroEntrada } from '../../domain/ports/portin/coordinar-encuentro.port.js';
+import type { SalidaEncuentro } from '../../domain/entities/salida-encuentro.js';
+import { EncuentroC8Mapper } from '../../application/mapper/encuentro-c8.mapper.js';
 import { Cupo } from '../../application/validations/cupo.validation.js';
 import { CodecEncuentroC8 } from './protocol/c8/codec-encuentro.js';
 import { canonico } from './protocol/json-estricto.js';
@@ -17,7 +18,7 @@ export class WebSocketEncuentroC8Adapter {
   private readonly revision: ReturnType<typeof setInterval>;
   private deteniendo = false;
 
-  constructor(private readonly coordinar: CoordinarEncuentroC8, private readonly codec: CodecEncuentroC8,
+  constructor(private readonly coordinar: CoordinarEncuentroEntrada, private readonly codec: CodecEncuentroC8,
     private readonly transporte: WebSocketServer, private readonly upgrades: LimiteUpgradesAdapter) {
     this.revision = setInterval(() => this.emitir(this.coordinar.limpiar()), 100);
     this.revision.unref();
@@ -54,7 +55,7 @@ export class WebSocketEncuentroC8Adapter {
   private conectar(socket: WebSocket): void {
     this.emitir(this.coordinar.limpiar());
     const reto = this.coordinar.abrir();
-    const id = reto.connectionId;
+    const id = reto.conexion;
     this.sockets.set(id, socket);
     const cupo = new Cupo(20, 10, performance.now());
     const controles = new Cupo(20, 10, performance.now());
@@ -71,7 +72,7 @@ export class WebSocketEncuentroC8Adapter {
       try {
         this.emitir(this.coordinar.limpiar());
         const bytes = Buffer.isBuffer(data) ? data : Array.isArray(data) ? Buffer.concat(data) : Buffer.from(data);
-        this.emitir(this.coordinar.ejecutar(id, this.codec.leer(bytes)));
+        this.emitir(this.coordinar.ejecutar(id, EncuentroC8Mapper.aDominio(this.codec.leer(bytes))));
       } catch { this.cerrar(id, 1008); }
     });
     socket.on('ping', (bytes) => {
@@ -82,14 +83,15 @@ export class WebSocketEncuentroC8Adapter {
     this.emitir([reto]);
   }
 
-  private emitir(salidas: readonly SalidaEncuentroC8[]): void {
-    for (const salida of salidas) {
+  private emitir(salidas: readonly SalidaEncuentro[]): void {
+    for (const evento of salidas) {
+      const salida = EncuentroC8Mapper.aDto(evento);
       const socket = this.sockets.get(salida.connectionId);
       if (!socket) continue;
       if (!enviarAcotado(socket, canonico(salida.mensaje), () => this.cerrar(salida.connectionId, 1008))) {
         this.cerrar(salida.connectionId, 1008);
       }
-      if (salida.cerrar) this.cerrar(salida.connectionId, 1000);
+      if (salida.cerrar) this.cerrar(salida.connectionId, this.deteniendo ? 1012 : 1000);
     }
   }
 

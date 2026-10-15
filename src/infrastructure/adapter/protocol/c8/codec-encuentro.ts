@@ -1,7 +1,7 @@
 import { createPublicKey, verify } from 'node:crypto';
 import { Ajv2020, type ValidateFunction } from 'ajv/dist/2020.js';
 import type { MensajeClienteC8 } from '../../../../application/dtos/encuentro-c8.dto.js';
-import type { IdentidadEncuentro } from '../../../../domain/ports/portout/verificacion-encuentro.port.js';
+import type { IdentidadEncuentro } from '../../../../domain/entities/identidad-encuentro.js';
 import { documentoCp2 } from '../cp2/documento-cp2.js';
 import { firmaDerCp2 } from '../cp2/codec-vinculacion.js';
 import { base64, publicaP256, origenHttps } from '../formatos.js';

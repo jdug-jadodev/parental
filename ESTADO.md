@@ -1,5 +1,36 @@
 # Estado del servidor separado
 
+## C8-I01 — implementación del encuentro local y móviles en paralelo — 2026-10-15
+
+Propietario corrige «no lo están revisando»: comprobadaAPIinactiva y recogidas
+ambas revisionesR0 ya cerradas. No describirlas como trabajo actual. Resueltos
+bloqueos concretos mediante contratoC8/1 R1 común y arrancadas tareas de CÓDIGO
+MAIN/transporte/codec/pruebas en sesiones raíz padre/hijo (no subagentes). Admisión
+confirmada y GET/api/session/active posterior running en ambas; después verificados
+fuentesC8 nuevas en ambos árboles y estado padreEN_CURSO_BLOQUE1. No cierre móvil
+ni APKfinal/ensayo real acreditado todavía. Sin tareasfísicas/push/deploy.
+
+Contrato exacto contrato-c8/CONTRATO_C8_1.md, SHA256
+089e0b6299ec6db3d312596e5929452321cbb60e3fb4646cceb4669b9492adde;
+Get-FileHash confirmó mismo contenido en tres repositorios. Anclas humanas desde
+identidades locales propias antes de candidata; nunca PoP/código como autoridad.
+Presupuesto hijo medido después de recibirCHALLENGE, Node usa emisión+ttlMs y
+revalida tras cripto. No renovar sesiónoriginal120s ni comparar relojes remotos.
+
+Servidor ya tiene código real de codec/PoP, coordinador RAM, puertos/entidades/
+mapper, consumoúnico/tombstones/cupos/cancelación/plazos y entrega PAIRfirmado
+original. WebSocketlocal /pair/c8.v1 por composiciónexplícita, producción bloqueada,
+sin modoCLI público o cambios bootstrap/cp.v2. Primer bloque commit76c34fe.
+Evidencia detallada documentacion/EVIDENCIA_C8_I01_LOCAL.md.
+
+Ejecutado focal2correctos; ampliación16/17 con expectativa bootstrap503incorrecta,
+ajustada a400 existente sin tocar bootstrap. Primer verificar203/206correctos con
+3fallos arquitectura; corregido código hacia puertos/entidades/mapper y extendida
+lista de adaptadores de ENTRADA en test, sin omitir reglas. Checkposteriorcorrecto
+y focales20C8+6arquitectura=26correctos. Seis escenarios con socketsNode reales
+locales, ningún teléfono/TLSpúblico/ordenAndroid. Verificarcompleto final en curso;
+no afirmar aún189previos+20 nuevos como suite final hasta terminar ejecución.
+
 ## C8-R0 — alternativa por código8 solicitada, en coordinación — 2026-10-15
 
 Propietario reporta pantalla manchada que impide QR y pide ocho caracteres

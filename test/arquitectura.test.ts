@@ -43,7 +43,8 @@ test('arquitectura: controladores reciben puertos de entrada, casos de uso y ada
   for (const { nombre, ast } of fuentes) {
     const controlador = nombre.startsWith('infrastructure/controller/');
     const entrada = controlador || ['infrastructure/adapter/websocket.adapter.ts',
-      'infrastructure/adapter/websocket-auth-cp2.adapter.ts'].includes(nombre);
+      'infrastructure/adapter/websocket-auth-cp2.adapter.ts',
+      'infrastructure/adapter/websocket-encuentro-c8.adapter.ts'].includes(nombre);
     const casoDeUso = nombre.startsWith('application/usecase/');
     const salida = /^infrastructure\/adapter\/[^/]+\.adapter\.ts$/.test(nombre) && !entrada;
     if (!entrada && !casoDeUso && !salida) continue;

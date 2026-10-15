@@ -1,13 +1,5 @@
-export interface IdentidadEncuentro {
-  readonly rol: 'CHILD' | 'PARENT';
-  readonly publica: string;
-}
-
-export interface OfertaEncuentro {
-  readonly publica: string;
-  readonly enrollId: string;
-  readonly enrollNonce: string;
-}
+import type { IdentidadEncuentro } from '../../entities/identidad-encuentro.js';
+import type { OfertaEncuentro } from '../../entities/oferta-encuentro.js';
 
 export interface VerificacionEncuentroSalida {
   prueba(payloadB64: string, sigB64: string, connectionId: string, nonce: string, origen: string): IdentidadEncuentro;

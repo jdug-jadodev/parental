@@ -1,5 +1,26 @@
 # Arquitectura del servidor
 
+## C8-I01 — transporte de encuentro local separado
+
+Contrato C8/1 en contrato-c8/CONTRATO_C8_1.md conserva documentos/firma CP2 internos
+y CP1 congelado. DTOs de transporte en application/dtos/encuentro-c8.dto.ts.
+CoordinarEncuentroC8 es máquina RAM de encuentro, no política Android: constructor
+inyecta reloj, entropía y verificación por puertos. Sin Node en aplicación/dominio.
+Tombstones conservan sólo código/deadline/estado tras purgar oferta y participantes.
+
+Codec/PoP y verificación de oferta/PAIR en adapters; prueba C8v1/PROOF separada de
+AUTH familiar. La pública declarada sólo es identidad provisional; las apps deben
+cotejar anclas humanas locales independientes. Ningún mensaje de control por C8.
+El adaptador WebSocket acepta únicamente loopback127.0.0.1, ruta/prefijo separados,
+limpia plazos cada100ms y limita entrada/salida/upgrades. Composición sólo en
+config/dependencias.ts mediante crearServidorEncuentroC8Local, que exige modo
+c8-local y rechaza producción. No CLI/público ni modificación de bootstrap/cp.v2.
+
+Node ancla deadline a emisión de CHALLENGE más presupuesto que hijo mide DESPUÉS
+de recibirlo. Así descuenta demora sin comparar relojes; las apps siguen obligadas
+a invalidar por marco original/fondo/contexto. READY/SENT no prueban aprobación
+adulta, identidad humana, commit, recuperación o efecto Android.
+
 ## Unidad CP/2 separada, sin composición productiva
 
 CP2-V01: DTOs QR en `application/dtos/vinculacion-cp2.dto.ts`, codec y verificación

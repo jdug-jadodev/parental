@@ -1,4 +1,6 @@
-import type { IdentidadEncuentro, OfertaEncuentro, VerificacionEncuentroSalida } from '../../domain/ports/portout/verificacion-encuentro.port.js';
+import type { IdentidadEncuentro } from '../../domain/entities/identidad-encuentro.js';
+import type { OfertaEncuentro } from '../../domain/entities/oferta-encuentro.js';
+import type { VerificacionEncuentroSalida } from '../../domain/ports/portout/verificacion-encuentro.port.js';
 import { CodecEncuentroC8 } from './protocol/c8/codec-encuentro.js';
 import { CodecVinculacionCp2 } from './protocol/cp2/codec-vinculacion.js';
 import { CriptografiaVinculacionCp2 } from './protocol/cp2/criptografia-vinculacion.js';

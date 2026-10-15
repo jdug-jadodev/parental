@@ -1,5 +1,28 @@
 # Coordinación central — padre, hijo y relay
 
+## C8-I01 — implementación real iniciada en paralelo — 2026-10-15
+
+Corregido seguimiento tras aviso del propietario: ambas revisionesR0 ya estaban
+cerradas, no ejecutándose. Leídos informes completos de padre/hijo: bloqueos de
+wire exacto, ancla humana y TTL. Resueltos en contrato-c8/CONTRATO_C8_1.md R1,
+SHA256089e0b6299ec6db3d312596e5929452321cbb60e3fb4646cceb4669b9492adde.
+Huellas propias locales visibles antes de candidata; presupuesto hijo medido
+después de CHALLENGE y deadlineNode=emisiónCHALLENGE+ttlMs, nunca recepción+ttl.
+
+Misma fuente íntegra enviada a ambas sesiones raíz para PADRE/HIJO-C8-I01:
+UNA unidad vertical MAIN/transporte/codec/pruebas/APK sin instalar. OpenAPI y
+bandejas comprobadas antes de envío, admisiones confirmadas y posteriormente
+GET/api/session/active confirmó ambas running. No es prueba de tarea terminada.
+Padre ya registra bloque1/código compilado/focales; hijo tiene contrato y fuentes
+C8 nuevas en su propio árbol. No afirmar aún cierre de apps o APK disponibles.
+
+Servidor implementa composiciónC8local, PoP/codec, coordinador RAM, consumo único/
+tombstone/cancelación/TTL/límites y entrega PAIR original verificada. Check y20
+tests focales correctos, seis con WebSockets reales locales. No WSS público/móvil
+real/ceremonia/orden Android por esos resultados. Producción bloqueada para C8;
+CLI/bootstrap/cp.v2 sin cambios. Verificación completa en curso al registrar esto.
+Sin acceso físico, push, deploy o variables remotas. Cierre de móviles pendiente.
+
 ## C8-R0 — cambio solicitado: vincular sin cámara — 2026-10-15
 
 Propietario no puede escanear por pantalla manchada y solicita código8 letras/
