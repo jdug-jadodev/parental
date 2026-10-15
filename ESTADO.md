@@ -1724,3 +1724,15 @@ build, **117 tests/0 fallos/0 omitidos (13 nuevos)**, esquema CP1 28 ejemplos y
 Sin privadas/códigos reales, Android/dispositivos o tests móviles reejecutados.
 README/arquitectura/coord actualizados, sin wiring cp.v2/WSS/despliegue público.
 Próxima unidad clientes QR CP2 y ceremonia pendiente de asignación; no remota lista.
+
+## HIJO-PAIR01 admitida — oferta QR real CP/2 — 2026-10-14
+
+Propietario continúa. API/schema/destino hijo/bandeja vacía comprobados; fuentes
+schema/README CP2-V014ac4962 íntegras enviadas en dos mensajes queue/resume=false,
+asignación única HIJO-PAIR01 admitida queue/resume=true. Oferta MAIN con identidad
+propia/código fresco/nonceUUID/ventana RAM5min y cancelación segura, no pareja falsa,
+alta silenciosa o CP1 migrado. Tests/build/UI en repo hijo, no reejecutados aquí.
+Aviso/confirmación antes instalar/inicializar identidad si necesaria/mostrar QR
+real en A13; A56 excluido, sin ceremonia física entre teléfonos autorizada ahora.
+PAIR_ACCEPT/órdenes/STATE/remoto aún fuera unidad, resultado pendiente. Render
+no nuevos tests/builds/apps/ADB/CP1/servidor/despliegue por esta asignación.

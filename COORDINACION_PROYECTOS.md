@@ -786,6 +786,22 @@ efímeras de tests. Fuente draft padre 75eb56e §§2–3/10.1, sin editar apps o
 Próxima dependencia: clientes QR CP2 y ceremonia con identidad/contexto/consumos/
 comparación humana/readback, asignación posterior; no enviada en este bloque.
 
+### HIJO-PAIR01 enviada: oferta QR CP/2 protegida
+
+2026-10-14: tras continuación del propietario, comprobados esquema API/destino
+raíz hijo/bandeja vacía. Enviados íntegros schema y README CP2-V01 de Render4ac4962
+en dos entradas queue/resume=false, luego HIJO-PAIR01 queue/resume=true admitida.
+Procedencia por texto suministrado, no lectura externa atribuida al hijo.
+
+Una unidad MAIN generar/presentar CHILD_OFFER cp.v2 canónico con identidad propia,
+nonce/UUID aleatorios y ventana RAM máxima5min, código adulto fresco/cierre al
+salir/fondo/caducidad/proceso/boot. Preservar identidad existente; si falta/corrupta,
+no crear/rotar silenciosamente. Alta de identidad, instalación y muestra real A13
+requieren aviso/confirmación específica en sesión hijo. A56 excluido.
+Schema separado exacto, sin tocar CP1 ni migrar consumos/credenciales o vincular.
+No recepción/commit PAIR_ACCEPT/órdenes/STATE/WSS en esta unidad, no simulación
+de identidad o permiso por QR. Resultado pendiente, Render sin dispositivos/apps.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |
