@@ -1,5 +1,21 @@
 # Estado del servidor separado
 
+## E2E01 en curso — STATE piloto — 2026-10-15
+
+Propietario prioriza recorrido funcional hoy. Ambas sesiones raíz reciben unidad
+vertical E2E01 (MAIN/transporte/escritor real, no otro modelo desconectado), fuentes
+STATE/ACK íntegras y límites. GET/api/session/active confirmó ambas running.
+Resultados móviles aún pendientes; no nuevas autorizaciones físicas o despliegue.
+
+Bloque STATE: schema piloto separado, DTO, codec/coherencia/firma CHILD; cinco tests
+focales correctos y TypeScript correcto. Primera pasada focal falló por comparar
+prototipos de objetos anidados del parser; aserción cambiada a canonicalidad, sin
+cambiar parser. Delta piloto compartido explícitamente a ambas apps: permittedTime
+y lastExpiry null = no disponibles, nunca cero; historia/avisos siguen pendientes.
+NETWORK_LOST refleja decisión posterior NORMAL/red10s, no caídas de WSS/PONG.
+Esquema/bytes CP1 intactos. Routing en preparación, aún sin prueba de móviles ni
+endpoint público; conservar loopback/health503/producción bloqueada.
+
 ## CP2-K01 — ACK CHILD y trabajo paralelo iniciado — 2026-10-15
 
 Continuación tras push: leídos relevoORD01padre/estadoAUTH01hijo/evidenciaAUTHcompleta.

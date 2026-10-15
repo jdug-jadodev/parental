@@ -1,5 +1,19 @@
 # CP/2 separado — primera unidad de vinculación local
 
+## STATE piloto E2E01
+
+`state-piloto.schema.json` es una versión parcial separada de CP1 y del futuro
+historial completo. Fuente STATE compartida íntegra a ambas apps para el piloto:
+20 campos STATE, reto5, effective11 y lastRemote9. permittedTime y lastExpiry
+son null obligatorios: datos no disponibles, no totales cero. No es congelación
+del contrato completo ni cancelación de historia/avisos. effective.reason admite
+NETWORK_LOST para revocación NORMAL/red10s posterior al draft; WSS no sustituye
+validación Android. Firma MESSAGE por CHILD con pública esperada externa.
+
+El codec complementa schema con coherencia temporal/revisión/resultado, contadores
+64 exactos, reto30s y duración temporal entera de1..1440min. No valida efectos del
+dispositivo ni freshness del padre: esas decisiones corresponden a cada app.
+
 2026-10-14. **CP2-V01 implementada y probada localmente, no perfil público ni
 ceremonia operativa.** CP/1 en `compartido/` sigue congelado; ningún cliente o
 socket del relay usa esta unidad automáticamente.
