@@ -1,5 +1,33 @@
 # Estado del servidor separado
 
+## CP2-I01 local y cruce JVM pendiente — 2026-10-15
+
+Revisadas evidencias completas PADRE-PAIR02/HIJO-PAIR03, entregas MAIN de firma/
+persistencia pendiente y recepción/confirmaciones/commit respectivamente; APKs
+nuevos no instalados. Ningún vínculo/permiso/canal acreditado por builds/JVM.
+Leído codec padre: lista PAIR_ACCEPT contiene diez campos como schema/hijo, no11
+del conteo documental. Test propio ahora exige conjuntos y cantidad10 exactos.
+
+Nuevo scripts/generar-vectores-cp2.mjs genera públicas/CHILD_OFFER/PAIR/hash/AUTH2roles,
+claves efímeras sóloRAM y hashes de recuperación ficticios, sin secretos reales.
+Verificador test/soporte/verificar-vector-cp2.ts acepta fixture6/8campos público,
+usa codecs/firmas CP2 reales y valida contexto interno; no autoridad o ceremonia.
+Tres nuevos tests en interoperabilidad-publica-cp2.test.ts, incluye generador/
+campos/aislamiento/negativos. No cambios productivos, schema/CP1/fixtures intactos.
+
+Vector Node compartido en texto íntegro a IAs existentes (resume=false); después
+PADRE-INTEROP01 e HIJO-INTEROP01 admitidas resume=true tras OpenAPI/bandejas vacías.
+Archivo público temporal cp2-i01-vector-node-publico.json, SHA256
+967ae05aecd28c6b7f90b8ae90e8421b408dd70acbf22fd30911085c69a964ec.
+Tareas JVM prueban Node→JVM y producirán públicas/sobres JVM para verificar vuelta;
+resultado pendiente, no Node/JVM acreditado todavía. Hijo no AUTH en esta unidad.
+
+Ejecutados focal3/3correctos, pnpmruncheck correcto, CLIverificador sobre vector
+suministrado correcto(oferta/PAIR/2AUTH). `pnpm run verificar` completo correcto:
+frozeninstall/check/build/**146tests0fallos0omitidos**, esquemaCP1 28ejemplos/
+13contraejemplos y diez vectores/78comprobaciones. Log temporal cp2-i01-verificar.log.
+Sin pruebas nuevas en teléfonos/ADB/APK/identidad/QRreal/ceremonia/push/despliegue.
+
 ## CP2-T01 — sockets AUTH locales y tercer bloque paralelo — 2026-10-15
 
 Petición de continuar rápido: PADRE-PAIR02 e HIJO-PAIR03 admitidas en sesiones

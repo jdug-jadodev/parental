@@ -138,3 +138,32 @@ Health sigue503 y keepalive sólo actividad del proceso; no disponibilidad CP2.
 No presencia/routing MESSAGE/STATE/ACK/órdenes, WSS público, cliente móvil, firmas
 móviles cruzadas o permisos de uso acreditados por esta unidad. El siguiente bloque
 de relay necesita el contrato de mensajes/STATE actualizado antes de integrarlos.
+
+## CP2-I01 — vectores públicos y cruce entre implementaciones
+
+`node scripts/generar-vectores-cp2.mjs` emite únicamente públicas y documentos de
+laboratorio: oferta, PAIR firmado/hash de payload y AUTH firmado de cada rol.
+Cada ejecución crea claves nuevas sólo RAM; no exporta privadas ni utiliza datos
+de teléfonos, códigos adultos o una pareja real. Los hashes de recuperación son
+aleatorios ficticios, no verificadores de códigos de producción. No usar el vector
+en una ceremonia; etiqueta CP2_PUBLICO_EFIMERO_SIN_AUTORIDAD.
+
+Verificador de laboratorio:
+
+```text
+pnpm exec tsx test/soporte/verificar-vector-cp2.ts <archivo-publico.json>
+```
+
+Acepta seis campos de fixture PAIR, u ocho con ambas pruebas AUTH. Exige oferta/
+PAIR consistentes, firma con pública externa del fixture y hash exacto; AUTH debe
+corresponder a rol/pareja del vector. Rechaza campos privados/desconocidos o AUTH
+incompleto. Las cadenas internas se validan con codecs CP2 productivos; no acepta
+normalizarlas para hacer pasar firmas. Archivo de laboratorio≤32KiB.
+
+Tres tests nuevos verifican generador, campos normativos y rechazo de cruces. El
+PAIR_ACCEPT del schema tiene **10 campos**, incluyendo v/kind/protocol: listas
+required/properties y payload generado contrastadas explícitamente. La referencia
+a11 del relevo padre es error de conteo, no motivo para modificar contrato.
+Enviado mismo vector público íntegro a ambas IAs para pruebas JVM y generación
+de vectores públicos JVM de vuelta. Hasta verificar esas devoluciones, esto sólo
+acredita Node→Node; no interoperabilidad JVM, teléfonos o vínculo operativo.

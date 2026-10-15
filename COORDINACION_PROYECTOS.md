@@ -1,5 +1,29 @@
 # Coordinación central — padre, hijo y relay
 
+## Integración móvil entregada; cruce CP2-I01 asignado — 2026-10-15
+
+Leídas evidencias completas PADRE-PAIR02 e HIJO-PAIR03: MAIN firma/almacenamiento
+pendiente en padre (código2511353, APK30780c68…9e8af8) y recepción/confirmaciones/
+commit separado en hijo (APK257ea98f…dc08cf). Ambos compilados/probados localmente,
+NO instalados o ensayados juntos. Preservan identidad/CP1/datos; sin canal o
+recuperaciónCP2 operativos ni vínculo físico nuevo autorizado. No reejecutados aquí.
+
+Error de conteo documental padre11 frente a hijo10: leído codec Kotlin padre,
+campos en línea88 son exactamente los diez del schema. Test nuevo Node contrasta
+required/properties y payload real. No cambiar fuente/firma ni inventar campo11.
+
+API/esquema/bandejas vacías comprobados; vector público Node íntegro remitido a
+ambos con resume=false y PADRE-INTEROP01/HIJO-INTEROP01 admitidas resume=true en
+sesiones existentes. Una unidad JVM por repo: verificar vector con codec/cripto
+propios, producir nueva salida pública JVM para vueltaNode. Padre también AUTH;
+hijo sólo oferta/PAIR, no AUTHimplementado por esta tarea. Recursos sólo tests,
+sin privadas/identidades/códigos reales ni APKfixture. No ADB/ceremonia/despliegue.
+SHA256archivoNode suministrado:967ae05aecd28c6b7f90b8ae90e8421b408dd70acbf22fd30911085c69a964ec.
+Scripts propios generan públicas/sobres con claves efímerasRAM y verifican vuelta
+sin reconstruir bytes. Focal tres casos y verificador CLI de ese vector correctos;
+verificación completa146correctos. JVMdevoluciones pendientes: no atribuir éxito
+Node/JVM ni interoperabilidad móvil por la admisión o pruebaNode→Node.
+
 ## Tercer bloque paralelo autorizado — 2026-10-15
 
 Propietario pide avanzar rápido y «hazlo»: continuidad de implementación, no permiso

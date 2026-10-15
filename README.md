@@ -133,6 +133,10 @@ probado con sockets Node reales en127.0.0.1. `pnpm run verificar`:143tests corre
 No arranca por CLI habitual, no routing de órdenes CP2, móviles conectados o servicio
 público. Los párrafos A01/A02 conservan el alcance de sus respectivos cierres.
 
+CP2-I01 añade generador/verificador de vectores públicos efímeros para cruce Node/JVM;
+`pnpm run verificar`:146tests correctos. Devoluciones JVM pendientes, sin nuevas
+instalaciones o permisos físicos. Uso y límites en `contrato-cp2/README.md`.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché
