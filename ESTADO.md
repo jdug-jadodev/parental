@@ -28,8 +28,14 @@ ajustada a400 existente sin tocar bootstrap. Primer verificar203/206correctos co
 3fallos arquitectura; corregido código hacia puertos/entidades/mapper y extendida
 lista de adaptadores de ENTRADA en test, sin omitir reglas. Checkposteriorcorrecto
 y focales20C8+6arquitectura=26correctos. Seis escenarios con socketsNode reales
-locales, ningún teléfono/TLSpúblico/ordenAndroid. Verificarcompleto final en curso;
-no afirmar aún189previos+20 nuevos como suite final hasta terminar ejecución.
+locales, ningún teléfono/TLSpúblico/ordenAndroid. Verificarcompleto final correcto:
+209tests/0fallos/0omitidos; esquema28ejemplos/13contraejemplos y10vectores/78
+comprobaciones. Incluye installfrozen/check/build/tests; salida confirma sin
+despliegue/dispositivos. Segundo bloque f4f7cff; pendiente sólo registro de cierre.
+Móviles continúan misma unidad: hijo ya registra MAIN/codec/transporte conectados
+en código,5focales nuevos correctos y Kotlindebug compilado; padre bloque1 con
+codec/PoP/borde/transporte y controlador/MAIN pendientes según su último registro.
+No afirmar cierre móvil/interopNodeJVM/APK disponible por estos registros parciales.
 
 ## C8-R0 — alternativa por código8 solicitada, en coordinación — 2026-10-15
 

@@ -20,7 +20,9 @@ Servidor implementa composiciónC8local, PoP/codec, coordinador RAM, consumo ún
 tombstone/cancelación/TTL/límites y entrega PAIR original verificada. Check y20
 tests focales correctos, seis con WebSockets reales locales. No WSS público/móvil
 real/ceremonia/orden Android por esos resultados. Producción bloqueada para C8;
-CLI/bootstrap/cp.v2 sin cambios. Verificación completa en curso al registrar esto.
+CLI/bootstrap/cp.v2 sin cambios. Verificación completa final209tests correctos,
+esquema28/13 y vectores10/78. Hijo registra además MAIN/codec/transporte en código,
+5focales nuevos correctos/Kotlindebug compilado; ambos cierres móviles pendientes.
 Sin acceso físico, push, deploy o variables remotas. Cierre de móviles pendiente.
 
 ## C8-R0 — cambio solicitado: vincular sin cámara — 2026-10-15

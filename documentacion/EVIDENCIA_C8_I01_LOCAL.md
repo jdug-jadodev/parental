@@ -41,7 +41,9 @@ y6con WebSockets reales locales: flujo original, rechazo de upgrades/perfiles,
 tráfico previo a prueba/binarios/órdenes, desconexión, caducidad/cupo y cierre1012.
 Claves efímeras sólo RAM, sin datos privados guardados o endpoint externo.
 
-Verificación completa final relanzada; resultado registrado al concluir en ESTADO.md.
+Verificación final `corepack pnpm run verificar` completa correcta:209tests,
+0fallos/0omitidos, esquema28ejemplos/13contraejemplos y10vectores/78comprobaciones.
+Incluye instalaciónfrozen/check/build/tests/contratoCP1 existente; no cambiaCP1.
 No ensayo Node↔Android/JVM cruzado por estos20tests; clientes del ensayo son Node,
 sin enforcer, Keystore ni persistencia móvil real. Compilar o firmar no acredita
 ceremonia humana, guardado de pareja, recuperación o bloqueoAndroid.
