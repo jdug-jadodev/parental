@@ -1,5 +1,16 @@
 # Estado del servidor separado
 
+## F02 admitida — autorización física nueva — 2026-10-15
+
+Propietario confirma específicamente actualizar APK debug padre en A56 preservando
+datos y leer QR nuevo generado por él desde sesión adulta A13. Sin APKtest/identidad
+nueva/vínculo/órdenes. Aviso previo dado, primero preparar lector para evitar QR
+caducado. Tras reinicio no se repite ninguna operación física completada.
+OpenAPI/destino/bandeja vacía padre comprobados; PADRE-PAIR01-F02 admitida en sesión
+existente queue/resume=true. Padre sólo A56 explícito, Render ningún teléfono.
+Resultado físico pendiente; no asumir instalación/cámara/lectura/vínculo logrados.
+Sólo coordinación/documentación propia, sin tests/builds/código/ADB nuevos aquí.
+
 ## CP2-A02 — contexto AUTH y segundo bloque paralelo — 2026-10-14
 
 Revisados relevo y evidencia HIJO-PAIR01 completos: QR real presentado y retirado

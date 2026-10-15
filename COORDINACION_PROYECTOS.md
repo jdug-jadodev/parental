@@ -1,5 +1,25 @@
 # Coordinación central — padre, hijo y relay
 
+## PADRE-PAIR01-F02 — autorización de lectura real, 2026-10-15
+
+Tras reinicio del servicio, se confirmó que no se habían operado teléfonos en este
+bloque. Propietario responde «sí» a actualización APK debug padre en A56 conservando
+datos y lectura de una oferta nueva que él generará en sesión adulta A13. Alcance:
+sólo lectura; sin APKtest, identidades nuevas, guardar vínculo ni enviar órdenes.
+Se avisó: preparar primero A56/lector, no generar oferta hasta estar listo.
+
+Consultados OpenAPI/destino raíz padre/bandeja vacía. PADRE-PAIR01-F02 admitida
+queue/resume=true en sesión existente. IA padre opera exclusivamente A56 con
+selector explícito, actualización única preservando datos/identidad, sin clear/
+desinstalar/downgrade/instrumentación. Base código0b010d7/APK AUTH01 incluye lector
+PAIR01; verificar artefacto/hash antes de instalar, no reconstruir por rutina.
+Llegar a LECTOR_LISTO antes de pedir QR al propietario. No operar A13 desde padre
+ni Render. Cámara por ruta NUEVO PERFILCP2, no retirar guarda de Recuperación.
+
+REQUIERE_MIGRACION puede ser estado esperado tras lectura correcta; no promover
+PREPARADO por leer huella. Sin payload/códigos/capturas en evidencia; retirada QR/
+cierre sesión y cámara al terminar. Resultado pendiente: admisión no ejecución.
+
 ## Segundo bloque paralelo — 2026-10-14
 
 Tras «listo», revisadas evidencias completas HIJO-PAIR01 y PADRE-PAIR01 y relevos.
