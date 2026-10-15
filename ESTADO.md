@@ -1,5 +1,20 @@
 # Estado del servidor separado
 
+## Arranque cerrado publicado y comprobado — 2026-10-15
+
+Propietario comunica despliegue listo. MCP list_deploys confirma live del commit
+aa2bfbb en dep-db8i432jnfac73frirr0, terminado18:58:06Z. Consultas HTTPS reales a
+https://parental-0j3o.onrender.com: GET/keepalive200{"alive":true}; GET/healthz503
+{"ok":false,"protocol":1}. Dos intentos WSS desde Node local al endpoint público:
+cp.v1 rechazadoHTTP503 y cp.v2 rechazadoHTTP400, sin upgrade ni AUTH/órdenes.
+Se acredita proceso público cerrado, NO relayCP2operativo, pareja o bloqueoAndroid.
+
+No cambios remotos, disparos de deploy, push, dispositivos o APK por estas
+comprobaciones. Autollamada566e0da/corrección documental3b90ded siguen locales;
+el commit publicadoaa2bfbb no incorpora timer propio. No habilitarSELF_URLaún.
+Siguiente bloque requiere habilitación pública CP2autenticada y configuración
+de pareja real; pruebas físicas/ceremonia necesitan autorización específica.
+
 ## Render conectado: fallo de build identificado y corrección local — 2026-10-15
 
 Propietario confirma MCP vinculado y cierre padre/hijo. MCP autenticado usado sólo

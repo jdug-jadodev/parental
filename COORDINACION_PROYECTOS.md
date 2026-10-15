@@ -1,5 +1,15 @@
 # Coordinación central — padre, hijo y relay
 
+## Render inicial live, verificación pública cerrada — 2026-10-15
+
+MCP confirma live de aa2bfbb en servicio parental. Comprobado aquí por HTTPS:
+https://parental-0j3o.onrender.com/keepalive200alive; /healthz503okfalseprotocol1.
+WSS/ws rechaza cp.v1con503 y cp.v2con400, sin conexión autenticada ni mensajes.
+URL real lista para coordinación posterior; no relayCP2niorden aplicada por ello.
+Sin push/deploy/remoto modificado ni operaciones físicas. Timerkeepalive aún
+local, no pertenece al commit desplegado. Próximo permiso/bloque: relaypúblicoCP2
+autenticado y pareja real; ceremonia/actualizaciónAPKs no autorizadas por Live.
+
 ## Cierre móvil recibido y diagnóstico Render por MCP — 2026-10-15
 
 MCP ya conectado, workspace previamente seleccionado. Consultas sólo lectura
