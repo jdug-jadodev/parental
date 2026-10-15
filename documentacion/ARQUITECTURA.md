@@ -22,6 +22,13 @@ de aplicación ni DTO de conexión nuevo. No cambia dominio/aplicación CP1 ni
 dependencias.ts; futura composición debe separar almacenes de retos por perfil y
 entregar connectionId desde el socket, no desde el frame firmado.
 
+CP2-T01 compone ese contexto en crearServidorAutenticacionCp2Local de dependencias.ts.
+EvaluarConexionCp2 es caso de uso del puerto existente; WebSocketAuthCp2Adapter es
+entrada separada AUTH-only con mapper/codec/puerto de autenticación inyectados.
+Sin casos de uso construidos en adaptadores ni cambios de flujo CP1. El creador HTTP
+comparte únicamente la superficie upgrade/detener/maximoConexiones y conserva
+controladores health/keepalive. Tests de arquitectura incluyen la nueva entrada.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

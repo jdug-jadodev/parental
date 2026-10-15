@@ -105,3 +105,36 @@ cruzada, plazo exacto10s/coste de firma, firma/esquema fallidos, pareja/nonce/ro
 claves no configuradas, desconexión/cupo y separación de instancias de retos.
 Composición sólo en tests; no wiring productivo ni sockets CP2 habilitados.
 Pendientes negociación, transporte/routing y clientes compatibles antes de operar.
+
+## CP2-T01 — transporte AUTH local separado
+
+`crearServidorAutenticacionCp2Local` en `config/dependencias.ts` compone un servidor
+de laboratorio explícito, distinto del arranque normal CP1. Exige configuración
+pública válida, rechaza producción y sólo acepta sockets procedentes de127.0.0.1.
+Las pruebas enlazan el listener en127.0.0.1/puerto efímero; no se añadió CLI/env que
+active CP2 en `main.ts`, ni escucha LAN/TLS público o despliegue.
+
+`EvaluarConexionCp2` admite exclusivamente GET /ws, sin Origin/query y con único
+subprotocolo cp.v2; no perfil mixto/downgrade. Transporte sin compresión, autoPong
+desactivado, máximo16384bytes/64fragmentos/128chunks, cabeceras32 y cupos upgrade
+existentes. Adaptador de entrada `WebSocketAuthCp2Adapter` tiene su almacén de
+retos y conexiones, separado del adaptador CP1. No se modifica su semántica.
+La prueba de arquitectura reconoce ambos como entradas e impone puertos de entrada.
+HTTP compartido acepta la superficie estructural del adaptador para cierre común.
+
+CHALLENGE/AUTH_PROOF/AUTH_OK reales, reto monotónico10s/consumo único y pública/rol/
+pareja configurados. Un cliente nuevo sólo sustituye mismo rol tras autenticar;
+máximo16retos/18sockets y una conexión autenticada por rol. Cierre ordenado1012.
+Tras AUTH se admite únicamente PING→PONGCP2, sin reenviarlo. Cupo20ráfaga/10porsegundo
+de aplicación y de controles, salida64KiB y supresión de noncePONG repetido inmediato/
+salida pendiente. Fallos de protocolo cierran1008 (binario1003/exceso1009) sin emitir
+ERRORCP1 ni inventar schema nuevo. No se añadieron autopings ni servicios externos.
+
+Diez pruebas nuevas de sockets reales con clientes Node y claves efímerasRAM:
+ambos roles/latidos, ausencia compresión, rechazo upgrade, prueba cruzada/replay,
+impostor/rol/nonce/pareja, sustitución, binarios/grandes, ausencia de autoridad antes
+AUTH, rechazo de órdenes tras AUTH, cupos/limpieza/timeout10s/cierre y configuración.
+Health sigue503 y keepalive sólo actividad del proceso; no disponibilidad CP2.
+No presencia/routing MESSAGE/STATE/ACK/órdenes, WSS público, cliente móvil, firmas
+móviles cruzadas o permisos de uso acreditados por esta unidad. El siguiente bloque
+de relay necesita el contrato de mensajes/STATE actualizado antes de integrarlos.

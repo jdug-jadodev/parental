@@ -1,5 +1,36 @@
 # Estado del servidor separado
 
+## CP2-T01 — sockets AUTH locales y tercer bloque paralelo — 2026-10-15
+
+Petición de continuar rápido: PADRE-PAIR02 e HIJO-PAIR03 admitidas en sesiones
+existentes tras esquema API/bandejas vacías, sin nuevas operaciones físicas.
+Padre integra snapshot/preparación-firma/persistencia CP2 pendiente, hijo puente
+adulto/recepción/confirmaciones/commit/readback/replay. Sin convertir CP1activo o
+estado corrupto a CP2 ni alterar identidad/credenciales, sin vínculo real autorizado
+por esta implementación. Resultados móviles pendientes, no reejecutados aquí.
+
+Implementado servidor AUTHcp.v2 de laboratorio separado del CLI/CP1, composición
+única en dependencias.ts. Nuevo caso EvaluarConexionCp2/entrada WebSocketAuthCp2Adapter
+y configuración de transporte: perfil único/GETws/sinOrigin-query/loopback, firmas
+con claves configuradas, retoRAM10s/consumo único/una conexiónporrol,16retos/18sockets,
+rechazo de binarios/grandes, cupos y backpressure existentes, cierre1012. Sólo
+PING/PONG trasAUTH, órdenes no admitidas ni reenviadas. No nuevas tramasERROR/presencia
+ni autopings. HTTP comparte superficie del adaptador y mantiene health503/keepalive.
+MainCP1/schema/fixtures sin cambios; producción rechazada, sin LAN/TLS/despliegue.
+
+Pruebas propias: primer check detectó códigos403/429 fuera de entidadHTTP existente;
+corregido con respuestas explícitas como patrónCP1, sin ampliar esa entidad. Focal
+inicial8/9correctos: assert detectó prototipo nulo del parser frente a objeto plano;
+helper de test hace copia superficial como helperCP1, no se debilita codec. Añadida
+clasificación de nueva entrada en test arquitectura conservando exigencia de puertos.
+Focal final16/16correctos (10nuevos+6arquitectura), incluido timeout real10s y cupo.
+`pnpm run verificar` completo correcto: frozeninstall/check/build/**143tests0fallos
+0omitidos**, esquemaCP1 28ejemplos/13contraejemplos,10vectores/78comprobaciones.
+Log temporal cp2-t01-verificar.log. Claves efímeras sóloRAM, Nodeclientes y sockets
+loopback reales; no Android/ADB/APK/firmas móviles/órdenes o permisos aplicados.
+Pendiente contratoMESSAGE/STATE con red10s/excepciónoffline para routingCP2; no
+garantía de extremo a extremo por AUTH_OK. Sin push, dispositivos o despliegue.
+
 ## F02 cerrada y revisada — 2026-10-15
 
 Leídos relevo y evidencia completa padre F02: lectura CP2 de QR real confirmada por

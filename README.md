@@ -128,6 +128,11 @@ CP2-A02 prueba ese contexto mediante adaptador CP2 y caso de uso existente:
 reto de un uso/10s, pareja/rol/conexión. `pnpm run verificar`: 133 tests correctos.
 Sin composición WebSocket CP2 aún; el apartado anterior describe el cierre A01.
 
+CP2-T01 añade servidor de laboratorio **separado** para AUTH/PING/PONG cp.v2,
+probado con sockets Node reales en127.0.0.1. `pnpm run verificar`:143tests correctos.
+No arranca por CLI habitual, no routing de órdenes CP2, móviles conectados o servicio
+público. Los párrafos A01/A02 conservan el alcance de sus respectivos cierres.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

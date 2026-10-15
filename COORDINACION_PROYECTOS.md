@@ -1,5 +1,31 @@
 # Coordinación central — padre, hijo y relay
 
+## Tercer bloque paralelo autorizado — 2026-10-15
+
+Propietario pide avanzar rápido y «hazlo»: continuidad de implementación, no permiso
+para nueva física, migración real o despliegue. Leída evidencia HIJO-PAIR02 completa:
+validaciónRAM probada, recepciónUI cerrada por puente de tickets pendiente. Normativo
+PAIR_ACCEPT tiene10campos, no11 del resumen padre; mismo schema exacto7290e6cb…22239,
+sin añadir un campo para conciliar ese error de conteo.
+
+API/esquema/bandejas vacías comprobados. PADRE-PAIR02 y HIJO-PAIR03 admitidas en
+sesiones existentes queue/resume=true, una unidad por repo. Padre integra snapshot
+CP2/preparación-firma MAIN/persistencia PENDIENTE_CONFIRMACION_HIJO; hijo integra
+puente de autoridad/cámara-confirmaciones/commit atómico CP2 con readback/replay.
+Ambos preservan identidad/CP1/consumos/datos, sin convertir vínculoCP1activo ni
+corrupto en nuevo perfil, sin falsa promoción por firma propia o AUTH_OK. Código
+permitido para alta explícita coherente no equivale a migración real autorizada.
+No ADB/instalar/QRreales/nuevasidentidades/física por estas asignaciones; sin recibos
+o esquemas nuevos unilaterales, resultados móviles pendientes.
+
+Render CP2-T01 implementado: servidor AUTH-only separado, composición en dependencias,
+upgrade exacto cp.v2/loopback/configválida/producciónbloqueada, retos y roles aislados,
+AUTH/PING/PONG en sockets reales Node. Diez pruebas nuevas, **143correctas** mediante
+verificar completo. Sin rutasMESSAGE/STATE/órdenes CP2 ni servicio público o conexión
+móvil. CP1/fixtures/schema vigentes intactos; health503/keepaliveproceso conservados.
+No repetir F02 cerrada; siguiente dependencia relay: contratoMESSAGE/STATE con reglas
+posteriores red10s/excepciónoffline antes de routing nuevo. Sin push/despliegue.
+
 ## F02 revisada — lectura real confirmada, sin vincular — 2026-10-15
 
 Relevo padre y pruebas/EVIDENCIA_PADRE_PAIR01_F02.md completos revisados: una

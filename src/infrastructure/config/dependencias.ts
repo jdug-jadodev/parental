@@ -22,6 +22,11 @@ import { EntropiaAdapter } from '../adapter/entropia.adapter.js';
 import { ProcesarMensaje } from '../../application/usecase/procesar-mensaje.usecase.js';
 import { VerificacionMensajeAdapter } from '../adapter/verificacion-mensaje.adapter.js';
 import { LimiteUpgradesAdapter } from '../adapter/limite-upgrades.js';
+import { EvaluarConexionCp2 } from '../../application/usecase/evaluar-conexion-cp2.usecase.js';
+import { CodecAutenticacionCp2 } from '../adapter/protocol/cp2/codec-autenticacion.js';
+import { VerificacionAutenticacionCp2Adapter } from '../adapter/verificacion-autenticacion-cp2.adapter.js';
+import { WebSocketAuthCp2Adapter } from '../adapter/websocket-auth-cp2.adapter.js';
+import { crearTransporteWebSocketCp2 } from './websocket-cp2.config.js';
 
 export function crearConfiguracionServidor(): ConfiguracionServidor {
   return new ConfiguracionServidor(new ConfigurarServidor(new ValidacionPublicaAdapter()));
@@ -45,5 +50,19 @@ export function crearServidorLocal(valores?: ConfiguracionRequestDto, tls?: TlsL
   const websocket = new WebSocketAdapter(new EvaluarConexion(Boolean(autenticacion)), autenticacion,
     autenticacion ? crearTransporteWebSocket() : undefined, procesar, new LimiteUpgradesAdapter(new RelojAdapter().ahora()));
   try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
+  catch (error) { websocket.detener(); throw error; }
+}
+
+export function crearServidorAutenticacionCp2Local(valores: ConfiguracionRequestDto): Server {
+  const configuracion = new ConfigurarServidor(new ValidacionPublicaAdapter()).ejecutar(ConfiguracionMapper.aDominio(valores));
+  if (configuracion.entorno === 'production') throw new Error('CP/2 sólo admite laboratorio local');
+  const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
+  const codec = new CodecAutenticacionCp2(readFileSync(new URL(`${raiz}contrato-cp2/autenticacion.schema.json`, import.meta.url)));
+  const autenticacion = new AutenticarConexion(configuracion.pareja, new RetosAutenticacionAdapter(), new RelojAdapter(),
+    new EntropiaAdapter(), new VerificacionAutenticacionCp2Adapter(codec, configuracion));
+  const websocket = new WebSocketAuthCp2Adapter(new EvaluarConexionCp2(), autenticacion, crearTransporteWebSocketCp2(),
+    codec, new LimiteUpgradesAdapter(new RelojAdapter().ahora()));
+  const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
+  try { return crearServidorHttp(new ServicioRouter(servicio), websocket); }
   catch (error) { websocket.detener(); throw error; }
 }
