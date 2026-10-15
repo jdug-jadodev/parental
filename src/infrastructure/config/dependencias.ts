@@ -39,6 +39,36 @@ import { KeepaliveProceso } from '../adapter/keepalive-proceso.js';
 import { leerKeepalive } from './keepalive.config.js';
 import { validarPerfilRender } from './perfil-render.config.js';
 import { EstadoRelayCp2Adapter } from '../adapter/estado-relay-cp2.adapter.js';
+import { WebSocketServer } from 'ws';
+import { CoordinarEncuentroC8 } from '../../application/usecase/coordinar-encuentro-c8.usecase.js';
+import { CodecEncuentroC8 } from '../adapter/protocol/c8/codec-encuentro.js';
+import { CodecVinculacionCp2 } from '../adapter/protocol/cp2/codec-vinculacion.js';
+import { CriptografiaVinculacionCp2 } from '../adapter/protocol/cp2/criptografia-vinculacion.js';
+import { VerificacionEncuentroAdapter } from '../adapter/verificacion-encuentro.adapter.js';
+import { EntropiaEncuentroAdapter } from '../adapter/entropia-encuentro.adapter.js';
+import { WebSocketEncuentroC8Adapter } from '../adapter/websocket-encuentro-c8.adapter.js';
+import { origenHttps } from '../adapter/protocol/formatos.js';
+
+export function crearServidorEncuentroC8Local(valores: ConfiguracionRequestDto, tls?: TlsLocal): Server {
+  if (valores.RELAY_MODE !== 'c8-local' || validarEntorno(valores.NODE_ENV) === 'production') {
+    throw new Error('C8 sólo permite el perfil local explícito');
+  }
+  const origen = valores.PUBLIC_ORIGIN ?? '';
+  origenHttps(origen);
+  const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
+  const pairCodec = new CodecVinculacionCp2(readFileSync(new URL(`${raiz}contrato-cp2/vinculacion.schema.json`, import.meta.url)));
+  const codec = new CodecEncuentroC8();
+  const reloj = new RelojAdapter();
+  const coordinar = new CoordinarEncuentroC8(reloj, new EntropiaEncuentroAdapter(),
+    new VerificacionEncuentroAdapter(codec, pairCodec, new CriptografiaVinculacionCp2(pairCodec)), origen);
+  const transporte = new WebSocketServer({ noServer: true, maxPayload: 16384, perMessageDeflate: false,
+    autoPong: false, maxFragments: 64, maxBufferedChunks: 128,
+    handleProtocols: (protocolos) => protocolos.size === 1 && protocolos.has('c8.v1') ? 'c8.v1' : false });
+  const websocket = new WebSocketEncuentroC8Adapter(coordinar, codec, transporte, new LimiteUpgradesAdapter(reloj.ahora()));
+  const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
+  try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
+  catch (error) { websocket.detener(); throw error; }
+}
 
 export function crearKeepaliveProceso(valores: ConfiguracionRequestDto): KeepaliveProceso | undefined {
   const configuracion = leerKeepalive(valores);
