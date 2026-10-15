@@ -1,5 +1,16 @@
 # Estado del servidor separado
 
+## Push del arranque cerrado autorizado y verificado — 2026-10-15
+
+Propietario confirma push sólo del servidor. Fetch sin divergencia remota, árbol
+limpio, revisión de rutas/diff y búsqueda dirigida de patrones de privadas/tokens
+sin coincidencias (no auditoría exhaustiva). Push normal origin/main correcto:
+2cb7315→4c64cc9c4d3eddd9af8e2f12af049da8d25f767d, cuatro commits de ACK/STATE/routing/
+bootstrap. `git ls-remote` coincide con HEAD y rama alineada. Sin nuevos tests,
+cambios/push móviles, dispositivos ni despliegue. Este registro se publica como
+cierre del mismo push. El propietario puede desplegar el perfil HTTP cerrado según
+documentacion/DESPLIEGUE_INICIAL_CERRADO.md; esto no habilita relay público CP2.
+
 ## Arranque inicial cerrado para Render — 2026-10-15
 
 Propietario autoriza prepararlo mientras ambas apps terminan, no desplegar.
