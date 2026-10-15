@@ -1,5 +1,15 @@
 # Coordinación central — padre, hijo y relay
 
+## Push coordinado completado — 2026-10-15
+
+Autorización explícita del propietario para los tres repos. Fetch, árboles limpios
+y sin divergencia; revisión dirigida de rutas/patrones sin alertas de credenciales.
+Push normal origin/main de Render4481c92(18commits), padref378ca2(15) e hijo141ed73(19)
+correctos. `ls-remote` confirmó los tres hashes y status limpio/alineado antes del
+registro final propio. Sin editar apps/añadir trabajo ajeno ni force/reset/rebase.
+Registro central se publica al cierre en Render. No pruebas/instalación/despliegue
+ni avance funcional acreditado por Git; se retoma desarrollo después de este bloque.
+
 ## Reanudación efectiva y CP2-O01 — 2026-10-15
 
 Propietario señaló que nadie trabajaba tras anuncio del siguiente bloque. Se
