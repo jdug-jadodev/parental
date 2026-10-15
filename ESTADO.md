@@ -1,5 +1,37 @@
 # Estado del servidor separado
 
+## CP2-A02 — contexto AUTH y segundo bloque paralelo — 2026-10-14
+
+Revisados relevo y evidencia HIJO-PAIR01 completos: QR real presentado y retirado
+por cancelar/fondo/caducidad administrativa2min, nuevas autorizaciones específicas
+en sesión hijo, identidad conservada; sin escaneo padre/pareja/remote. APK reportado
+0d363886…4344e9, baseline restaurado/desarmado. No pruebas móviles reejecutadas aquí.
+Revisada evidencia PADRE-PAIR01 completa: código82734c7, codec/lectorMAIN/preparación
+RAM, firma MAIN no conectada por snapshot incompatible. APK8c919e1e…247970b no instalado.
+Normalización LF y SHA256 del schema en tres repos:7290e6cb…ef22239 igual, sin editar copias.
+
+HIJO-PAIR02 y PADRE-AUTH01 admitidas en sesiones existentes tras consultar esquema
+API/bandejas vacías; fuente AUTH completa enviada al padre primero resume=false.
+Hijo valida aceptación contra oferta viva/autoridad/confirmaciones sin commit;
+padre desarrolla borde AUTH/estado de conexión sin WSS o snapshot fabricado.
+Una tarea por repo, sin nueva física ni permiso heredado, resultados pendientes.
+
+Código propio: VerificacionAutenticacionCp2Adapter implementa puerto existente,
+claves configuradas determinan rol y firma CPv2/AUTH, mapper CP2 devuelve entidad
+de frame existente. Caso de uso AutenticarConexion y retos RAM reutilizados en
+tests aislados: consumo previo/fallo, pareja/nonce/connectionId confiable, caducidad
+10s antes-después de firma, desconexión/cupo/instancias. Sin tocar CP1 ni dominio/
+aplicación/config productiva, sin wiring socketsCP2/HTTPhealth503/loopback/producción.
+
+Ejecutados focal ocho tests correctos; primer `pnpm run verificar` detectó import
+de DTO de aplicación en mapper de infraestructura. Corregido usando la entidad de
+frame existente, sin debilitar test de arquitectura. Verificación completa final
+correcta: frozen install/check/build/**133 tests0fallos0omitidos**, esquema CP1
+28ejemplos/13contraejemplos y diez vectores/78comprobaciones. Log temporal
+cp2-a02-verificar-final.log. Sin claves privadas persistidas/APK/ADB/despliegue/push.
+Siguiente dependencia servidor: transporte/negociación CP2 local aislado; autenticación
+por sockets reales CP2 y routing todavía no probados ni habilitados.
+
 ## CP2-A01 y avance paralelo — 2026-10-14
 
 Propietario autoriza trabajo paralelo por proyecto. HIJO-PAIR01 no duplicada;

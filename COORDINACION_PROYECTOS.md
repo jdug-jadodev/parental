@@ -1,5 +1,30 @@
 # Coordinación central — padre, hijo y relay
 
+## Segundo bloque paralelo — 2026-10-14
+
+Tras «listo», revisadas evidencias completas HIJO-PAIR01 y PADRE-PAIR01 y relevos.
+Hijo: oferta real presentada/retirada con aprobaciones propias nuevas para instalar,
+inicializar identidad y tres ofertas cancel/fondo/caducidad sesión2min. Identidad
+conservada, no vinculado ni escaneado por padre. Padre82734c7: lector MAIN compilado
+pero no instalado, preparación firmada sólo caso puro probado; firma MAIN sigue
+bloqueada sin snapshot compatible. No resolver migración quitando esa guarda.
+Schema de vinculación comparado en tres repos con terminadores normalizados LF:
+SHA2567290e6cb419e910756d3848586be24358f063455b1c65c47f24e75b5cef22239 igual.
+
+Comprobado esquema API y bandejas vacías; tareas admitidas queue/resume=true en
+sesiones existentes: HIJO-PAIR02 valida PAIR_ACCEPT contra oferta/identidad/contexto
+y confirmaciones, sin commit/store/ceremonia; PADRE-AUTH01 codec/firma/estado AUTH
+separados sin activar WSS ni fabricar snapshot compatible. Schema AUTH íntegro
+CP2-A01d99ddac enviado al padre antes con resume=false. Fuentes PAIR del hijo ya
+entregadas íntegras en PAIR01. No nuevos permisos físicos/ADB/QR reales por tareas.
+Resultados pendientes; no asumir admisión como terminación.
+
+Render CP2-A02: adaptador de verificación CP2 para puerto existente y mapper de
+frames CP2; reutiliza caso de uso/retos en pruebas separadas, consumo antes de firma,
+pareja/rol/nonce/socket-id/plazo10s antes-después. Ocho tests nuevos con firmas reales;
+verificación final133 correctos. Sin socketsCP2/composición/despliegue/push. Siguiente
+dependencia servidor: negociación/transporte local aislado, no routing completo aún.
+
 ## Trabajo paralelo autorizado — 2026-10-14
 
 Propietario solicita avanzar en los tres proyectos a la vez. Una tarea por repo,

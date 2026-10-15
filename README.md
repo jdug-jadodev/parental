@@ -124,6 +124,10 @@ CP2-A01 añade mensajes y verificación de firmas AUTH separadas: ver
 `contrato-cp2/README.md`. Verificación final: 125 tests correctos, ocho nuevos.
 Pendiente enlazar reto/consumo/pareja/conexión; no autenticación WSS CP/2 operativa.
 
+CP2-A02 prueba ese contexto mediante adaptador CP2 y caso de uso existente:
+reto de un uso/10s, pareja/rol/conexión. `pnpm run verificar`: 133 tests correctos.
+Sin composición WebSocket CP2 aún; el apartado anterior describe el cierre A01.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

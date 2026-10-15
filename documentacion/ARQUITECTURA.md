@@ -15,6 +15,13 @@ los mismos bordes. Parser canónico CP/2 compartido en documento-cp2.ts y DER
 genérico firmaDerCp2; sin cambiar formatos de vinculación o CP/1. No composición
 de autenticación CP/2 ni estado de retos/conexiones añadido por esta unidad.
 
+CP2-A02: VerificacionAutenticacionCp2Adapter implementa el puerto existente y
+reutiliza AutenticarConexion/RetosAutenticacionAdapter en pruebas de contexto CP2
+aislado. Mapper específico usa FrameAutenticacionEntity existente sin dependencia
+de aplicación ni DTO de conexión nuevo. No cambia dominio/aplicación CP1 ni
+dependencias.ts; futura composición debe separar almacenes de retos por perfil y
+entregar connectionId desde el socket, no desde el frame firmado.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

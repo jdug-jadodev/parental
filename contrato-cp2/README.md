@@ -85,3 +85,23 @@ reemplazo de conexiones ni routing. El llamador debe comprobar ese contexto;
 una firma válida puede verificarse otra vez y no demuestra frescura o permiso.
 No se activa latido automático, ni AUTH_OK acredita orden aplicada o internet.
 Tests `test/autenticacion-cp2.test.ts`: ocho nuevos casos con claves sólo RAM.
+
+## CP2-A02 — contexto de autenticación probado localmente
+
+`VerificacionAutenticacionCp2Adapter` implementa el puerto existente de verificación
+con las dos públicas fijadas por configuración, validadas antes de uso. La clave
+que verifica determina el rol permitido, no una clave o rol arbitrario del frame.
+Mapper CP2 independiente emite CHALLENGE/AUTH_OK canónicos mediante la entidad de
+frame existente, sin DTO de conexión duplicado ni cambios al mapper CP1.
+
+Se reutiliza `AutenticarConexion`, independiente de versión, con almacén RAM de
+retos exclusivo de la instancia CP2. Consume ANTES de verificar, compara pareja,
+nonce y connectionId del intento confiable, y comprueba vencimiento monotónico
+antes/después de la firma. Cancelar libera capacidad y revoca el reto. El adaptador
+WebSocket deberá suministrar el id asociado a SU socket, nunca copiarlo del payload.
+
+Ocho pruebas nuevas con firmas reales verifican ambos roles, consumo, conexión
+cruzada, plazo exacto10s/coste de firma, firma/esquema fallidos, pareja/nonce/rol,
+claves no configuradas, desconexión/cupo y separación de instancias de retos.
+Composición sólo en tests; no wiring productivo ni sockets CP2 habilitados.
+Pendientes negociación, transporte/routing y clientes compatibles antes de operar.
