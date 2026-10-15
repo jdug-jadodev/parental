@@ -122,6 +122,16 @@ e importación criptográfica SPKI P-256.
 
 ## HTTP, liveness y seguridad
 
+CP2-P01 compone crearServidorRelayCp2Render sólo desde modo cp2 explícito con
+entorno/origenRender validados y ConfigurarServidor con pareja/públicas completas.
+El alcance RENDER es inyectado al adaptador; LOCAL permanece por defecto y conserva
+guardia127.0.0.1. No se usan headers de proxy como autoridad o selector de perfil.
+EstadoRelayCp2Adapter recibe disponibilidad del transporte por constructor;
+EstadoServicio permite protocolo2 sin cambiar default1, health local/bootstrap o
+CP1. Health refleja disponibilidad del adaptador, no autorización/aplicación móvil.
+LatidosTransporte se reutiliza en CP2 para ping30s/pong correlacionado/limpieza,
+con timer cancelado en detener. Root config es el único punto de composición.
+
 Arranque inicial cerrado autorizado: `crearServidorInicialCerrado` compone los
 mismos controller/router/EstadoLocalAdapter y WebSocketAdapter sin autenticador,
 transporte WebSocket ni procesador. Exige RELAY_MODE=bootstrap y ausencia de las

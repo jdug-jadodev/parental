@@ -1,4 +1,3 @@
 export class EstadoServicio {
-  readonly protocolo = 1;
-  constructor(readonly operativo: boolean) { Object.freeze(this); }
+  constructor(readonly operativo: boolean, readonly protocolo: 1 | 2 = 1) { Object.freeze(this); }
 }

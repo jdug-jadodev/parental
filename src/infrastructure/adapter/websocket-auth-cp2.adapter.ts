@@ -19,11 +19,14 @@ import { RelayCp2Mapper } from './mapper/relay-cp2.mapper.js';
 import { CodecAutenticacionCp2 } from './protocol/cp2/codec-autenticacion.js';
 import { LimiteUpgradesAdapter } from './limite-upgrades.js';
 import { enviarAcotado } from './salida-websocket.js';
+import { LatidosTransporte } from './latidos-transporte.js';
 
 export class WebSocketAuthCp2Adapter {
   readonly maximoConexiones = 18;
   private readonly autenticados = new Map<RolAutenticado, WebSocket>();
   private deteniendo = false;
+  private readonly latidos = new LatidosTransporte();
+  private readonly revision: ReturnType<typeof setInterval>;
 
   constructor(
     private readonly evaluar: EvaluarConexionEntrada,
@@ -32,7 +35,13 @@ export class WebSocketAuthCp2Adapter {
     private readonly codec: CodecAutenticacionCp2,
     private readonly upgrades: LimiteUpgradesAdapter,
     private readonly procesar?: ProcesarMensajeEntrada,
-  ) {}
+    private readonly alcance: 'LOCAL' | 'RENDER' = 'LOCAL',
+  ) {
+    this.revision = setInterval(() => this.latidos.revisar(), 30000);
+    this.revision.unref();
+  }
+
+  get disponible(): boolean { return !this.deteniendo; }
 
   upgrade(solicitud: IncomingMessage, socket: Duplex, head: Buffer = Buffer.alloc(0)): void {
     const limite = setTimeout(() => socket.destroy(), 1000);
@@ -41,7 +50,7 @@ export class WebSocketAuthCp2Adapter {
     socket.on('error', () => socket.destroy());
     try {
       if (this.deteniendo) { socket.end(new RechazoUpgradeEntity(503).serializar()); return; }
-      if (!(socket instanceof Socket) || socket.remoteAddress !== '127.0.0.1') {
+      if (!(socket instanceof Socket) || this.alcance === 'LOCAL' && socket.remoteAddress !== '127.0.0.1') {
         socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\nContent-Length: 0\r\n\r\n'); return;
       }
       if (solicitud.rawHeaders.length > 64 || this.evaluar.ejecutar(UpgradeMapper.aDominio(
@@ -72,6 +81,7 @@ export class WebSocketAuthCp2Adapter {
   detener(): void {
     if (this.deteniendo) return;
     this.deteniendo = true;
+    clearInterval(this.revision);
     for (const socket of this.transporte.clients) this.cerrar(socket, 1012);
     this.transporte.close();
   }
@@ -94,6 +104,7 @@ export class WebSocketAuthCp2Adapter {
     limite.unref();
     socket.on('error', () => socket.terminate());
     socket.once('close', () => {
+      this.latidos.eliminar(socket);
       clearTimeout(limite);
       this.autenticacion.cancelar(reto.connectionId);
       if (identidad && this.autenticados.get(identidad.rol) === socket) this.autenticados.delete(identidad.rol);
@@ -103,7 +114,10 @@ export class WebSocketAuthCp2Adapter {
       if (!controles.admitir(performance.now()) || socket.bufferedAmount + bytes.length + 2 > 65536) { rechazar(); return; }
       socket.pong(bytes, false, (error) => { if (error) socket.terminate(); });
     });
-    socket.on('pong', () => { if (!controles.admitir(performance.now())) rechazar(); });
+    socket.on('pong', (bytes: Buffer) => {
+      if (!controles.admitir(performance.now())) { rechazar(); return; }
+      this.latidos.pong(socket, bytes);
+    });
     socket.on('message', (datos: RawData, binario: boolean) => {
       if (rechazado || socket.readyState !== WebSocket.OPEN) return;
       if (binario) { rechazar(1003); return; }
@@ -116,6 +130,7 @@ export class WebSocketAuthCp2Adapter {
           if (!enviarAcotado(socket, AutenticacionCp2Mapper.aceptacion(conexion).texto, () => rechazar())) { rechazar(); return; }
           const anterior = this.autenticados.get(conexion.rol);
           this.autenticados.set(conexion.rol, socket);
+          this.latidos.registrar(socket);
           if (anterior && anterior !== socket) this.cerrar(anterior, 1008);
           return;
         }

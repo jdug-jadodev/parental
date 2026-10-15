@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import type { AddressInfo } from 'node:net';
 import { test } from 'node:test';
 import WebSocket from 'ws';
-import { crearServidorRelayCp2Local } from '../src/infrastructure/config/dependencias.js';
+import { crearServidorRelayCp2Local, crearServidorRelayCp2Render } from '../src/infrastructure/config/dependencias.js';
 import { cerrarServidorHttp } from '../src/infrastructure/config/servidor.config.js';
 import { CriptografiaStateCp2 } from '../src/infrastructure/adapter/protocol/cp2/criptografia-state.js';
 import { CodecStateCp2 } from '../src/infrastructure/adapter/protocol/cp2/codec-state.js';
@@ -47,9 +47,10 @@ const firmado = (valor: unknown, privada: KeyObject): Buffer => {
   return json({ v: 2, kind: 'SIGNED', purpose: 'MESSAGE', payloadB64: payload.toString('base64url'),
     sigB64: sign('sha256', bytesFirmaMessageCp2(payload), privada).toString('base64url') });
 };
-async function iniciar() {
+async function iniciar(publico = false) {
   const { env, claves, pareja } = entornoAuth();
-  const servidor = crearServidorRelayCp2Local(env);
+  const servidor = publico ? crearServidorRelayCp2Render({ ...env, NODE_ENV: 'production', LOG_LEVEL: 'error',
+    RELAY_MODE: 'cp2', RENDER: 'true', RENDER_EXTERNAL_URL: env.PUBLIC_ORIGIN }) : crearServidorRelayCp2Local(env);
   servidor.listen(0, '127.0.0.1'); await once(servidor, 'listening');
   const url = `ws://127.0.0.1:${(servidor.address() as AddressInfo).port}/ws`;
   const autenticar = async (rol: 'PARENT' | 'CHILD'): Promise<ClienteRelay> => {
@@ -65,8 +66,8 @@ async function iniciar() {
   } };
 }
 
-test('CP2-R01: recorrido firmado SYNC→STATE→LOCK→ACK conserva bytes originales', async (t) => {
-  const s = await iniciar(); t.after(s.detener);
+for (const publico of [false, true]) test(`CP2-R01: recorrido firmado SYNC→STATE→LOCK→ACK conserva bytes, perfil ${publico ? 'Render' : 'local'}`, async (t) => {
+  const s = await iniciar(publico); t.after(s.detener);
   const padre = await s.autenticar('PARENT'); const hijo = await s.autenticar('CHILD');
   const nonce = randomBytes(32).toString('base64url'); const reto = randomBytes(32).toString('base64url');
   const boot = randomUUID(); const sesion = randomUUID();
@@ -96,7 +97,8 @@ test('CP2-R01: recorrido firmado SYNC→STATE→LOCK→ACK conserva bytes origin
   const noncePing = randomBytes(32).toString('base64url');
   padre.enviar(codecAuthCp2.codificarFrame({ v: 2, kind: 'PING', nonce: noncePing }));
   assert.deepEqual({ ...codecAuthCp2.leerFrame(await padre.recibir()) }, { v: 2, kind: 'PONG', nonce: noncePing });
-  const health = await fetch(s.url.replace('ws:', 'http:').replace('/ws', '/healthz')); assert.equal(health.status, 503);
+  const health = await fetch(s.url.replace('ws:', 'http:').replace('/ws', '/healthz')); assert.equal(health.status, publico ? 200 : 503);
+  assert.deepEqual(await health.json(), { ok: publico, protocol: publico ? 2 : 1 });
 });
 
 test('CP2-R01: receptor ausente no conserva ni confirma órdenes', async (t) => {

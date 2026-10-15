@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: parental
+    runtime: node
+    numInstances: 1
+    autoDeployTrigger: "off"
+    buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build
+    startCommand: corepack pnpm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: error
+      - key: RELAY_MODE
+        value: cp2
+      - key: PUBLIC_ORIGIN
+        sync: false
+      - key: ACTIVE_PAIR_ID
+        sync: false
+      - key: PARENT_PUBLIC_KEY_B64
+        sync: false
+      - key: CHILD_PUBLIC_KEY_B64
+        sync: false

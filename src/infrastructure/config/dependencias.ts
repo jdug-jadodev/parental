@@ -37,6 +37,8 @@ import { CriptografiaAckCp2 } from '../adapter/protocol/cp2/criptografia-ack.js'
 import { CriptografiaStateCp2 } from '../adapter/protocol/cp2/criptografia-state.js';
 import { KeepaliveProceso } from '../adapter/keepalive-proceso.js';
 import { leerKeepalive } from './keepalive.config.js';
+import { validarPerfilRender } from './perfil-render.config.js';
+import { EstadoRelayCp2Adapter } from '../adapter/estado-relay-cp2.adapter.js';
 
 export function crearKeepaliveProceso(valores: ConfiguracionRequestDto): KeepaliveProceso | undefined {
   const configuracion = leerKeepalive(valores);
@@ -83,16 +85,21 @@ export function crearServidorLocal(valores?: ConfiguracionRequestDto, tls?: TlsL
 }
 
 export function crearServidorAutenticacionCp2Local(valores: ConfiguracionRequestDto): Server {
-  return componerCp2Local(valores, false);
+  return componerCp2(valores, false);
 }
 
 export function crearServidorRelayCp2Local(valores: ConfiguracionRequestDto, tls?: TlsLocal): Server {
-  return componerCp2Local(valores, true, tls);
+  return componerCp2(valores, true, tls);
 }
 
-function componerCp2Local(valores: ConfiguracionRequestDto, routing: boolean, tls?: TlsLocal): Server {
+export function crearServidorRelayCp2Render(valores: ConfiguracionRequestDto): Server {
+  validarPerfilRender(valores);
+  return componerCp2(valores, true, undefined, 'RENDER');
+}
+
+function componerCp2(valores: ConfiguracionRequestDto, routing: boolean, tls?: TlsLocal, alcance: 'LOCAL' | 'RENDER' = 'LOCAL'): Server {
   const configuracion = new ConfigurarServidor(new ValidacionPublicaAdapter()).ejecutar(ConfiguracionMapper.aDominio(valores));
-  if (configuracion.entorno === 'production') throw new Error('CP/2 sólo admite laboratorio local');
+  if (configuracion.entorno === 'production' && alcance === 'LOCAL') throw new Error('CP/2 sólo admite laboratorio local');
   const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
   const codec = new CodecAutenticacionCp2(readFileSync(new URL(`${raiz}contrato-cp2/autenticacion.schema.json`, import.meta.url)));
   const autenticacion = new AutenticarConexion(configuracion.pareja, new RetosAutenticacionAdapter(), new RelojAdapter(),
@@ -106,8 +113,9 @@ function componerCp2Local(valores: ConfiguracionRequestDto, routing: boolean, tl
       new CriptografiaStateCp2(new CodecStateCp2(cargar('state-piloto'))), ack));
   }
   const websocket = new WebSocketAuthCp2Adapter(new EvaluarConexionCp2(), autenticacion, crearTransporteWebSocketCp2(),
-    codec, new LimiteUpgradesAdapter(new RelojAdapter().ahora()), procesar);
-  const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
+    codec, new LimiteUpgradesAdapter(new RelojAdapter().ahora()), procesar, alcance);
+  const estado = alcance === 'RENDER' ? new EstadoRelayCp2Adapter(() => websocket.disponible) : new EstadoLocalAdapter();
+  const servicio = new ServicioController(new ConsultarServicio(estado));
   try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
   catch (error) { websocket.detener(); throw error; }
 }

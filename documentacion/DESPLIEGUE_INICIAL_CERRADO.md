@@ -63,11 +63,13 @@ externas, cron ni servicios de monitorización y no se probó contra Render real
 
 ## Barreras conservadas
 
-Sólo el modo explícito `bootstrap` escucha HTTP en `0.0.0.0`. No construye servidor
+El modo explícito `bootstrap` escucha HTTP en `0.0.0.0`. No construye servidor
 WebSocket, autenticador ni enrutador de órdenes y rechaza toda configuración de
 pareja. Un valor desconocido de RELAY_MODE falla; quitarlo en producción vuelve a
-la barrera anterior que aborta el proceso. Los creadores CP1/CP2 operativos siguen
-siendo locales y rechazan producción. No existe paso automático de bootstrap a relay.
+la barrera anterior que aborta el proceso. Los creadores locales CP1/CP2 siguen
+rechazando producción. No existe paso automático de bootstrap a relay. El perfil
+público CP2 posterior es explícito y exige configuración real completa; ver
+[habilitación autenticada](DESPLIEGUE_CP2_AUTENTICADO.md).
 
 Con la URL real se coordina la ceremonia móvil y se obtiene la exportación pública.
 La habilitación posterior del relay CP2 autenticado requiere otro bloque verificado

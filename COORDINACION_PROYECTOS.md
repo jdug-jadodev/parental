@@ -1,5 +1,25 @@
 # Coordinación central — padre, hijo y relay
 
+## CP2-P01 autorizado — perfil público listo en código — 2026-10-15
+
+Propietario autoriza preparar habilitación CP2autenticada. Implementados selector
+explícito RELAY_MODEcp2 y composiciónRender: entorno/origenautomático coincidentes,
+pareja/públicascompletas fijas, sin fallback o modoanónimo. LocalCP1/CP2/bootstrap
+siguen diferenciados; sólo perfilnuevo cambia alcance y health200protocol2.
+189tests correctos y proceso compilado probado con RenderSIMULADO/ambosrolesAUTH.
+No evidencia de conexión de APK o TLSrealCP2 por estos tests. Sin push/deploy o
+modificación de variables remotas; servicio público sigue bootstrapaa2bfbb.
+
+Ya se conoce origenreal https://parental-0j3o.onrender.com. Para activación falta
+parejareal y ambas públicas de su aceptación; exportadorCP2padre escribe PAIR_ID,
+mapear exacto a ACTIVE_PAIR_ID. No reusar CP1, clavesprueba o códigosrecuperación.
+Nuevo permiso específico para actualizar A56/A13 conservando datos y ceremonia
+antes de obtener exportación; ninguna operación física desde Render ni subagente.
+Propietario despliega sólo tras código subido/configuración lista, autodeployactual
+requiere atención. Procedimiento documentacion/DESPLIEGUE_CP2_AUTENTICADO.md.
+Límite actual hijo: foreground120s, no servicio con appcerrada ni disponibilidad
+cotidiana acreditada. No cerrar funcionalidad remota por recibir AUTH_OK/ACKrelay.
+
 ## Render inicial live, verificación pública cerrada — 2026-10-15
 
 MCP confirma live de aa2bfbb en servicio parental. Comprobado aquí por HTTPS:

@@ -1,5 +1,44 @@
 # Estado del servidor separado
 
+## CP2-P01 — perfil público autenticado autorizado y preparado — 2026-10-15
+
+Propietario responde sí a preparar habilitación pública CP2 con autenticación
+obligatoria. Alcance implementado en código, sin despliegue/push/config remota ni
+permisos físicos heredados. Bootstrap aa2bfbb continúa siendo último publicado.
+
+RELAY_MODEcp2 explícito selecciona crearServidorRelayCp2Render, exige producción,
+RENDERtrue y origenPUBLIC_ORIGIN igual al RENDER_EXTERNAL_URL automático (barrafinal
+automática tolerada), parejaUUIDv4minúscula y ambas públicasSPKIP256distintas.
+SELF_URL opcional debe coincidir. Sin configuración válida aborta antes de listen;
+no servidor abierto/fallback o claves de cliente aceptadas. Perfiles locales CP1/
+CP2 conservan rechazo producción y127.0.0.1; bootstrap sigue sin WebSocket.
+
+Adaptador CP2 recibe alcanceRender sólo desde composición; no confianza en
+X-Forwarded-For ni Origin para autoridad. Configurado, escuchaHTTPinterno0.0.0.0
+detrás TLSRender; guardas entorno/origen no certifican por sí mismas ese TLS.
+Mismos retos10s/firmas/routinglímites/bytesoriginales. Reutiliza LatidosTransporte:
+ping30s/pongnonce y limpia siguiente ciclo si ausente, sin equivalencia a Androidred.
+EstadoRelayCp2Adapter producehealth200protocol2 si adaptador no se está deteniendo;
+no disponibilidad/aplicación de teléfonos. DefaultEstadoServicio protocolo1 intacto.
+
+Ejecutados check/focal17correctos y `corepack pnpm run verificar` completo correcto:
+**189tests0fallos0omitidos**, esquema28/13, vectores10/78. Seis tests nuevos de
+perfil más recorrido firmado existente ejecutado también bajo perfil Render
+SIMULADO local (no siete escenarios nuevos de negocio). Incluyen claves/rol
+erróneos, falta config, origen/mode/env,CP1/Origin/query,health y alcanceIPv6:
+::1 aceptaAUTH sólo perfilRender, localrechaza403. Sin TLS público por ello.
+Log temporal cp2-publico-verificar.log. Además artefacto compilado dist/src/main.js
+ejecutado como proceso con RenderSIMULADO: health200protocol2, ambosrolesAUTH_OK,
+stderrvacío/clavesefímeras sóloRAM, sin endpoint real o configuración familiar.
+
+Guía documentacion/DESPLIEGUE_CP2_AUTENTICADO.md y plantilla pública separada.
+Inspección sólolectura confirmó exportador padre VincularCp2 usa PAIR_ID: trasladar
+ese valor real a ACTIVE_PAIR_ID, no usar exportadorCP1. Claves todavía no obtenidas
+por este proyecto: falta actualizaciónAPK/ceremonia con autorización específica,
+luego configuración pública real/despliegue por propietario. No insertar fixtures.
+Recordar autodeploy remoto activo: no push implícito. Piloto móvilforeground120s,
+no promesa de uso habitual/appcerrada/recuperación completa. Nada físico ejecutado.
+
 ## Arranque cerrado publicado y comprobado — 2026-10-15
 
 Propietario comunica despliegue listo. MCP list_deploys confirma live del commit

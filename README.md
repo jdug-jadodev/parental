@@ -4,20 +4,30 @@ Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
 y los fixtures permanecen congelados.
 
-## Estado: R01–R03 locales, sin despliegue
+## Estado: bootstrap publicado; CP/2 público autenticado preparado
 
-**Primer despliegue cerrado preparado:** `RELAY_MODE=bootstrap` permite únicamente
+**Primer despliegue cerrado verificado:** `RELAY_MODE=bootstrap` permite únicamente
 HTTP en producción para obtener la URL de Render, sin WebSockets ni pareja.
 Usar health check `/keepalive` (200 de proceso); `/healthz` conserva503.
 Instrucciones: [despliegue inicial cerrado](documentacion/DESPLIEGUE_INICIAL_CERRADO.md).
-175tests correctos. No desplegado; no habilita el relay público ni control móvil.
+Publicado aa2bfbb en https://parental-0j3o.onrender.com: keepalive200/health503 y
+upgradesCP1/CP2 rechazados. No habilita control móvil ni incorpora cambios locales posteriores.
+
+**CP2-P01 autorizado y preparado:** `RELAY_MODE=cp2` exige producción Render,
+origen externo coincidente y pareja con dos claves públicas P256 distintas.
+No arranca si falta configuración; no hay modo de relay anónimo. Health200protocol2
+sólo significa relay configurado, no orden aplicada. Ese perfil aún no se desplegó.
+Guía: [CP2 autenticado](documentacion/DESPLIEGUE_CP2_AUTENTICADO.md).
+Verificación local actual:189tests correctos. Entorno Render simulado en pruebas;
+no conexión de APK/efecto físico acreditados por este resultado.
 
 **Avance CP2-E2E01:** composición explícita `crearServidorRelayCp2Local` autentica
 `cp.v2` y retransmite SYNC/órdenes/STATE/ACK firmados. `pnpm run verificar`:
 169tests correctos, incluido recorrido con dos clientes Node y un hijo simulado.
 No es una prueba de bloqueo Android. STATE piloto no ofrece historia/avisos.
-La CLI normal y el creador AUTH-only no se convierten automáticamente a CP2;
-loopback, health503 y bloqueo de producción se mantienen. Integración móvil en curso.
+Sin modo público explícito, CLI/creador AUTH-only conservan loopback/health503 y
+bloqueo de producción. Ambas integraciones móviles reportadas terminadas en código,
+sin actualización de teléfonos ni ensayo físico por este proyecto.
 
 Validación de configuración pública, claves SPKI P-256 distintas, HTTP y
 límites iniciales. Transporte WebSocket conectado sin compresión y con máximo
@@ -27,12 +37,9 @@ al socket, nonce de 32 bytes y expiración monotónica de 10 segundos.
 R03 reenvía SYNC_REQUEST/SET_POLICY del padre y STATE/ACK del hijo tras validar
 firma, pareja y rol. Mantiene intactos los bytes originales y no guarda órdenes.
 
-**Relay no operativo públicamente:** los perfiles de relay escuchan solo en
-`127.0.0.1`, `/healthz` devuelve503 y su arranque en producción está bloqueado.
-La única excepción es el HTTP inicial cerrado explícito, sin relay.
-Sin configuración se rechazan upgrades;
-con configuración válida se permite autenticación y reenvío exclusivamente local.
-Health 503 se conserva como barrera hasta autorizar y validar la fase pública.
+Los creadores locales de relay escuchan en `127.0.0.1`, health503 y producción
+bloqueada. Bootstrap no crea WebSockets. Sólo el nuevo perfil CP2 público explícito
+y configurado permite AUTH/routing en Render. CP1/fixtures congelados intactos.
 
 HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
 `GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
