@@ -52,8 +52,14 @@ Resultado PADRE-C8-X01 recogido:1test JVM ejecutado con arnésNodeREAL,
 WSS/TLSestricto, PAIRoriginal/hash idénticos y readback antes de envío;
 NodeDONE/exit0. Hash públicoPAIR `rJ7mi56D-qJF-iHGKrX2pk9IAz0UB0qIQLMqvTQAYZw`.
 Evidencia propia padre pruebas/EVIDENCIA_PADRE_C8_X01.md, no reejecutada desde Render.
-Adulto/disco de test falsos, sin Android/Keystore real. Rolhijo en curso al cerrar
-preparación de servidor; no dar por aprobado ni inferir dosapps físicas por esto.
+Adulto/disco de test falsos, sin Android/Keystore real.
+
+Entrega HIJO-C8-X01 posterior recogida:2tests opt-in ejecutados0fallos0omitidos,
+READY/PAIR_SENT/DONE y exitNode0. PAIRhashidéntico
+`X28PLtkh_Zv4nf-pqACF5Xe8bx21xZ0MTnNmdYsGOww`. PuenteOkHttpTEST/modeloJVMreal,
+adulto/discoRAM falsos; no wrapperAndroid/Keystore/enforcer. Evidencia propia
+hijo pruebas/EVIDENCIA_HIJO_C8_X01.md. Ambos roles aprobados separadamente contra
+Node; NO prueba de dosapps físicas juntas o una ceremonia real.
 
 Se prepara separadamente en servidor, desactivado por defecto y sin publicar.
 No usar endpointreal bootstrap para estos ensayos. No instalar APK nuevas ni

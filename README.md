@@ -14,7 +14,8 @@ No se habilitó ningún socket nuevo en Render, bootstrap o `cp.v2`.
 No confundir READY/SENT con pareja guardada ni orden aplicada. Ambas apps cerraron
 su integración y generaron APK nuevas sin instalar; cruceNodeJVM en coordinación.
 Verificación actual del servidor:217tests correctos, esquemaCP1 y vectores intactos.
-Primer crucePARENTJVM↔Node por WSS local aprobado; resultadoCHILDJVM pendiente.
+CrucesPARENTJVM↔Node y CHILDJVM↔Node por WSS local aprobados por sus respectivos
+proyectos; contrapartesNode sintéticas, no dosAPKs o teléfonos reales.
 
 Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps padre e hijo no forman
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`

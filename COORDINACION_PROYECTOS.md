@@ -1,5 +1,27 @@
 # Coordinación central — padre, hijo y relay
 
+## C8-F04 — avance autorizado; Auto-Deploy activo y permisos locales pendientes — 2026-10-15
+
+Propietario dice «hagamosle» tras cierre de ambos cruces y propuesta de publicar/
+actualizar. Se conserva despliegue manual por propietario; no push con despliegue
+implícito. Consulta MCP get_service confirmó AHORA autoDeployyes/triggercommit,
+branchmain, healthcheckkeepalive/1instancia, comandos corepackpnpm correctos.
+Sin cambio remoto o triggerdeploy. Antes de push, propietario debe desactivar
+Auto-Deploy y confirmarlo; no configurar/habilitar ventanaC8 todavía.
+
+Entrega HIJO-C8-X01 recogida:2tests opt-in ejecutados0fallos0omitidos,3eventos
+Node/exit0 y PAIRframehashidénticoX28PLtkh_Zv4nf-pqACF5Xe8bx21xZ0MTnNmdYsGOww.
+PuenteOkHttpTEST/modeloJVM real con NodePARENTsintético/servidorNodeREAL, no
+wrapperAndroid/Keystore/enforcer/discoAndroid/dosAPKs reales. Padre ya cerrado.
+R1 y APKs sin cambios. No inferir ceremoniaguardada o efectoAndroid de esos cruces.
+
+PADRE/HIJO-C8-F04 admitidas queue/resumetrue en sesiones raíz existentes tras
+OpenAPI/estadoinactivo/bandejasvacías. Tarea de preflightLOCAL y solicitudpermiso
+DIRECTO para actualizar A56/A13 respectivamente, sin ADB por coordinación ni
+instalar antes de respuesta en cada sesión. No ceremonia/ofertas/C8 aún; primero
+actualizaciones conservando datos/emergencia y compatibilidad, sin heredarF03.
+Servidor no usa dispositivos. Revisión/publicación pendiente de desactivarAutoDeploy.
+
 ## C8-P01/X01 — autorizado preparar perfil y cruce local — 2026-10-15
 
 Propietario responde «sí, avancemos» a prueba cruzadalocal y preparaciónpública

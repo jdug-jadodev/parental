@@ -1,5 +1,29 @@
 # Estado del servidor separado
 
+## C8-F04 — coordinar publicación conservadora y actualización móvil — 2026-10-15
+
+Propietario dice «hagamosle» a publicación/despliegue y actualización siguientes.
+Consulta MCPsólolectura confirmó servicio srv-db8hogqvcj2c73aen0s0 en workspace
+tea-db8h7sl9fdbs73eabck0: AutoDeployyes/triggercommit/main, healthkeepalive y1instancia;
+comandosbuild/start corepackpnpm correctos. No cambiar config/disparar deploy ni
+push que lo lance: propietario conserva despliegue manual y debe desactivarAutoDeploy.
+Árbol previo limpio, main ahead11; no confundir código local con servicio publicado.
+
+Recogido cierreHIJO-C8-X01:2tests opt-in0fallos0omitidos y NodeDONE/exit0,
+PAIRframehashX28PLtkh_Zv4nf-pqACF5Xe8bx21xZ0MTnNmdYsGOww igualJVMNode. Dos
+crucesporrol cerrados (contrapartesNode sintéticas), no Android/Keystore/enforcer
+ni dosAPKs simultáneas. R1/APKs conservadas; evidencia propia del hijo leída,
+no repetir ejecucióndesdeRender. Preparaciónservidor217tests sigue evidenciaanterior.
+
+Enviadas PADRE/HIJO-C8-F04 a sesiones raíz existentes, OpenAPI/estadosinactivos/
+bandejasvacías verificados y admisiones queue/resumetrue confirmadas. Sólo
+preflightlocal/solicitudhabilitaciónDIRECTA antes de cualquierADB en su sesión,
+actualizaciónfuturaúnica conservardatos sóloA56/sóloA13 con selectorexplícito.
+No trasladar permisos o reutilizarF03, no ceremonia/C8/oferta hasta otro paso.
+Trabajo propio documental/sin nuevos tests ni modificaciones de apps/dispositivos,
+sin push/deploy o variables remotas. Próximo: AutoDeployoff confirmado y permisos
+físicos en sesionesmóviles antes de publicación/instalaciones correspondientes.
+
 ## C8-P01/X01 — perfil temporal preparado y cruce JVM iniciado — 2026-10-15
 
 Autorización del propietario: prueba cruzada LOCAL y preparación perfilpúblico,
