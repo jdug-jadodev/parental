@@ -184,3 +184,27 @@ JVM→Node fue ejecutado aquí. Queda acreditado el cruce criptográfico local d
 muestras públicas, no UI/IO Android/Keystore real, oferta vigente, consentimiento,
 recuperación, vínculo real, clientes conectados o control remoto. No se cambiaron
 codecs/esquemas para lograr la compatibilidad ni se instalaron APKs.
+
+## CP2-O01 — SYNC_REQUEST/SET_POLICY separados
+
+`ordenes.schema.json`, DTOs y codec/criptografía propios en el borde CP2 implementan
+la parte PARENT de draft75eb56e §§2–5. SYNC_REQUEST tiene6campos: v/kind/pairId/sender/
+syncNonce/requestedAction; acción null explícita para consulta o LOCK/ALLOW/ALLOW_FOR.
+SET_POLICY tiene12: v/kind/sender/pairId/bootId/childSessionId/commandId/seq/
+expectedRevision/commandNonce/action/durationSec. Sobre MESSAGE cerrado de5campos.
+No añadir campos por errores de conteo en resúmenes. Campos/nulos obligatorios.
+
+Seq decimal1..2^63−1 y revisión0..2^63−1 en strings exactos; schema limita forma y
+codec valida rango con bigint. UUIDv4minúsculos y nonce32base64urlcanónico. Duración
+sóloALLOW_FOR:60..86400segundos/múltiplo60 (minutos1..1440enteros), null paraLOCK/ALLOW.
+No LOCK_FOR/deferredAllowSec/WAITING_ALLOW ni duración predeterminada. Mismos límites
+8192/16384/profundidad6/ASCII/UTF8/canonicalidad/DER/P256. Firma CPv2/MESSAGE+LFreal
+sobre payloadoriginal, pública padre esperada desde llamador, hashpayload/copias.
+
+No integración con sockets/routing/STATE/ACK, reserva de seq, escritor del hijo,
+reto vivo/CAS/revisión o enforcement. Firma válida puede verificarse otra vez y no
+acredita operación aceptada/aplicada. TransporteT01 sigue rechazando estas órdenes.
+Regla de red posterior al draft: autorización NORMAL se revoca10s desde señal
+Android negativa y reconectar no abre; excepciónOFFLINE es local explícita. No
+copiar semántica antigua «ALLOW incluso offline» del draft a las apps por este codec.
+Siete tests nuevos cubren campos/tipos/rangos/duración/bytes/firma/domino/aislamiento.

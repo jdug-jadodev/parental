@@ -137,6 +137,10 @@ CP2-I01 añade generador/verificador de vectores públicos efímeros para cruce 
 `pnpm run verificar`:146tests correctos. Devoluciones JVM pendientes, sin nuevas
 instalaciones o permisos físicos. Uso y límites en `contrato-cp2/README.md`.
 
+CP2-O01 añade schema/DTO/codec y verificación de firma MESSAGE de SYNC_REQUEST/
+SET_POLICY. `pnpm run verificar`:153tests correctos. Sin routing/STATE/enforcement
+o emisión móvil habilitados por esos validadores.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

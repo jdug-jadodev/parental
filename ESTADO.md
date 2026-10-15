@@ -1,5 +1,30 @@
 # Estado del servidor separado
 
+## CP2-O01 implementado; trabajo paralelo realmente iniciado — 2026-10-15
+
+Tras corrección del propietario por inactividad, se reconoció que anuncio anterior
+no asignó tareas. HIJO-AUTH01/PADRE-ORD01 admitidas queue/resume=true tras esquemaAPI/
+bandejas vacías; fuentesAUTH/ORD completas por texto, ninguna nueva sesión/subagente.
+GET/api/session/active confirmó **running** para padre/hijo/Render, no sólo outcome
+de turno anterior. Hijo implementa AUTHCHILD/bordeKeystore-snapshot validado sinred;
+padre codec/firmante órdenes sin autorizar snapshotpendiente ni emisión. Resultados
+móviles pendientes, sin dispositivos/permisos físicos nuevos por estas unidades.
+
+Render: nuevos ordenes.schema.json/DTO/codec/criptografía MESSAGE y7tests. SYNC6campos
+conrequestedActionnull/acción; SET_POLICY12campos conseqC+/expectedRevisionC hasta
+2^63−1 y nonce/contexto; accionesLOCK/ALLOW/ALLOW_FOR, durationSecnullo60..86400múltiplo60.
+Predominio de lista normativa sobre conteo13 erróneo de mi primer aviso corregido
+en fuente íntegra posterior al padre. Firma sobre bytesCPv2/MESSAGEoriginales con
+públicaesperada externa; no verificación de reto/CAS/aplicación por firma.
+Sin wiringórdenes/T01routing/STATE/ACK/seqreservado/enforcement; CP1/fixtures/AUTH/
+PAIR/esquemas previos intactos. NORMALrevocared10s y OFFLINElocalexplícito siguen,
+sin activarALLOWremotooffline por texto viejo del draft. No APK/ADB/QRreal/red/push/deploy.
+
+Ejecutados focal7/7correctos y `pnpm run verificar` completo: frozeninstall/check/
+build/**153tests0fallos0omitidos**, esquemaCP1 28ejemplos/13contraejemplos y diez
+vectores/78comprobaciones. Log temporal cp2-o01-verificar.log. Código puro de
+representación/criptografía, no hijo aplicando órdenes ni control remoto disponible.
+
 ## CP2-I01 cerrado — cruce local bidireccional verificado — 2026-10-15
 
 Revisadas evidencias completas INTEROP01 de padre/hijo. Ambas JVM reportan aceptar

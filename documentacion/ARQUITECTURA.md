@@ -29,6 +29,11 @@ Sin casos de uso construidos en adaptadores ni cambios de flujo CP1. El creador 
 comparte únicamente la superficie upgrade/detener/maximoConexiones y conserva
 controladores health/keepalive. Tests de arquitectura incluyen la nueva entrada.
 
+CP2-O01 mantiene DTOs de órdenes en aplicación y codec/criptografía MESSAGE en
+el borde protocol/cp2, schema parcial aparte. Sólo valida representaciones/firmas,
+no decide permisos ni llama al enforcer, writer o almacenamiento del hijo. Sin
+composición nueva o cambios al transporte AUTH-only por esta unidad.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

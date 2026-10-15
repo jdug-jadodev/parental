@@ -1,5 +1,31 @@
 # Coordinación central — padre, hijo y relay
 
+## Reanudación efectiva y CP2-O01 — 2026-10-15
+
+Propietario señaló que nadie trabajaba tras anuncio del siguiente bloque. Se
+reconoció que no se había asignado ese bloque: un anuncio no activa sesiones.
+Comprobados OpenAPI/bandejas vacías, HIJO-AUTH01 y PADRE-ORD01 admitidas con
+queue/resume=true en sesiones existentes. Consulta **GET /api/session/active**
+confirmó las tres sesiones running (padre/hijo/Render). El campo outcome=succeeded
+del listado raíz describe un resultado anterior, no sustituye estado activo.
+
+HIJO-AUTH01 implementa codec/estado cliente/firmante existente para CHILD, snapshot
+PairAndroidverificado sin generar identidad/autorizar uso ni iniciar red; fuente
+schemaAUTH íntegra suministrada antes, con pruebas e interop Node existentes.
+PADRE-ORD01 implementa codec/firmanteSYNC-SET_POLICY y guardas sin habilitar envío
+porPAIRpendiente/AUTH_OK. Campos estables draft75eb56e§§2–5; fuente schemaORD íntegra
+enviada durante la misma unidad conresume=false. Corrección de conteo propia: lista
+SET_POLICY contiene12campos, no13 del primer aviso; SYNC6. No cambiar la lista.
+Sin ADB/instalación/ceremonia/órdenes reales/despliegue ni nueva tarea automática.
+
+Render CP2-O01 implementado: schema/DTO/codec/firmas MESSAGE para PARENT SYNC_REQUEST
+y SET_POLICY, seq/revisión64/rango/nonce32/acciones LOCK-ALLOW-ALLOW_FOR/duración
+minutos1..1440/sinLOCK_FOR. Requisitos posteriores NORMALred10s/excepciónlocal
+siguen vigentes, no incorporar semánticaofflineantigua del draft. Siete tests nuevos;
+verificación completa153correctos. SinSTATE/ACK/routing/enforcement; T01 aún rechaza
+órdenes. Resultados móviles de estas unidades pendientes; no sumar admisión como
+resultado de implementación ni pruebas físicas.
+
 ## CP2-I01 cerrado — devoluciones JVM verificadas por Node — 2026-10-15
 
 Leídas evidencias completas PADRE-INTEROP01/HIJO-INTEROP01 y relevos. Reportan
