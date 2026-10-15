@@ -167,3 +167,20 @@ a11 del relevo padre es error de conteo, no motivo para modificar contrato.
 Enviado mismo vector público íntegro a ambas IAs para pruebas JVM y generación
 de vectores públicos JVM de vuelta. Hasta verificar esas devoluciones, esto sólo
 acredita Node→Node; no interoperabilidad JVM, teléfonos o vínculo operativo.
+
+### Devoluciones JVM verificadas — 2026-10-15
+
+Se revisaron ambas evidencias INTEROP01 y se ejecutó el verificador anterior sobre
+los dos archivos públicos JVM entregados, sin regenerarlos ni operar las apps:
+
+- Padre: oferta/PAIR/ambos AUTH aceptados en Node; SHA256 del archivo
+  `fb830c79349479eca0e7ee5392c05d5a32ca62157af7e00fd1d890dcf2c65d4b` comprobado.
+- Hijo: oferta/PAIR aceptados en Node; SHA256 del archivo
+  `fa04fc863d7bace67b5036751e04865e2e6d90047d333252e4a70d21f5b36bf6` comprobado.
+  AUTH no evaluado/implementado por el hijo en este bloque.
+
+Node→JVM está reportado con codecs propios en las evidencias de cada app;
+JVM→Node fue ejecutado aquí. Queda acreditado el cruce criptográfico local de esas
+muestras públicas, no UI/IO Android/Keystore real, oferta vigente, consentimiento,
+recuperación, vínculo real, clientes conectados o control remoto. No se cambiaron
+codecs/esquemas para lograr la compatibilidad ni se instalaron APKs.

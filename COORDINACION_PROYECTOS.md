@@ -1,5 +1,26 @@
 # Coordinación central — padre, hijo y relay
 
+## CP2-I01 cerrado — devoluciones JVM verificadas por Node — 2026-10-15
+
+Leídas evidencias completas PADRE-INTEROP01/HIJO-INTEROP01 y relevos. Reportan
+Node→JVM con codecs propios: padre oferta/PAIR/AUTHambosroles (4tests nuevos,
+34core+177app=211distintos); hijo oferta/PAIR (5nuevos,433debug/378release,
+AUTH_NO_EVALUADO_HIJO). No reejecutados en Render ni sumados como pruebas propias.
+
+Ejecutado por Render `pnpm exec tsx test/soporte/verificar-vector-cp2.ts` contra
+cada ruta explícita `pruebas/interop_cp2_jvm_publica.json`: padre oferta/PAIR/2AUTH
+correctos; hijo oferta/PAIR correctos sinAUTH. Archivos sólo leídos, sin regenerar:
+SHA256padre fb830c79349479eca0e7ee5392c05d5a32ca62157af7e00fd1d890dcf2c65d4b,
+SHA256hijo fa04fc863d7bace67b5036751e04865e2e6d90047d333252e4a70d21f5b36bf6,
+comprobados contra evidencias. Cruce bidireccional local de muestras públicas
+confirmado para esos formatos, no identidad humana ni autoridad real.
+
+Sin APK/ADB/QRreales/ceremonia/alta/despliegue. APKs MAINintegrados aún no instalados.
+Pendientes: AUTHhijo, confirmación/reconciliación del vínculo pendiente en padre,
+recuperaciónCP2, contratoMESSAGE/STATE actualizado, órdenes/transporte móvil y
+endpointTLSreal coordinado. No añadir recibos/schema unilateralmente ni guardar
+vínculo real contra origen de laboratorio para aparentar remoto listo.
+
 ## Integración móvil entregada; cruce CP2-I01 asignado — 2026-10-15
 
 Leídas evidencias completas PADRE-PAIR02 e HIJO-PAIR03: MAIN firma/almacenamiento

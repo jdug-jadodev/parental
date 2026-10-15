@@ -1,5 +1,26 @@
 # Estado del servidor separado
 
+## CP2-I01 cerrado — cruce local bidireccional verificado — 2026-10-15
+
+Revisadas evidencias completas INTEROP01 de padre/hijo. Ambas JVM reportan aceptar
+la fuente Node exacta967ae05a…a964ec con codecs/cripto reales. Padre4tests nuevos,
+34core+177app=211distintos; hijo5nuevos,433debug/378release. Sólo reportados, no
+ejecutados aquí. Hijo noAUTH en esta unidad; no equivaler variantes a casos nuevos.
+
+Ejecutados aquí dos comandos `pnpm exec tsx test/soporte/verificar-vector-cp2.ts`
+con rutas públicas explícitas de las devoluciones JVM: padre devuelve
+oferta=true/pair=true/firmasAuth=2; hijo oferta=true/pair=true/firmasAuth=0.
+SHA256 de archivos cotejados por Node contra evidencia: padre fb830c79349479eca0e7ee5392c05d5a32ca62157af7e00fd1d890dcf2c65d4b;
+hijo fa04fc863d7bace67b5036751e04865e2e6d90047d333252e4a70d21f5b36bf6.
+Sin regenerar muestras ni acceder a privadas/identidades/teléfonos. Cruce local
+Node→JVM reportado y JVM→Node propio correcto, no ceremonia o control remoto.
+
+Sólo documentación propia en este cierre; no suite/build nuevo ni cambios a
+codecs/esquemas/CP1/apps. Última suite propia146correctos mantiene su procedencia,
+no se suman estos dos comandos como nuevos casos de esa suite. Sin ADB/APK/QRreal/
+vínculo/órdenes/push/despliegue. Pendientes AUTHhijo/recuperación/reconciliación/
+contratoMESSAGE-STATE/transporte móvil y endpointTLSantes de integración remota.
+
 ## CP2-I01 local y cruce JVM pendiente — 2026-10-15
 
 Revisadas evidencias completas PADRE-PAIR02/HIJO-PAIR03, entregas MAIN de firma/
