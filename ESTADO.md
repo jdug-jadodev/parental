@@ -18,6 +18,14 @@ Especificación de ejecución documentacion/ENSAYO_C8_NODE_JVM.md suministrada
 OpenAPI/bandejas previas comprobadas; admisiones queue/resumetrue y running de
 ambas confirmados. Ejecución/resultadosJVM finales todavía no recogidos.
 
+Después recogida entregaPADRE-C8-X01:1test opt-in ejecutado0fallos/errores/omitidos,
+WSSNodeREAL/TLSestricto, control/transporte/codec/preparador/writerJVM reales con
+adulto/discofalsos, nodoHijoSINTÉTICO. HashPAIRoriginal Node/JVMidéntico
+rJ7mi56D-qJF-iHGKrX2pk9IAz0UB0qIQLMqvTQAYZw y DONE/exitNode0. Paseordinario257
+correctos excluye cruceavisando si falta ruta, no contabilizado como cruce.
+Sin nueva compilaciónAPK/instalación/Androidreal. Reporte leído desde evidencia
+propia del padre, no reejecutado desde Render. Hijo aún no cerrado/recogido.
+
 Preparado crearServidorEncuentroC8Render y selectorCLIc8 explícito, opt-inflagtrue
 obligatorio/ventanaentera60000..600000/producciónRender/origenautomático igual/
 sin configuraciónfamilia. VariablesC8 fuera de perfil abortan. Sin fallbackanónimo,
@@ -32,8 +40,14 @@ añadido escenario cierreventanareal: focalperfil7correctos. Primer verificar215
 correctos, falloETIMEDOUT en pruebaarranqueC00(tsx/proceso,5s) bajo paralelismo de
 Gradles/suite. Focalarranque posterior2correctos≈0.5scadauno, sin cambiar barrera.
 Acotado test-concurrency=4 en script pnpm, sin aumentar timeout/omitir asserts;
-se conserva paralelismo efectivo con móviles. Suite final relanzada y en curso,
-no afirmar conteo final hasta resultado. No cambiosremotos, push, deploy,
+se conserva paralelismo efectivo con móviles. Suite final completa CORRECTA:
+217tests/0fallos/0omitidos, esquema28/13 y vectores10/78, installfrozen/check/build
+incluidos. Además proceso real dist/src/main.js con RenderSIMULADO arrancóC8,
+keepalive200/health503 y PoPPARENT→READY, stderrvacío; cerrado al terminar. No TLS
+público/identidadfamiliar por ese proceso. Bloque servidor6165702 y registrocierre.
+API de coordinación al cerrar: padreinactivo con cruceaprobado, hijo sigue running,
+fuente CruceNodeC8Test.kt nueva, sin informe/resultadocerrado todavía. No afirmar
+crucehijo ni dosJVMsimultáneos aprobados. No cambiosremotos, push, deploy,
 APK nuevos por Render, ADB/teléfonos o efectosAndroid por esta tarea.
 
 ## C8-I01 — implementación del encuentro local y móviles en paralelo — 2026-10-15

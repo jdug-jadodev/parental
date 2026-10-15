@@ -13,6 +13,8 @@ HTTP mantiene sólo health/keepalive y health503 incluso en perfilC8 público.
 No se habilitó ningún socket nuevo en Render, bootstrap o `cp.v2`.
 No confundir READY/SENT con pareja guardada ni orden aplicada. Ambas apps cerraron
 su integración y generaron APK nuevas sin instalar; cruceNodeJVM en coordinación.
+Verificación actual del servidor:217tests correctos, esquemaCP1 y vectores intactos.
+Primer crucePARENTJVM↔Node por WSS local aprobado; resultadoCHILDJVM pendiente.
 
 Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps padre e hijo no forman
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`

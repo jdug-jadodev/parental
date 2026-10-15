@@ -16,6 +16,14 @@ por rol JVM con contraparteNode sintética, no dosAPKs físicas o Keystore real.
 No debilitar DNS/TLS/autoridad reales para localhost; puenteTEST si wrapperAndroid
 no inyectable, con límites explícitos y ejecucióndeprueba opt-in real, no UP-TO-DATE.
 
+Entrega PADRE-C8-X01 recogida:1cruce PARENTJVM↔hijoNodeSINTÉTICO/servidorNodeREAL
+WSS/TLSestricto, Gradletest ejecutado0fallos y procesoNodeDONE/exit0. HashPAIR
+idéntico Node/JVM rJ7mi56D-qJF-iHGKrX2pk9IAz0UB0qIQLMqvTQAYZw. Control/transporte/
+codec/writer-readbackJVM reales; disco/adulto/Keystore físicos NO probados. Padre
+quedaPENDING,noACTIVO. Paseordinario257correctos excluye cruce sin ruta con aviso.
+Evidencia padre pruebas/EVIDENCIA_PADRE_C8_X01.md; no repetir APK/build/instalación.
+Cruce hijo todavía pendiente de recoger, no deducirlo del éxito padre.
+
 Perfil servidor C8 público preparado en código, no habilitado remotamente:
 RELAY_MODEc8/flagtrue/ventana60..600s/entornoRender-origen válido/sin pareja; modo
 local y bootstrap conservan barreras. Globaldeadlineacorta encuentros/socket y
@@ -23,7 +31,11 @@ cierra1012, health503/keepalive200, nada de órdenes o AUTHfamiliar abierto.
 Plantilla flagfalse aborta intencionalmente hasta habilitación específica futura.
 Reinicio con flagtrue rearma ventana; propietario debe desarmar tras ensayo.
 Check/build correctos,33focales iniciales y7perfilposteriores correctos; suite
-completa en curso. Resultado de cruce JVM todavía pendiente; no afirmar aprobado.
+final217correctos/esquema28-13/vectores10-78. Primerapasa215/216conETIMEDOUT5s de
+arranqueCPU, focalarranque2correctos y runneracotadoa4sin ampliar timeout/asserts.
+ProcesoCLIcompilado con RenderSIMULADO confirmó keepalive200/health503/PoPREADY,
+sin TLS público. ÚltimaAPI: padreinactivo/entregacerrada, hijo sigue running con
+testCruceNodeC8Test.kt nuevo, resultado de ese rol todavía pendiente de recoger.
 Sin ADB/instalar/push/deploy/variablesremotas ni cambios CP1/CP2/R1.
 
 ## C8-I01 — implementación real iniciada en paralelo — 2026-10-15

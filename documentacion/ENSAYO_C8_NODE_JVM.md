@@ -48,6 +48,13 @@ sólo asumirla desde UP-TO-DATE o que el test fue omitido sin ruta.
 
 ## Perfil público
 
+Resultado PADRE-C8-X01 recogido:1test JVM ejecutado con arnésNodeREAL,
+WSS/TLSestricto, PAIRoriginal/hash idénticos y readback antes de envío;
+NodeDONE/exit0. Hash públicoPAIR `rJ7mi56D-qJF-iHGKrX2pk9IAz0UB0qIQLMqvTQAYZw`.
+Evidencia propia padre pruebas/EVIDENCIA_PADRE_C8_X01.md, no reejecutada desde Render.
+Adulto/disco de test falsos, sin Android/Keystore real. Rolhijo en curso al cerrar
+preparación de servidor; no dar por aprobado ni inferir dosapps físicas por esto.
+
 Se prepara separadamente en servidor, desactivado por defecto y sin publicar.
 No usar endpointreal bootstrap para estos ensayos. No instalar APK nuevas ni
 usar identidades/códigos adultos/teléfonos reales; requieren autorización posterior.

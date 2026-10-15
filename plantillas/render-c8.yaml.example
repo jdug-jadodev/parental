@@ -4,7 +4,8 @@ services:
     runtime: node
     plan: free
     region: oregon
-    autoDeployTrigger: off
+    numInstances: 1
+    autoDeployTrigger: "off"
     buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build
     startCommand: corepack pnpm start
     healthCheckPath: /keepalive

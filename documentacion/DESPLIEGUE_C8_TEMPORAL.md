@@ -41,6 +41,8 @@ copiarla NO produce un servidor de enrolamiento activo y fallará cerrado hasta
 habilitación deliberada. No aplicar plantillas como si fueran cambios remotos.
 
 Build: `corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build`.
+Una sola instancia: encuentros y tombstones viven sólo en RAM, sin registro común
+entre réplicas. No escalar horizontalmente este piloto.
 Start: `corepack pnpm start`. Nunca `corepack enable` en Render.
 Health check de plataforma: **`/keepalive`**, respuesta200alive sólo proceso.
 **`/healthz` permanece503** porque el relay familiar no está operativo. No ocultar
