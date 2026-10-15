@@ -1,15 +1,18 @@
 # Control parental — servidor Render independiente
 
-## C8 — alternativa sin cámara en implementación local
+## C8 — alternativa sin cámara, perfil público preparado sin publicar
 
 Contrato separado [C8/1](contrato-c8/CONTRATO_C8_1.md): código temporal de8
 caracteres alfanuméricos, un uso y encuentro en RAM; conserva firmas/guardas CP2.
 Implementados codec/posesión provisional, coordinador y WebSocket local `/pair`,
-`c8.v1`, con composición explícita `crearServidorEncuentroC8Local`. No admite
-producción ni se selecciona desde CLI. HTTP mantiene sólo health/keepalive y
-health503. No habilita ningún socket nuevo en Render, bootstrap o `cp.v2`.
-No confundir READY/SENT con pareja guardada ni orden aplicada. Ambas apps están
-implementando su integración; las APK instaladas todavía no contienen C8.
+`c8.v1`, con composición explícita `crearServidorEncuentroC8Local` que sigue
+bloqueada en producción. Perfil público SEPARADO preparado: `RELAY_MODE=c8` más
+opt-in explícito y ventana60..600s, sólo en Render validado, sin claves familiares
+o acceso al relay. Guía [C8 temporal](documentacion/DESPLIEGUE_C8_TEMPORAL.md).
+HTTP mantiene sólo health/keepalive y health503 incluso en perfilC8 público.
+No se habilitó ningún socket nuevo en Render, bootstrap o `cp.v2`.
+No confundir READY/SENT con pareja guardada ni orden aplicada. Ambas apps cerraron
+su integración y generaron APK nuevas sin instalar; cruceNodeJVM en coordinación.
 
 Servidor Node.js 24 / TypeScript con `src/` y paquete pnpm en la raíz. Las apps padre e hijo no forman
 parte de este proyecto y no se modifican desde aquí. CP/1 en `compartido/`
@@ -72,6 +75,8 @@ Requiere Node 24 y pnpm 10.0.0 (fijado en `packageManager`). Instala con
 `pnpm install --frozen-lockfile`, chequea TypeScript, compila, ejecuta tests, valida ejemplos
 contra el esquema y verifica vectores criptográficos. Como alternativa Windows
 se conserva `powershell -File scripts/verificar.ps1` desde la raíz.
+El runner limita a4archivos de test simultáneos para compartir recursos con las
+pruebas móviles paralelas sin ampliar timeouts o eliminar comprobaciones.
 Para arrancar la base local: `pnpm run build` y `pnpm start`.
 
 El único lockfile activo es `pnpm-lock.yaml`, importado del anterior lockfile npm

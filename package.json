@@ -12,7 +12,7 @@
     "dev": "tsx watch src/main.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/src/main.js",
-    "test": "tsx --test test/*.test.ts",
+    "test": "tsx --test --test-concurrency=4 test/*.test.ts",
     "check": "tsc --noEmit -p tsconfig.json",
     "test:esquema": "node scripts/verificar-esquema.mjs",
     "test:carga": "node --expose-gc test/soporte/carga-relay.mjs",

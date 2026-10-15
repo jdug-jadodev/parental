@@ -34,9 +34,11 @@ export class CoordinarEncuentroC8 implements CoordinarEncuentroEntrada {
   private intentos = 0;
 
   constructor(private readonly reloj: RelojSalida, private readonly entropia: EntropiaEncuentroSalida,
-    private readonly verificar: VerificacionEncuentroSalida, private readonly origen: string) {}
+    private readonly verificar: VerificacionEncuentroSalida, private readonly origen: string,
+    private readonly limiteServidor = Infinity) {}
 
   abrir(): SalidaEncuentro {
+    if (this.reloj.ahora() >= this.limiteServidor) throw new Error('Ventana C8 cerrada');
     if (this.participantes.size >= 18) throw new Error('Cupo de encuentro agotado');
     const id = this.entropia.identificador();
     if (this.participantes.has(id)) throw new Error('Identificador repetido');
@@ -48,12 +50,12 @@ export class CoordinarEncuentroC8 implements CoordinarEncuentroEntrada {
   ejecutar(id: string, mensaje: EntradaEncuentro): SalidaEncuentro[] {
     const p = this.participantes.get(id);
     const ahora = this.reloj.ahora();
-    if (!p || ahora >= p.inicio + 120000) throw new Error('Sesión C8 no vigente');
+    if (!p || ahora >= Math.min(p.inicio + 120000, this.limiteServidor)) throw new Error('Sesión C8 no vigente');
     if (mensaje.tipo === 'AUTH') {
       if (p.pruebaConsumida || ahora >= p.inicio + 10000) throw new Error('Prueba C8 no vigente');
       p.pruebaConsumida = true;
       const identidad = this.verificar.prueba(mensaje.carga!, mensaje.firma!, id, p.nonce, this.origen);
-      if (this.reloj.ahora() >= p.inicio + 10000) throw new Error('Prueba C8 caducada');
+      if (this.reloj.ahora() >= Math.min(p.inicio + 10000, this.limiteServidor)) throw new Error('Prueba C8 caducada');
       p.identidad = identidad;
       return [this.salida(id, 'READY')];
     }
@@ -62,7 +64,7 @@ export class CoordinarEncuentroC8 implements CoordinarEncuentroEntrada {
     if (mensaje.tipo === 'PUBLISH') {
       if (p.identidad.rol !== 'CHILD' || p.ocupado) throw new Error('Publicación no autorizada');
       if (!Number.isInteger(mensaje.plazo) || mensaje.plazo! < 1 || mensaje.plazo! > 120000) throw new Error('Plazo inválido');
-      const limite = p.inicio + mensaje.plazo!;
+      const limite = Math.min(p.inicio + mensaje.plazo!, this.limiteServidor);
       if (ahora >= limite || this.encuentros.size >= 16) return [this.salida(id, 'UNAVAILABLE', {}, true)];
       const oferta = this.verificar.oferta(mensaje.carga!, p.identidad.publica);
       let codigo: string | undefined;
@@ -132,7 +134,7 @@ export class CoordinarEncuentroC8 implements CoordinarEncuentroEntrada {
     const ahora = this.reloj.ahora();
     const salidas: SalidaEncuentro[] = [];
     for (const [id, p] of this.participantes) {
-      if (ahora >= p.inicio + (p.identidad ? 120000 : 10000)) salidas.push(...this.cerrar(id));
+      if (ahora >= Math.min(p.inicio + (p.identidad ? 120000 : 10000), this.limiteServidor)) salidas.push(...this.cerrar(id));
     }
     for (const [codigo, e] of this.encuentros) {
       if (ahora < e.limite) continue;

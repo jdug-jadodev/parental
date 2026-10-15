@@ -19,8 +19,15 @@ export class WebSocketEncuentroC8Adapter {
   private deteniendo = false;
 
   constructor(private readonly coordinar: CoordinarEncuentroEntrada, private readonly codec: CodecEncuentroC8,
-    private readonly transporte: WebSocketServer, private readonly upgrades: LimiteUpgradesAdapter) {
-    this.revision = setInterval(() => this.emitir(this.coordinar.limpiar()), 100);
+    private readonly transporte: WebSocketServer, private readonly upgrades: LimiteUpgradesAdapter,
+    private readonly alcance: 'LOCAL' | 'RENDER' = 'LOCAL', private readonly limitePublico?: number) {
+    if (alcance === 'RENDER' && (!Number.isFinite(limitePublico) || limitePublico! <= performance.now())) {
+      throw new Error('C8 público requiere ventana finita vigente');
+    }
+    this.revision = setInterval(() => {
+      if (this.limitePublico !== undefined && performance.now() >= this.limitePublico) this.detener();
+      else this.emitir(this.coordinar.limpiar());
+    }, 100);
     this.revision.unref();
   }
 
@@ -30,8 +37,9 @@ export class WebSocketEncuentroC8Adapter {
     socket.once('close', () => clearTimeout(limite));
     socket.on('error', () => socket.destroy());
     const rechazar = (codigo: number): void => { socket.end(`HTTP/1.1 ${codigo} Rejected\r\nConnection: close\r\nContent-Length: 0\r\n\r\n`); };
+    if (this.limitePublico !== undefined && performance.now() >= this.limitePublico) this.detener();
     if (this.deteniendo) { rechazar(503); return; }
-    if (!(socket instanceof Socket) || socket.remoteAddress !== '127.0.0.1') { rechazar(403); return; }
+    if (!(socket instanceof Socket) || this.alcance === 'LOCAL' && socket.remoteAddress !== '127.0.0.1') { rechazar(403); return; }
     if (solicitud.method !== 'GET' || solicitud.url !== '/pair' || solicitud.headers.origin !== undefined ||
       solicitud.headers['sec-websocket-protocol'] !== 'c8.v1' ||
       solicitud.rawHeaders.length > 64) { rechazar(400); return; }
@@ -49,6 +57,7 @@ export class WebSocketEncuentroC8Adapter {
     this.deteniendo = true;
     clearInterval(this.revision);
     for (const id of this.sockets.keys()) this.cerrar(id, 1012);
+    this.coordinar.limpiar();
     this.transporte.close();
   }
 

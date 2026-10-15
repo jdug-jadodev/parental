@@ -1,5 +1,25 @@
 # Arquitectura del servidor
 
+## C8-P01/X01 — perfil público preparado y arnés de cruce
+
+PerfilC8Render separado del local, compuesto en config/dependencias.ts tras validar
+modoC8/opt-in/ventana/producción/Render/origen automático y ausencia de pareja.
+Sin convivencia con cp.v2. CLI sólo lo selecciona explícitamente, no por defecto;
+variables de habilitación fuera de ese perfil abortan. Adaptador recibe alcance
+RENDER y deadline monotónico finito, no confianza en cabeceras de proxy. Deadline
+global acorta códigos/socket y cierra1012; keepalive200/health503 permanecen, no
+se usa EstadoRelayCp2Adapter para aparentar relay familiar disponible.
+
+Prueba de posesión provisional acredita clave declarada, no familia/adulto. La
+ventana es por proceso; restart con flagtrue la rearma, no hay cierre durable.
+Guía documentacion/DESPLIEGUE_C8_TEMPORAL.md y plantilla desactivada por defecto.
+Ningún perfil nuevo desplegado o configurado remotamente por esta preparación.
+
+Arnés test/soporte/interop-c8.mjs usa dist real y contraparteNode efímera con
+WSS/TLS local estricto. Contrato de pipes en documentacion/ENSAYO_C8_NODE_JVM.md.
+Certificado/privadaTLS sólo RAMviaPIPE de tests; no logs/archivos con privadas.
+Cada JVM prueba contra Node, no se presenta como dos apps/dispositivos físicos.
+
 ## C8-I01 — transporte de encuentro local separado
 
 Contrato C8/1 en contrato-c8/CONTRATO_C8_1.md conserva documentos/firma CP2 internos

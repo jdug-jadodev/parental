@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: parental
+    runtime: node
+    plan: free
+    region: oregon
+    autoDeployTrigger: off
+    buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build
+    startCommand: corepack pnpm start
+    healthCheckPath: /keepalive
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: error
+      - key: RELAY_MODE
+        value: c8
+      - key: C8_ENROLLMENT_ENABLED
+        value: "false"
+      - key: C8_ENROLLMENT_WINDOW_MS
+        value: "600000"
+      - key: PUBLIC_ORIGIN
+        sync: false

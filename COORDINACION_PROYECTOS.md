@@ -1,5 +1,31 @@
 # Coordinación central — padre, hijo y relay
 
+## C8-P01/X01 — autorizado preparar perfil y cruce local — 2026-10-15
+
+Propietario responde «sí, avancemos» a prueba cruzadalocal y preparaciónpública
+SIN instalar/desplegar. Recogidos cierres móviles C8-I01: padre292tests distintos/
+MAINtransporteTLSsimulado y APK3b5351b6…a0b938; hijo210core/506debug/451release/
+MAINcompilado y APK6221f3f5…250751. Archivos APK cotejados por Get-FileHash desde
+Render: coinciden con entregas, NO instalación o pruebaAndroid. R1intacto.
+
+Arnés Node real compilado test/soporte/interop-c8.mjs, protocolo de pipes en
+documentacion/ENSAYO_C8_NODE_JVM.md. Build correcto antes de enviar tareas.
+PADRE/HIJO-C8-X01 admitidas queue/resumetrue en sesiones raíz existentes tras
+OpenAPI/bandejasinactivas/vacías; API posterior confirmó ambas running. UNA prueba
+por rol JVM con contraparteNode sintética, no dosAPKs físicas o Keystore real.
+No debilitar DNS/TLS/autoridad reales para localhost; puenteTEST si wrapperAndroid
+no inyectable, con límites explícitos y ejecucióndeprueba opt-in real, no UP-TO-DATE.
+
+Perfil servidor C8 público preparado en código, no habilitado remotamente:
+RELAY_MODEc8/flagtrue/ventana60..600s/entornoRender-origen válido/sin pareja; modo
+local y bootstrap conservan barreras. Globaldeadlineacorta encuentros/socket y
+cierra1012, health503/keepalive200, nada de órdenes o AUTHfamiliar abierto.
+Plantilla flagfalse aborta intencionalmente hasta habilitación específica futura.
+Reinicio con flagtrue rearma ventana; propietario debe desarmar tras ensayo.
+Check/build correctos,33focales iniciales y7perfilposteriores correctos; suite
+completa en curso. Resultado de cruce JVM todavía pendiente; no afirmar aprobado.
+Sin ADB/instalar/push/deploy/variablesremotas ni cambios CP1/CP2/R1.
+
 ## C8-I01 — implementación real iniciada en paralelo — 2026-10-15
 
 Corregido seguimiento tras aviso del propietario: ambas revisionesR0 ya estaban

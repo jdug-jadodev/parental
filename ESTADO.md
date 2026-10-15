@@ -1,5 +1,41 @@
 # Estado del servidor separado
 
+## C8-P01/X01 — perfil temporal preparado y cruce JVM iniciado — 2026-10-15
+
+Autorización del propietario: prueba cruzada LOCAL y preparación perfilpúblico,
+sin instalar/subir/desplegar. Recogidos cierres C8-I01 padre/hijo y comprobados
+APKdebug locales SHA2563b5351b631ab3e9b0d7a3ac2d9b94036b44b551ea5f0a10b1f50c642a2a0b938/
+6221f3f52a7bdfbe4a4da19627c00821598fb2b2f9a59989a82e846e28250751.
+No nueva instalación o verificación física. Reportes móviles completos en sus
+relevos; contraparte TLS anterior simulada, no Node. R1/CP1/CP2 intactos.
+
+Arnés test/soporte/interop-c8.mjs usa dist real y WSSloopback, TLSnormalCAefímera
+RAMviaPIPE, prueba de posesión y PAIRoriginal verificados; counterpartNodeficticia
+porrol. Nada de privadas/códigosreales en archivos/log/chat. Límite45s/limpieza y
+fallos genéricos; no ofrece endpointreal. node--check correcto y build previo.
+Especificación de ejecución documentacion/ENSAYO_C8_NODE_JVM.md suministrada
+íntegra a sesiones raíz padre/hijo para UNA pruebaC8-X01 opt-in local cada una.
+OpenAPI/bandejas previas comprobadas; admisiones queue/resumetrue y running de
+ambas confirmados. Ejecución/resultadosJVM finales todavía no recogidos.
+
+Preparado crearServidorEncuentroC8Render y selectorCLIc8 explícito, opt-inflagtrue
+obligatorio/ventanaentera60000..600000/producciónRender/origenautomático igual/
+sin configuraciónfamilia. VariablesC8 fuera de perfil abortan. Sin fallbackanónimo,
+sin quitarAUTHcp.v2, sin nuevas rutasHTTP. ScopeRender sólo en composiciónvalidada;
+local conserva127.0.0.1/rechazoproducción. Globaldeadlineacorta encuentros, timer
+cierra1012 y rechaza503, healthsigue503/keepalive200. No disponibilidadrelay falsa.
+Reinicio rearma ventana si flagtrue sigue configurada; documentado desarmado futuro.
+Guía documentacion/DESPLIEGUE_C8_TEMPORAL.md y plantilla flagfalse de fallocerrado.
+
+Ejecutados check/build correctos; focalarquitectura/C8/perfil33correctos. Después
+añadido escenario cierreventanareal: focalperfil7correctos. Primer verificar215/216
+correctos, falloETIMEDOUT en pruebaarranqueC00(tsx/proceso,5s) bajo paralelismo de
+Gradles/suite. Focalarranque posterior2correctos≈0.5scadauno, sin cambiar barrera.
+Acotado test-concurrency=4 en script pnpm, sin aumentar timeout/omitir asserts;
+se conserva paralelismo efectivo con móviles. Suite final relanzada y en curso,
+no afirmar conteo final hasta resultado. No cambiosremotos, push, deploy,
+APK nuevos por Render, ADB/teléfonos o efectosAndroid por esta tarea.
+
 ## C8-I01 — implementación del encuentro local y móviles en paralelo — 2026-10-15
 
 Propietario corrige «no lo están revisando»: comprobadaAPIinactiva y recogidas

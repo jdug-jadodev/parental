@@ -396,3 +396,18 @@ test('C8 local: cierre controlado usa1012 en ambos roles de un encuentro', async
   assert.equal(await child.cierre, 1012);
   assert.equal(await parent.cierre, 1012);
 });
+
+test('C8: ventana global acorta códigos y sockets sin ampliar por AUTH o CLAIM', () => {
+  let ahora = 1000;
+  const caso = adaptar(new CoordinarEncuentroC8({ ahora: () => ahora }, new EntropiaEncuentroAdapter(), verificacion, origen, 10000));
+  const child = caso.abrir(); caso.ejecutar(child.connectionId, autenticar(child, 'CHILD'));
+  const respuesta = caso.ejecutar(child.connectionId, { v: 1, kind: 'PUBLISH', offerB64: b64(oferta), ttlMs: 120000 })[0]!.mensaje;
+  if (respuesta.kind !== 'CODE') throw new Error('Falta código');
+  assert.equal(respuesta.remainingMs, 9000);
+  const parent = caso.abrir(); caso.ejecutar(parent.connectionId, autenticar(parent, 'PARENT'));
+  caso.ejecutar(parent.connectionId, { v: 1, kind: 'CLAIM', code: respuesta.code });
+  ahora = 10000;
+  assert.throws(() => caso.abrir());
+  assert.throws(() => caso.ejecutar(parent.connectionId, { v: 1, kind: 'SEND_PAIR', pairB64: aceptar() }));
+  assert.equal(caso.limpiar().length, 2);
+});

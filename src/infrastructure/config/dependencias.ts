@@ -48,6 +48,7 @@ import { VerificacionEncuentroAdapter } from '../adapter/verificacion-encuentro.
 import { EntropiaEncuentroAdapter } from '../adapter/entropia-encuentro.adapter.js';
 import { WebSocketEncuentroC8Adapter } from '../adapter/websocket-encuentro-c8.adapter.js';
 import { origenHttps } from '../adapter/protocol/formatos.js';
+import { validarPerfilEncuentroRender } from './perfil-encuentro-render.config.js';
 
 export function crearServidorEncuentroC8Local(valores: ConfiguracionRequestDto, tls?: TlsLocal): Server {
   if (valores.RELAY_MODE !== 'c8-local' || validarEntorno(valores.NODE_ENV) === 'production') {
@@ -55,16 +56,26 @@ export function crearServidorEncuentroC8Local(valores: ConfiguracionRequestDto, 
   }
   const origen = valores.PUBLIC_ORIGIN ?? '';
   origenHttps(origen);
+  return componerEncuentroC8(origen, tls);
+}
+
+export function crearServidorEncuentroC8Render(valores: ConfiguracionRequestDto): Server {
+  const ventana = validarPerfilEncuentroRender(valores);
+  return componerEncuentroC8(valores.PUBLIC_ORIGIN!, undefined, 'RENDER', ventana);
+}
+
+function componerEncuentroC8(origen: string, tls?: TlsLocal, alcance: 'LOCAL' | 'RENDER' = 'LOCAL', ventana?: number): Server {
   const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
   const pairCodec = new CodecVinculacionCp2(readFileSync(new URL(`${raiz}contrato-cp2/vinculacion.schema.json`, import.meta.url)));
   const codec = new CodecEncuentroC8();
   const reloj = new RelojAdapter();
+  const limite = ventana === undefined ? undefined : reloj.ahora() + ventana;
   const coordinar = new CoordinarEncuentroC8(reloj, new EntropiaEncuentroAdapter(),
-    new VerificacionEncuentroAdapter(codec, pairCodec, new CriptografiaVinculacionCp2(pairCodec)), origen);
+    new VerificacionEncuentroAdapter(codec, pairCodec, new CriptografiaVinculacionCp2(pairCodec)), origen, limite);
   const transporte = new WebSocketServer({ noServer: true, maxPayload: 16384, perMessageDeflate: false,
     autoPong: false, maxFragments: 64, maxBufferedChunks: 128,
     handleProtocols: (protocolos) => protocolos.size === 1 && protocolos.has('c8.v1') ? 'c8.v1' : false });
-  const websocket = new WebSocketEncuentroC8Adapter(coordinar, codec, transporte, new LimiteUpgradesAdapter(reloj.ahora()));
+  const websocket = new WebSocketEncuentroC8Adapter(coordinar, codec, transporte, new LimiteUpgradesAdapter(reloj.ahora()), alcance, limite);
   const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
   try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
   catch (error) { websocket.detener(); throw error; }
