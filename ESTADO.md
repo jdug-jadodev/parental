@@ -1,5 +1,33 @@
 # Estado del servidor separado
 
+## C8-R0 — alternativa por código8 solicitada, en coordinación — 2026-10-15
+
+Propietario reporta pantalla manchada que impide QR y pide ocho caracteres
+alfanuméricos. Se pausa ensayoQR; propuesta documentacion/VINCULACION_CODIGO8_PROPUESTA.md.
+No existe esta opción en APK actuales ni servidor; requiere código/artefactos
+nuevos y despliegue posterior autorizado, sin prometer alta por introducir8chars.
+
+Fuentes leídas: padreVincularCp2, hijoAccesoAdulto/generación-recepción-validación-
+guardado, contrato/arquitectura/composiciónRender. DependenciasQR reales halladas:
+padre exige QrLocal.generar antes de persistir; hijo matriz!=null yCAMERA al recibir.
+Propuesto transporteC8/1 separado, no cambiarCP1/bytesPAIR/semánticaAUTHcp.v2.
+Necesita resolver autenticación de enrolamiento previa a pareja sin abrir órdenes
+ni simular confianza en públicas recibidas. HTTPcontroller sigue sólohealth/keepalive.
+
+Código propuesto32símbolos/8caracteres/40bits, temporal≤sesiónoriginal120s, un uso,
+intentos/cupos/cancelación; no adulto5..10dígitos ni recuperación. Firma/huellas/
+autoridad/identidades/commit/readback y pendientes se conservan. No wireformat
+implementado/sincronizado antes de revisión acordada entre tres proyectos.
+
+PADRE/HIJO-C8-R0 enviados con misma fuente íntegra a sesiones raíz existentes,
+OpenAPI/bandejasvacías/inactivas previas comprobados, admisiones correctas y ambas
+running según GET/api/session/active. Tarea corta de revisión/informe, sin compilar
+de nuevo o tocar dispositivos. No acuerdo aún ni nueva evidenciafuncional.
+Trabajo propio sólo propuesta/documentación: sin tests nuevos, código, APK, ADB,
+claves/códigos reales, servicios externos, push ni deploy. Node189previos no se
+presentan como evidencia de C8. Instalaciónmóvil previa/UIbuena son reportes
+anteriores del propietario/relevos, no comprobaciones físicas desde Render.
+
 ## F03 — preparar actualización/vinculación sin acceso físico desde Render — 2026-10-15
 
 Propietario pide avanzar al paso móvil. Leídos AGENTS padre/hijo; no trasladar

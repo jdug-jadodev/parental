@@ -1,5 +1,30 @@
 # Coordinación central — padre, hijo y relay
 
+## C8-R0 — cambio solicitado: vincular sin cámara — 2026-10-15
+
+Propietario no puede escanear por pantalla manchada y solicita código8 letras/
+números. Pausar rutaQR para este ensayo; no repetir escaneo ni borrar pendientes.
+Código de encuentro temporal, no código adulto/recuperación/autoridad. Propuesta
+documentacion/VINCULACION_CODIGO8_PROPUESTA.md, alfabeto32sin0/O-1/I y vida acotada
+al marco adulto original, consumo único y límites. No implementado ni desplegado.
+
+CHILD_OFFER/PAIR_ACCEPT/firmas CP2 y CP1 se mantienen. TransporteC8/1 separado por
+acordar: no PAIR por cp.v2 ni AUTH familiar anónimo. Resolver enrolamiento antes
+de contar con claves familiares mediante autenticación provisional de alcance
+limitado, que NO acredita familia/persona/permiso ni permite órdenes. Propuesto
+WSS/perfil separado para no añadir controllerHTTP de negocio; sin habilitarlo aún.
+
+Leídas rutasMAIN: padre VincularCp2.firmar depende QrLocal.generar; hijo generación
+exige matrizQR y recepciónCAMERA. Identificados puntos que deben desacoplarse sin
+eliminar guardaslegado, identidadexistente, autorizaciónadulta, huellasindependientes,
+consumosdurables/readback o estadospendientes. No código nuevo en apps desde Render.
+
+Misma fuente íntegraC8-R0 enviada a sesiones raíz existentes para UNA revisión
+corta PADRE-C8-R0/HIJO-C8-R0, no implementaciónwire unilateral. OpenAPI/bandejas
+vacías/sesionesinactivas comprobadas antes; admisión queue/resumetrue confirmada y
+GET/api/session/active verificó ambas running. Revisiones pendientes, no afirmar
+acuerdo/freeze antes de recibirlas. Sin ADB/otra instalación/QRreal/deploy/push.
+
 ## F03 — preparación móvil enviada, permisos físicos locales pendientes — 2026-10-15
 
 Propietario responde «ok, hazlo» al siguiente paso de actualizar/vincular. Se
