@@ -27,6 +27,13 @@ import { CodecAutenticacionCp2 } from '../adapter/protocol/cp2/codec-autenticaci
 import { VerificacionAutenticacionCp2Adapter } from '../adapter/verificacion-autenticacion-cp2.adapter.js';
 import { WebSocketAuthCp2Adapter } from '../adapter/websocket-auth-cp2.adapter.js';
 import { crearTransporteWebSocketCp2 } from './websocket-cp2.config.js';
+import { VerificacionMensajeCp2Adapter } from '../adapter/verificacion-mensaje-cp2.adapter.js';
+import { CodecOrdenesCp2 } from '../adapter/protocol/cp2/codec-ordenes.js';
+import { CodecAckCp2 } from '../adapter/protocol/cp2/codec-ack.js';
+import { CodecStateCp2 } from '../adapter/protocol/cp2/codec-state.js';
+import { CriptografiaOrdenesCp2 } from '../adapter/protocol/cp2/criptografia-ordenes.js';
+import { CriptografiaAckCp2 } from '../adapter/protocol/cp2/criptografia-ack.js';
+import { CriptografiaStateCp2 } from '../adapter/protocol/cp2/criptografia-state.js';
 
 export function crearConfiguracionServidor(): ConfiguracionServidor {
   return new ConfiguracionServidor(new ConfigurarServidor(new ValidacionPublicaAdapter()));
@@ -54,15 +61,31 @@ export function crearServidorLocal(valores?: ConfiguracionRequestDto, tls?: TlsL
 }
 
 export function crearServidorAutenticacionCp2Local(valores: ConfiguracionRequestDto): Server {
+  return componerCp2Local(valores, false);
+}
+
+export function crearServidorRelayCp2Local(valores: ConfiguracionRequestDto, tls?: TlsLocal): Server {
+  return componerCp2Local(valores, true, tls);
+}
+
+function componerCp2Local(valores: ConfiguracionRequestDto, routing: boolean, tls?: TlsLocal): Server {
   const configuracion = new ConfigurarServidor(new ValidacionPublicaAdapter()).ejecutar(ConfiguracionMapper.aDominio(valores));
   if (configuracion.entorno === 'production') throw new Error('CP/2 sólo admite laboratorio local');
   const raiz = existsSync(new URL('../../../package.json', import.meta.url)) ? '../../../' : '../../../../';
   const codec = new CodecAutenticacionCp2(readFileSync(new URL(`${raiz}contrato-cp2/autenticacion.schema.json`, import.meta.url)));
   const autenticacion = new AutenticarConexion(configuracion.pareja, new RetosAutenticacionAdapter(), new RelojAdapter(),
     new EntropiaAdapter(), new VerificacionAutenticacionCp2Adapter(codec, configuracion));
+  let procesar: ProcesarMensaje | undefined;
+  if (routing) {
+    const cargar = (nombre: string): Buffer => readFileSync(new URL(`${raiz}contrato-cp2/${nombre}.schema.json`, import.meta.url));
+    const ack = new CodecAckCp2(cargar('ack'));
+    procesar = new ProcesarMensaje(new VerificacionMensajeCp2Adapter(configuracion,
+      new CriptografiaOrdenesCp2(new CodecOrdenesCp2(cargar('ordenes'))), new CriptografiaAckCp2(ack),
+      new CriptografiaStateCp2(new CodecStateCp2(cargar('state-piloto'))), ack));
+  }
   const websocket = new WebSocketAuthCp2Adapter(new EvaluarConexionCp2(), autenticacion, crearTransporteWebSocketCp2(),
-    codec, new LimiteUpgradesAdapter(new RelojAdapter().ahora()));
+    codec, new LimiteUpgradesAdapter(new RelojAdapter().ahora()), procesar);
   const servicio = new ServicioController(new ConsultarServicio(new EstadoLocalAdapter()));
-  try { return crearServidorHttp(new ServicioRouter(servicio), websocket); }
+  try { return crearServidorHttp(new ServicioRouter(servicio), websocket, tls); }
   catch (error) { websocket.detener(); throw error; }
 }

@@ -5,6 +5,7 @@ import { performance } from 'node:perf_hooks';
 import WebSocket, { type RawData, type WebSocketServer } from 'ws';
 import type { EvaluarConexionEntrada } from '../../domain/ports/portin/evaluar-conexion.port.js';
 import type { AutenticarConexionEntrada } from '../../domain/ports/portin/autenticar-conexion.port.js';
+import type { ProcesarMensajeEntrada } from '../../domain/ports/portin/procesar-mensaje.port.js';
 import type { ConexionAutenticada, RolAutenticado } from '../../domain/entities/conexion-autenticada.js';
 import type { RetoAutenticacion } from '../../domain/entities/reto-autenticacion.js';
 import { IntentoAutenticacion } from '../../domain/entities/intento-autenticacion.js';
@@ -14,6 +15,7 @@ import { UpgradeEntity } from './entities/upgrade.entity.js';
 import { RechazoUpgradeEntity } from './entities/rechazo-upgrade.entity.js';
 import { UpgradeMapper } from './mapper/upgrade.mapper.js';
 import { AutenticacionCp2Mapper } from './mapper/autenticacion-cp2.mapper.js';
+import { RelayCp2Mapper } from './mapper/relay-cp2.mapper.js';
 import { CodecAutenticacionCp2 } from './protocol/cp2/codec-autenticacion.js';
 import { LimiteUpgradesAdapter } from './limite-upgrades.js';
 import { enviarAcotado } from './salida-websocket.js';
@@ -29,6 +31,7 @@ export class WebSocketAuthCp2Adapter {
     private readonly transporte: WebSocketServer,
     private readonly codec: CodecAutenticacionCp2,
     private readonly upgrades: LimiteUpgradesAdapter,
+    private readonly procesar?: ProcesarMensajeEntrada,
   ) {}
 
   upgrade(solicitud: IncomingMessage, socket: Duplex, head: Buffer = Buffer.alloc(0)): void {
@@ -117,7 +120,20 @@ export class WebSocketAuthCp2Adapter {
           return;
         }
         if (!cupo.admitir(performance.now())) { rechazar(); return; }
-        const frame = this.codec.leerFrame(bytes);
+        if (this.autenticados.get(identidad.rol) !== socket) { rechazar(); return; }
+        let frame;
+        try { frame = this.codec.leerFrame(bytes); }
+        catch {
+          if (!this.procesar) { rechazar(); return; }
+          const mensaje = this.procesar.ejecutar(identidad, bytes);
+          const destino = this.autenticados.get(identidad.rol === 'PARENT' ? 'CHILD' : 'PARENT');
+          if (!destino || destino.readyState !== WebSocket.OPEN || !enviarAcotado(destino,
+            Buffer.from(mensaje.bytes()).toString('utf8'), () => this.cerrar(destino, 1008))) {
+            if (destino) this.cerrar(destino, 1008);
+            if (!enviarAcotado(socket, RelayCp2Mapper.ausente(mensaje.commandId).texto, () => rechazar())) rechazar();
+          }
+          return;
+        }
         if (frame.kind !== 'PING') { rechazar(); return; }
         if (pongPendiente || frame.nonce === ultimoNonce) return;
         pongPendiente = true;

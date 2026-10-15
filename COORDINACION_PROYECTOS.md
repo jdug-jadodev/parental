@@ -1,5 +1,33 @@
 # Coordinación central — padre, hijo y relay
 
+## Piloto vertical E2E01 solicitado por propietario — 2026-10-15
+
+Propietario necesita funcionalidad hoy: priorizado vincular/conectar/bloquear/
+permitir/confirmar resultado antes de historia y avisos; no se cancelan requisitos
+ni autenticación, TLS o bloqueo seguro. No se interpreta urgencia como permiso de
+despliegue, ADB, instalación, pruebas A13/A56 o ceremonia real.
+
+HIJO-E2E01 y PADRE-E2E01 iniciadas por API de sesiones raíz existentes resume=true,
+admisión confirmada y GET/api/session/active comprobó ambas running. No subagentes.
+Una unidad vertical por app con commits intermedios: hijo writerCONTROL durable y
+puente a enforcer/red/timer/local existentes, STATE/ACKfirmados/WSS/UI real;
+padre STATE/WSS/confirmación de canal/intenciones durables/órdenes/UI y ACKhistórico.
+Se exige no terminar con otro puerto sin implementación ni snapshot ficticio MAIN.
+Primer piloto foreground explícito: no promesa de funcionamiento con apps muertas.
+
+Fuente común STATE01-PILOTO y después schema íntegro idéntico a ambas apps; ACK
+íntegro suministrado al hijo. Delta piloto separado documentado: permittedTime y
+lastExpiry null obligatorios = no disponibles, no cero; NETWORK_LOST por red10s
+posterior al draft. No cambio CP1 ni congelación del protocoloCP2completo. Se
+comunica PEER_UNAVAILABLE del draft§4 sin PEER_STATUS espontáneo ni nuevo ACKrelay.
+
+Render STATE `d2fddc4` y routing local implementados. Verificación completa169tests
+correctos, esquema28/13 y vectores10/78. Recorrido Node con hijo SIMULADO pasó
+SYNC→STATE→LOCK→ACKpending→ACKapplied y preservó bytes. No bloqueo físico demostrado.
+Resultados/buildsAPKmóviles E2E01 pendientes; revisarlos antes de instalar o ensayar.
+Origen HTTPS real de Render aún necesario para ceremonia: propietario crea y
+despliega; no usar origen ficticio ni quitar barreras públicas unilateralmente.
+
 ## Bloque paralelo siguiente iniciado y ACK CP2-K01 — 2026-10-15
 
 Continuación del propietario tras push: revisados ORD01padre y AUTH01hijo; evidencia

@@ -14,6 +14,17 @@ El codec complementa schema con coherencia temporal/revisión/resultado, contado
 64 exactos, reto30s y duración temporal entera de1..1440min. No valida efectos del
 dispositivo ni freshness del padre: esas decisiones corresponden a cada app.
 
+Routing E2E01: `crearServidorRelayCp2Local` selecciona explícitamente el validador
+MESSAGE según rol autenticado, siempre con las públicas configuradas. SYNC/orden
+van al hijo; STATE/ACK al padre, mismo frame original. Ausente/saturado se descarta
+sin cola: `{v:2,kind:PEER_UNAVAILABLE,reason:PEER_OFFLINE,refCommandId:UUID|null}`
+del draft§4 en JSON canónico. No se emite PEER_STATUS espontáneo en este mínimo.
+El hijo sigue decidiendo validez/consumo/efectos; duplicados pueden reenviarse y
+deben reconciliarse en su escritor durable. Relay no inventa resultados ni secuencias.
+Prueba Node integrada con clavesefímeras: SYNC→STATE→LOCK→ACKpending→ACKapplied;
+se acredita transporte local, no enforcement físico. Creador AUTH-only/CLI normal
+no cambian de perfil. Barreras loopback/health503/producción siguen activas.
+
 2026-10-14. **CP2-V01 implementada y probada localmente, no perfil público ni
 ceremonia operativa.** CP/1 en `compartido/` sigue congelado; ningún cliente o
 socket del relay usa esta unidad automáticamente.

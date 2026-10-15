@@ -6,6 +6,13 @@ y los fixtures permanecen congelados.
 
 ## Estado: R01–R03 locales, sin despliegue
 
+**Avance CP2-E2E01:** composición explícita `crearServidorRelayCp2Local` autentica
+`cp.v2` y retransmite SYNC/órdenes/STATE/ACK firmados. `pnpm run verificar`:
+169tests correctos, incluido recorrido con dos clientes Node y un hijo simulado.
+No es una prueba de bloqueo Android. STATE piloto no ofrece historia/avisos.
+La CLI normal y el creador AUTH-only no se convierten automáticamente a CP2;
+loopback, health503 y bloqueo de producción se mantienen. Integración móvil en curso.
+
 Validación de configuración pública, claves SPKI P-256 distintas, HTTP y
 límites iniciales. Transporte WebSocket conectado sin compresión y con máximo
 de 16 KiB únicamente con configuración pública válida y clientes loopback.

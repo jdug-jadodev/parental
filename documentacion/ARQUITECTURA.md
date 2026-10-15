@@ -41,6 +41,16 @@ relay ni composición adicional; ACK no se genera por recepción/transporte.
 
 ## Estructura y dependencias
 
+E2E01 añade CodecStateCp2/CriptografiaStateCp2 y coherencia semántica en el borde;
+DTO propio sin Node en aplicación. VerificacionMensajeCp2Adapter implementa el
+puerto existente y mapea DTO verificado a MensajeVerificadoEntity/RelayMapper.
+ProcesarMensaje sigue comprobando pareja/rol sin conocer CP1/CP2 o sockets.
+Composición explícita crearServidorRelayCp2Local inyecta ese caso de uso al mismo
+adaptador CP2; creador AUTH-only no recibe procesador y conserva su rechazo.
+El transporte sólo retransmite bytes inmutables a socket vigente y acota salida;
+no persiste políticas ni decide aplicación, no crea ACKCHILD. Peer ausente usa
+mapperCP2 separado; HTTP no incorpora rutas operativas. Sin cambio CLI pública.
+
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.
 - `application/dtos`: configuración, respuestas de servicio y contrato CP/1.
 - `application/usecase`: implementaciones de puertos de entrada.

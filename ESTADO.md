@@ -2,6 +2,26 @@
 
 ## E2E01 en curso — STATE piloto — 2026-10-15
 
+Bloque routing local completado tras STATE `d2fddc4`: nueva composición explícita
+crearServidorRelayCp2Local con firma/validación de SYNC_REQUEST/SET_POLICY/STATE/ACK.
+Reutiliza ProcesarMensaje y puertos de dominio; no decisiones de permisos en relay.
+Preserva frame original y comprueba socket vigente por rol antes de retransmitir.
+Ausente/salida saturada descarta sin cola y emite PEER_UNAVAILABLE CP2 del draft;
+no ACKdehijo ni PEER_STATUS espontáneo. AUTH-only anterior sigue separado y probado.
+TLS local opcional por composición, sin certificados/claves nuevos en disco ni
+ensayo TLS positivo por esta unidad; producción/loopback/health503 siguen igual.
+
+Ejecutado `pnpm run verificar` completo: install congelado/check/build y
+**169tests correctos,0fallos,0omitidos**; esquemaCP1 28/13, vectores10/78.
+Incluye9tests nuevos:5STATE y4routing. Prueba de recorrido usa dos sockets Node
+autenticados y clavesefímerasRAM: SYNC→STATE→LOCK→ACKpending→ACKapplied, comprobación
+de bytes idénticos, duplicado reenviado sin afirmar exactamente-una-vez, PING/PONG y
+health503. Es un hijo SIMULADO, NO observación de bloqueo Android ni autorización
+de uso. Casos ausente/rol/clave/pareja/schema/producción/TLSincompleto probados.
+Primer focal routing falló por comparar prototipo null de PONG contra objeto
+ordinario; aserción corregida, nueva verificación integral correcta. Log temporal
+cp2-e2e01-verificar.log. No push, dispositivos, ceremonia ni despliegue.
+
 Propietario prioriza recorrido funcional hoy. Ambas sesiones raíz reciben unidad
 vertical E2E01 (MAIN/transporte/escritor real, no otro modelo desconectado), fuentes
 STATE/ACK íntegras y límites. GET/api/session/active confirmó ambas running.
