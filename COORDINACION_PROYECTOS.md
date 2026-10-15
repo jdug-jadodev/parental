@@ -1,5 +1,21 @@
 # Coordinación central — padre, hijo y relay
 
+## F03 — preparación móvil enviada, permisos físicos locales pendientes — 2026-10-15
+
+Propietario responde «ok, hazlo» al siguiente paso de actualizar/vincular. Se
+preparan tareas en sesiones raíz propias sin trasladar permisos físicos desde
+Render: cada rol debe avisar y esperar habilitación directa local antes de ADB/
+instalación/QR. No se interpreta como permiso de publicar/desplegar servidor.
+
+Leídos AGENTS raíz de ambas apps, verificados hashes APK E2E01 desde archivos
+locales: padre38739ae2…92636/hijofc7a5bd8…108ed, coinciden con evidencias. Sin
+consultas a dispositivos. OpenAPI/bandejasvacías/sesionesinactivas comprobadas;
+PADRE-F03-PREPARACION e HIJO-F03-PREPARACION admitidas queue/resumetrue.
+GET/api/session/active confirmó ambas running después de admisión. Las tareas
+mandan preflight local/solicitudpermiso y detener, no instalación o ceremonia automática.
+Origen real https://parental-0j3o.onrender.com, bootstrap sigue cerrado; no AUTH/
+órdenes contra él. Checklist en documentacion/F03_PREPARACION_VINCULO_REAL.md.
+
 ## CP2-P01 autorizado — perfil público listo en código — 2026-10-15
 
 Propietario autoriza preparar habilitación CP2autenticada. Implementados selector

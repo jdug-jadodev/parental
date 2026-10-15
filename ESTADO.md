@@ -1,5 +1,24 @@
 # Estado del servidor separado
 
+## F03 — preparar actualización/vinculación sin acceso físico desde Render — 2026-10-15
+
+Propietario pide avanzar al paso móvil. Leídos AGENTS padre/hijo; no trasladar
+permisos físicos: sesiones propias deben pedir habilitación directa antes de ADB
+o ceremonia. Verificados archivos APK locales mediante SHA256, sin dispositivos:
+padre38739ae2f2b33c1e059b14f98829df81d83b1b983a2de9f03fe632cabac92636,
+hijofc7a5bd82e6bfdcb0ae0434ce2d88be03eac2cc1390d73a339c9eb52c83108ed.
+Coinciden con evidencia E2E01; no acreditar instalación/firma compatible por hash.
+
+OpenAPI consultada, bandejas vacías y sesiones sin ejecución activa al iniciar.
+Enviadas PADRE/HIJO-F03-PREPARACION a sesiones raíz existentes, admisión confirmada
+queue/resumetrue. Preparar artefacto/checklist y pedir permiso local, no usar ADB
+por mensaje coordinador. GET/api/session/active confirmó ambas running; no se
+acredita instalación física. Sin recompilar/repetir tests móviles cerrados por defecto,
+sin nuevas claves/QR/store/instalación/órdenes. Checklist de ceremonia futura en
+documentacion/F03_PREPARACION_VINCULO_REAL.md. Publicación backend no ejecutada;
+bootstrapaa2bfbb sigue perfilreal y claves de parejareal aún no obtenidas.
+Cambios propios sólo documentación/coordinación; sin nuevos tests de código.
+
 ## CP2-P01 — perfil público autenticado autorizado y preparado — 2026-10-15
 
 Propietario responde sí a preparar habilitación pública CP2 con autenticación
