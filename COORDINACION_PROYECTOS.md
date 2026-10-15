@@ -1,5 +1,22 @@
 # Coordinación central — padre, hijo y relay
 
+## F02 revisada — lectura real confirmada, sin vincular — 2026-10-15
+
+Relevo padre y pruebas/EVIDENCIA_PADRE_PAIR01_F02.md completos revisados: una
+actualización install-r A56, APK final33ef534732cf2ce0e3a3e1acc1ca2afc2b9d98ac5266373d9ba11cac54d4dd7a.
+Propietario confirmó visor listo, generó oferta nueva manualmente desde A13 y
+respondió «si aparece» a OfertaCP2leída+huella. Confirma UI, no bytes ópticos exactos,
+identidad/frescura/ceremonia/permiso. Posterior «Cerrado, sin permiso nuevo» confirma
+retirada QR/sesión A13 y cierre cámara/perfil A56; no vínculo/códigos/órdenes.
+REQUIERE_MIGRACION explicado, no observado independientemente. Firma MAIN sigue
+bloqueada por implementación intacta; snapshot/persistencia y transporte pendientes.
+
+Al recibir «listo» central se envió continuación de F02 condicionada a consultar
+estado y no repetir instalación. La lectura inmediata del relevo mostró F02 ya
+cerrada; se envió corrección explícita de detener/no repetir física ni solicitar
+otra oferta. Ninguna nueva autorización física por ese «listo». Render no operó
+teléfonos ni reejecutó pruebas móviles; no nueva tarea asignada por este cierre.
+
 ## PADRE-PAIR01-F02 — autorización de lectura real, 2026-10-15
 
 Tras reinicio del servicio, se confirmó que no se habían operado teléfonos en este

@@ -1,5 +1,18 @@
 # Estado del servidor separado
 
+## F02 cerrada y revisada — 2026-10-15
+
+Leídos relevo y evidencia completa padre F02: lectura CP2 de QR real confirmada por
+propietario mediante UI OfertaCP2leída+huella, sin bytes ópticos exactos/identidad/
+ceremonia acreditados. Una install-r A56, hashfinal33ef5347…d4dd7a; dueño confirma
+QR/sesión A13 retirados y cámara/perfil A56 cerrados, sin permiso nuevo ni vínculo.
+Padre no operó A13; Render no teléfonos/tests/builds nuevos. Snapshot/persistencia
+MAIN y transporte real pendientes, PREPARADO sin promoción por lectura.
+Continuación central por «listo» enviada antes de leer relevo actual quedó seguida
+de corrección explícita detener/no repetir install/escaneo al comprobar cierre.
+No permisos físicos nuevos ni otra tarea automática. Evidencia ajena revisada,
+no ensayo repetido aquí; conservar cierre y retomar desarrollo sin teléfonos.
+
 ## F02 admitida — autorización física nueva — 2026-10-15
 
 Propietario confirma específicamente actualizar APK debug padre en A56 preservando
