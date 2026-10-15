@@ -10,6 +10,11 @@ CP/1. Dominio de firma CPv2/PAIR separado; sólo bytes originales, clave esperad
 desde llamador. Sin wiring en config/dependencias.ts, WSS, casos de uso móviles,
 estado de ceremonia/consumos o rutas públicas. Ver alcance/límites en README CP2.
 
+CP2-A01 añade DTOs AUTH, schema parcial separado, codec y verificación AUTH en
+los mismos bordes. Parser canónico CP/2 compartido en documento-cp2.ts y DER
+genérico firmaDerCp2; sin cambiar formatos de vinculación o CP/1. No composición
+de autenticación CP/2 ni estado de retos/conexiones añadido por esta unidad.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

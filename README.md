@@ -120,6 +120,10 @@ Primera unidad separada CP2-V01 implementada localmente el 2026-10-14:
 117 tests correctos (13 nuevos) mediante `pnpm run verificar`. No CP/2 completo,
 integración móvil, migración o socket cp.v2; CP/1 y barreras públicas intactos.
 
+CP2-A01 añade mensajes y verificación de firmas AUTH separadas: ver
+`contrato-cp2/README.md`. Verificación final: 125 tests correctos, ocho nuevos.
+Pendiente enlazar reto/consumo/pareja/conexión; no autenticación WSS CP/2 operativa.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

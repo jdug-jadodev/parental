@@ -1,5 +1,28 @@
 # Coordinación central — padre, hijo y relay
 
+## Trabajo paralelo autorizado — 2026-10-14
+
+Propietario solicita avanzar en los tres proyectos a la vez. Una tarea por repo,
+respetando dependencias y permisos físicos; no nuevas sesiones/subagentes.
+HIJO-PAIR01 sigue asignada, no duplicada. PADRE-PAIR01 admitida en sesión raíz
+existente tras comprobar destino/bandeja vacía: fuentes schema/README CP2-V01
+íntegras queue/resume=false y tarea queue/resume=true. Lectura/huellas y preparación
+de aceptación CP/2, sin sobreescribir vínculo legado, quitar guardas o promoverlo
+por lectura/firma propia. Instalación/QR real A56 requieren nueva confirmación;
+A13 excluido de padre. Admisión no demuestra implementación terminada.
+
+Render CP2-A01 implementa mensajes/schema/DTO/codec y firmas AUTH separados,
+basados en draft75eb56e §4. Ocho tests nuevos, dominio CPv2/AUTH y claves/roles
+esperados externos, bytes originales. Parser CP/2 compartido con QR sin cambios
+de schema de vinculación/CP1. No enlaza reto RAM/consumo/plazo/pareja/socket ni
+negociación/routing; siguiente dependencia de autenticación, no remoto listo.
+
+Verificación final `pnpm run verificar`: 125 tests correctos, esquema y vectores
+CP1 correctos. Una repetición intermedia falló por ETIMEDOUT de spawnSync en test
+de arranque existente (124/125); repetición completa sin cambios dio 125/125.
+Sin aumentar timeouts/retirar barreras ni atribuir causa de contención demostrada.
+Resultados móviles pendientes; sin teléfonos/despliegue/push desde Render.
+
 Última actualización: 2026-10-13. Coordinador: sesión de parental_render, por petición del propietario.
 Este documento organiza el trabajo; no autoriza editar las apps, operar teléfonos,
 abrir LAN, instalar certificados, aprovisionar, borrar datos, hacer push o desplegar.

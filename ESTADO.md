@@ -1,5 +1,30 @@
 # Estado del servidor separado
 
+## CP2-A01 y avance paralelo — 2026-10-14
+
+Propietario autoriza trabajo paralelo por proyecto. HIJO-PAIR01 no duplicada;
+PADRE-PAIR01 admitida con fuentes completas CP2-V01 enviadas por API a sesión
+existente, lectura/huellas y preparación de aceptación CP/2, resultados pendientes.
+Sin permiso físico heredado para QR reales/ceremonia/instalaciones nuevas.
+
+Implementados `contrato-cp2/autenticacion.schema.json`, DTOs AUTH, codec y firmas
+CPv2/AUTH en borde CP2, parser JSON canónico compartido con vinculación y DER
+genérico. CHALLENGE/AUTH_PROOF/AUTH_OK/PING/PONG/sobre AUTH cerrados; públicas y
+roles esperados aportados por llamador. Firma no consume reto ni acredita socket.
+Sin wiring/negociación/routing CP2, CP1/fixtures/schema QR intactos, loopback y
+health503/producción bloqueada conservados. No APK/ADB/despliegue/push propio.
+
+Ejecutados `pnpm run check` correcto y focal AUTH/vinculación: 21 casos correctos
+(ocho nuevos AUTH, trece QR ya existentes). `pnpm run verificar` ejecutado;
+repetición intermedia registrada en temporal tuvo 124 correctos/1 fallo por
+ETIMEDOUT spawnSync del test R01 arranque parcial. No se modificó timeout/test
+para ocultarlo; repetición completa final correcta: **125 tests/0 fallos/0 omitidos**,
+install congelado/check/build, 28 ejemplos/13 contraejemplos CP1 y diez vectores/
+78 comprobaciones. No sumar repeticiones como casos distintos ni garantizar
+ausencia de flakiness. Registro final temporal cp2-auth-verificar-final.log.
+Próxima dependencia servidor: enlazar contexto de autenticación/consumo de reto
+CP2 antes de habilitar transporte; remoto y resultados móviles aún pendientes.
+
 Origen: parental_padre, commit previo a extracción 308c2b1.
 Estado: R01_IMPLEMENTADO_Y_VERIFICADO_LOCAL — R02/R03 pendientes; no servicio público operativo.
 

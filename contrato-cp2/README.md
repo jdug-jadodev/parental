@@ -21,7 +21,7 @@ No se ha congelado CP/2 completo ni aprobado migración móvil por esta entrega.
 - Sobre PAIR: exactamente kind=SIGNED, payloadB64, purpose=PAIR, sigB64, v=2.
   No lleva protocol adicional: el perfil está en el payload conforme §2.
 
-OFFLINE/AUTH/MESSAGE/STATE, transporte WSS, recuperación/migración e historial
+OFFLINE/MESSAGE/STATE, transporte WSS, recuperación/migración e historial
 no están implementados en este esquema parcial. No enviar PAIR por el relay.
 Oferta y firma correctas no bastan para promover vínculo PREPARADO.
 
@@ -63,3 +63,25 @@ Siguiente dependencia: clientes implementan estos bordes de manera separada,
 sin migrar datos/identidades de producción ni quitar guardas para escanear. La
 primera vinculación real requiere fuentes móviles compatibles y autorización
 física específica de ambos dispositivos; endpoint/TLS todavía pendientes.
+
+## CP2-A01 — mensajes y firmas AUTH separados
+
+2026-10-14. Base draft padre `75eb56e` §4: nuevo `autenticacion.schema.json`
+cerrado para CHALLENGE, AUTH_PROOF, AUTH_OK, PING/PONG y sobre SIGNED/AUTH.
+DTOs en `application/dtos/autenticacion-cp2.dto.ts`; codec y criptografía AUTH
+en el mismo borde CP/2. JSON estricto compartido con vinculación sin cambiar
+su schema, campos ni firmas; DER/P-256 se reutiliza con nombre genérico.
+
+CHALLENGE contiene connectionId, nonce32 y timeoutSec=10; AUTH_PROOF añade
+pairId, role y protocol=cp.v2. AUTH_OK contiene connectionId/protocol; latidos
+sólo nonce. Prueba suelta no es frame. Sobre AUTH no admite PAIR/MESSAGE/OFFLINE.
+Firma SHA256/P-256 DER sobre `UTF8("CPv2/AUTH\n") || payloadBytes` originales;
+el llamador suministra pública y rol esperados, nunca una clave del emisor.
+Mismos límites/canonicalidad/nonce que CP2-V01 y copias de buffers al devolver.
+
+**No autentica sockets todavía:** no se ha enlazado esta unidad al registro de
+parejas, negociación cp.v2, reto RAM por conexión/consumo/plazo monotónico,
+reemplazo de conexiones ni routing. El llamador debe comprobar ese contexto;
+una firma válida puede verificarse otra vez y no demuestra frescura o permiso.
+No se activa latido automático, ni AUTH_OK acredita orden aplicada o internet.
+Tests `test/autenticacion-cp2.test.ts`: ocho nuevos casos con claves sólo RAM.
