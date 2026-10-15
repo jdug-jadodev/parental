@@ -1,5 +1,19 @@
 # Estado del servidor separado
 
+## Publicación autorizada con Auto-Deploy activo — 2026-10-15
+
+Propietario acepta expresamente mantener Auto-Deploy y usar push como despliegue
+autorizado. Reemplaza requisito anterior de desactivarlo: no cambiar configuración
+remota ni disparar deploy manual adicional. Alcance sólo servidor; bootstrap debe
+seguir cerrado, sin activarC8/cp.v2 o nuevas variables/SELF_URL por este permiso.
+
+Preflight: árbol limpio, origenhttps://github.com/jdug-jadodev/parental.git/main,
+fetchoriginmain correcto y0commits remotos/12locales pendientes antes de este registro.
+Revisados nombres/diffstat/diffcheck de47archivos; sin .env/privadas/almacenesmóviles
+entre cambios. Código actual conserva evidenciaverificar217correctos; sólo docs
+después, sin repetir tests como si se hubiera cambiado código. Publicación y
+confirmación de deploy se registran después de ejecutar, no por autorización sola.
+
 ## C8-F04 — coordinar publicación conservadora y actualización móvil — 2026-10-15
 
 Propietario dice «hagamosle» a publicación/despliegue y actualización siguientes.

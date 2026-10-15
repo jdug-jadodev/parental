@@ -1,5 +1,12 @@
 # Coordinación central — padre, hijo y relay
 
+## Auto-Deploy aceptado para publicar servidor cerrado — 2026-10-15
+
+Propietario responde sí a mantener Auto-Deploy activo y usar push como despliegue
+autorizado; ya no bloquea publicación. No desactivarAutoDeploy ni tocar variables/
+activarC8 por este permiso. Subir sólo servidor y comprobar deploy asociado y
+barreras bootstrap. Apps/instalaciones/ceremonia no se ejecutan desde Render.
+
 ## C8-F04 — avance autorizado; Auto-Deploy activo y permisos locales pendientes — 2026-10-15
 
 Propietario dice «hagamosle» tras cierre de ambos cruces y propuesta de publicar/
