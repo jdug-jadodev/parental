@@ -1,5 +1,36 @@
 # Estado del servidor separado
 
+## Render conectado: fallo de build identificado y corrección local — 2026-10-15
+
+Propietario confirma MCP vinculado y cierre padre/hijo. MCP autenticado usado sólo
+en lectura: workspace ya seleccionado, list_services/list_deploys/list_logs. Servicio
+parental srv-db8hogqvcj2c73aen0s0, URL pública real https://parental-0j3o.onrender.com.
+Deploy dep-db8hoh2vcj2c73aen240 de aa2bfbb: build_failed. Logs verifican Node24.21.0
+y fallo de `corepack enable`: EROFS unlink /usr/bin/pnpm. No alcanzó instalación,
+compilación o arranque; no atribuir el fallo a WSS, APK, health o keepalive.
+
+Plantilla/guía inicial corregidas a `corepack pnpm install --frozen-lockfile
+--prod=false && corepack pnpm run build`; start `corepack pnpm start`. Sin enable
+ni enlacesglobales. Test de regresión plantilla y `corepack pnpm run verificar`
+correcto: **182tests0fallos0omitidos**, esquema28/13, vectores10/78. Corepack resolvió
+pnpm10.0.0; ejecutados además install--frozen-lockfile--prod=false/build directos,
+ambos correctos localmente en Windows. No ensayo de esta corrección en Render aún.
+Log local temporal render-build-corregido-verificar.log.
+
+MCP informa autoDeployTriggercommit/autoDeployyes en servicio real, aunque plantilla
+propone off. Avisado propietario: push puede disparar deploy. No cambiar ajustes,
+variables, lanzar deploy ni push por esta consulta. No inspección de secretos remotos.
+
+Leídos relevo/evidencia E2E01 padre e hijo. Ambos reportan MAIN integrado y builds
+listos para ensayo, no teléfonos actualizados ni canal/bloqueo físico probado.
+Padre reporta272distintos/ensayoWSSsimulado tresacciones y pending→applied persistidos;
+hijo205core/490debug/435release y actor/writer/enforcerfalso en JVM. No reejecutado
+aquí ni sumar a Node. APKdebug reportados padre38739ae2…92636, hijofc7a5bd8…108ed.
+Canal hijo sólo foreground y marco adulto120s: primer piloto no acredita uso remoto
+habitual con app cerrada ni sesiones largas. No reasignación automática/física por
+cierre. Próximo: propietario corrige Build/Start y despliega cerrado; habilitación
+CP2pública autenticada requiere bloque/permiso posterior. URL ya no es desconocida.
+
 ## Diagnóstico Render pendiente de OAuth y autollamada opcional — 2026-10-15
 
 Propietario solicita conectar https://mcp.render.com/mcp por despliegue fallido y

@@ -1,5 +1,26 @@
 # Coordinación central — padre, hijo y relay
 
+## Cierre móvil recibido y diagnóstico Render por MCP — 2026-10-15
+
+MCP ya conectado, workspace previamente seleccionado. Consultas sólo lectura
+confirman URL https://parental-0j3o.onrender.com y primerdeployaa2bfbb build_failed:
+`corepack enable` falla EROFS al modificar /usr/bin/pnpm antes de instalar/compilar.
+Guía/plantilla inicial corregidas a corepack pnpm directo (install/build/start),
+sin enlaces en /usr/bin. Verificación local182tests correctos; sin nuevo deploy.
+
+Servicio real tiene autodeployporcommit activo: no push mientras no se acuerde
+publicación; propietario debe desactivarlo si quiere disparos sólo manuales.
+No se modificaron ajustes remotos/variables ni se pidió exportar credenciales.
+
+Relevos/evidencias PADRE-E2E01 e HIJO-E2E01 revisados: MAIN vertical compilado,
+JVM/simulador/firmas aprobados según reportes, sin nueva instalación o efecto físico.
+No repetir tareas cerradas ni sumar pruebas móviles como propias. Sesiónforeground
+120s del hijo limita piloto: control con appcerrada/uso habitual todavía no probado.
+URL real obtenida de metadata aun con build fallido; no crear origen/pareja ficticios.
+Tras arreglar arranque cerrado, quedan habilitación pública CP2autenticada y nueva
+autorización específica para instalar/ceremonia/ensayar. Sin subagentes ni apps
+editadas desde Render; no retomar pruebas LOCAL07/LOCAL08.
+
 ## Render MCP y autollamada opcional solicitados — 2026-10-15
 
 Despliegue reportado fallido por el propietario, sin logs accesibles aún. MCPRender

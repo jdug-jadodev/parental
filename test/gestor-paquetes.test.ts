@@ -1,9 +1,18 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 const verificar = fileURLToPath(new URL('../scripts/verificar.mjs', import.meta.url));
+test('plantilla inicial usa corepack pnpm directo sin habilitar enlaces globales en Render', () => {
+  const plantilla = readFileSync(new URL('../plantillas/render-inicial.yaml.example', import.meta.url), 'utf8');
+  assert.match(plantilla, /buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build/);
+  assert.match(plantilla, /startCommand: corepack pnpm start/);
+  assert.doesNotMatch(plantilla, /corepack enable/);
+  assert.match(plantilla, /autoDeployTrigger: "off"/);
+  assert.match(plantilla, /healthCheckPath: \/keepalive/);
+});
 for (const gestor of [undefined, 'npm/11.0.0']) {
   test(`verificador exige pnpm cuando el gestor es ${gestor ?? 'ausente'}`, () => {
     const env = { ...process.env };

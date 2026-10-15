@@ -4,8 +4,8 @@ services:
     runtime: node
     numInstances: 1
     autoDeployTrigger: "off"
-    buildCommand: corepack enable && pnpm install --frozen-lockfile --prod=false && pnpm run build
-    startCommand: pnpm start
+    buildCommand: corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build
+    startCommand: corepack pnpm start
     healthCheckPath: /keepalive
     envVars:
       - key: NODE_ENV

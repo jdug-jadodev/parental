@@ -7,8 +7,8 @@ no se ha ejecutado desde este proyecto. No requiere claves, pareja ni origen pre
 
 - Repositorio: servidor `parental`, rama `main`, directorio raíz vacío.
 - Runtime: Node24, fijado también en `.node-version` y `package.json`.
-- Build: `corepack enable && pnpm install --frozen-lockfile --prod=false && pnpm run build`.
-- Start: `pnpm start`.
+- Build: `corepack pnpm install --frozen-lockfile --prod=false && corepack pnpm run build`.
+- Start: `corepack pnpm start`.
 - Health Check Path: `/keepalive`, sólo para este arranque cerrado.
 - Variables: `NODE_ENV=production`, `LOG_LEVEL=error`, `RELAY_MODE=bootstrap`.
 - `PORT` lo asigna Render; no fijarlo manualmente.
@@ -19,6 +19,14 @@ no se ha ejecutado desde este proyecto. No requiere claves, pareja ni origen pre
 `plantillas/render-inicial.yaml.example` expresa este perfil por separado. No
 usar la plantilla antigua con health `/healthz`: devuelve503 intencionalmente.
 El código debe estar subido antes de desplegar: un commit local no llega a Render.
+
+Corrección del primer fallo observado: no ejecutar `corepack enable` en Render.
+Intentó reemplazar `/usr/bin/pnpm` y falló con EROFS (sistema de archivos de sólo
+lectura), antes de instalar o compilar. Invocar `corepack pnpm` directamente usa
+el pnpm10.0.0 fijado en packageManager sin crear enlaces en `/usr/bin`.
+El MCP observó despliegue automático por commit activado en el servicio real:
+desactivarlo en el Dashboard antes de subir cambios si se quiere mantener revisión
+manual. No confundir la plantilla con ajustes ya aplicados en Render.
 
 ## Qué debe observarse después del despliegue
 
