@@ -762,6 +762,30 @@ No borrar datos/identidad/ParentStore o promover PREPARADO para probarlo.
 Cerrar cámara y registrar hash/observaciones/datos conservados; resultado pendiente.
 Render no opera dispositivos; CP1/CP2/relay/despliegue sin cambios por esta prueba.
 
+### F01 sin cámara; CP2-V01 de vinculación implementada separadamente
+
+2026-10-14: padre beecf75 confirmado; evidencia F01/relevo completos revisados.
+APK QR02 confirmado en A56 del propietario mediante desconectar/reconectar cable
+y hash. Cámara no abierta: recuperación observada deshabilitada, sin permiso
+CAMERA nuevo/testAPK o pareja falsa. PREPARADO sigue intacto, lectura óptica no
+acreditada. Fuente PairingScreen conecta CamaraOferta bajo !bloqueado/frame null;
+no inferir ausencia general de componente por guarda de Recuperación.
+
+Se pasa a implementación útil del contrato nuevo, conforme autorización separada
+y gate C08: CP2-V01 en `contrato-cp2/`, sólo CHILD_OFFER/PAIR_ACCEPT/sobre PAIR con
+v=2/perfil cp.v2, canonicalidad/límites/base64/SPKI/origen/DER/P-256 y firmas bytes
+originales CPv2/PAIR. DTOs y bordes CP2 aislados, no modifica ni migra CP1. Clave
+padre esperada suministrada por llamador; firma no prueba ceremonia/frescura/replay.
+Modelo órdenes/STATE/red posterior al gate queda fuera de esta unidad estable.
+
+Ejecutado `pnpm run check`, focal inicial diez tests correctos y verificación final
+`pnpm run verificar`: instalación congelada/TypeScript/build/117 tests correctos
+(13 nuevos), 28 ejemplos/13 contraejemplos CP1 y 10 vectores/78 comprobaciones.
+Sin keys privadas persistidas, dispositivos, sockets cp.v2 o despliegue; sólo claves
+efímeras de tests. Fuente draft padre 75eb56e §§2–3/10.1, sin editar apps o fixtures.
+Próxima dependencia: clientes QR CP2 y ceremonia con identidad/contexto/consumos/
+comparación humana/readback, asignación posterior; no enviada en este bloque.
+
 ## 1. Fuentes y situación comprobada
 
 | Proyecto | Revisión consultada | Estado |

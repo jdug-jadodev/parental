@@ -115,6 +115,11 @@ CI preparado en `.github/workflows/verificar.yml`: Node 24 y pnpm fijado,
 verificación y carga corta en Ubuntu/Windows. Carga prolongada opcional manual.
 Sin push ni ejecución remota comprobada; ver `documentacion/CI.md`.
 
+Primera unidad separada CP2-V01 implementada localmente el 2026-10-14:
+`contrato-cp2/README.md` y `vinculacion.schema.json`, DTOs y validación/firma PAIR.
+117 tests correctos (13 nuevos) mediante `pnpm run verificar`. No CP/2 completo,
+integración móvil, migración o socket cp.v2; CP/1 y barreras públicas intactos.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

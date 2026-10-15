@@ -1,5 +1,15 @@
 # Arquitectura del servidor
 
+## Unidad CP/2 separada, sin composición productiva
+
+CP2-V01: DTOs QR en `application/dtos/vinculacion-cp2.dto.ts`, codec y verificación
+criptográfica en `infrastructure/adapter/protocol/cp2/`, schema parcial en
+`contrato-cp2/`. Constructor recibe schema, sin lectura de archivos desde dominio/
+aplicación. Reutiliza primitivas técnicas JSON/base64/SPKI/DER/origen sin cambiar
+CP/1. Dominio de firma CPv2/PAIR separado; sólo bytes originales, clave esperada
+desde llamador. Sin wiring en config/dependencias.ts, WSS, casos de uso móviles,
+estado de ceremonia/consumos o rutas públicas. Ver alcance/límites en README CP2.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

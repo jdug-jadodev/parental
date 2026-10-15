@@ -1699,3 +1699,28 @@ Sólo APK app y cámara, testAPK/instrumentación extra requieren nuevo permiso.
 Conservar ParentStore/identidad y rechazo correcto de fixture PARENT; no concluir
 bytes exactos por error genérico o vinculación por lectura óptica. Resultado pendiente;
 Render sin nuevos tests/builds/ADB/apps/CP1/servidor/despliegue.
+
+## CP2-V01 local: QR de vinculación separado — 2026-10-14
+
+Padre beecf75 confirmado; relevo y evidencia F01 completos leídos. APK QR02 actual
+confirmado en A56 por verificación física cable/hash, sin cámara ejecutada; escáner
+de Recuperación deshabilitado y sin alta falsa/retirar guardas. Fuente PairingScreen
+sí conecta CamaraOferta condicionalmente: no ausencia universal del componente.
+No prueba óptica/vínculo/APPLIED por instalación o corrección sintética.
+
+Con autorización previa CP2 separada y gate C08, implementada unidad CP2-V01:
+`contrato-cp2/{README.md,vinculacion.schema.json}`, DTOs de oferta/aceptación/sobre,
+codec y crypto `src/infrastructure/adapter/protocol/cp2/`, test vinculación CP2.
+Canonicalidad exacta/UTF8/ASCII/duplicados/profundidad6, frame16384/payload8192,
+base64/nonce/hash/SPKI-P256/origen/DER-rango y dominio CPv2/PAIR sobre bytes originales.
+Caller aporta clave padre esperada, resultado copia buffers; sin ceremonia/replay/
+consumos ni migración implementados. CP1/fixtures/apps/config productiva intactos.
+
+Comandos propios ejecutados: `pnpm run check` correcto; focal
+`pnpm exec tsx --test test/vinculacion-cp2.test.ts` diez casos iniciales correctos;
+tras tres casos adicionales, `pnpm run verificar` correcto: frozen install, check,
+build, **117 tests/0 fallos/0 omitidos (13 nuevos)**, esquema CP1 28 ejemplos y
+13 contraejemplos, diez vectores/78 comprobaciones. No sumar focal como distintos.
+Sin privadas/códigos reales, Android/dispositivos o tests móviles reejecutados.
+README/arquitectura/coord actualizados, sin wiring cp.v2/WSS/despliegue público.
+Próxima unidad clientes QR CP2 y ceremonia pendiente de asignación; no remota lista.
