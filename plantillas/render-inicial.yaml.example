@@ -14,3 +14,5 @@ services:
         value: error
       - key: RELAY_MODE
         value: bootstrap
+      # Después de obtener la URL real, SELF_URL activa la autollamada opcional.
+      # Sin SELF_URL no hay autollamadas; intervalo por defecto: 600000ms.

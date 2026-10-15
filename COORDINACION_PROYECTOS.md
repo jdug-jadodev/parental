@@ -1,5 +1,16 @@
 # Coordinación central — padre, hijo y relay
 
+## Render MCP y autollamada opcional solicitados — 2026-10-15
+
+Despliegue reportado fallido por el propietario, sin logs accesibles aún. MCPRender
+configurado globalmente mediante CLI oficial; requiere OAuth en /mcps→render.
+No afirmar conexión/logs/diagnóstico resuelto; no nuevas operaciones remotas.
+Inspección sólo lectura de back-elevation confirmó SELF_URL/health cada600000ms,
+sin leer .env. Adaptado opcionalmente a SELF_URL/keepalive en este servidor con
+timeout/cancelación/no concurrencia/no redirects y desactivado sin SELF_URL.
+181tests correctos. No garantía contra suspensión, sin nuevo monitor externo ni
+cambio de permisos/dispositivos. Cambios actuales aún sin push ni despliegue.
+
 ## Preparación de despliegue inicial cerrado — 2026-10-15
 
 Propietario aclara que necesita desplegar para obtener la URL y autoriza preparar

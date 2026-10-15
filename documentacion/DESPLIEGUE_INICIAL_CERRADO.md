@@ -32,7 +32,26 @@ En esa URL:
 
 Render puede marcar este despliegue como saludable porque `/keepalive` responde:
 eso sólo acredita proceso HTTP, NO disponibilidad de relay, orden aplicada ni
-garantía contra suspensión. No hay cron, autopings ni servicios externos nuevos.
+garantía contra suspensión. No hay cron ni servicios externos nuevos.
+
+## Autollamada opcional solicitada por el propietario
+
+Basada en el mecanismo inspeccionado de `back-elevation`: una vez conocida la URL
+real, configurar `SELF_URL=https://tu-servicio.onrender.com` (sin barra final) y,
+opcionalmente, `KEEP_ALIVE_INTERVAL_MS=600000`. No hace falta PUBLIC_ORIGIN para
+esto; bootstrap sigue rechazando las cuatro variables de pareja/origen del relay.
+La autollamada apunta sólo a `/keepalive`, no a `/healthz` que sigue devolviendo503.
+No añadir SELF_URL antes de conocer el origen real ni usar un origen ficticio.
+
+Sin SELF_URL está desactivada. Intervalo permitido:60000..3600000ms, por defecto
+600000ms. Primer GET tras el intervalo; timeout10s, sin redirecciones/cuerpo/
+credenciales, una petición como máximo en vuelo y cancelación al apagar el proceso.
+Fallos sólo emiten un aviso genérico, sin URL/respuesta ni cambio de estado del relay.
+
+Es una medida de mejor esfuerzo mientras el proceso está activo. Una instancia
+suspendida no ejecuta timers: no garantiza impedir suspensión ni sustituye un
+plan sin suspensión o disponibilidad validada. No se han configurado llamadas
+externas, cron ni servicios de monitorización y no se probó contra Render real.
 
 ## Barreras conservadas
 

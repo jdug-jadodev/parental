@@ -1,5 +1,34 @@
 # Estado del servidor separado
 
+## Diagnóstico Render pendiente de OAuth y autollamada opcional — 2026-10-15
+
+Propietario solicita conectar https://mcp.render.com/mcp por despliegue fallido y
+basarse en keepalive de C:\Users\Usuario\Documents\back-elevation. Inspección sólo
+de fuentes/config pública de ese proyecto, sin leer .env ni modificarlo:
+src/infrastructure/keepAlive.ts usa setInterval→SELF_URL/health y src/index.ts lo
+activa si SELF_URL existe; env/render.yaml fijan intervalo600000ms. No evidencia
+de que ese mecanismo garantice evitar suspensión.
+
+Consultadas guías oficiales OpenCodeV2 MCP/RenderMCP. `opencode mcp list` indicó
+ningún servidor; `opencode mcp add render --global --url https://mcp.render.com/mcp`
+lo configuró fuera del repositorio. Listado posterior: needs authentication.
+Se pide /mcps→render→iniciar sesión, sin pedir claves ni lanzar OAuth interactivo
+oculto. Sin acceso aún a logs/cuenta/servicios: causa del fallo de deploy NO conocida.
+No modificar variables remotas ni desplegar por esta solicitud de diagnóstico.
+
+Autollamada propia opcional implementada por solicitud actual, no monitor externo:
+SELF_URL HTTPSorigenexacto sincredenciales/path/query/localhost/IP; destino fijo
+/keepalive. Sin SELF_URL no timer; intervalo600000ms por defecto, rango60s..1h.
+Timeout10s, sinredirects, no superponer requests, cancelar cuerpo/señal al apagar,
+avisos genéricos sin datos. Composición por constructor sólo dependencias.ts;
+timer arranca tras listen. No salud CP2, desbloqueo ni garantía antisuspensión.
+
+Ejecutado check/focal6correctos y `pnpm run verificar` completo correcto:
+**181tests0fallos0omitidos**, esquema28/13, vectores10/78. Log temporal
+keepalive-proceso-verificar.log. Pruebas de red usan fetch falso/reloj simulado;
+no solicitudes de autollamada a Render ni medición real de10min por este bloque.
+Bootstrap/relay local/health503/CP1 intactos. Sin push, deploy, apps o dispositivos.
+
 ## Push del arranque cerrado autorizado y verificado — 2026-10-15
 
 Propietario confirma push sólo del servidor. Fetch sin divergencia remota, árbol

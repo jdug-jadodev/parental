@@ -130,6 +130,12 @@ Sólo esa rama explícita en main escucha HTTP en0.0.0.0 incluso en producción;
 perfiles de relay y modo por defecto conservan las barreras anteriores. Render
 usa keepalive como health de proceso durante bootstrap, no disponibilidad CP.
 
+Autollamada opcional: config/keepalive.config.ts valida SELF_URL/intervalo y la
+raíz dependencias.ts inyecta fetch y aviso genérico a KeepaliveProceso, componente
+técnico de infraestructura sin acceso a permisos/pareja/mensajes. main inicia
+el timer sólo después de escuchar y lo cancela en señal/error. No afecta controller,
+EstadoServicio o respuesta health; un GET propio exitoso no acredita relay listo.
+
 - `GET /healthz`: 503 con `{ok:false,protocol:1}`; fase pública no autorizada/validada.
 - `GET /keepalive`: 200 con `{alive:true}`, sin claves, pareja ni presencia.
 - Otras rutas/métodos y query strings: 404. No hay endpoints HTTP de negocio.

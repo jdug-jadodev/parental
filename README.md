@@ -37,7 +37,10 @@ Health 503 se conserva como barrera hasta autorizar y validar la fase pública.
 HTTP expone únicamente `GET /healthz` (disponibilidad del relay) y
 `GET /keepalive` (200 `{"alive":true}`: el proceso responde). Keepalive no
 acredita autenticación, entrega de órdenes ni evita por sí solo la suspensión
-de Render. No se configuraron autopings HTTP, cron ni servicios externos.
+de Render. No hay cron ni servicios externos. La autollamada HTTP es opcional:
+configurar `SELF_URL=https://tu-servicio.onrender.com` activa un GET a `/keepalive`
+cada10min (`KEEP_ALIVE_INTERVAL_MS=600000` por defecto). Sin SELF_URL no hay
+autollamadas. No garantiza evitar la suspensión ni reactiva un proceso suspendido.
 
 ## Verificación con Node.js, sin Python
 

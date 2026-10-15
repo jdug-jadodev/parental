@@ -35,6 +35,14 @@ import { CodecStateCp2 } from '../adapter/protocol/cp2/codec-state.js';
 import { CriptografiaOrdenesCp2 } from '../adapter/protocol/cp2/criptografia-ordenes.js';
 import { CriptografiaAckCp2 } from '../adapter/protocol/cp2/criptografia-ack.js';
 import { CriptografiaStateCp2 } from '../adapter/protocol/cp2/criptografia-state.js';
+import { KeepaliveProceso } from '../adapter/keepalive-proceso.js';
+import { leerKeepalive } from './keepalive.config.js';
+
+export function crearKeepaliveProceso(valores: ConfiguracionRequestDto): KeepaliveProceso | undefined {
+  const configuracion = leerKeepalive(valores);
+  return configuracion ? new KeepaliveProceso(configuracion.url, configuracion.intervaloMs, fetch,
+    () => console.error('Keepalive: la solicitud no pudo completarse correctamente.')) : undefined;
+}
 
 export function crearConfiguracionServidor(): ConfiguracionServidor {
   return new ConfiguracionServidor(new ConfigurarServidor(new ValidacionPublicaAdapter()));
