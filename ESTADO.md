@@ -1,5 +1,34 @@
 # Estado del servidor separado
 
+## CP2-K01 — ACK CHILD y trabajo paralelo iniciado — 2026-10-15
+
+Continuación tras push: leídos relevoORD01padre/estadoAUTH01hijo/evidenciaAUTHcompleta.
+Nuevo vectorAUTHhijo verificado aquí mediante CLIpúblico: oferta/PAIR/2AUTHcorrectos;
+hash14ad8921072e628e700cd4404a3a4d0506c07ce434215c13f288efe32860c289 cotejado.
+AUTHhijo187core/445debug/390release/17nuevosdistintos son reportados, no reejecutados
+ni sumados como pruebas propias; APKnuevo60cf3399…39ee0f no instalado por esta tarea.
+
+HIJO-ORD01/PADRE-ACK01 admitidas queue/resume=true tras OpenAPI/bandejas vacías y
+confirmadas running en GET/api/session/active. FuentesORDhijo/ACKpadre completas
+suministradas por texto, sin lecturas externas atribuidas. Validación/retos30s en
+hijo sin fabricar contextoCONTROL ni aplicación; correlación ACK conservadora en
+padre sin suplantarSTATE/crearstoreCP2deintenciones. Sin nuevas tareas físicas;
+resultados móviles pendientes. No nuevos subagentes/sesiones/instalaciones/push.
+
+Código propio: ack.schema.json/DTO/codec/criptografía CHILD+7tests. Payload14campos,
+cincoresultados/reasons/nuloscerrados, revisiónaceptada≤evaluada/contador64strings,
+hash32/UUID/canonicalidadUTF8ASCII/depth6/frame16384payload8192/DERP256. ClaveHIJO
+esperada externa y dominioCPv2/MESSAGEoriginalbytes, hashACK separado de hashorden.
+Sin modeactual/STATE o generaciónACK porrelay, routing/escritor/enforcement reales.
+CP1/fixtures/esquemasprevios/arranqueAUTH-only/barreraspúblicas intactos.
+
+Ejecutados focal7/7correctos, CLIvectorAUTHhijo correcto y `pnpm run verificar`
+completo correcto: frozeninstall/check/build/**160tests0fallos0omitidos**, esquemaCP1
+28ejemplos/13contraejemplos y diezvectores/78comprobaciones. Log temporal
+cp2-k01-verificar.log. No ADB/APK/cámara/QRreal/credenciales/vínculo/órdenes/deploy.
+Próxima dependencia STATEconreglasposteriores y autoridaddurable antes de integrar
+transporte/enforcement. Este trabajo posterior al push no queda publicado por él.
+
 ## Push de los tres repositorios solicitado y verificado — 2026-10-15
 
 Propietario solicita «haz push de todos los repositorios y luego continuamos».

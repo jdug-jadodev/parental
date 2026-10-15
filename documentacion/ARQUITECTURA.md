@@ -34,6 +34,11 @@ el borde protocol/cp2, schema parcial aparte. Sólo valida representaciones/firm
 no decide permisos ni llama al enforcer, writer o almacenamiento del hijo. Sin
 composición nueva o cambios al transporte AUTH-only por esta unidad.
 
+CP2-K01 mantiene ACK en DTO propio y borde protocol/cp2 de codec/firma CHILD.
+Reutiliza dominioMESSAGE y DTO de sobre existente, sin duplicar conexión o estado
+actual. No correlación de intenciones/autoridad de aplicación en infraestructura
+relay ni composición adicional; ACK no se genera por recepción/transporte.
+
 ## Estructura y dependencias
 
 - `application/mapper`: DTO request → entidad de dominio; resultado → DTO response.

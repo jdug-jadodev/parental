@@ -141,6 +141,10 @@ CP2-O01 añade schema/DTO/codec y verificación de firma MESSAGE de SYNC_REQUEST
 SET_POLICY. `pnpm run verificar`:153tests correctos. Sin routing/STATE/enforcement
 o emisión móvil habilitados por esos validadores.
 
+CP2-K01 añade ACK CHILD firmado y validación de sus cinco resultados, separado de
+STATE. `pnpm run verificar`:160tests correctos. AUTH del hijo también cruzó JVM→Node;
+sin clientes móviles conectados, aplicación de órdenes o servicio público por ello.
+
 Primera integración JVM del padre con relay WSS local preparada en
 `pnpm run test:padre --ruta-padre RUTA` después de compilar. Reutiliza sus clases
 ya compiladas sin modificar el repo ni usar dispositivos; requiere JDK/caché

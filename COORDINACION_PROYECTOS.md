@@ -1,5 +1,27 @@
 # Coordinación central — padre, hijo y relay
 
+## Bloque paralelo siguiente iniciado y ACK CP2-K01 — 2026-10-15
+
+Continuación del propietario tras push: revisados ORD01padre y AUTH01hijo; evidencia
+AUTHhijo completa. Ejecutado Nodeverificador sobre NUEVA vueltaAUTHhijo: oferta/
+PAIR/ambosAUTH correctos y hash14ad8921072e628e700cd4404a3a4d0506c07ce434215c13f288efe32860c289
+coincidente. Codec/bordeAUTH compilados no equivalen a socket móvil o permiso.
+
+OpenAPI/bandejas vacías comprobados; HIJO-ORD01 y PADRE-ACK01 admitidas resume=true.
+GET/api/session/active confirmó ambas running. Hijo recibe fuenteORDschema íntegra
+antes y desarrolla codec/validación/retos internos30s sin contextoCONTROLfabricado
+o enforcerreal. Padre desarrolla ACKCHILD/correlación conservadora, sin sustituir
+STATE/activarenvío ni inventar intención durable. FuenteACKschema íntegra enviada
+durante misma unidad resume=false tras siete focales correctos. No tareas físicas,
+instalación o despliegue; resultados móviles pendientes, no sólo anuncios de trabajo.
+
+RenderK01 implementa ACK14/sobre5, DTO/codec/firmaCHILD con resultados/nulos/razones
+cerrados y revisión64coherente; ACK nunca modeactual/confirmaciónrelay. Verificar
+completo160correctos (7nuevos), sinrouting o ACK generado por el servidor. Próxima
+dependencia: STATE actualizado con NORMALred10s/excepciónlocal y autoridad durable;
+no retomar texto antiguo offline/channel del draft sin incorporar esas decisiones.
+Cambios posteriores al push anterior no se consideran publicados automáticamente.
+
 ## Push coordinado completado — 2026-10-15
 
 Autorización explícita del propietario para los tres repos. Fetch, árboles limpios

@@ -208,3 +208,30 @@ Regla de red posterior al draft: autorización NORMAL se revoca10s desde señal
 Android negativa y reconectar no abre; excepciónOFFLINE es local explícita. No
 copiar semántica antigua «ALLOW incluso offline» del draft a las apps por este codec.
 Siete tests nuevos cubren campos/tipos/rangos/duración/bytes/firma/domino/aislamiento.
+
+## CP2-K01 — ACK CHILD separado de STATE
+
+`ack.schema.json`, DTO, codec y verificador implementan draft75eb56e §§7/9.
+ACK cerrado14campos: v/kind/sender/pairId/bootId/childSessionId/commandId/seq/
+commandPayloadSha256B64/acceptedRevision/evaluatedRevision/result/reason/resultElapsedMs.
+SobreMESSAGE5campos, dominio CPv2/MESSAGE+LFreal y públicaHIJOesperada externa.
+Hash del resultado verificado es SHA256 del payloadACK; commandPayloadSha256B64
+sigue siendo el hash de la orden, no se confunden ni se recalculan como si fueran uno.
+
+APPLIED exige razónOK/revisiónaceptada/instante, PENDING razónOK/revisión/instantenull,
+FAILED razónENFORCEMENT_ERROR/revisión/instante. REJECTED usa revisión/instantenull
+y causa evaluable distinta deOK/UNKNOWN_COMMAND; UNKNOWN_COMMAND usa esosnulos y
+causa homónima. Seq/revisión aceptada positivos, evaluación/elapsed no negativos,
+strings decimales exactos≤2^63−1; accepted≤evaluated. Nulos explícitos obligatorios.
+Hash32/base64url canónica, UUIDv4minúsculos, mismas barreras UTF8/ASCII/canonicalidad/
+DER/rango/tamaño/profundidad. No campos mode/source/remaining ni texto libre.
+
+Verificar firma no correlaciona intención ni demuestra evidencia física: padre
+debe comprobar orden/seq/hash/contexto originales y vuelo conocido. ACKterminal
+histórico no rejuvenece STATE ni declara modo actual; UNKNOWN conserva incertidumbre.
+El relay no emite ACKdehijo. Sin routing/STATE/escritor/aplicación de órdenes por
+esta unidad; transporteT01 sigue AUTH-only. Siete tests nuevos con clavesefímerasRAM.
+
+Vuelta AUTH del hijo141ed73 verificada por Node (oferta/PAIR/ambosAUTH), archivo público
+SHA25614ad8921072e628e700cd4404a3a4d0506c07ce434215c13f288efe32860c289 comprobado.
+Actualiza el alcance histórico AUTH_NO_EVALUADO_HIJO de INTEROP01, sin afirmar canal.
